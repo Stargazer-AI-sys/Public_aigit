@@ -1,6 +1,6 @@
 # Project_webportfolio 작업 기록
 
-> 최종 갱신 2026-11-06 (ICT PC 세션) | 새 세션은 §0부터 읽는다. 경로는 저장소 루트(`aigit`) 기준 상대 경로다.
+> 최종 갱신 2026-11-06 (HOME PC 세션) | 새 세션은 §0부터 읽는다. 경로는 저장소 루트(`aigit`) 기준 상대 경로다.
 
 ## 0. 인계 요약
 
@@ -10,9 +10,9 @@
   - `app/page.tsx`는 아직 템플릿 그대로이고, `app/layout.tsx`의 `title`·`lang="en"`도 그대로다. 구현 때 함께 바꾼다.
   - `create-next-app@16.4.3` 템플릿에 shadcn/ui가 초기화되어 있다(`components.json`, `components/ui/button.tsx`, `lib/utils.ts`). MDX도 설치되어 있다(`@next/mdx`, `@mdx-js/loader`, `@mdx-js/react`, `@types/mdx`; `next.config.ts`의 `createMDX`, 루트 `mdx-components.tsx`).
   - 실제 콘텐츠(`.mdx`)와 frontmatter 방식은 아직 정하지 않았다. `@next/mdx`는 기본적으로 frontmatter를 지원하지 않고 `export const metadata`를 쓴다.
-- **목업을 포트폴리오 핵심 주제(CASE 01~03 + REFLECTION) 기준으로 다시 썼고, 사용자 검토 대기 중이다.** Next.js 페이지 구현은 시작하지 않았다.
-  - 기준 파일: `Claudecode/Project_webportfolio/prototype/portfolio-mockup.html`(커밋하지 않은 수정). 실제 화면 캡처 편집본 15장은 `prototype/img/`, 원본은 `img/`(둘 다 git 미추적).
-  - 게시본 https://claude.ai/artifact/WCkt39nNT6HVbXK44m9ToA (비공개)에 11-06 사용자 요청으로 반영했다(버전 `1793944948-1213`, `index.html` + `img/` 15장, 슬러그 UUID `ec7d3e9d-6cec-4131-a566-9ab19d6fd2bd`). 이후 다크 모드 버튼 수정과 CASE 01 화면 소개 문장 삭제도 포함된 상태다.
+- **목업을 포트폴리오 핵심 주제(CASE 01~03 + REFLECTION) 기준으로 다시 썼고, 11-06 사용자 검토에서 "큰 문제 없음, 조금 수정할 부분만 남음" 판정을 받아 그 수정을 반영했다.** Next.js 페이지 구현은 시작하지 않았다.
+  - 기준 파일: `Claudecode/Project_webportfolio/prototype/portfolio-mockup.html`. 11-06 커밋 `59c7852`(`20261106_HOMEwork_webportfolio_mockup_case03_process_criteria`)로 `main`에 push했다. 실제 화면 캡처 편집본 15장은 `prototype/img/`, 원본은 `img/`(둘 다 커밋 `dc7a026`부터 git 추적 중이다. public 동기화에서는 `img/`만 제외한다).
+  - 게시본 https://claude.ai/artifact/WCkt39nNT6HVbXK44m9ToA (비공개)에 11-06 최신 수정까지 반영했다(버전 `1793958040-c8e5`, `index.html`만 갱신, `img/`는 그대로, 슬러그 UUID `ec7d3e9d-6cec-4131-a566-9ab19d6fd2bd`).
 - Context7 MCP는 HOME PC와 ICT PC에서 정상 연결된다(11-03 ICT PC는 `resolve-library-id` 호출 확인).
 
 ### 콘텐츠·구조 결정 (2026-11-02 사용자 결정)
@@ -43,19 +43,22 @@
 - **Home 수치 칸:** "31건" 대신 "4가지 기준 / AI Workflows에서 중요한 4가지 기준"(Working Style로 연결).
 - **공개 범위 항목**(CASE 01의 PC 경로·실습 비밀번호 문제, CASE 03의 토큰 수치, 캡처 속 외부 URL)은 사용자가 신경 쓰지 않기로 했다. 다시 제안하지 않는다.
 
+### 목업 검토 후속 결정 (2026-11-06 사용자 결정)
+- **CASE 03 초점:** 핵심은 "반복을 막는 기준"이 아니라 "처리 기준"이다. 다시 지시한 내용을 살펴보니 처리 규칙이 모호했고, 처리 규칙을 정해 해결했다는 맥락으로 쓴다. 메인 카드와 상세 페이지를 함께 고친다.
+- **제목 길이:** 메인 카드에서 두 줄로 넘어가 어색해 CASE 03 제목을 "처리 기준을 먼저 세웠습니다"로 줄였다(상세 페이지 제목도 동일). Working Style 03 제목은 "규칙과 도구"를 남기고 "처리 기준을 정해 규칙과 도구로 바꿉니다"로 정했다.
+- **버튼:** 메인의 "AI Workflows 보기"를 "Working Style 보기"와 같은 모양(파란색·`↗` 없음)으로 통일한다.
+- **인용:** REFLECTION 11.06 질문은 원문을 띄어쓰기까지 그대로 인용한다(A안).
+- **무시 항목(다시 제안하지 않는다):** REFLECTION 타임라인을 프로젝트별로 나누는 안, CASE 02 카드 이미지(터미널 7개) 교체, CASE 01 "화면 기준 5건"과 게시 기록 1건의 차이(현재 Notion 기준 5건이 올라가 있는 것이 맞다), "AI가 처리한 일"과 "AI가 맡은 일" 용어 통일.
+
 ### 다른 PC에서 이어갈 때
 - pull 후 이 폴더에서 `npm install`을 먼저 실행한다. `node_modules/`는 git에 없다. Node.js가 없으면 그것부터 설치한다.
 - Context7 MCP는 `.mcp.json`으로 함께 옮겨지지만, PC마다 Claude Code에서 승인해야 한다.
 - `humanize-korean` 플러그인은 2026-11-04에 DESKTOP-K58196E에서 설치했다. 다른 PC에서 쓰려면 설치 여부를 먼저 확인한다.
 
 ### 다음 단계
-0. **11-06 재구성 목업을 사용자가 검토한다.** 아래 미결정 제안은 사용자가 나중에 정한다(실행 허가 아님).
-   - REFLECTION 타임라인에 학습 자동화(10.19)와 프로세스 개선(10.29~11.06)이 한 카드에 함께 있다. 세 사례를 묶는 회고라 두었지만, 맥락 분리 기준을 엄격히 적용하면 프로젝트별로 나눌 수 있다.
-   - CASE 02 카드 이미지(`prototype/img/case02-herdr-parallel.png`, 터미널 7개)는 카드 크기에서 글자가 읽히지 않는다. 대체 캡처를 받거나 Obsidian 위키 화면으로 바꾸는 안.
-   - 카드의 교훈 문장(`.learn`)과 REFLECTION 타임라인 질문 문구는 기록을 보고 정리한 표현이다. 실제 경험담으로 바꿀지, 11.06 질문을 띄어쓰기 수정 없이 원문 그대로 인용할지.
-   - CASE 01의 "화면 기준 5건": 11.06 게시 기록(`published.json`)에는 1건만 남아 있다. 학습 자동화 앱에서 게시 후 목록을 새로 고치면 기록과 맞춰진다.
-   - 이전부터 남은 문구: Working Style 03 "확인 기준이 잘못되어 잘못 처리된" 표현, "AI가 처리한 일"과 "AI가 맡은 일" 용어 통일, 미사용 CSS `.chip`.
-   - 정리되면 사용자 요청에 따라 게시본에 반영(HTML + `prototype/img/`)하고 커밋한다.
+0. **남은 문구 확인(선택):** 사용자가 아직 정하지 않은 항목이 둘 있다(실행 허가 아님).
+   - Working Style 03 "운영에서" 항목의 "확인 기준이 잘못되어 잘못 처리된" 표현.
+   - 카드의 교훈 문장(`.learn`) 4곳은 기록을 보고 정리한 표현이다. 경험담형 예시("AI가 끝났다고 보고해도, 어디서 확인했는지 되물으면 빠진 부분이 드러났습니다.")를 제시했으나 사용자는 REFLECTION 11.06 질문 인용(A안)만 정했다. REFLECTION 10.19·10.29 질문은 원문을 찾지 못해 지금도 정리된 표현이다.
 1. **화면 확인:** 이미지 팝업의 실제 클릭 동작, 다크 모드, 모바일 너비는 아직 보지 않았다. headless Edge는 창 최소 폭 때문에 모바일 캡처가 오른쪽이 잘려 실제 브라우저로 봐야 한다.
 2. 상세 페이지 미확인 항목을 본다: 다크 모드, 모바일, 게시본의 버튼 동작, 마지막에 고친 프로세스 순서도 문구.
 3. 승인되면 Next.js로 구현한다: 메뉴·좌측 레일·우측 슬롯(자리만), 카드 데이터 분리, 상세 페이지 2개의 라우트, `layout.tsx`의 제목과 `lang="ko"`, 토글 위치를 임시 고정 위치에서 상단 우측으로 이동. 목업의 해시 전환은 목업용이다.
@@ -63,6 +66,13 @@
 5. 스크린샷을 받으면 목업·구현에 반영한다.
 
 ## 1. 진행 내용
+
+### 2026-11-06 (HOME PC) — 목업 검토 후속 수정·게시·커밋
+- **수정(`prototype/portfolio-mockup.html`):** 메인 "AI Workflows 보기" 버튼 스타일 통일. CASE 03 카드(제목·요약·문제·제 판단·결과·교훈)와 상세 페이지(제목·머리말·개요 첫 문단, 발생한 문제 1번에 "조치" 추가)를 처리 기준 중심으로 재작성. Working Style 03 제목과 "AI와 함께" 문장 수정. REFLECTION 11.06 질문을 원문 그대로 인용. 미사용 `.chips`·`.chip` CSS와 JS 삭제.
+- **"해결" 표현의 범위:** "해결했다"는 모델 확인을 시작 전 검사와 훅으로 바꾼 일에만 붙였다. 기록 자동 저장은 시험 중, "멈출 사유가 없으면 다음 Task로" 규칙은 제안 단계라 상세 페이지 "조치"에 그 상태로 적었다.
+- **게시·커밋:** 게시본을 `1793958040-c8e5`로 갱신(`index.html`만 patch). 커밋 `59c7852`를 `main`에 push했다.
+- **검증:** 수정 후 `chip` 잔존 검색 0건. 사용자가 11.06 질문 제목이 1줄로 보인다고 직접 확인했다.
+- **미확인:** 줄인 CASE 03 제목과 Working Style 03 제목이 메인에서 어떻게 보이는지는 화면으로 확인하지 않았다. 게시본도 열어 보지 않았다.
 
 ### 2026-11-06 (ICT PC) — 핵심 주제(CASE 01~03 + REFLECTION) 기준 목업 재작성
 - **재작성:** Home 카드 3개 + REFLECTION, CASE별 상세 페이지 3개(개요·분석 및 계획·실제 화면·프로세스·발생한 문제·개선할 내용, CASE 02는 폴더 구조 포함). 근거는 `gptgit/project-prototype`·`project-management` 문서와 기록, `Claudecode/Project_Refactor/WORK_LOG.md`, 10.29 점검 보고서.
