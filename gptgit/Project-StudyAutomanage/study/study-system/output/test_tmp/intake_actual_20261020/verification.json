@@ -1,0 +1,16 @@
+{
+  "source_count": 10,
+  "approved_count": 8,
+  "new_files": [
+    "3일차 ssh 연결.txt",
+    "4일차 [ipv4].txt"
+  ],
+  "new_api_attempts": 0,
+  "ready": false,
+  "approval_db_unchanged": true,
+  "intake_report": "output\\notion_live\\intake\\20261020T005535Z_27b6e5cac8e7\\report.json",
+  "actual_new_paid_analysis_executed": false,
+  "actual_user_review_executed": false,
+  "notion_published": false,
+  "review_launcher_without_analysis": "blocked with guidance; no empty review session opened"
+}

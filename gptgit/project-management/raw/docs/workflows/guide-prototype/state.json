@@ -1,0 +1,295 @@
+{
+  "schema_version": 1,
+  "run_id": "guide-prototype",
+  "title": "AI 작업 요청·진행·재개 사용자 가이드",
+  "spec_version": "1.0",
+  "request_hash": "04cd175aef0830bfbe2f5678b8e407285e6bff811d08a22bb7495c4c7d0b5f91",
+  "criteria": {
+    "R1": "사용자가 마스터 AI에 보낼 요청 예시와 범위를 이해할 수 있다",
+    "R2": "진행 중과 검증된 완료를 구분하고 증거·미검증 항목을 찾을 수 있다",
+    "R3": "재개 요청 예시가 있고 중복 실행을 방지하는 절차를 설명한다",
+    "R4": "현재 구현과 미연결 기능을 구분하고 실제 가능한 명령만 안내한다"
+  },
+  "baseline": [
+    {
+      "path": "docs/workflows/guide-prototype/00-request/approval.md",
+      "sha256": "5cad5535450d5510ef51a3fb43a38246af7fc81e62f39f65f7071fe9ec15c54f",
+      "snapshot": "docs/workflows/guide-prototype/evidence/5cad5535450d5510ef51a3fb43a38246af7fc81e62f39f65f7071fe9ec15c54f.md"
+    },
+    {
+      "path": "docs/workflows/guide-prototype/00-request/request.json",
+      "sha256": "04cd175aef0830bfbe2f5678b8e407285e6bff811d08a22bb7495c4c7d0b5f91",
+      "snapshot": "docs/workflows/guide-prototype/evidence/04cd175aef0830bfbe2f5678b8e407285e6bff811d08a22bb7495c4c7d0b5f91.json"
+    }
+  ],
+  "stages": {
+    "01-planning": {
+      "status": "complete",
+      "attempt": 2,
+      "reviews": 1,
+      "defects": {},
+      "history": [
+        {
+          "session": "f6f1dade-3ac2-4873-b2da-90f604b5be26",
+          "provider": "claude",
+          "model": "claude-opus-5-5",
+          "spec_version": "1.0",
+          "summary": "제공된 요구명세 v1.0, 실행계획, 대표 화면 승인 기록을 대조해 기획 단계의 적합성만 읽기 전용으로 검토했다. R1~R4는 모두 계획의 Task와 완료 조건에 연결되어 있다. 범위 밖 항목(API 추가 비용, Slack, 클라우드 배포, 미검증 기능의 완성 표시)도 계획의 예외 규칙과 맞는다. 필수 결함은 없어 pass로 판정한다. 다만 이 판정은 기획 적합성에 대한 것이다. 가이드 제작 완료, 독립 QA, 실제 사용자 동선 시험, 전체 환경 통합 완료를 뜻하지 않는다. 확인된 제한은 그대로 남아 있다. docker-desktop은 정지 상태였고 컨테이너 시험은 엔진 연결 실패로 실행되지 않았다. herdr는 첫 화면까지만 확인했다. 내부 마스터와 Claude 사이의 전달·회수는 검증되지 않았다. Hermes는 설치·연결되지 않았다. 명세의 approval 필드가 가리키는 docs/workflows/guide-prototype/00-request/approval.md는 검토 자료에 없어 대조하지 못했다. 해시, 스냅샷, 스크린샷 파일이 실제로 있는지와 해시가 일치하는지도 직접 확인하지 않았고, 승인 기록에 적힌 내용만 근거로 삼았다.",
+          "verdict": "pass",
+          "criteria": [
+            "R1",
+            "R2",
+            "R3",
+            "R4"
+          ],
+          "defects": [],
+          "suggestions": [
+            "R3: 계획의 대표 결과에 재개 요청 문구 예시를 하나 더 고정하면 제작 담당이 R3 완료를 판정하기 쉬워진다. 예: “지난번 가이드 작업을 이어서 해줘. 마지막으로 끝난 단계와 남은 일을 먼저 보여주고, 이미 끝난 일은 다시 하지 마.”",
+            "R3: 개발 지식이 낮은 사용자는 실행 ID를 알기 어렵다. 사용자는 작업 이름이나 날짜로 요청하고, 마스터가 실행 ID를 찾아 확인해 주는 방식을 가이드에 명시하는 것을 권한다.",
+            "R4: '실제 가능한 명령만 안내한다'는 조건과 '검증 예정인 두 번째 명령'이 함께 있으면 해석이 갈릴 수 있다. 두 번째 명령은 매번 할 일 단계에서 빼고 '연결 준비 상태(검증 예정)' 구역에만 두는 것을 권한다. 그리고 첫 화면까지만 확인됐다는 기대 결과를 함께 적는다.",
+            "R2: 사용자가 증거와 미검증 항목을 직접 찾을 수 있도록 마스터에게 물을 확인 문구를 가이드에 넣는 것을 권한다. 예: “완료 근거와 아직 검증 안 된 항목을 따로 보여줘.” 파일 경로를 직접 찾게 하는 방식보다 이 방식을 권한다.",
+            "근거 대조: 명세의 approval 필드(approval.md)와 화면 승인 기록(screen-approval.md)의 관계를 계획에 한 줄 적어 두면, 승인 근거가 하나인지 두 개인지 혼동을 줄일 수 있다.",
+            "역할 표기: 검토 담당과 독립 QA가 모두 GPT이므로 같은 제공자 안의 독립 검토라는 점을 적어 둔다. 서로 다른 제공자의 교차 검증으로 표시하지 않도록 계획이나 보고에 남기는 것을 권한다."
+          ],
+          "evidence": [
+            {
+              "path": "docs/workflows/guide-prototype/01-planning/screen-approved-review.json",
+              "sha256": "3bbd39fa8e5dbd76617e29b6e357a968fe40d0f1d2327dc9716e9fe5c8a2d286",
+              "snapshot": "docs/workflows/guide-prototype/evidence/3bbd39fa8e5dbd76617e29b6e357a968fe40d0f1d2327dc9716e9fe5c8a2d286.json"
+            }
+          ],
+          "artifacts": [
+            {
+              "path": "docs/workflows/guide-prototype/01-planning/plan.md",
+              "sha256": "0595aa75dca30ad477a94212b07090da39ea298c384a78322b699e07a577ac10",
+              "snapshot": "docs/workflows/guide-prototype/evidence/0595aa75dca30ad477a94212b07090da39ea298c384a78322b699e07a577ac10.md"
+            },
+            {
+              "path": "docs/workflows/guide-prototype/00-request/screen-approval.md",
+              "sha256": "ac3619ead8206a7283cb2df832dae8043a3c5a197d2c3a96a1bc4620f4ea540d",
+              "snapshot": "docs/workflows/guide-prototype/evidence/ac3619ead8206a7283cb2df832dae8043a3c5a197d2c3a96a1bc4620f4ea540d.md"
+            }
+          ]
+        }
+      ],
+      "archived_rounds": [
+        {
+          "status": "blocked",
+          "attempt": 1,
+          "reviews": 0,
+          "defects": {},
+          "history": [],
+          "owner": {
+            "session": "codex-master-20261027",
+            "provider": "gpt",
+            "model": "현재 Codex GPT 세션(정확한 모델 ID 미수집)",
+            "task": "R1~R4에 대응하는 가이드 기획과 대표 초안 준비. 정식 완료 전 검토·사용자 확인 필요"
+          },
+          "submission": {
+            "session": "codex-master-20261027",
+            "spec_version": "1.0",
+            "summary": "가이드 실행계획 작성. Claude 사전 기획 검토 G1에 따라 선행 HTML의 초안 지위를 명시함",
+            "self_test": "요구사항 R1~R4와 계획 Task를 대조. 대표 HTML 구조 검사와 화면 검토는 사전 확인이며 정식 QA가 아님",
+            "limitations": [
+              "정정 후 Claude 기획 재검토 미수행",
+              "대표 화면 사용자 승인 미수행",
+              "herdr 전체 동선·Docker·Hermes 실행 검증은 다음 작업"
+            ],
+            "artifacts": [
+              {
+                "path": "docs/workflows/guide-prototype/01-planning/plan.md",
+                "sha256": "f788fc3a5fe4e5e68b5ed5a8ee11941f50a390b21b57024abec2c0feb4e73b26",
+                "snapshot": "docs/workflows/guide-prototype/evidence/f788fc3a5fe4e5e68b5ed5a8ee11941f50a390b21b57024abec2c0feb4e73b26.md"
+              },
+              {
+                "path": "guide_docs/AI_작업_요청과_재개_가이드.html",
+                "sha256": "3028447b8d4118043eda18cc1a364532994094b0300c5b7db525f13afda8bbad",
+                "snapshot": "docs/workflows/guide-prototype/evidence/3028447b8d4118043eda18cc1a364532994094b0300c5b7db525f13afda8bbad.html"
+              }
+            ]
+          },
+          "blocked_from": "review",
+          "reason": "사용자가 재시작 없이 환경 설치까지만 진행하고 후속 검증은 작업기록에 남기도록 요청함. 기획 정정 재검토·대표 화면 확인 후 정식 제작 재개 필요"
+        }
+      ],
+      "owner": {
+        "session": "01a17b98-24a4-70c0-82a5-f6a97d8334fc",
+        "provider": "gpt",
+        "model": "현재 Codex GPT 세션; 정확한 모델 ID 미수집",
+        "task": "승인된 화면 버전 연결 및 환경 제한을 기획에 보완"
+      },
+      "submission": {
+        "session": "01a17b98-24a4-70c0-82a5-f6a97d8334fc",
+        "spec_version": "1.0",
+        "summary": "화면 승인과 기존 초안 해시 연결, 실제 환경 제한 보완",
+        "self_test": "기존 초안 스냅샷 및 사용자 응답 대조",
+        "limitations": [
+          "환경 통합 미완료",
+          "정식 제작 및 독립 QA 전"
+        ],
+        "artifacts": [
+          {
+            "path": "docs/workflows/guide-prototype/01-planning/plan.md",
+            "sha256": "0595aa75dca30ad477a94212b07090da39ea298c384a78322b699e07a577ac10",
+            "snapshot": "docs/workflows/guide-prototype/evidence/0595aa75dca30ad477a94212b07090da39ea298c384a78322b699e07a577ac10.md"
+          },
+          {
+            "path": "docs/workflows/guide-prototype/00-request/screen-approval.md",
+            "sha256": "ac3619ead8206a7283cb2df832dae8043a3c5a197d2c3a96a1bc4620f4ea540d",
+            "snapshot": "docs/workflows/guide-prototype/evidence/ac3619ead8206a7283cb2df832dae8043a3c5a197d2c3a96a1bc4620f4ea540d.md"
+          }
+        ]
+      },
+      "review": {
+        "session": "f6f1dade-3ac2-4873-b2da-90f604b5be26",
+        "provider": "claude",
+        "model": "claude-opus-5-5",
+        "spec_version": "1.0",
+        "summary": "제공된 요구명세 v1.0, 실행계획, 대표 화면 승인 기록을 대조해 기획 단계의 적합성만 읽기 전용으로 검토했다. R1~R4는 모두 계획의 Task와 완료 조건에 연결되어 있다. 범위 밖 항목(API 추가 비용, Slack, 클라우드 배포, 미검증 기능의 완성 표시)도 계획의 예외 규칙과 맞는다. 필수 결함은 없어 pass로 판정한다. 다만 이 판정은 기획 적합성에 대한 것이다. 가이드 제작 완료, 독립 QA, 실제 사용자 동선 시험, 전체 환경 통합 완료를 뜻하지 않는다. 확인된 제한은 그대로 남아 있다. docker-desktop은 정지 상태였고 컨테이너 시험은 엔진 연결 실패로 실행되지 않았다. herdr는 첫 화면까지만 확인했다. 내부 마스터와 Claude 사이의 전달·회수는 검증되지 않았다. Hermes는 설치·연결되지 않았다. 명세의 approval 필드가 가리키는 docs/workflows/guide-prototype/00-request/approval.md는 검토 자료에 없어 대조하지 못했다. 해시, 스냅샷, 스크린샷 파일이 실제로 있는지와 해시가 일치하는지도 직접 확인하지 않았고, 승인 기록에 적힌 내용만 근거로 삼았다.",
+        "verdict": "pass",
+        "criteria": [
+          "R1",
+          "R2",
+          "R3",
+          "R4"
+        ],
+        "defects": [],
+        "suggestions": [
+          "R3: 계획의 대표 결과에 재개 요청 문구 예시를 하나 더 고정하면 제작 담당이 R3 완료를 판정하기 쉬워진다. 예: “지난번 가이드 작업을 이어서 해줘. 마지막으로 끝난 단계와 남은 일을 먼저 보여주고, 이미 끝난 일은 다시 하지 마.”",
+          "R3: 개발 지식이 낮은 사용자는 실행 ID를 알기 어렵다. 사용자는 작업 이름이나 날짜로 요청하고, 마스터가 실행 ID를 찾아 확인해 주는 방식을 가이드에 명시하는 것을 권한다.",
+          "R4: '실제 가능한 명령만 안내한다'는 조건과 '검증 예정인 두 번째 명령'이 함께 있으면 해석이 갈릴 수 있다. 두 번째 명령은 매번 할 일 단계에서 빼고 '연결 준비 상태(검증 예정)' 구역에만 두는 것을 권한다. 그리고 첫 화면까지만 확인됐다는 기대 결과를 함께 적는다.",
+          "R2: 사용자가 증거와 미검증 항목을 직접 찾을 수 있도록 마스터에게 물을 확인 문구를 가이드에 넣는 것을 권한다. 예: “완료 근거와 아직 검증 안 된 항목을 따로 보여줘.” 파일 경로를 직접 찾게 하는 방식보다 이 방식을 권한다.",
+          "근거 대조: 명세의 approval 필드(approval.md)와 화면 승인 기록(screen-approval.md)의 관계를 계획에 한 줄 적어 두면, 승인 근거가 하나인지 두 개인지 혼동을 줄일 수 있다.",
+          "역할 표기: 검토 담당과 독립 QA가 모두 GPT이므로 같은 제공자 안의 독립 검토라는 점을 적어 둔다. 서로 다른 제공자의 교차 검증으로 표시하지 않도록 계획이나 보고에 남기는 것을 권한다."
+        ],
+        "evidence": [
+          {
+            "path": "docs/workflows/guide-prototype/01-planning/screen-approved-review.json",
+            "sha256": "3bbd39fa8e5dbd76617e29b6e357a968fe40d0f1d2327dc9716e9fe5c8a2d286",
+            "snapshot": "docs/workflows/guide-prototype/evidence/3bbd39fa8e5dbd76617e29b6e357a968fe40d0f1d2327dc9716e9fe5c8a2d286.json"
+          }
+        ],
+        "artifacts": [
+          {
+            "path": "docs/workflows/guide-prototype/01-planning/plan.md",
+            "sha256": "0595aa75dca30ad477a94212b07090da39ea298c384a78322b699e07a577ac10",
+            "snapshot": "docs/workflows/guide-prototype/evidence/0595aa75dca30ad477a94212b07090da39ea298c384a78322b699e07a577ac10.md"
+          },
+          {
+            "path": "docs/workflows/guide-prototype/00-request/screen-approval.md",
+            "sha256": "ac3619ead8206a7283cb2df832dae8043a3c5a197d2c3a96a1bc4620f4ea540d",
+            "snapshot": "docs/workflows/guide-prototype/evidence/ac3619ead8206a7283cb2df832dae8043a3c5a197d2c3a96a1bc4620f4ea540d.md"
+          }
+        ]
+      }
+    },
+    "02-development": {
+      "status": "waiting",
+      "attempt": 0,
+      "reviews": 0,
+      "defects": {},
+      "history": [],
+      "archived_rounds": []
+    },
+    "03-qa": {
+      "status": "waiting",
+      "attempt": 0,
+      "reviews": 0,
+      "defects": {},
+      "history": [],
+      "archived_rounds": []
+    },
+    "04-wiki": {
+      "status": "waiting",
+      "attempt": 0,
+      "reviews": 0,
+      "defects": {},
+      "history": [],
+      "archived_rounds": []
+    }
+  },
+  "events": [
+    {
+      "at": "2026-10-27T03:34:29.493384+00:00",
+      "stage": "00-request",
+      "action": "init",
+      "raw": "raw/0001-init.json",
+      "sha256": "04cd175aef0830bfbe2f5678b8e407285e6bff811d08a22bb7495c4c7d0b5f91",
+      "operation": "init"
+    },
+    {
+      "at": "2026-10-27T03:48:30.321036+00:00",
+      "stage": "01-planning",
+      "action": "start",
+      "raw": "raw/0002-start.json",
+      "sha256": "f412e8618800cc976982199b9525a41421dbaa45e084db80c566fe115514de86",
+      "operation": "planning-start"
+    },
+    {
+      "at": "2026-10-27T03:48:30.607808+00:00",
+      "stage": "01-planning",
+      "action": "submit",
+      "raw": "raw/0003-submit.json",
+      "sha256": "f9891460852d4eaa918039649e3540a0e09c0993f65b6493da2c0d4393e95fcc",
+      "operation": "planning-submit"
+    },
+    {
+      "at": "2026-10-27T03:48:30.911450+00:00",
+      "stage": "01-planning",
+      "action": "block",
+      "raw": "raw/0004-block.json",
+      "sha256": "44a58ddecbf47059bff62d7fed1047721360c1d29580d80772aa33037acf01e4",
+      "operation": "defer-validation"
+    },
+    {
+      "at": "2026-10-27T04:31:59.265116+00:00",
+      "stage": "01-planning",
+      "action": "reopen",
+      "raw": "raw/0005-reopen.json",
+      "sha256": "ab3941006c992a5ad926d215725dbd084e33d369358cb37c69cf1fd4d37a9140",
+      "operation": "screen-approved-replan"
+    },
+    {
+      "at": "2026-10-27T04:31:59.317765+00:00",
+      "stage": "01-planning",
+      "action": "start",
+      "raw": "raw/0006-start.json",
+      "sha256": "a1215e9183070cc9de88ef77ad3f5a203765535c45ca525f124fb4c07fc15a76",
+      "operation": "screen-approved-plan-start"
+    },
+    {
+      "at": "2026-10-27T04:31:59.398250+00:00",
+      "stage": "01-planning",
+      "action": "submit",
+      "raw": "raw/0007-submit.json",
+      "sha256": "ef00dac62ac36177b6d4cc092c35772c143a2263023f76d7580eb4ae4b271ee4",
+      "operation": "screen-approved-plan-submit"
+    },
+    {
+      "at": "2026-10-27T04:33:17.623199+00:00",
+      "stage": "01-planning",
+      "action": "review",
+      "raw": "raw/0008-review.json",
+      "sha256": "5488e318b6e0e20a2d80535b4383566f6e4947a78b9dc49994718c0674d5668b",
+      "operation": "screen-approved-plan-review"
+    },
+    {
+      "at": "2026-10-27T04:33:17.691799+00:00",
+      "stage": "01-planning",
+      "action": "complete",
+      "raw": "raw/0009-complete.json",
+      "sha256": "a5810a1e8ede8c455b0fa11bb211b823cca84adea54a6abfcc9fc5118e1f831c",
+      "operation": "screen-approved-plan-complete"
+    }
+  ],
+  "operations": {
+    "planning-start": "1ecfc5694698507f8816a0e662df91f3c286fde2243dc4fdcd97840b280cb90e",
+    "planning-submit": "fd030a45c2483327152c127c4109024ec18a70d6bc7fa21cb4dbefe4649beed6",
+    "defer-validation": "b98b82695b914666a13d20beef982dba5bedb14d71363c3e73fb138f6247d27b",
+    "screen-approved-replan": "73ee63a8fc776ff5da03be96aedcb43d2f54e025442429e6c89824c61d4a3d9e",
+    "screen-approved-plan-start": "c9c2eb586fd64de4ca3361f2ab7d5972310dcf72c8d1d02fff4dbbfb5e9c1ab3",
+    "screen-approved-plan-submit": "0057419e9ebbafe36c703b9e40f9fd1f80c68069686e2d636c2f4129f5b22efc",
+    "screen-approved-plan-review": "247034f9d2fc9b6de8718f5289ee29944c7cce927387ac43707bc48fae73a45b",
+    "screen-approved-plan-complete": "5cade9b028c9df621f732c685e2c754d5b37a0558aa7c17e34597bbc8f5d8538"
+  }
+}

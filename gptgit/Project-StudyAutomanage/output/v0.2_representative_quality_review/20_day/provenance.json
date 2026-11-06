@@ -1,0 +1,37 @@
+{
+  "origin": "analysis(1).json",
+  "method": "assistant-reviewed saved result adaptation, not fresh API analysis",
+  "findings": [
+    {
+      "path": "/relationships/1",
+      "reason": "루프백 핑이 Inter-VLAN 라우팅 관계를 입증한다는 연결을 제거했다. 기존 정적 경로→RIP 관계는 유지했다."
+    },
+    {
+      "path": "/practice/1/related_concepts 및 /theory/principles/2/related_concepts",
+      "reason": "루프백 핑을 Inter-VLAN 검증으로 해석할 수 있는 연결을 제거했다."
+    },
+    {
+      "path": "/concepts/6/description",
+      "reason": "상태 확인 지시와 실제 상태 확인 결과를 구분했다."
+    },
+    {
+      "path": "/practice/0/evidence",
+      "reason": "SVI·트렁크 설정과 확인 지시를 함께 설명하므로 설정 명령을 포함하는 연속 구간으로 근거를 확장했다."
+    },
+    {
+      "path": "/topics",
+      "reason": "루프백 핑을 L3/Inter-VLAN 하위 주제로 고정하지 않고 독립 주제로 배치했다."
+    }
+  ],
+  "remaining": [
+    {
+      "severity": "limitation",
+      "issue": "설정에는 fa1/14, 확인 메모에는 fa0/14가 있어 실제 장비의 포트 이름 확인이 필요하다."
+    },
+    {
+      "severity": "limitation",
+      "issue": "RIP 버전·자동 요약·단말 게이트웨이·배선이 확인되지 않아 네트워크 실습 성공은 판정하지 않았다."
+    }
+  ],
+  "actual_ai_call": false
+}

@@ -1,0 +1,29 @@
+{
+  "status": "SUCCESS",
+  "original_run": "output\\live_api_validation_v0.2\\20261015T075227Z_39cef6d312f3",
+  "recovered_run": "output\\live_api_validation_v0.2_recovery\\20261015T075454Z_e4e61d2b8840",
+  "initial_failure": "missing /relationships/1 in section content_refs",
+  "repair": "appended /relationships/1 to router-subinterfaces; both endpoints were uniquely grouped there",
+  "core_content_unchanged_after_normalization": true,
+  "evidence_quotes_exact": 6,
+  "comments": 0,
+  "review_candidates": 0,
+  "new_api_calls": 0,
+  "budget": {
+    "calls_used": 5,
+    "call_limit": 5,
+    "calls_remaining": 0
+  },
+  "unit_tests": {
+    "passed": 85,
+    "total": 85
+  },
+  "original_failure_preserved": true,
+  "limitations": [
+    "This is local recovery of one actual response, not a second live API test.",
+    "Full technical accuracy and real network execution were not validated.",
+    "Ambiguous section links remain failures; core data is not inferred."
+  ],
+  "official_records_updated": false,
+  "guides_updated": false
+}

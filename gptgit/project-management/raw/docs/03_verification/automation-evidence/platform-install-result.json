@@ -1,0 +1,17 @@
+[
+  {
+    "operation": "Microsoft-Windows-Subsystem-Linux",
+    "restart_requested": false,
+    "exit_code": 3010
+  },
+  {
+    "operation": "VirtualMachinePlatform",
+    "restart_requested": false,
+    "exit_code": 3010
+  },
+  {
+    "operation": "WSL MSI 3.0.3",
+    "restart_requested": false,
+    "exit_code": 0
+  }
+]

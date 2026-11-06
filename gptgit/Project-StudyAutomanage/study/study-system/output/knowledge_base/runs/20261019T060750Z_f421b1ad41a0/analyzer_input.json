@@ -1,0 +1,6 @@
+{
+  "material_id": "d7bab40eb0785349ae73364c61ea15ad5ec0c178f979f467f1d7cd9904a3f203",
+  "filename": "2일차_원격접속.txt",
+  "extension": ".txt",
+  "extracted_text": "■원격 접속 구성\n1. Telnet(TCP/23번 사용)\n - 장비 이름\n - 가상회선 범위\n - 가상회선 접속 PW\n - 특권 PW\n R2\nconf t\nenable secret 2222\nline vty 0 2\npass 3333\n\nR3\nconf t\nenable pass 4444\nline vty 0 1\npass 5555\n\n\twww.unicode.org\n방화벽 장비\n-2계층 방화벽\n\nMessage\nSegment\nPacket\nFrame\n\n\n\n\n\n\n\n\n\n\n\n\n"
+}

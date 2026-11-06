@@ -1,0 +1,19 @@
+{
+  "provider": "mock-file",
+  "actual_ai_call": false,
+  "completed_stages": [
+    "input_validation",
+    "prompt_generation",
+    "response_received",
+    "json_parse",
+    "source_injection",
+    "reviewed_reference_binding",
+    "schema_validation",
+    "quality_validation"
+  ],
+  "warnings": [],
+  "review_candidates_pending": 4,
+  "result_reused": false,
+  "cache_key": "696dd94ac7b7818a786083bc2a41f930c65ee46932e6a56755e040a0843e28c8",
+  "force_reanalysis": false
+}

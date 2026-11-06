@@ -1,0 +1,40 @@
+﻿filename,path,extension,size_bytes,created_at,modified_at,sha256,text_length,status,error,text
+2일차_원격접속.txt,C:\Users\ICT\Desktop\Aigit\gptgit\Project-StudyAutomanage\study\sourcefile\2일차_원격접속.txt,.txt,369,2026-10-19T12:12:47,2026-09-02T16:59:59,d7bab40eb0785349ae73364c61ea15ad5ec0c178f979f467f1d7cd9904a3f203,255,success,,"■원격 접속 구성
+1. Telnet(TCP/23번 사용)
+ - 장비 이름
+ - 가상회선 범위
+ - 가상회선 접속 PW
+ - 특권 PW
+ R2
+conf t
+enable secret 2222
+line vty 0 2
+pass 3333
+
+R3
+conf t
+enable pass 4444
+line vty 0 1
+pass 5555
+
+	www.unicode.org
+방화벽 장비
+-2계층 방화벽
+
+Message
+Segment
+Packet
+Frame
+
+
+
+
+
+
+
+
+
+
+
+
+"

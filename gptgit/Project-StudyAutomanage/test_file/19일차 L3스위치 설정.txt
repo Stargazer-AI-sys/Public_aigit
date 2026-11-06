@@ -1,0 +1,41 @@
+ESW
+
+conf t
+int fa1/1
+no sw
+ip addr 192.168.1.254 255.255.255.0
+no sh
+int fa1/2
+no sw
+ip addr 192.168.2.254 255.255.255.0
+no sh
+do sh ip route
+
+
+
+ESW2
+conf t
+int range fa1/1 - 2
+sw mo acc
+sw acc vlan 10
+int range fa1/3 - 4
+sw mo acc
+sw acc vlan 20
+
+
+
+ip routing
+
+**L3스위치는 서브인터페이스를 설정하지 못하기때문에 SVI를 지정해야됩니다.
+
+sh vlan-sw
+----------------------
+ESW1
+
+vlan 10
+int vlan 10
+ip addr 192.168.10.254 255.255.255.0
+vlan 20
+int vlan 20
+ip addr 192.168.20.254 255.255.255.0
+

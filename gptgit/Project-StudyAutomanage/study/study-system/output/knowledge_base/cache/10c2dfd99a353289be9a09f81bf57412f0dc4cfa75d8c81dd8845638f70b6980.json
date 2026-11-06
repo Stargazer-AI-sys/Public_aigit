@@ -1,0 +1,270 @@
+{
+  "context": {
+    "cache_format": 1,
+    "input_sha256": "7c236f72ba312954e4b3ccce4ce214f707eb7b6fa545c35ccdf62aac0a2a5a93",
+    "prompt_sha256": "7cc1ff9bd092001e05187d669214dfd3501e1d847205678626534b2d4d92b272",
+    "schema_sha256": "468684eae5625fcc4ca0b4301c81e205bf2a338ff6bcc480b4d81918305740fe",
+    "config": {
+      "provider": "openai",
+      "auxiliary_context_omitted": false,
+      "model": "gpt-6-luna",
+      "reasoning_effort": "low",
+      "max_output_tokens": 6000,
+      "service_tier": "default",
+      "processing_sha256": "ce7803667149281905ff5b599bbe91bc61d16f3e1bfafdcaa82d93de9665b472"
+    }
+  },
+  "analysis": {
+    "material_type": {
+      "material_type": "실습",
+      "confidence": 0.87,
+      "reason": "라우터 인터페이스와 DHCP 풀을 구성하는 명령 및 주소 계산·구성 예시가 중심이며, DHCP의 간단한 설명과 ping 초기 타임아웃에 관한 관찰 해석도 포함합니다. 명령 실행 결과를 확인하거나 성공 여부를 기록한 내용은 없습니다."
+    },
+    "summary": "DHCP의 기능과 라우터 DHCP 풀 구성 예시, /27 서브넷 주소 계산 및 ping 초기 타임아웃에 대한 설명을 정리한다.",
+    "topics": [
+      {
+        "name": "네트워크 서비스",
+        "children": [
+          {
+            "name": "DHCP",
+            "children": [
+              {
+                "name": "라우터 DHCP 풀 구성"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "IP 주소 및 서브넷팅",
+        "children": [
+          {
+            "name": "/27 서브넷 주소 계산"
+          }
+        ]
+      },
+      {
+        "name": "네트워크 진단",
+        "children": [
+          {
+            "name": "ping 초기 타임아웃 설명"
+          }
+        ]
+      }
+    ],
+    "keywords": [
+      {
+        "name": "DHCP",
+        "type": "프로토콜"
+      },
+      {
+        "name": "DHCP pool",
+        "type": "라우터 설정"
+      },
+      {
+        "name": "서브넷 마스크",
+        "type": "IP 주소 설정"
+      },
+      {
+        "name": "기본 게이트웨이",
+        "type": "IP 주소 설정"
+      },
+      {
+        "name": "DNS 서버",
+        "type": "IP 주소 설정"
+      },
+      {
+        "name": "ARP 테이블",
+        "type": "네트워크 진단"
+      },
+      {
+        "name": "ping",
+        "type": "네트워크 진단"
+      }
+    ],
+    "concepts": [
+      {
+        "name": "DHCP",
+        "description": "연결된 호스트에 IP 관련 설정 정보를 자동으로 할당하는 기능을 담당하는 프로토콜이다. 자료에서는 운영체제에서 별도로 할당하는 방법과 라우터에서 할당하는 방법을 언급한다.",
+        "type": {
+          "category": "네트워크 서비스",
+          "subtype": "프로토콜"
+        }
+      },
+      {
+        "name": "DHCP 풀",
+        "description": "라우터에서 DHCP를 구성할 때 사용하는 설정 단위로, 예시에서는 각 풀에 네트워크 주소와 마스크, 기본 라우터 주소, DNS 서버 주소를 지정한다.",
+        "type": {
+          "category": "네트워크 설정",
+          "subtype": "DHCP"
+        }
+      },
+      {
+        "name": "라우터 인터페이스 주소",
+        "description": "예시 구성에서 라우터의 FastEthernet 인터페이스에 지정하는 IP 주소와 서브넷 마스크다. 첫 구성은 Fa0/0에 192.168.1.254/24, Fa1/0에 192.168.2.254/24를 지정하며, /27 예시에서는 각각 200.100.100.94/27과 200.100.100.158/27을 지정한다.",
+        "type": {
+          "category": "네트워크 설정",
+          "subtype": "인터페이스 IP 주소"
+        }
+      },
+      {
+        "name": "호스트 IP 관련 설정 정보",
+        "description": "자료에서 네트워크 통신을 위해 호스트에 필요한 정보로 할당할 유니캐스트 주소, 서브넷 마스크, 게이트웨이, DNS 서버 주소 등을 제시한다.",
+        "type": {
+          "category": "네트워크 설정",
+          "subtype": "호스트 설정 정보"
+        }
+      },
+      {
+        "name": "/27 서브넷 주소 범위",
+        "description": "자료의 계산 예시에서는 200.100.100.0/24를 /27로 나누고, 세 번째와 다섯 번째 서브넷 범위를 각각 200.100.100.64–95와 200.100.100.128–159로 제시한다.",
+        "type": {
+          "category": "주소 지정",
+          "subtype": "서브넷"
+        }
+      },
+      {
+        "name": "ARP 테이블",
+        "description": "ping 초기 타임아웃에 관한 자료의 설명에서 최초 통신 시 아직 구축되지 않은 것으로 언급되는 테이블이다. 자료는 이후 목적지 호스트에 대한 스위치의 브로드캐스트와 학습 지연을 설명한다.",
+        "type": {
+          "category": "네트워크 동작",
+          "subtype": "주소 해석"
+        }
+      },
+      {
+        "name": "ping 응답 시간 제한",
+        "description": "자료는 ping에서 기본 2초 안에 응답이 있어야 한다고 설명하며, 최초 통신에서 학습 시간이 이를 초과하면 초기 테스트가 실패할 수 있다고 서술한다.",
+        "type": {
+          "category": "네트워크 진단",
+          "subtype": "응답 시간"
+        }
+      },
+      {
+        "name": "초기 ping 타임아웃",
+        "description": "자료에서는 최초 통신 시 ARP 테이블이 구축되지 않아 발생하는 브로드캐스트와 학습 시간 때문에 처음 1~2개 패킷에서 Request time out이 나올 수 있고, 이후에는 정상 테스트가 진행된다고 설명한다.",
+        "type": {
+          "category": "네트워크 진단",
+          "subtype": "ping 관찰 설명"
+        }
+      }
+    ],
+    "theory": {
+      "definitions": [
+        {
+          "subject": "DHCP",
+          "content": "연결된 호스트에 IP 관련 설정 정보를 자동으로 할당하는 기능을 담당하는 프로토콜이다. 자료는 호스트에 할당할 정보의 예로 유니캐스트 주소, 서브넷 마스크, 게이트웨이, DNS 서버 주소 등을 든다.",
+          "evidence": "■DHCP(Dynamic Host Configuration Protocol)\n-연결된 호스트에 대해 IP관련 설정 정보를 자동으로 할당하는 기능을 담당하는 프로토콜이다.\n-윈도우나 리눅스에서 별도로 만들어 할당하는 방법과 라우터에서 할당하는 방식이 있다.\n-네트워크 통신을 위해 호스트에서 필요한 IP관련 정보는 할당할 유니캐스트, 서브넷 마스크, 게이트웨이, DNS서버 주소 등이 있다."
+        }
+      ],
+      "principles": [
+        {
+          "subject": "자료의 /27 서브넷 계산 예시",
+          "content": "자료는 200.100.100.0/24를 /27로 서브넷팅하는 문제에서 서브넷 비트가 3비트 추가된다고 적고, 세 번째 서브넷을 200.100.100.64–95, 다섯 번째 서브넷을 200.100.100.128–159로 제시한다. 각 라우터 인터페이스에는 해당 범위의 마지막 사용 가능 주소라고 제시된 .94와 .158을 지정하고, DHCP 풀에는 각각 .64/27과 .128/27 네트워크를 설정한다.",
+          "evidence": "문제. 200.100.100.0/24 주소를 /27로 서브넷팅.\n3번째 서브넷과 5번째 서브넷을 각각 할당\n라우터에는 사용 가능한 마지막 IP 할당 및 DHCP구성.\n1. 주소 범위 계산\n 서브넷 비트가 3비트 추가됨. 추가된 3비트로 십진수 2, 4가 해당됨.\n010 0 0000=>64\n010 1 1111=>95\n\n100 0 0000=>128\n100 1 1111=>159\n2. 라우터에 할당 주소\n Fa0/0 : 200.100.100.94/27\n Fa1/0 : 200.100.100.158/27",
+          "related_concepts": [
+            "/27 서브넷 주소 범위",
+            "라우터 인터페이스 주소"
+          ]
+        },
+        {
+          "subject": "자료의 ping 초기 타임아웃 설명",
+          "content": "자료에서는 최초 통신 때 ARP 테이블이 아직 구축되지 않아 목적지 호스트에 대해 스위치가 브로드캐스트하고, 이로 인한 학습 시간이 기본 2초 응답 시간 안에 들지 않으면 처음 1~2개 패킷에서 Request time out이 발생할 수 있으며 이후에는 정상 테스트가 진행된다고 설명한다. 이는 자료에 적힌 설명이며, 별도의 검증 결과는 제시되어 있지 않다.",
+          "evidence": "Tip. ping test에서 처음 1~2개의 패킷이 손실되면서 Request time out이 나오는 이유?\n-최초 통신을 하면 ARP테이블이 구축되지 않은 상태이므로 목적지 호스트에 대해 스위치가 브로드캐스트를 하게 된다.\nping은 기본 2초의 시간 안에 응답이 있어야 하는데, 브로드캐스트 신호로 인해 학습까지 걸리는 시간이 초과되는 경우가 발생되어 test 실패가되며 이후에는 모두 정상적으로 test가 진행된다.",
+          "related_concepts": [
+            "ARP 테이블",
+            "ping 응답 시간 제한",
+            "초기 ping 타임아웃"
+          ]
+        }
+      ]
+    },
+    "practice": [
+      {
+        "title": "라우터에서 DHCP 풀 구성 예시",
+        "description": "R1에서 Fa0/0을 192.168.1.254/24, Fa1/0을 192.168.2.254/24로 설정하고 각 인터페이스를 활성화하는 명령을 제시한다. 이어 ict1 풀에는 192.168.1.0/24, 기본 라우터 192.168.1.254, DNS 서버 192.168.1.253을 지정하고, ict2 풀에는 192.168.2.0/24, 기본 라우터 192.168.2.254, DNS 서버 192.168.2.253을 지정하는 구성 예시다. 명령 실행이나 구성 확인 결과는 기록되어 있지 않다.",
+        "evidence": "R1\nen\nconf t\nint fa0/0\nip addr 192.168.1.254 255.255.255.0\nno sh\nint fa1/0\nip addr 192.168.2.254 255.255.255.0\nno sh\ndo sh ip route\nexit\nip dhcp pool ict1\nnetwork 192.168.1.0 255.255.255.0\ndefault-router 192.168.1.254\ndns-server 192.168.1.253\nexit\nip dhcp pool ict2\nnetwork 192.168.2.0 255.255.255.0\ndefault-router 192.168.2.254\ndns-server 192.168.2.253",
+        "related_concepts": [
+          "DHCP",
+          "DHCP 풀",
+          "라우터 인터페이스 주소"
+        ]
+      },
+      {
+        "title": "/27 서브넷을 이용한 라우터 및 DHCP 구성 예시",
+        "description": "200.100.100.0/24를 /27로 나누어 세 번째와 다섯 번째 서브넷을 사용하는 문제와 주소 계산을 제시한다. R1의 Fa0/0에는 200.100.100.94/27, Fa1/0에는 200.100.100.158/27을 지정하고, ict1 풀에는 200.100.100.64/27과 기본 라우터 .94 및 DNS 서버 .93을, ict2 풀에는 200.100.100.128/27과 기본 라우터 .158 및 DNS 서버 .157을 지정하는 명령 예시다. 구성 실행 결과나 성공 여부는 기록되어 있지 않다.",
+        "evidence": "문제. 200.100.100.0/24 주소를 /27로 서브넷팅.\n3번째 서브넷과 5번째 서브넷을 각각 할당\n라우터에는 사용 가능한 마지막 IP 할당 및 DHCP구성.\n1. 주소 범위 계산\n 서브넷 비트가 3비트 추가됨. 추가된 3비트로 십진수 2, 4가 해당됨.\n010 0 0000=>64\n010 1 1111=>95\n\n100 0 0000=>128\n100 1 1111=>159\n2. 라우터에 할당 주소\n Fa0/0 : 200.100.100.94/27\n Fa1/0 : 200.100.100.158/27\n\n3.라우터 구성\nR1\nen\nconf t\nint fa0/0\nip addr 200.100.100.94 255.255.255.224\nno sh\nint fa1/0\nip addr 200.100.100.158 255.255.255.224\nno sh\nexit\nip dhcp pool ict1\nnet 200.100.100.64 255.255.255.224\ndefault-router 200.100.100.94\ndns-server 200.100.100.93\nip dhcp pool ict2\nnet 200.100.100.128 255.255.255.224\ndefault-router 200.100.100.158\ndns-server 200.100.100.157",
+        "related_concepts": [
+          "/27 서브넷 주소 범위",
+          "라우터 인터페이스 주소",
+          "DHCP 풀"
+        ]
+      }
+    ],
+    "schema_version": "0.2",
+    "sections": [
+      {
+        "id": "dhcp-overview",
+        "title": "DHCP 개요와 호스트 설정 정보",
+        "content_refs": [
+          "/concepts/0",
+          "/concepts/3",
+          "/theory/definitions/0"
+        ]
+      },
+      {
+        "id": "router-dhcp-config",
+        "title": "라우터 인터페이스 및 DHCP 풀 구성 예시",
+        "content_refs": [
+          "/concepts/1",
+          "/concepts/2",
+          "/practice/0"
+        ]
+      },
+      {
+        "id": "subnetting-dhcp-config",
+        "title": "/27 서브넷 계산과 DHCP 구성 예시",
+        "content_refs": [
+          "/concepts/1",
+          "/concepts/2",
+          "/concepts/4",
+          "/theory/principles/0",
+          "/practice/1"
+        ]
+      },
+      {
+        "id": "ping-timeout",
+        "title": "ping 초기 타임아웃 설명",
+        "content_refs": [
+          "/concepts/5",
+          "/concepts/6",
+          "/concepts/7",
+          "/theory/principles/1"
+        ]
+      }
+    ],
+    "source": {
+      "material_id": "1001126a59f6f8362da368d79f676d79949e47f8cd1ab38e9c8ced703457f8ae",
+      "filename": "4일차_DHCP구성.txt",
+      "extension": ".txt"
+    }
+  },
+  "analysis_sha256": "df1296fbb5736f9dfda88d70191243c52c432a9310e135c5836562961fa35fd9",
+  "origin": {
+    "kind": "generated_result"
+  },
+  "review_request": {
+    "review_version": 1,
+    "analysis_sha256": "d80595b0d807dc7cda7c10e652e92f7a3b7d089600c8b1013f1e2d0a2666df93",
+    "source": {
+      "material_id": "1001126a59f6f8362da368d79f676d79949e47f8cd1ab38e9c8ced703457f8ae",
+      "filename": "4일차_DHCP구성.txt",
+      "extension": ".txt"
+    },
+    "candidates": []
+  },
+  "auxiliary_review": {
+    "status": "OK",
+    "issues": [],
+    "core_result_preserved": true
+  }
+}

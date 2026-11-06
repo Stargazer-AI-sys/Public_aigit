@@ -1,0 +1,23 @@
+{
+  "provider": "openai",
+  "actual_ai_call": false,
+  "completed_stages": [
+    "input_validation",
+    "prompt_generation"
+  ],
+  "warnings": [],
+  "evidence_mode": "source_line_ranges",
+  "model": "gpt-6-luna",
+  "reasoning_effort": "low",
+  "timeout_seconds": 90,
+  "max_output_tokens": 6000,
+  "api_request_attempted": false,
+  "response_received": false,
+  "automatic_retries": 0,
+  "usage": null,
+  "response_id": null,
+  "response_status": null,
+  "result_reused": false,
+  "cache_key": "d8de2a7e612504eced37fed9cb9e4d27c4b6b78d5a2f7b3febca65ca23cab786",
+  "force_reanalysis": false
+}

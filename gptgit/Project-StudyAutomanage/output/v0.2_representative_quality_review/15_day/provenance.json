@@ -1,0 +1,25 @@
+{
+  "origin": "study/study-system/fixtures/saved_runs/15_day",
+  "method": "assistant-reviewed saved result adaptation, not fresh API analysis",
+  "findings": [
+    {
+      "path": "/concepts/8/description",
+      "reason": "미완성 RIPv2 서브넷 범위 설명을 완성된 문장처럼 해석하지 않도록 수정했다."
+    },
+    {
+      "path": "/theory/comparisons/0/criteria",
+      "reason": "원문에 완성되지 않은 서브넷 범위 처리를 확정 비교 항목에서 제외했다."
+    }
+  ],
+  "remaining": [
+    {
+      "severity": "limitation",
+      "issue": "RIPv2 서브넷 범위·IS-IS 메트릭·AS 질문은 원문에서 미완성인 상태로 유지했다."
+    },
+    {
+      "severity": "limitation",
+      "issue": "RIPv1 브로드캐스트 관찰은 원문 기록으로만 유지했으며 원본 패킷 캡처를 검증하지 않았다."
+    }
+  ],
+  "actual_ai_call": false
+}

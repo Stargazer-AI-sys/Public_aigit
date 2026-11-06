@@ -1,0 +1,21 @@
+{
+  "status": "PASS",
+  "actual_ai_call": false,
+  "decisions": [
+    {
+      "candidate_id": "candidate-c1e2585f5137c003",
+      "section_id": "loopback-ping",
+      "status": "applied",
+      "reason": "이번 대화에서 공식 자료 본문을 조회하고 해당 정정 문장이 출처의 설명과 일치함을 검토했다."
+    },
+    {
+      "candidate_id": "candidate-d9a10b33638d4de5",
+      "section_id": "static-redistribution",
+      "status": "applied",
+      "reason": "이번 대화에서 공식 자료 본문을 조회하고 해당 정정 문장이 출처의 설명과 일치함을 검토했다."
+    }
+  ],
+  "technical_review_source": "trusted local decisions; not URL availability checks",
+  "input_analysis_sha256": "29fa713523766a06c63da90e55df87e1ec5c4b784f651ea2742c286d79cbaee6",
+  "output_analysis_sha256": "db1b3f179d75999e5cdadac88604069fb9d8254da9c4e8c1b2ea2562d63ce1b2"
+}

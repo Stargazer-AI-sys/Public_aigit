@@ -1,0 +1,27 @@
+{
+  "date": "2026-10-22",
+  "modified_user_code": [
+    "analyzer/workspace.py",
+    "analyzer/notion_intake.py",
+    "analyzer/classification.py",
+    "analyzer/notion_reader.py",
+    "analyzer/notion_front.py"
+  ],
+  "before_after_results_identical": true,
+  "protected_files_unchanged": 38,
+  "regression_tests": {
+    "count": 124,
+    "seconds": 140.591,
+    "passed": true
+  },
+  "focused_tests": {
+    "count": 8,
+    "passed": true,
+    "overlaps_regression": true
+  },
+  "processing_identity_unchanged": true,
+  "paid_api_calls": 0,
+  "notion_calls": 0,
+  "isolated_preview": "passed",
+  "actual_startup_and_shutdown": "passed"
+}

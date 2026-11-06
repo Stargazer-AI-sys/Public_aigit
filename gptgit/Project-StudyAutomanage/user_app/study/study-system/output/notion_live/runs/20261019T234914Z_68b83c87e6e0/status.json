@@ -1,0 +1,6 @@
+{
+  "state": "interrupted",
+  "package": "C:\\Users\\ICT\\Desktop\\Aigit\\gptgit\\Project-StudyAutomanage\\study\\study-system\\output\\notion_live\\prepared\\20261019T234857Z_b1f9ad45b482\\package.json",
+  "reason": "dispatcher preflight runner unavailable; stopped before any remote call",
+  "actual_notion_calls": 0
+}

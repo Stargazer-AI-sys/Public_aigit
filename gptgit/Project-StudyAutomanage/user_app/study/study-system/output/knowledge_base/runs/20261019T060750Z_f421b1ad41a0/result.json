@@ -1,0 +1,8 @@
+{
+  "status": "FAILED",
+  "material_id": "d7bab40eb0785349ae73364c61ea15ad5ec0c178f979f467f1d7cd9904a3f203",
+  "error": {
+    "code": "SCHEMA_VALIDATION_ERROR",
+    "message": "[{\"path\": \"/theory\", \"message\": \"{} should be non-empty\"}]"
+  }
+}

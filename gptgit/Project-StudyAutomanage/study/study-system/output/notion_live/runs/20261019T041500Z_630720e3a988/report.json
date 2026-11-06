@@ -1,0 +1,43 @@
+{
+  "mode": "notion-mcp",
+  "notion_sent": false,
+  "writes": 0,
+  "skipped": 172,
+  "reconciled": 0,
+  "errors": [],
+  "plan_digest": "571bced470bce8e465799d7b91a2e33da393a0214ee1682bc8bf90a93cdb7d34",
+  "phase_seconds": {
+    "content": 121.342,
+    "relations": 3.84,
+    "front": 0.078
+  },
+  "elapsed_seconds": 125.268,
+  "transport_metrics": {
+    "tool_calls": {
+      "query_data_sources": 4
+    },
+    "tool_seconds": {
+      "query_data_sources": 117.42750389996218
+    },
+    "exchanges": 4,
+    "batch_creates": 0,
+    "request_json_bytes": 580,
+    "response_json_bytes": 91326,
+    "local_changed_entities": 0,
+    "revision_reused_pages": 86,
+    "body_read_pages": 0,
+    "revision_bootstrap_pages": 0
+  },
+  "front_pages": {
+    "total": 10,
+    "unchanged": 10,
+    "reads": 0,
+    "writes": 0,
+    "recovered": 0,
+    "errors": [],
+    "verified_page_ids": []
+  },
+  "entity_notion_sent": false,
+  "approval_db_unchanged": true,
+  "result_path": "output\\notion_live\\runs\\20261019T041500Z_630720e3a988\\report.json"
+}

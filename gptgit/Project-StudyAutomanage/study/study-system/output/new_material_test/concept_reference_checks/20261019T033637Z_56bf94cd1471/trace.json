@@ -1,0 +1,27 @@
+{
+  "provider": "saved-response",
+  "actual_ai_call": false,
+  "completed_stages": [
+    "input_validation",
+    "prompt_generation",
+    "response_received",
+    "json_parse",
+    "optional_null_normalization",
+    "source_injection",
+    "schema_validation",
+    "concept_reference_check"
+  ],
+  "warnings": [
+    "미해결 개념 참조를 원문 근거와 함께 concept_reference_review.json에 남겼습니다. 자동 유료 재호출·개념 추가는 하지 않습니다."
+  ],
+  "api_request_attempted": false,
+  "automatic_retries": 0,
+  "offline_revalidation": true,
+  "content_review_required": true,
+  "usage": {
+    "input_tokens": 0,
+    "output_tokens": 0,
+    "total_tokens": 0
+  },
+  "origin_run_directory": "C:\\Users\\ICT\\Desktop\\Aigit\\gptgit\\Project-StudyAutomanage\\study\\study-system\\output\\knowledge_base\\runs\\20261019T032342Z_9275ca30e632"
+}

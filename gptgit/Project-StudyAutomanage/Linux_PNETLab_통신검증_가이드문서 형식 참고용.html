@@ -1,0 +1,169 @@
+<!doctype html>
+<html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Linux ↔ PNETLab 내부 네트워크 통신 검증 가이드</title>
+<style>
+:root{color-scheme:light}*{box-sizing:border-box}body{margin:0;background:#fff;color:#20252b;font:16px/1.75 system-ui,-apple-system,"Segoe UI","Malgun Gothic",sans-serif}main{max-width:960px;margin:auto;padding:42px 28px 70px}h1{font-size:29px;line-height:1.4;margin:0 0 12px}h2{font-size:23px;margin:42px 0 16px;padding-bottom:8px;border-bottom:1px solid #d9dee4}h3{font-size:18px;margin:26px 0 10px}p{margin:10px 0}a{color:#245c88;text-underline-offset:3px}.meta{color:#606973;font-size:14px}.note{padding:12px 16px;border-left:3px solid #7893a8;background:#f5f7f9;margin:18px 0}.success{border-left-color:#528368}nav{padding:16px 0;border-bottom:1px solid #d9dee4}nav a{display:inline-block;margin:4px 16px 4px 0}table{border-collapse:collapse;width:100%;font-size:14px;margin:14px 0}th,td{padding:10px 12px;text-align:left;border:1px solid #d9dee4;vertical-align:top}th{background:#f3f5f7;font-weight:600}.table-wrap{overflow-x:auto}pre{background:#f5f6f8;border:1px solid #e0e4e8;border-radius:4px;padding:14px 16px;overflow-x:auto;line-height:1.6;font-size:14px}code{font-family:ui-monospace,SFMono-Regular,Consolas,monospace}p code,li code,td code{background:#f1f3f5;padding:1px 4px;border-radius:3px}li{margin:7px 0}footer{margin-top:40px;border-top:1px solid #d9dee4;padding-top:16px;font-size:13px;color:#606973}@media(max-width:600px){main{padding:24px 16px}h1{font-size:25px}h2{font-size:21px}th,td{padding:8px}pre{font-size:13px}}@media print{main{max-width:none;padding:0}nav{display:none}h2{break-after:avoid}pre,table,.note{break-inside:avoid}a{color:inherit}body{font-size:11pt}}
+</style></head><body><main>
+<header><p class="meta">네트워크 엔지니어 취업 프로젝트 · Phase 1 · 검증일 2026-10-11</p><h1>Linux ↔ PNETLab 내부 네트워크<br>통신 검증 가이드</h1><p>VMware의 외부 Linux 서버를 PNETLab의 Access 스위치에 연결하고, Core 스위치의 SVI를 통해 다른 VLAN까지 통신하는 실습 절차입니다.</p></header>
+<div class="note success"><strong>[확정] 검증 완료</strong><br>Linux → VLAN 10 게이트웨이, Linux → VLAN 20 PC 통신 성공. 두 VM 재부팅 후 브리지·IP·경로 유지, PC20 Ping 패킷 손실 0%.</div>
+<nav aria-label="목차"><a href="#scope">1. 목적·환경</a><a href="#layout">2. 연결·주소</a><a href="#vmware">3. VMware</a><a href="#switch">4. 스위치</a><a href="#bridge">5. PNETLab 브리지</a><a href="#linux">6. Linux</a><a href="#reboot">7. 재부팅 검증</a><a href="#troubleshoot">8. 문제 확인·원복</a><a href="#references">9. 참고 자료</a></nav>
+<section id="scope"><h2>$1 목적 및 적용 환경</h2><p><strong>검증 목표:</strong> 관리·인터넷 접속은 VMnet8에 유지하고, VMnet2에서 외부 Linux → ASW1 → CORE-TEST → VLAN 20 PC20 통신을 확인합니다.</p>
+<ul><li>VMware 위 PNETLab VM과 Ubuntu 테스트 서버 VM 각각 NIC 2개.</li><li>Linux OS: 사용자 제공 출력상 Ubuntu 26.04.1 LTS. ens34는 NetworkManager 프로필로 관리.</li><li>ASW1과 CORE-TEST: Cisco vIOS Switch / IOSvL2 계열. 사용한 ASW 버전은 Experimental Version 15.2(20200924:215240).</li><li>현재 Image 이름은 <code>viosl2-adventerprisek9-m.ssa.high_iron_2…</code>까지만 확인. 전체 이름은 별도 확인 필요.</li></ul>
+<p class="note">이 문서는 2026-10-11 실습에서 확인한 환경을 기준으로 합니다. NIC 이름, 포트명, 기존 브리지 구성이 다르면 실제 값에 맞춰 적용하세요. VLAN·IP는 현재 검증용 값이며 최종 회사망 설계는 아닙니다.</p>
+<p><strong>범위:</strong> ICMP 연결성, VLAN·Trunk·SVI·정적 경로, 영구 설정과 재부팅 유지. 웹서비스, 실습망의 인터넷 접근, Edge Router, AWS/VPN은 후속 작업입니다.</p></section>
+<section id="layout"><h2>$2 연결 구조 및 주소 계획</h2><h3>%1 장비 역할</h3><div class="table-wrap"><table><thead><tr><th>이름</th><th>역할</th><th>주요 설정</th></tr></thead><tbody><tr><td>ASW1</td><td>단말 Access 연결</td><td>PC·Linux 포트의 VLAN 지정, Core uplink Trunk</td></tr><tr><td>CORE-TEST</td><td>Core L3·게이트웨이</td><td>Vlan10·Vlan20 SVI와 ip routing</td></tr><tr><td>LINUX-LAB</td><td>PNETLab Network 객체</td><td>Cloud1 / pnet1. 서버 노드가 아닌 외부 연결 지점</td></tr><tr><td>Linux 테스트 서버</td><td>VMware 외부 단말</td><td>ens32 관리망, ens34 실습망</td></tr></tbody></table></div>
+<h3>%2 연결표</h3><div class="table-wrap"><table><thead><tr><th>출발 연결</th><th>도착 연결</th><th>통신 방식</th></tr></thead><tbody><tr><td>Linux ens34</td><td>VMnet2 → PNETLab eth1 → pnet1 → LINUX-LAB</td><td>태그 없는 Ethernet</td></tr><tr><td>LINUX-LAB</td><td>ASW1 Gi0/3</td><td>Access VLAN 10</td></tr><tr><td>PC10 / PC20</td><td>ASW1 Gi0/0 / Gi0/1</td><td>가이드 기준 포트: VLAN 10 / VLAN 20</td></tr><tr><td>ASW1 Gi0/2</td><td>CORE-TEST Gi0/2</td><td>802.1Q Trunk, 허용 VLAN 10·20</td></tr></tbody></table></div><p class="meta">PC 두 대가 ASW1 아래에 연결된 것은 확인됐습니다. Gi0/0·Gi0/1은 재현용 지정이며 사용자의 실제 PC 연결 포트별 출력은 수집하지 않았습니다.</p>
+<h3>%3 IP 및 경로</h3><div class="table-wrap"><table><thead><tr><th>대상</th><th>주소</th><th>게이트웨이 / 경로</th></tr></thead><tbody><tr><td>PNETLab pnet0</td><td>192.168.111.136/24</td><td>VMnet8 관리 접속</td></tr><tr><td>Linux ens32</td><td>192.168.111.100/24, .128/24</td><td>default via 192.168.111.2</td></tr><tr><td>Linux ens34</td><td>10.10.10.100/24</td><td>10.10.20.0/24 via 10.10.10.1</td></tr><tr><td>CORE Vlan10 / Vlan20</td><td>10.10.10.1/24 / 10.10.20.1/24</td><td>VLAN 간 라우팅 활성화</td></tr><tr><td>PC10</td><td>10.10.10.10/24</td><td>10.10.10.1</td></tr><tr><td>PC20</td><td>10.10.20.10/24</td><td>10.10.20.1</td></tr></tbody></table></div><p>Linux 관리망의 두 주소는 사용자가 직접 설정한 기존 값입니다. 추가 NIC 설정 시 변경하지 않습니다. 별도 DB VM의 현재 주소는 이번 검증에서 확인하지 않았습니다.</p></section>
+<section id="vmware"><h2>$3 VMware 관리망·실습망 구성</h2><ol><li>기존 스위치/VPCS 설정을 저장하고 VM을 정상 종료합니다.</li><li><strong>Edit → Virtual Network Editor</strong>에서 사용하지 않는 VMnet2를 설정합니다.</li><li>각 VM의 <strong>Settings → Add → Network Adapter</strong>로 두 번째 NIC를 추가합니다.</li><li>추가 NIC를 <strong>Custom: Specific virtual network → VMnet2</strong>로 지정하고 Connect at power on을 체크합니다.</li></ol>
+<table><thead><tr><th>항목</th><th>VMnet8</th><th>VMnet2</th></tr></thead><tbody><tr><td>Type</td><td>NAT, 기존 설정 유지</td><td>Host-only</td></tr><tr><td>Subnet / Mask</td><td>192.168.111.0 / 255.255.255.0</td><td>10.10.10.0 / 255.255.255.0</td></tr><tr><td>VMware DHCP</td><td>기존 설정 유지</td><td>꺼짐</td></tr><tr><td>Host virtual adapter</td><td>기존 설정 유지</td><td>꺼짐</td></tr><tr><td>연결 NIC</td><td>두 VM의 첫 번째 NIC</td><td>두 VM의 두 번째 NIC</td></tr></tbody></table>
+<p><strong>VMnet2 ≠ pnet2:</strong> VMnet 번호는 VMware 네트워크 이름이고, pnet 번호는 PNETLab 브리지 이름입니다. 이 실습은 VMnet2에 연결된 eth1을 pnet1에 연결합니다.</p>
+<h3>%확인 — Linux 테스트 서버</h3>
+<pre><code>ip -br link
+ip -br addr
+ip route</code></pre>
+<p><strong>핵심 확인:</strong> ens34 UP, 초기에는 IP 없음. ens32 주소와 default via 192.168.111.2 유지.</p></section>
+<section id="switch"><h2>$4 ASW1·CORE-TEST 설정</h2><p>이미 설정·검증된 항목은 조회로 확인하면 됩니다. 아래는 새 실습을 재현할 때의 구성입니다. 포트 연결을 먼저 확인하고 각 장비의 콘솔에서 실행합니다.</p><h3>%1 ASW1 — Access와 Trunk</h3>
+<pre><code>enable
+configure terminal
+hostname ASW1
+vlan 10
+ name TEST10
+exit
+vlan 20
+ name TEST20
+exit
+interface GigabitEthernet0/0
+ description TO-PC10
+ switchport mode access
+ switchport access vlan 10
+ spanning-tree portfast
+ no shutdown
+exit
+interface GigabitEthernet0/1
+ description TO-PC20
+ switchport mode access
+ switchport access vlan 20
+ spanning-tree portfast
+ no shutdown
+exit
+interface GigabitEthernet0/2
+ description TO-CORE-TEST-Gi0/2
+ switchport trunk encapsulation dot1q
+ switchport mode trunk
+ switchport trunk allowed vlan 10,20
+ no shutdown
+exit
+interface GigabitEthernet0/3
+ description TO-LINUX-VM
+ switchport mode access
+ switchport access vlan 10
+ spanning-tree portfast
+ no shutdown
+exit
+end</code></pre>
+<p>PortFast는 단말로 향하는 Access 포트에 적용합니다. Core로 향하는 Gi0/2 Trunk에는 적용하지 않습니다.</p><h3>%2 CORE-TEST — Trunk와 SVI 라우팅</h3>
+<pre><code>enable
+configure terminal
+hostname CORE-TEST
+vlan 10
+ name TEST10
+exit
+vlan 20
+ name TEST20
+exit
+interface GigabitEthernet0/2
+ description TO-ASW1-Gi0/2
+ switchport trunk encapsulation dot1q
+ switchport mode trunk
+ switchport trunk allowed vlan 10,20
+ no shutdown
+exit
+interface Vlan10
+ ip address 10.10.10.1 255.255.255.0
+ no shutdown
+exit
+interface Vlan20
+ ip address 10.10.20.1 255.255.255.0
+ no shutdown
+exit
+ip routing
+end</code></pre>
+<p>CORE의 이전 단말 포트 Gi0/0·Gi0/1은 이번 구성에서 비활성화했습니다. 다른 연결이 없는지 확인 후 필요하면 shutdown 처리합니다. ASW1에는 이 실습의 게이트웨이 IP를 중복 배치하지 않습니다.</p><h3>%3 VPCS</h3><p>PC10 콘솔:</p>
+<pre><code>ip 10.10.10.10/24 10.10.10.1
+save</code></pre>
+<p>PC20 콘솔:</p>
+<pre><code>ip 10.10.20.10/24 10.10.20.1
+save</code></pre>
+<h3>%4 스위치 검증</h3><p>양쪽 스위치:</p>
+<pre><code>show interfaces trunk
+show spanning-tree vlan 10
+show spanning-tree vlan 20</code></pre>
+<p>CORE-TEST:</p>
+<pre><code>show vlan brief
+show ip interface brief
+show ip route</code></pre>
+<p><strong>정상 기준:</strong> VLAN10·20 active, Trunk의 허용·활성·forwarding 목록 모두 10,20, SVI up/up, 두 /24 C 경로. 현재 CORE Gi0/2는 두 VLAN에서 Root FWD입니다. 이는 루트 방향 포트라는 뜻이며 CORE 자체가 Root Bridge라는 뜻은 아닙니다.</p><p>Trunk 허용 목록만 설정해도 VLAN이 생성되는 것은 아닙니다. 양쪽 스위치에 VLAN 10·20이 있어야 합니다. Trunk 포트가 show vlan brief의 Ports에 없어도 VLAN 항목 자체는 표시돼야 합니다.</p></section>
+<section id="bridge"><h2>$5 PNETLab 외부 브리지 연결</h2><h3>%1 실제 연결 확인</h3><p><strong>PNETLab VM의 Linux 콘솔/SSH</strong>에서 실행합니다. Cisco 장비 콘솔이 아닙니다.</p>
+<pre><code>bridge link
+ip -d link show dev eth1.1
+grep -A 4 &quot;^iface pnet1 &quot; /etc/network/interfaces</code></pre>
+<p>이번 환경은 pnet1에 eth1.1이 연결되고, eth1.1은 802.1Q VLAN ID 1이었습니다. 태그 없는 Linux ens34와 연결하려고 pnet1을 eth1에 직접 연결했습니다.</p><p class="note">아래 임시 변경은 pnet1이 실습용이며 기존 연결이 eth1.1인 이번 환경 기준입니다. 이미 eth1 → pnet1이라면 변경 명령을 반복하지 말고 상태만 확인합니다. eth0 / pnet0 관리망은 유지합니다.</p><h3>%2 임시 변경 및 확인</h3>
+<pre><code>ip link set dev eth1.1 nomaster
+ip link set dev eth1 master pnet1
+bridge link show dev eth1</code></pre>
+<p><strong>핵심 확인:</strong> master pnet1, state forwarding. pnet1/eth1에는 별도의 IP를 설정하지 않습니다. eth1.1의 VLAN ID 1은 PNETLab 호스트 외부 태그 설정이며, ASW의 Access VLAN10과 다른 구분입니다.</p><h3>%3 토폴로지 Network 객체 추가</h3><ol><li>PNETLab에서 ASW1·CORE-TEST가 보이는 토폴로지 화면의 빈 공간을 우클릭합니다.</li><li><strong>Add an object → Network</strong>를 선택합니다. 메뉴 이름은 버전에 따라 다를 수 있습니다.</li><li>Name: <strong>LINUX-LAB</strong>, Type: <strong>Cloud1 / pnet1</strong> 항목을 선택하고 저장합니다.</li><li>ASW1 Gi0/3 ↔ LINUX-LAB을 연결합니다. 포트가 사용 중이면 다른 빈 포트를 선택하고 설정도 맞춥니다.</li></ol><h3>%4 영구 설정</h3><p>임시 연결에서 Ping 성공을 확인한 뒤 진행합니다.</p>
+<pre><code>cp -a /etc/network/interfaces /root/interfaces.backup-20261011
+nano /etc/network/interfaces</code></pre>
+<p>pnet1 블록의 bridge_ports만 eth1.1에서 eth1로 바꿉니다.</p>
+<pre><code>auto pnet1
+iface pnet1 inet manual
+    bridge_ports eth1
+    bridge_stp off</code></pre>
+<p>저장: Ctrl+O → Enter → Ctrl+X. pnet0·pnet2 등 다른 블록은 유지합니다. 백업 파일이 이미 있으면 다른 이름으로 백업해 기존 원본을 보존하세요.</p>
+<pre><code>grep -A 4 &quot;^iface pnet1 &quot; /etc/network/interfaces</code></pre>
+<p><strong>핵심 확인:</strong> bridge_ports eth1. 임시 연결이 이미 적용됐으므로 전체 네트워크 서비스 재시작 없이 다음 검증으로 진행합니다.</p></section><section id="linux"><h2>$6 Linux IP·경로 및 영구 설정</h2><h3>%1 임시 통신 검증</h3><p><strong>Linux 테스트 서버</strong>에서 실행합니다. 주소·경로가 이미 있으면 add를 반복하지 않습니다.</p>
+<pre><code>ip addr add 10.10.10.100/24 dev ens34
+ip link set dev ens34 up
+ping -I ens34 -c 4 10.10.10.1</code></pre>
+<p><strong>핵심 확인:</strong> 게이트웨이 Ping 손실 0%. 성공 후 VLAN20 경로를 추가합니다.</p>
+<pre><code>ip route add 10.10.20.0/24 via 10.10.10.1 dev ens34
+ping -c 4 10.10.20.10</code></pre>
+<p><strong>핵심 확인:</strong> PC20 Ping 손실 0%. Linux가 기존 ens32 기본 경로로 보내지 않도록 목적지 VLAN20의 경로만 추가합니다.</p><h3>%2 관리 방식 확인·백업</h3>
+<pre><code>cat /etc/os-release | head -n 5
+ls /etc/netplan
+nmcli -t -f NAME,DEVICE connection show --active
+cp -a /etc/netplan &quot;/root/netplan-backup-$(date +%Y%m%d-%H%M%S)&quot;</code></pre>
+<p>이번 환경에는 netplan-ens32:ens32 및 ens34:ens34가 표시됐습니다. 다른 연결 이름이면 실제 프로필명으로 변경합니다.</p><h3>%3 NetworkManager 프로필 영구화</h3>
+<pre><code>nmcli connection modify ens34 \
+  ipv4.method manual \
+  ipv4.addresses &quot;10.10.10.100/24&quot; \
+  ipv4.gateway &quot;&quot; \
+  ipv4.routes &quot;10.10.20.0/24 10.10.10.1&quot; \
+  ipv4.never-default yes \
+  connection.autoconnect yes
+
+nmcli connection up ens34</code></pre>
+<p>ens32는 수정하지 않습니다. never-default yes는 실습 NIC에 기본 경로가 생성되는 것을 막습니다. 이 명령은 ens34의 IPv4 주소·정적 경로 목록을 지정한 값으로 설정하므로 다른 실습 경로가 있다면 먼저 확인하세요.</p>
+<pre><code>ip -br addr show ens34
+ip route
+ping -c 4 10.10.20.10</code></pre>
+<p><strong>핵심 확인:</strong> ens34 주소, default via 192.168.111.2 dev ens32, VLAN20 경로, 손실 0%. 이번 NetworkManager/Netplan 연동 환경에서는 nmcli로 관리하고 중복 YAML을 별도 작성하지 않았습니다.</p></section><section id="reboot"><h2>$7 저장 및 재부팅 검증</h2><p>스위치 ASW1과 CORE-TEST 각각:</p>
+<pre><code>copy running-config startup-config</code></pre>
+<p>VPCS 각각 save. 파일·프로필 영구화까지 마친 뒤 Linux와 PNETLab VM에서 각각 정상 재부팅합니다.</p>
+<pre><code>reboot</code></pre>
+<p>PNETLab 관리 페이지에 재접속해 ASW1·CORE-TEST·PC20을 실행합니다. STP 수렴 후 확인합니다.</p><p><strong>PNETLab VM:</strong></p>
+<pre><code>bridge link show dev eth1</code></pre>
+<p><strong>Linux 테스트 서버:</strong></p>
+<pre><code>ip -br addr show ens34
+ip route
+ping -c 4 10.10.20.10</code></pre>
+<table><thead><tr><th>완료 기준</th><th>2026-10-11 결과</th></tr></thead><tbody><tr><td>eth1 master pnet1 / state forwarding</td><td>유지 확인</td></tr><tr><td>ens34 10.10.10.100/24</td><td>유지 확인</td></tr><tr><td>default via 192.168.111.2</td><td>유지 확인</td></tr><tr><td>10.10.20.0/24 via 10.10.10.1 dev ens34</td><td>유지 확인</td></tr><tr><td>Linux → PC20 Ping</td><td>패킷 손실 0%</td></tr></tbody></table><p class="meta">모든 재부팅 항목은 사용자 확인 결과입니다. 일부 항목은 전체 출력 대신 핵심 상태 확인으로 기록했습니다.</p></section>
+<section id="troubleshoot"><h2>$8 문제 발생 시 확인·원복</h2><h3>%1 증상별 확인 순서</h3><table><thead><tr><th>증상</th><th>확인 명령 / 항목</th><th>조치 기준</th></tr></thead><tbody><tr><td>Linux 새 NIC에 IP 없음</td><td>ip -br addr / nmcli connection show --active</td><td>새 NIC 인식과 IPv4 설정은 별개. 실제 프로필명 확인</td></tr><tr><td>게이트웨이 Ping 실패</td><td>VMnet2 지정 → bridge link → Cloud1 → ASW Gi0/3 VLAN10</td><td>VMnet2·브리지·Access 연결부터 확인</td></tr><tr><td>게이트웨이는 성공, PC20 실패</td><td>ip route / CORE show ip route / PC20 show ip</td><td>VLAN20 목적지 경로, CORE SVI, PC20 게이트웨이 확인</td></tr><tr><td>Trunk 활성 VLAN none</td><td>show vlan brief</td><td>양쪽 VLAN10·20 생성 확인</td></tr><tr><td>Trunk forwarding none</td><td>show spanning-tree vlan 10 / 20</td><td>수렴 후 재조회. 지속되면 Blocking/Inconsistent 상태 분석</td></tr><tr><td>재부팅 후 실패</td><td>위 5항목 재조회</td><td>빠진 영구 설정 또는 실습 노드 실행 상태 확인</td></tr></tbody></table><p>초기 Trunk forwarding none은 재조회에서 정상으로 바뀌었습니다. 당시 정확한 원인은 확정하지 않았으며 STP 수렴 시점 차이 가능성만 있습니다.</p>
+<h3>%2 임시 변경 원복</h3><p>PNETLab 브리지의 이번 변경을 되돌릴 때:</p>
+<pre><code>ip link set dev eth1 nomaster
+ip link set dev eth1.1 master pnet1</code></pre>
+<p>영구 설정도 되돌리려면 interfaces의 pnet1 bridge_ports를 기존 eth1.1로 복구합니다. 이 경우 Linux의 태그 없는 연결은 더 이상 동일하게 동작하지 않습니다.</p><p>Linux에서 임시 주소·경로만 제거할 때:</p>
+<pre><code>ip route del 10.10.20.0/24 via 10.10.10.1 dev ens34
+ip addr del 10.10.10.100/24 dev ens34</code></pre>
+<p>위 명령은 실행 중 상태만 변경하며 NetworkManager 영구 프로필을 복구하지는 않습니다. 영구 설정 원복은 백업의 기존 ens34 값으로 프로필을 복구하고 재활성화한 뒤 ip route로 확인합니다. ens32 관리 연결은 유지하세요.</p><h3>%3 운영 반영</h3><ul><li>관리 IP와 VMnet8 DHCP 범위 중복 여부 확인은 별도 남은 항목입니다.</li><li>hostname은 ASW1 / CORE-TEST처럼 실제 역할을 드러내도록 유지합니다.</li><li>다음 실습은 Edge Router ↔ CORE 연결과 반환 경로 설계입니다.</li></ul></section>
+<section id="references"><h2>$9 근거 및 참고 자료</h2><p>실습 구성과 성공 결과는 작업 기록.md의 2026-10-11 항목 및 network project 진행상황.md를 기준으로 정리했습니다.</p><ul><li><a href="https://developer.cisco.com/docs/modeling-labs/iosvl2/">Cisco IOSvL2 기능 설명</a></li><li><a href="https://www.cisco.com/c/en/us/support/docs/lan-switching/inter-vlan-routing/41260-189.html">Cisco Inter-VLAN Routing 구성</a></li><li><a href="https://man7.org/linux/man-pages/man8/ip-link.8.html">ip-link: VLAN 및 master/nomaster</a></li><li><a href="https://www.networkmanager.dev/docs/api/latest/settings-ipv4.html">NetworkManager IPv4 설정</a></li><li><a href="https://netplan.readthedocs.io/en/0.107.1/netplan-everywhere/">Netplan / NetworkManager 연동</a></li></ul></section><footer>작성일 2026-10-11 · 독립 HTML 문서 · 외부 스크립트·폰트 없이 열람 및 인쇄 가능</footer></main></body></html>

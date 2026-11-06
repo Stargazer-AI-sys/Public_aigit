@@ -1,0 +1,21 @@
+{
+  "status": "PASS",
+  "actual_ai_call": false,
+  "decisions": [
+    {
+      "candidate_id": "candidate-c52275f29aaaa20b",
+      "section_id": "routing-families",
+      "status": "applied",
+      "reason": "이번 대화에서 공식 자료 본문을 조회하고 해당 정정 문장이 출처의 설명과 일치함을 검토했다."
+    },
+    {
+      "candidate_id": "candidate-cf20d7548b6d92a3",
+      "section_id": "linkstate-neighbors",
+      "status": "applied",
+      "reason": "이번 대화에서 공식 자료 본문을 조회하고 해당 정정 문장이 출처의 설명과 일치함을 검토했다."
+    }
+  ],
+  "technical_review_source": "trusted local decisions; not URL availability checks",
+  "input_analysis_sha256": "72b2032bfee44a0ef7d11f245f89b4e22f26dcea819c664a07da15b4a9ffce7c",
+  "output_analysis_sha256": "7432a9b6bf720f7fa52e615c34e096941fff60a3c714d7f0c32f39316099b452"
+}

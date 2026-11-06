@@ -1,0 +1,43 @@
+[
+  {
+    "candidate_id": "candidate-1cfd7a4de3d33efd",
+    "outcome": "supported",
+    "reason": "이번 대화에서 공식 자료 본문을 조회하고 해당 정정 문장이 출처의 설명과 일치함을 검토했다.",
+    "reference": {
+      "id": "rfc7868",
+      "title": "RFC 7868 — EIGRP architecture",
+      "url": "https://www.rfc-editor.org/rfc/rfc7868.html",
+      "verification_status": "source_checked",
+      "checked_on": "2026-10-15"
+    }
+  },
+  {
+    "candidate_id": "candidate-9ff3af8fa232fc91",
+    "outcome": "supported",
+    "reason": "이번 대화에서 공식 자료 본문을 조회하고 해당 정정 문장이 출처의 설명과 일치함을 검토했다.",
+    "reference": {
+      "id": "cisco-route-selection",
+      "title": "Cisco — Configure Route Selection for Routers",
+      "url": "https://www.cisco.com/c/en/us/support/docs/ip/enhanced-interior-gateway-routing-protocol-eigrp/8651-21.html",
+      "verification_status": "source_checked",
+      "checked_on": "2026-10-15"
+    }
+  },
+  {
+    "candidate_id": "candidate-8a26d90fff369427",
+    "outcome": "supported",
+    "reason": "이번 대화에서 공식 자료 본문을 조회하고 해당 정정 문장이 출처의 설명과 일치함을 검토했다.",
+    "reference": {
+      "id": "cisco-route-selection",
+      "title": "Cisco — Configure Route Selection for Routers",
+      "url": "https://www.cisco.com/c/en/us/support/docs/ip/enhanced-interior-gateway-routing-protocol-eigrp/8651-21.html",
+      "verification_status": "source_checked",
+      "checked_on": "2026-10-15"
+    }
+  },
+  {
+    "candidate_id": "candidate-6fb7d4e2bd285afa",
+    "outcome": "unresolved",
+    "reason": "이번 확인 범위에서 보안 단정·손실 원인까지 뒷받침할 근거를 확보하지 못해 게시를 보류한다."
+  }
+]

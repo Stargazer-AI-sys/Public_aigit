@@ -1,0 +1,443 @@
+{
+  "material_type": {
+    "material_type": "네트워크 이론 및 라우터 설정 실습 노트",
+    "confidence": 0.99,
+    "reason": "라우팅 개념과 프로토콜 분류를 설명하고, 정적 경로·RIP·디폴트 라우트·플로팅 라우트 설정 명령과 확인 과제를 포함한다."
+  },
+  "summary": "라우팅 테이블을 이용한 패킷 전달, 라우터의 핵심 기능, 네트워크 분리 방식과 라우팅 프로토콜 분류를 복습하는 자료다. 정적 경로 설정 방식, stub network와 디폴트 라우트, 최장 프리픽스·AD·cost에 따른 경로 선택을 설명한다. RIP과 정적 라우팅을 함께 설정해 라우팅 테이블 변화를 확인하고, AD를 조정한 플로팅 라우트로 보조 경로를 구성하는 실습을 포함한다. 끝부분에는 IP 주소와 서브넷 마스크를 이진수로 표현한 계산 메모가 있다.",
+  "topics": [
+    {
+      "name": "라우팅 기초",
+      "children": [
+        {
+          "name": "라우팅 테이블과 패킷 전달"
+        },
+        {
+          "name": "라우터 핵심 기능과 switching·routing 구분"
+        },
+        {
+          "name": "직접 연결 및 원격지 네트워크 학습"
+        },
+        {
+          "name": "물리적·논리적 네트워크 분리"
+        }
+      ]
+    },
+    {
+      "name": "라우팅 방식과 프로토콜",
+      "children": [
+        {
+          "name": "정적 라우팅"
+        },
+        {
+          "name": "동적 라우팅과 IGP·EGP"
+        },
+        {
+          "name": "Distance vector·Link state·Hybrid"
+        }
+      ]
+    },
+    {
+      "name": "경로 선택과 보조 경로 구성",
+      "children": [
+        {
+          "name": "Stub network와 디폴트 라우트"
+        },
+        {
+          "name": "최장 프리픽스·AD·cost"
+        },
+        {
+          "name": "플로팅 라우트"
+        }
+      ]
+    },
+    {
+      "name": "라우터 설정 실습",
+      "children": [
+        {
+          "name": "정적 경로 및 디폴트 라우트 설정"
+        },
+        {
+          "name": "RIP 설정과 라우팅 테이블 변화 확인"
+        },
+        {
+          "name": "IP 주소와 서브넷 마스크 계산 메모"
+        }
+      ]
+    }
+  ],
+  "keywords": [
+    {
+      "name": "라우팅 테이블",
+      "type": "네트워크 개념"
+    },
+    {
+      "name": "정적 라우팅",
+      "type": "라우팅 방식"
+    },
+    {
+      "name": "동적 라우팅",
+      "type": "라우팅 방식"
+    },
+    {
+      "name": "IGP",
+      "type": "프로토콜 분류"
+    },
+    {
+      "name": "EGP",
+      "type": "프로토콜 분류"
+    },
+    {
+      "name": "RIP",
+      "type": "라우팅 프로토콜"
+    },
+    {
+      "name": "OSPF",
+      "type": "라우팅 프로토콜"
+    },
+    {
+      "name": "EIGRP",
+      "type": "라우팅 프로토콜"
+    },
+    {
+      "name": "stub network",
+      "type": "네트워크 구조"
+    },
+    {
+      "name": "디폴트 라우트",
+      "type": "경로 설정"
+    },
+    {
+      "name": "longest prefix",
+      "type": "경로 선택 기준"
+    },
+    {
+      "name": "AD",
+      "type": "경로 선택 기준"
+    },
+    {
+      "name": "cost",
+      "type": "경로 선택 기준"
+    },
+    {
+      "name": "플로팅 라우트",
+      "type": "보조 경로 설정"
+    },
+    {
+      "name": "VLAN",
+      "type": "네트워크 분리 방식"
+    }
+  ],
+  "concepts": [
+    {
+      "name": "라우팅",
+      "description": "라우팅 테이블 매핑을 거쳐 패킷을 특정 인터페이스로 출력하며, 서로 다른 네트워크 사이의 처리를 담당한다.",
+      "type": {
+        "category": "네트워크",
+        "subtype": "패킷 전달"
+      }
+    },
+    {
+      "name": "정적 라우팅",
+      "description": "원격지 네트워크 정보를 입력하고 다음 홉 IP 또는 출력 인터페이스를 지정하는 경로 구성 방식이다.",
+      "type": {
+        "category": "라우팅",
+        "subtype": "경로 설정 방식"
+      }
+    },
+    {
+      "name": "IGP",
+      "description": "하나의 AS 안에서 사용하는 라우팅 프로토콜 분류다.",
+      "type": {
+        "category": "라우팅 프로토콜",
+        "subtype": "AS 내부"
+      }
+    },
+    {
+      "name": "EGP",
+      "description": "서로 다른 AS 사이에서 사용하는 라우팅 프로토콜 분류이며 자료에서는 path vector와 연결해 설명한다.",
+      "type": {
+        "category": "라우팅 프로토콜",
+        "subtype": "AS 간"
+      }
+    },
+    {
+      "name": "Distance vector",
+      "description": "주기적으로 정보를 교환하는 경로 계산 방식으로, 자료에서는 RIP과 IGRP를 예로 든다.",
+      "type": {
+        "category": "라우팅",
+        "subtype": "경로 계산 방식"
+      }
+    },
+    {
+      "name": "Link state",
+      "description": "네트워크 상태 변화 시 정보를 교환하는 방식으로, 자료에서는 OSPF와 IS-IS를 예로 든다.",
+      "type": {
+        "category": "라우팅",
+        "subtype": "경로 계산 방식"
+      }
+    },
+    {
+      "name": "Hybrid",
+      "description": "Distance vector와 Link state를 혼합한 방식으로 설명되며 EIGRP가 예시로 제시된다.",
+      "type": {
+        "category": "라우팅",
+        "subtype": "경로 계산 방식"
+      }
+    },
+    {
+      "name": "Stub network",
+      "description": "외부와 통하는 인터페이스가 단 하나인 네트워크다.",
+      "type": {
+        "category": "네트워크",
+        "subtype": "연결 구조"
+      }
+    },
+    {
+      "name": "디폴트 라우트",
+      "description": "불특정 다수의 목적지와 통신할 때 사용하는 기본 경로 설정 방식이며, 자료에서는 stub network에도 사용한다고 설명한다.",
+      "type": {
+        "category": "라우팅",
+        "subtype": "기본 경로"
+      }
+    },
+    {
+      "name": "최장 프리픽스",
+      "description": "목적지 IP에 둘 이상의 경로가 일치할 때 프리픽스 길이가 긴 경로를 우선하는 테이블 조회 기준이다.",
+      "type": {
+        "category": "라우팅",
+        "subtype": "경로 선택 기준"
+      }
+    },
+    {
+      "name": "AD",
+      "description": "관리 거리를 의미하며, 동일 네트워크 정보를 둘 이상의 경로로 학습한 경우 우선 경로를 판단하는 기준이다. 자료에서는 작은 값을 우선한다고 설명한다.",
+      "type": {
+        "category": "라우팅",
+        "subtype": "경로 선택 기준"
+      }
+    },
+    {
+      "name": "Cost",
+      "description": "경로 선택에 사용하는 비용으로, 자료에서는 낮은 비용을 우선한다고 설명한다.",
+      "type": {
+        "category": "라우팅",
+        "subtype": "경로 선택 기준"
+      }
+    },
+    {
+      "name": "플로팅 라우트",
+      "description": "잉여 회선이 있을 때 주 경로와 보조 경로를 지정하여 주 경로 장애 시 보조 경로가 동작하도록 하는 구성이다.",
+      "type": {
+        "category": "라우팅",
+        "subtype": "장애 대비 경로"
+      }
+    }
+  ],
+  "relationships": [
+    {
+      "from": "라우팅",
+      "relation": "참조한다",
+      "to": "라우팅 테이블",
+      "description": "라우팅 테이블 매핑을 거쳐 패킷을 특정 인터페이스로 출력한다."
+    },
+    {
+      "from": "IGP",
+      "relation": "포함한다",
+      "to": "Distance vector",
+      "description": "동적 라우팅의 IGP 하위 방식으로 제시된다."
+    },
+    {
+      "from": "IGP",
+      "relation": "포함한다",
+      "to": "Link state",
+      "description": "동적 라우팅의 IGP 하위 방식으로 제시된다."
+    },
+    {
+      "from": "IGP",
+      "relation": "포함한다",
+      "to": "Hybrid",
+      "description": "동적 라우팅의 IGP 하위 방식으로 제시된다."
+    },
+    {
+      "from": "RIP",
+      "relation": "분류된다",
+      "to": "Distance vector",
+      "description": "주기적 정보 교환 방식의 예로 제시된다."
+    },
+    {
+      "from": "OSPF",
+      "relation": "분류된다",
+      "to": "Link state",
+      "description": "상태 변화 시 정보 교환 방식의 예로 제시된다."
+    },
+    {
+      "from": "EIGRP",
+      "relation": "분류된다",
+      "to": "Hybrid",
+      "description": "혼합 방식의 예로 제시된다."
+    },
+    {
+      "from": "디폴트 라우트",
+      "relation": "사용된다",
+      "to": "Stub network",
+      "description": "정적 경로의 기본 방식 설명에서 stub network에도 사용한다고 명시한다."
+    },
+    {
+      "from": "AD",
+      "relation": "우선순위 조정에 사용된다",
+      "to": "플로팅 라우트",
+      "description": "AD 값을 부여해 한 경로를 백업 인터페이스로 설정할 수 있다고 설명한다."
+    }
+  ],
+  "theory": {
+    "definitions": [
+      {
+        "subject": "라우팅",
+        "content": "라우팅 테이블을 기준으로 패킷을 특정 인터페이스로 출력하는 처리다.",
+        "evidence": "라우팅이 됐다는 얘기는 라우팅 테이블 매핑을 거쳐 패킷을 특정 인터페이스로 출력"
+      },
+      {
+        "subject": "AD",
+        "content": "관리 거리이며, 특정 네트워크 정보를 여러 경로로 학습했을 때 우선 경로를 판단하는 기준이다.",
+        "evidence": "AD란 관리 거리를 의미하며 특정 네트워크 정보를 2개 이상 경로로 학습한 경우 우선하는 경로를 판단하는 기준으로 사용"
+      },
+      {
+        "subject": "Stub network",
+        "content": "외부와 통하는 인터페이스가 하나인 네트워크다.",
+        "evidence": "stub network : 외부와 통하는 인터페이스가 단 1개인 네트워크"
+      },
+      {
+        "subject": "플로팅 라우트",
+        "content": "주 경로 장애 발생 시 보조 경로가 동작하도록 주 경로와 보조 경로를 지정하는 구성이다.",
+        "evidence": "플로팅 라우트는 목적지로 갈수 있는 잉여 회선이 있는 경우 주경로와 보조 경로를 지정하여 주 경로 장애 발생 시 보조경로가 동작하도록 하여 장애 내성"
+      }
+    ],
+    "principles": [
+      {
+        "subject": "직접 연결 네트워크 학습",
+        "content": "자료는 IP 설정과 no sh 명령으로 직접 연결된 네트워크를 학습할 수 있다고 설명한다.",
+        "evidence": "직접 연결된 네트워크 학습은 ip  설정, no sh 명령으로 가능",
+        "related_concepts": [
+          "라우팅"
+        ]
+      },
+      {
+        "subject": "정적 경로 지정",
+        "content": "원격지 네트워크 정보를 입력한 뒤 다음 홉 IP 또는 출력 인터페이스 이름을 사용한다.",
+        "evidence": "2) 다음 홉 ip 또는 출력 인터페이스 이름 사용",
+        "related_concepts": [
+          "정적 라우팅"
+        ]
+      },
+      {
+        "subject": "경로 선택 기준",
+        "content": "자료는 테이블 조회에서 긴 프리픽스를 우선하고, AD와 cost는 작은 값을 우선하는 기준으로 제시한다.",
+        "evidence": "1. 테이블 룩업(다른 서브넷 회선이 2개 이상 적용되는 IP가 둘다 통과 가능한 아이피 대역인경우 프리픽스 길이가 긴쪽을 우선함) _longest prefix\n2. AD값이 적은게 우선시함  192.168.4.0[(1)/0] via ....\n3. cost 낮은 비용을 우선시함 192.168.4.0[1/(0)] via ....",
+        "related_concepts": [
+          "최장 프리픽스",
+          "AD",
+          "Cost"
+        ]
+      },
+      {
+        "subject": "백업 경로 우선순위",
+        "content": "AD 값을 부여하여 경로 우선순위를 정하고 한 인터페이스를 백업 경로로 설정할 수 있다.",
+        "evidence": "만약 한개를 백업 루트로 두고 싶다면 AD 값을 부여해서 우선순위를 정해서 백업인터페이스로 설정가능하다.",
+        "related_concepts": [
+          "AD",
+          "플로팅 라우트"
+        ]
+      }
+    ],
+    "comparisons": [
+      {
+        "subject_a": "Switching",
+        "subject_b": "Routing",
+        "criteria": [
+          "같은 네트워크 내부 처리와 서로 다른 네트워크 사이 처리"
+        ],
+        "evidence": "switching : 같은 네트워크에서 데이터를 처리, 보낼 지 말지를 결정\nrouting : 서로 다른 네트워크 사이에서 처리(연결)",
+        "related_concepts": [
+          "라우팅"
+        ]
+      },
+      {
+        "subject_a": "물리적 네트워크 분리",
+        "subject_b": "논리적 네트워크 분리",
+        "criteria": [
+          "물리적 포트 기준 분리와 VLAN 기준 분리"
+        ],
+        "evidence": "1. 물리적 분리 : 라우터 or l3 스위치 물리적 포트를 기준으로 나뉜 네트워크\n2. 논리적 분리 : vlan으로 나뉜 네트워크"
+      },
+      {
+        "subject_a": "Distance vector",
+        "subject_b": "Link state",
+        "criteria": [
+          "정보 교환 시점"
+        ],
+        "evidence": "-distance vector : 주기적정보교환=>rip, IGRP(x)\n-link state : 상태변화시 정보교환 => OSPF, IS-IS(x)",
+        "related_concepts": [
+          "Distance vector",
+          "Link state"
+        ]
+      },
+      {
+        "subject_a": "IGP",
+        "subject_b": "EGP",
+        "criteria": [
+          "하나의 AS 내부와 서로 다른 AS 사이의 사용 범위"
+        ],
+        "evidence": "IGP 하나의 AS에서..\n경로 계산 방식\ndistance vector 주기적\nlink state 네트워크 상태가 변했을때\nadveanced distance vecrtor 위에 두가지 믹싱해서 나온기술\nEGP 서로 다른 AS에서...",
+        "related_concepts": [
+          "IGP",
+          "EGP"
+        ]
+      }
+    ]
+  },
+  "practice": [
+    {
+      "title": "출력 인터페이스를 이용한 정적 경로 설정",
+      "description": "목적지 네트워크와 서브넷 마스크, 출력 인터페이스를 지정하는 ip route 설정 예시다.",
+      "evidence": "ip route 192.168.2.0 255.255.255.0 s2/0\nip route 192.168.3.0 255.255.255.0 s2/0\nip route 192.168.23.0 255.255.255.0 s2/0",
+      "related_concepts": [
+        "정적 라우팅"
+      ]
+    },
+    {
+      "title": "특정 정적 경로 제거 및 디폴트 라우트 설정",
+      "description": "기존의 목적지별 정적 경로를 제거하고 Serial2/0을 사용하는 디폴트 라우트를 설정하는 예시다.",
+      "evidence": "no ip route 192.168.2.0 255.255.255.0 Serial2/0\nno ip route 192.168.3.0 255.255.255.0 Serial2/0\nno ip route 192.168.4.0 255.255.255.128 Serial2/0\nno ip route 192.168.4.128 255.255.255.128 Serial2/0\nip route 0.0.0.0 0.0.0.0 Serial2/0",
+      "related_concepts": [
+        "정적 라우팅",
+        "디폴트 라우트"
+      ]
+    },
+    {
+      "title": "RIP 설정과 정적 경로 추가에 따른 테이블 변화 확인",
+      "description": "R1과 R2에서 RIP으로 네트워크를 등록하고, R1에 정적 경로를 추가하여 라우팅 테이블 변화를 확인하는 실습이다. 출력 인터페이스와 다음 홉 IP를 사용하는 명령이 함께 제시된다.",
+      "evidence": "1. 동적 라우팅(RIP) 설정으로 원격지 학습\n2. 정적라우팅을 추가할 경우 라우팅 테이블 변화 확인\nR1\nconf t\nrouter rip\nnet 192.168.1.0\nnet 192.168.12.0\nip route 192.168.2.0 255.255.255.0 s2/0\nip route 192.168.2.0 255.255.255.0 192.168.12.2\nrouter rip\nR2\nconf t\nrouter rip\nnet 192.168.2.0\nnet 192.168.12.0",
+      "related_concepts": [
+        "정적 라우팅",
+        "Distance vector",
+        "AD"
+      ]
+    },
+    {
+      "title": "플로팅 라우트 보조 경로 설정",
+      "description": "목적지 192.168.2.0/24에 대해 s2/0 출력 인터페이스와 AD 10을 지정한 보조 경로 설정 예시다.",
+      "evidence": "ip route 192.168.2.0 255.255.255.0 s2/0 10 ←-보조",
+      "related_concepts": [
+        "플로팅 라우트",
+        "정적 라우팅",
+        "AD"
+      ]
+    }
+  ],
+  "source": {
+    "material_id": "bc86db8089b8e84a49a80114657d596b3458b9d124880bb7b2965844526661a5",
+    "filename": "12일차.docx",
+    "extension": ".docx"
+  }
+}

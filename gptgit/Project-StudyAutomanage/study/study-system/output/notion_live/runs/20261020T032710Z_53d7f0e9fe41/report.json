@@ -1,0 +1,42 @@
+{
+  "mode": "notion-mcp",
+  "package_digest": "96a8bad5ab61cb9278e4576e9067285be419b24c32e107f9be5abab21f6afe69",
+  "errors": [
+    {
+      "code": "NOTION_DISPATCHER_TIMEOUT"
+    }
+  ],
+  "notion_sent": false,
+  "front_completion": "incomplete",
+  "writes": 0,
+  "skipped": 0,
+  "reconciled": 0,
+  "plan_digest": "70ed668ec43c643f2fb1b9f2a87358bdf517ad1ffe0afc69568afa028042af33",
+  "publication_policy": "local-source",
+  "normal_write_confirmation": "tool-response",
+  "phase_seconds": {},
+  "elapsed_seconds": 181.575,
+  "transport_metrics": {
+    "tool_calls": {
+      "query_data_sources": 1
+    },
+    "tool_seconds": {
+      "query_data_sources": 181.56171849998645
+    },
+    "exchanges": 1,
+    "batch_creates": 0,
+    "request_json_bytes": 145,
+    "response_json_bytes": 0,
+    "local_changed_entities": 0,
+    "revision_reused_pages": 0,
+    "changed_revision_reused_pages": 0,
+    "body_read_pages": 0,
+    "revision_bootstrap_pages": 0,
+    "publication_policy": "local-source",
+    "acknowledged_pages": 0
+  },
+  "publication_sequence": "complete-only",
+  "entity_writes": 0,
+  "approval_db_unchanged": true,
+  "result_path": "C:\\Users\\ICT\\Desktop\\Aigit\\gptgit\\Project-StudyAutomanage\\study\\study-system\\output\\notion_live\\runs\\20261020T032710Z_53d7f0e9fe41\\report.json"
+}

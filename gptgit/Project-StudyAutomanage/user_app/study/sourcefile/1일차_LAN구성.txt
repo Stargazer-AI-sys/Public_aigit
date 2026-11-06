@@ -1,0 +1,135 @@
+■LAN통신 원리
+PC, 서버, 스위치, 라우터의 통신 원리에서 가장 많이 사용된느 기능은 Table이다.
+1. ARP Table : IP<=>MAC주소 변환용 테이블
+ =>PC, Router등에서 사용
+ =>목적지 IP에 상응하는 MAC주소 확인용
+ =>arp 또는 show arp명려으로 확인 가능
+2. MAC Table : MAC<=>Port 확인용 테이블
+3. Routing Table : IP<=>Port 확인용 테이블
+
+LAN통신 순서
+1. 송신 시스템은 ARP Table에서 목적지 IP에 상응하는 MAC주소 확인. 없으면 브로드 캐스트(FFFFFFFFFFFF)주소를 목적지 MAC주소로 입력. 있으면 해당 MAC주소를 목적지 주소로 선택
+2. 스위치는 자신의 MAC Table에서 목적지 MAC주소에 상응하는 포트 확인. 없으면 모든 포트에 프레임 전송(브로드 캐스팅)
+3. 수신 시스템은 자신의 IP와 목적지 IP를 비교. 맞으면 응답. 틀리면 무시
+4. 반송신호를 받은 스위치는 출발지 MAC주소를 MAC Table에 기록 후 유니 캐스팅
+5. 송신 시스템은 회신 프레임을 기준으로 자신의 ARP Table에 목적지 MAC주소를 저장. 이후 동일한 목적지로 프레임 전송 시 유니 캐스팅.
++++++++++++++++++++++++++++
+■Inter Vlan구성
+Step 1. 각 스위치별 Vlan설정
+SW3
+en
+conf t
+int range fa0/1 - 3
+sw acc vlan 30
+sw mode access
+
+SW2
+en
+conf t
+int range fa0/1 - 2
+sw acc vlan 20
+sw mode access
+
+SW1
+en
+conf t
+int range fa0/1 - 3
+sw acc vlan 10
+sw mode access
+
+Step 2. 스위치에 트렁크 포트 생성
+- 트렁크 포트는 프레임에 Vlan tagging(꼬리표)를 붙이는 기능을 갖는다.
+SW3
+conf t
+int fa0/24
+sw mode trunk
+do sh vlan
+
+SW2, SW1
+conf t
+int range fa0/23 - 24
+sw mode trunk
+
+Trunk기능은 각 스위치의 VLAN DB에 해당 vlan정보가 있어야 가능하다. 따라서, 각 스위치에 vlan10, 20, 30이 모두 학습되어야 함.
+SW1
+conf t
+vlan 20
+vlan 30
+
+SW2
+conf t
+vlan 10
+vlan 30
+
+SW3
+conf t
+vlan 10
+vlan 20
+
+Step 3. Router-on-a-stick구성
+R1
+en
+conf t
+int g0/0
+no sh
+int g0/0.10
+encap dot1q 10
+ip addr 192.168.10.254 255.255.255.0
+int g0/0.20
+encap dot1q 20
+ip addr 192.168.20.254 255.255.255.0
+int g0/0.30
+encap dot1q 30
+ip addr 192.168.30.254 255.255.255.0
+
+※이제 서로 다른  vlan간 통신 가능 상태
++++++++++++++++++++++++++
+ACL(Access Control List)-접근통제목록
+=>일반적으로  L3또는 라우터에 구현
+=>표준, 확장의 2가지 유형으로 분류
+=>확장은 특정 프로토콜에 대한 제어 가능
+
+ACL조건
+- Vlan 10은 Web접근 가능
+- Vlan 30은 FTP접근 가능
+- Mail서비스는 모두 가능
+
+R1
+conf t
+acc 100 permit tcp 192.168.10.0 0.0.0.255 any eq 80
+acc 100 permit udp 192.168.10.0 0.0.0.255 any eq 53
+acc 100 deny tcp any any eq 80
+acc 100 permit tcp 192.168.30.0 0.0.0.255 any eq 21
+acc 100 deny tcp any any eq 21
+acc 100 permit ip any any
+int g0/0.20
+ip access-group 100 out
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+
+
+

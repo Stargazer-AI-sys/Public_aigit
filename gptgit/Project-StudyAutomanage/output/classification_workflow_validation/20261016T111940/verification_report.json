@@ -1,0 +1,222 @@
+{
+  "status": "PASS",
+  "focus": "classification -> linked local knowledge base -> user approval; Notion integration remains next stage",
+  "local_tests": {
+    "passed": 123,
+    "total": 123,
+    "exit_code": 0
+  },
+  "representative_materials": 4,
+  "common_concepts": 40,
+  "related_directed_links": 8,
+  "classification": [
+    {
+      "filename": "20일차 경로재분배,루프백가상장비설정.txt",
+      "paths": [
+        [
+          "NETWORK",
+          "온프레미스 네트워크",
+          "L3 스위치 라우팅",
+          "SVI를 이용한 Inter-VLAN"
+        ],
+        [
+          "NETWORK",
+          "온프레미스 네트워크",
+          "루프백 주소를 소스로 지정한 핑"
+        ],
+        [
+          "NETWORK",
+          "온프레미스 네트워크",
+          "경로 재분배",
+          "RIP 정적 경로 재분배"
+        ]
+      ],
+      "status": "pending",
+      "holds": []
+    },
+    {
+      "filename": "15일차 Dynamic routing_IGP.txt",
+      "paths": [
+        [
+          "NETWORK",
+          "온프레미스 네트워크",
+          "동적 라우팅",
+          "IGP",
+          "Distance vector"
+        ],
+        [
+          "NETWORK",
+          "온프레미스 네트워크",
+          "동적 라우팅",
+          "IGP",
+          "Link state"
+        ],
+        [
+          "NETWORK",
+          "온프레미스 네트워크",
+          "동적 라우팅",
+          "IGP",
+          "Hybrid"
+        ],
+        [
+          "NETWORK",
+          "온프레미스 네트워크",
+          "동적 라우팅",
+          "EGP"
+        ],
+        [
+          "NETWORK",
+          "온프레미스 네트워크",
+          "동적 라우팅",
+          "RIP",
+          "RIPv1"
+        ],
+        [
+          "NETWORK",
+          "온프레미스 네트워크",
+          "동적 라우팅",
+          "RIP",
+          "RIPv2"
+        ]
+      ],
+      "status": "pending",
+      "holds": []
+    },
+    {
+      "filename": "12일차.docx",
+      "paths": [
+        [
+          "NETWORK",
+          "온프레미스 네트워크",
+          "라우팅 기본 개념",
+          "라우터 기능"
+        ],
+        [
+          "NETWORK",
+          "온프레미스 네트워크",
+          "라우팅 기본 개념",
+          "네트워크 분리"
+        ],
+        [
+          "NETWORK",
+          "온프레미스 네트워크",
+          "라우팅 프로토콜",
+          "IGP와 EGP"
+        ],
+        [
+          "NETWORK",
+          "온프레미스 네트워크",
+          "라우팅 프로토콜",
+          "경로 계산 방식"
+        ],
+        [
+          "NETWORK",
+          "온프레미스 네트워크",
+          "정적 라우팅",
+          "디폴트 라우트와 stub network"
+        ],
+        [
+          "NETWORK",
+          "온프레미스 네트워크",
+          "정적 라우팅",
+          "경로 선택 기준"
+        ],
+        [
+          "NETWORK",
+          "온프레미스 네트워크",
+          "정적 라우팅",
+          "플로팅 라우트"
+        ],
+        [
+          "NETWORK",
+          "온프레미스 네트워크",
+          "동적 라우팅",
+          "RIP 설정"
+        ]
+      ],
+      "status": "pending",
+      "holds": [
+        "기존 인계의 Stub network 보안·패킷 손실 단락 게시 보류. 해당 내용 검토 후 명시적으로 해제 필요."
+      ]
+    },
+    {
+      "filename": "18일차.txt",
+      "paths": [
+        [
+          "NETWORK",
+          "온프레미스 네트워크",
+          "VLAN 및 스위치 포트 설정",
+          "액세스 포트와 트렁크 포트"
+        ],
+        [
+          "NETWORK",
+          "온프레미스 네트워크",
+          "VLAN 및 스위치 포트 설정",
+          "라우터 서브인터페이스와 802.1Q"
+        ],
+        [
+          "NETWORK",
+          "온프레미스 네트워크",
+          "VLAN 및 스위치 포트 설정",
+          "Native VLAN"
+        ],
+        [
+          "NETWORK",
+          "온프레미스 네트워크",
+          "VLAN 및 스위치 포트 설정",
+          "VTP"
+        ],
+        [
+          "NETWORK",
+          "온프레미스 네트워크",
+          "스패닝 트리"
+        ],
+        [
+          "NETWORK",
+          "온프레미스 네트워크",
+          "EtherChannel"
+        ]
+      ],
+      "status": "pending",
+      "holds": []
+    }
+  ],
+  "repeated_batch_runs": {
+    "first_reused": 4,
+    "second_reused": 4,
+    "new_api_attempts": 0
+  },
+  "ui_checks": [
+    "Search and material detail",
+    "Category edit and save",
+    "Approval on QA copy",
+    "Prose edit invalidates approval on QA copy",
+    "12-day publication hold prevents approval",
+    "Revision history and shared-concept links"
+  ],
+  "user_material_approvals_changed": false,
+  "approved_export_materials": 0,
+  "notion_sent": false,
+  "api_ledger": {
+    "calls_used": 6,
+    "call_limit": 100,
+    "budget_usd": 2.0,
+    "estimated_or_reserved_usd": 0.01220902
+  },
+  "original_source_sha256": {
+    "12일차.docx": "bc86db8089b8e84a49a80114657d596b3458b9d124880bb7b2965844526661a5",
+    "15일차 Dynamic routing_IGP.txt": "5520ea4cfcab84de60fba38f45a7c0f5d68173bf9c58f525630414acfc5f0efc",
+    "18일차.txt": "475bb0dedd096ba1ba136d8a480894d332729b2fddfaca504a4eb7edae2fd18a",
+    "20일차 경로재분배,루프백가상장비설정.txt": "bc311d69fc2366ebe3ae69a6b0b4627fd79e437b96c97241398ba20313aacf4d"
+  },
+  "new_api_calls": 0,
+  "guides_updated": false,
+  "official_records_updated": false,
+  "limits": [
+    "Classification is suggested from existing topics and editable local policy; uncertain topics stay unconfirmed.",
+    "Concept links use exact normalized names and explicit aliases; automatic semantic truth merging is not performed.",
+    "Optional comments and reviewed external links retain existing analysis; no new comments were fabricated.",
+    "New generation quality on additional live API documents is not claimed by reuse-only checks.",
+    "12-day content publication hold remains; approval is blocked until explicit review/release."
+  ]
+}

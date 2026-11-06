@@ -1,0 +1,171 @@
+{
+  "version": 1,
+  "responses": {
+    "handoff-20261028": {
+      "sessions": {
+        "master-handoff": {
+          "session_id": "01a18212-e0e4-7202-8bca-7bb9ad9d3628",
+          "task": "HANDOFF-01",
+          "provider": "codex",
+          "snapshots": {
+            "start": {
+              "total": {
+                "input_tokens": 21347180,
+                "cached_input_tokens": 21058560,
+                "output_tokens": 33500,
+                "reasoning_output_tokens": 2786,
+                "total_tokens": 21380680
+              },
+              "last": {
+                "input_tokens": 74526,
+                "cached_input_tokens": 70272,
+                "output_tokens": 280,
+                "reasoning_output_tokens": 10,
+                "total_tokens": 74806
+              },
+              "context_window": 258400,
+              "status": "collected",
+              "source": "codex_token_count",
+              "at": "2026-10-28T12:54:03.994478+00:00",
+              "enabled": true,
+              "mode_epoch": 1
+            },
+            "end": {
+              "total": {
+                "input_tokens": 21891259,
+                "cached_input_tokens": 21598592,
+                "output_tokens": 35130,
+                "reasoning_output_tokens": 2881,
+                "total_tokens": 21926389
+              },
+              "last": {
+                "input_tokens": 79342,
+                "cached_input_tokens": 78336,
+                "output_tokens": 68,
+                "reasoning_output_tokens": 18,
+                "total_tokens": 79410
+              },
+              "context_window": 258400,
+              "status": "collected",
+              "source": "codex_token_count",
+              "at": "2026-10-28T12:55:33.818500+00:00",
+              "enabled": true,
+              "mode_epoch": 1
+            }
+          }
+        }
+      },
+      "reads": [
+        {
+          "path": "docs/02_design/automation_workflow.md",
+          "session": "master-handoff",
+          "session_id": "01a18212-e0e4-7202-8bca-7bb9ad9d3628",
+          "task": "HANDOFF-01",
+          "start": 33,
+          "end": 47,
+          "section": "Task 세션과 맥락 복원",
+          "sha256": "d03737e6e420d52b5525e166aeb17233f12081085d62318513d5076da878b6c7",
+          "reason": "다음 세션의 인계 범위와 복원 기준 대조",
+          "at": "2026-10-28T12:54:04.264751+00:00"
+        },
+        {
+          "path": "docs/04_records/management_log.md",
+          "session": "master-handoff",
+          "session_id": "01a18212-e0e4-7202-8bca-7bb9ad9d3628",
+          "task": "HANDOFF-01",
+          "start": 540,
+          "end": 549,
+          "section": "다음 세션 인계 시험",
+          "sha256": "b038f618a58543e4508493eeea36bbf645a442deff69d8abab594e70a8f3bd83",
+          "reason": "저장된 인계의 완료 기준과 보류 조건 확인",
+          "at": "2026-10-28T12:55:13.232479+00:00"
+        }
+      ],
+      "events": [
+        {
+          "at": "2026-10-28T12:53:54.847428+00:00",
+          "mode": "on",
+          "mode_epoch": 1
+        }
+      ]
+    },
+    "resume-20261028-01": {
+      "sessions": {
+        "master-resume": {
+          "session_id": "01a18295-b31a-7741-a3d8-4e432f7b7217",
+          "task": "RESUME-01",
+          "provider": "codex",
+          "snapshots": {
+            "start": {
+              "total": {
+                "input_tokens": 253654,
+                "cached_input_tokens": 215040,
+                "output_tokens": 798,
+                "reasoning_output_tokens": 33,
+                "total_tokens": 254452
+              },
+              "last": {
+                "input_tokens": 61941,
+                "cached_input_tokens": 58368,
+                "output_tokens": 175,
+                "reasoning_output_tokens": 18,
+                "total_tokens": 62116
+              },
+              "context_window": 258400,
+              "status": "collected",
+              "source": "codex_token_count",
+              "at": "2026-10-28T12:58:14.558469+00:00",
+              "enabled": true,
+              "mode_epoch": 1
+            },
+            "end": {
+              "total": {
+                "input_tokens": 316871,
+                "cached_input_tokens": 276992,
+                "output_tokens": 1007,
+                "reasoning_output_tokens": 49,
+                "total_tokens": 317878
+              },
+              "last": {
+                "input_tokens": 63217,
+                "cached_input_tokens": 61952,
+                "output_tokens": 209,
+                "reasoning_output_tokens": 16,
+                "total_tokens": 63426
+              },
+              "context_window": 258400,
+              "status": "collected",
+              "source": "codex_token_count",
+              "at": "2026-10-28T12:58:26.174045+00:00",
+              "enabled": true,
+              "mode_epoch": 1
+            }
+          }
+        }
+      },
+      "reads": [
+        {
+          "path": "docs/02_design/hermes_worker.md",
+          "session": "master-resume",
+          "session_id": "01a18295-b31a-7741-a3d8-4e432f7b7217",
+          "task": "RESUME-01",
+          "start": 1,
+          "end": 30,
+          "section": "Hermes 연결 범위",
+          "sha256": "d43b607e7970f5e72db79f3bcd09bcc7228067fe3c5ce674f14495e305b633af",
+          "reason": "전체 프로토타입에 남은 전달·회수 검증 범위 확인",
+          "at": "2026-10-28T12:58:25.903940+00:00"
+        }
+      ],
+      "events": [
+        {
+          "at": "2026-10-28T12:58:03.198113+00:00",
+          "mode": "on",
+          "mode_epoch": 1
+        }
+      ]
+    }
+  },
+  "mode_epoch": 1,
+  "enabled": true
+}

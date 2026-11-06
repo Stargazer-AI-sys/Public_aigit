@@ -1,0 +1,25 @@
+{
+  "items": [
+    {
+      "row": 1,
+      "filename": "3일차 ssh 연결.txt",
+      "status": "success",
+      "material_id": "aed8c1e95f915f8bcbc512479c0a62f132aa79d4df5b6c9e28aaca311b1e36d0",
+      "run": "C:\\Users\\ICT\\Desktop\\Aigit\\gptgit\\Project-StudyAutomanage\\study\\study-system\\output\\knowledge_base\\runs\\20261020T010137Z_d1c2b89d9a29"
+    },
+    {
+      "row": 2,
+      "filename": "4일차 [ipv4].txt",
+      "status": "success",
+      "material_id": "1ebe62f0f584c9646966af91d95967dfa215764387e141fbe5c37afb58d4a84e",
+      "run": "C:\\Users\\ICT\\Desktop\\Aigit\\gptgit\\Project-StudyAutomanage\\study\\study-system\\output\\knowledge_base\\runs\\20261020T010202Z_5aa939b8690b"
+    }
+  ],
+  "new_api_attempts": 2,
+  "new_successes": 2,
+  "reused": 0,
+  "failed": 0,
+  "blocked": 0,
+  "recovered_cache_locks": 0,
+  "status": "PASS"
+}

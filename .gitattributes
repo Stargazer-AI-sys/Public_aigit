@@ -1,0 +1,16 @@
+# 학습자료 프로그램은 파일 바이트로 지문을 만든다. PC마다 줄바꿈이 바뀌면 저장된 결과·승인·게시 기록과 연결이 끊긴다.
+# Git 저장본은 모두 LF라서 원래 PC의 줄바꿈을 알 수 없다. 아래 규칙은 저장된 지문과 대조해 정했다(2026-10-28).
+# - 기본(학습자료 .txt, .cmd, notion_target.json 등): CRLF. 자료 ID가 CRLF 기준이다.
+# - .py, .js, .mjs, notion_home.json: LF. 캐시 지문·게시 준비 지문이 LF 기준이다.
+# - 단, 게시 준비 지문이 CRLF 기준인 .py 4개는 CRLF.
+gptgit/Project-StudyAutomanage/** text=auto eol=crlf
+gptgit/Project-StudyAutomanage/**/*.py -text
+gptgit/Project-StudyAutomanage/**/*.js -text
+gptgit/Project-StudyAutomanage/**/*.mjs -text
+gptgit/Project-StudyAutomanage/**/config/notion_home.json -text
+gptgit/Project-StudyAutomanage/**/analyzer/notion_reader.py text eol=crlf
+gptgit/Project-StudyAutomanage/**/analyzer/notion_sync.py text eol=crlf
+gptgit/Project-StudyAutomanage/**/analyzer/notion_mcp.py text eol=crlf
+gptgit/Project-StudyAutomanage/**/analyzer/workspace.py text eol=crlf
+# refactory_target(간소화 재설계, 2026-10-28): 코드 지문이 없어져 파일별 예외가 필요 없다. 학습자료 내용 해시가 PC마다 같도록 모두 CRLF로 꺼낸다.
+Claudecode/Project_Refactor/refactory_target/** text=auto eol=crlf

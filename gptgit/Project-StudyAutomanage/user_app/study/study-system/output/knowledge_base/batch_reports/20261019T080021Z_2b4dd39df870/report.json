@@ -1,0 +1,18 @@
+{
+  "items": [
+    {
+      "row": 1,
+      "filename": "3일차 7계층 OSI.txt",
+      "status": "success",
+      "material_id": "48ad38993b65414c77de9d44263ae4e2f1e5091935b386a34e49bf5eeb9e5fb6",
+      "run": "C:\\Users\\ICT\\Desktop\\Aigit\\gptgit\\Project-StudyAutomanage\\study\\study-system\\output\\knowledge_base\\runs\\20261019T075958Z_14e126eae4f3"
+    }
+  ],
+  "new_api_attempts": 1,
+  "new_successes": 1,
+  "reused": 0,
+  "failed": 0,
+  "blocked": 0,
+  "recovered_cache_locks": 0,
+  "status": "PASS"
+}

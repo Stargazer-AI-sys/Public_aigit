@@ -1,0 +1,47 @@
+{
+  "reviewed_run": "output\\live_api_validation_v0.2\\20261016T014148Z_c78ecce6899c",
+  "status": "PASS_WITH_REVIEW_NOTES",
+  "schema_version": "0.2",
+  "structure_and_links": "PASS",
+  "evidence_exact_matches": 6,
+  "evidence_total": 6,
+  "actual_ai_call_in_user_run": true,
+  "additional_api_calls_by_assistant": 0,
+  "source_run_unchanged": true,
+  "local_regression_tests": {
+    "passed": 106,
+    "total": 106
+  },
+  "comments": 0,
+  "review_candidates": 0,
+  "auxiliary_issues": 0,
+  "budget_at_user_run": {
+    "stage": "representative_verification",
+    "call_limit": 100,
+    "calls_used": 6,
+    "calls_remaining": 94,
+    "budget_usd": 2.0,
+    "estimated_or_reserved_usd": 0.01220902,
+    "remaining_usd": 1.98779098,
+    "pricing_checked_at": "2026-10-12",
+    "billing_verified": false,
+    "ledger_path": "C:\\Users\\ICT\\.study_analyzer\\verification_budget.sqlite3"
+  },
+  "improvements": [
+    "Router interface names, VLAN numbers and IPv4 addresses appear in generated practice descriptions.",
+    "Readable result includes original command blocks and distinguishes configuration examples from confirmed execution."
+  ],
+  "review_notes": [
+    "Native VLAN evidence includes intervening VTP notes; exact continuous source preserved. Scope overlap is a refinement, not a structural failure.",
+    "Whether encap dot is an accepted abbreviation depends on the target IOS command context; no device execution was verified.",
+    "EtherChannel device/group details remain in the quoted command blocks; its narrative description is still summarized."
+  ],
+  "display_fix": "Credential masking no longer removes ordinary domain/password explanation; original result JSON and run preserved.",
+  "external_spot_check_sources": [
+    "https://www.cisco.com/c/en/us/td/docs/ios/lanswitch/command/reference/lsw_book/lsw_b1.html",
+    "https://www.cisco.com/c/en/us/td/docs/switches/lan/c9000/lyr2-fwd/etherchannel/etherchannel-configuration-guide/m_ethernetchannel.html"
+  ],
+  "technical_accuracy_all_claims": "not exhaustively verified",
+  "guides_updated": false,
+  "official_records_updated": false
+}

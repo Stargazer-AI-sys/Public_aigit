@@ -1,0 +1,133 @@
+20일차
+
+1. SVI를 이용한 Inter-vlan
+2. L3스위치에서의 라우팅프로토콜 구성
+
+L3 스위치
+
+IGP 내부게이트웨이 프로토콜
+
+EGP 외부 게이트웨이 프로토콜
+
+
+**예를 들어 RIP 를 학습한 라우터에서 OSPF로 학습된 라우터로 갈시 
+
+aSw1
+conf t
+int fa1/1
+sw mode acc
+sw acc vlan 10
+int fa1/2
+sw mo acc
+sw acc vlan 20
+int fa1/15
+sw mo tr
+
+sh vlan-switch
+
+ ASW2
+conf t
+int fa1/1
+sw mode acc
+sw acc vlan 10
+int fa1/2
+sw mo acc
+sw acc vlan 20
+int range fa1/14 - 15
+sw mo tr
+
+conf t
+ip routing
+vlan 10
+int vlan 10
+ip addr 192.168.10.254 255.255.255.0
+vlan 20
+int vlan 20
+ip addr 192.168.20.254 255.255.255.0
+in fa1/14
+sw mo tr
+
+설정 후 2가지 확인
+1. sh int trunk : fa0/14포트가 trunk로 지정되어 있는지, 캡슐화 프로토콜은 무엇인지 확인
+2. sh ip int b : vlan 10, vlan 20에 할당된 IP 및 SVI 활성화 여부 확인
+
+
+루프백 인터페이스로 가상의 장비를 추가했을때 핑테스트는
+R1#ping 192.168.10.1 source 192.168.30.1
+확장핑으로 소스 아이피를 기입해야된다.
+
+R1
+conf t
+int fa0/0
+no sh
+ip addr 172.16.12.2 255.255.255.252
+int L0
+ip addr 192.168.30.1 255.255.255.0
+
+router rip
+net 172.16.0.0
+net 192.168.30.1
+
+DSW1
+conf t
+int fa1/1
+no sw
+ip addr 172.16.12.1 255.255.255.252
+router rip
+net 172.16.0.0
+net 192.168.20.0
+net 192.168.10.0
+
+[경로 재분배]:서로 다른 라우팅 프로토콜(예: OSPF, EIGRP, RIP, BGP 등)을 사용하는 네트워크 간에 경로 정보를 번역하고 공유하여, 한쪽 프로토콜이 학습한 네트워크 정보를 다른 쪽 프로토콜로 전달하는 기능입니다. 정적으로는 안해준다. 
+R2
+int l0
+ip addr 192.168.40.1 255.255.255.0
+int s1/0
+ip addr 192.168.12.2 255.255.255.252
+no sh
+ex
+
+ip route 0.0.0.0 0.0.0.0 s1/0
+
+R1
+conf t
+int s1/0
+ip addr 192.168.12.1 255.255.255.252
+no sh
+ex
+ip route 192.168.40.0 255.255.255.0 s1/0
+
+R1
+router rip
+redistribute static metric 10 #RIP의 메트릭값을 10으로 재분배
+#redistribute connected  #직접 연결된 네트워크 재분배
+
+ 설정 하면  
+
+학습이 되지 않은 ESW3
+
+R    192.168.40.0/24 [120/10] via 172.16.12.2, 00:00:21, FastEthernet1/1
+     172.16.0.0/30 is subnetted, 1 subnets
+
+라우팅 테이블에 위와 같이 나온다.
+
+R2#ping 192.168.10.1 source 192.168.40.1
+
+
+
+***경로 재분배는 동적 라우팅 프로토콜로 연결된 구간에서 사용가능.
+-정적으로 연결된 라우터간에는 사용안함
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,8 @@
+{
+  "status": "FAILED",
+  "material_id": "475bb0dedd096ba1ba136d8a480894d332729b2fddfaca504a4eb7edae2fd18a",
+  "error": {
+    "code": "AI_CALL_ERROR",
+    "message": "API Key 형식을 확인하세요."
+  }
+}

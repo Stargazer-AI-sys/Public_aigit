@@ -1,0 +1,35 @@
+{
+  "scope": "same approved 4 materials / 72 entities; native revision bootstrap then unchanged repeat",
+  "same_plan_digest": true,
+  "bootstrap_report": "output\\notion_live\\runs\\20261019T024006Z_dc8c5f58502d\\report.json",
+  "repeat_report": "output\\notion_live\\runs\\20261019T024421Z_5836073bed58\\report.json",
+  "bootstrap_calls": {
+    "query_data_sources": 4,
+    "fetch": 72
+  },
+  "repeat_calls": {
+    "query_data_sources": 4
+  },
+  "repeat_writes": 0,
+  "repeat_errors": [],
+  "revision_receipts": 72,
+  "pending_operations": 0,
+  "lock_files": [],
+  "approval_db_unchanged": true,
+  "tests": {
+    "existing_python_regression": 43,
+    "new_delta_python": 10,
+    "node_dispatch": 9
+  },
+  "byte_metric_scope": "serialized logical request/response JSON only; not wire traffic, model tokens or billing",
+  "repeat_request_json_bytes": 580,
+  "repeat_response_json_bytes": 75047,
+  "paid_ai_calls": 0,
+  "content_or_relation_writes": 0,
+  "schema_change": "Added hidden native LAST_EDITED_TIME property to 4 existing data sources",
+  "limitations": [
+    "Four paginated metadata inventories remain necessary for remote edits/deletions/duplicates.",
+    "Missing or changed revision evidence falls back to page fetch.",
+    "Initial receipt bootstrap reads existing pages once."
+  ]
+}

@@ -1,0 +1,19 @@
+{
+  "items": [
+    {
+      "row": 1,
+      "filename": "4일차_DHCP구성.txt",
+      "status": "success",
+      "material_id": "434e71dbfdb77012af22a6ae35820b000d267a29216973b4b2bd185aca36ffe8",
+      "run": "C:\\Users\\ICT\\Desktop\\Aigit\\gptgit\\Project-StudyAutomanage\\study\\study-system\\output\\knowledge_base\\runs\\20261020T032349Z_59447eb0b92b",
+      "warnings": []
+    }
+  ],
+  "new_api_attempts": 1,
+  "new_successes": 1,
+  "reused": 0,
+  "failed": 0,
+  "blocked": 0,
+  "recovered_cache_locks": 0,
+  "status": "PASS"
+}

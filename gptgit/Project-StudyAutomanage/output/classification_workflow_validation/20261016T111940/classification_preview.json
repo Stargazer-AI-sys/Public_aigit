@@ -1,0 +1,179 @@
+{
+  "materials": [
+    {
+      "filename": "12일차.docx",
+      "status": "pending",
+      "classification": [
+        [
+          "NETWORK",
+          "온프레미스 네트워크",
+          "라우팅 기본 개념",
+          "라우터 기능"
+        ],
+        [
+          "NETWORK",
+          "온프레미스 네트워크",
+          "라우팅 기본 개념",
+          "네트워크 분리"
+        ],
+        [
+          "NETWORK",
+          "온프레미스 네트워크",
+          "라우팅 프로토콜",
+          "IGP와 EGP"
+        ],
+        [
+          "NETWORK",
+          "온프레미스 네트워크",
+          "라우팅 프로토콜",
+          "경로 계산 방식"
+        ],
+        [
+          "NETWORK",
+          "온프레미스 네트워크",
+          "정적 라우팅",
+          "디폴트 라우트와 stub network"
+        ],
+        [
+          "NETWORK",
+          "온프레미스 네트워크",
+          "정적 라우팅",
+          "경로 선택 기준"
+        ],
+        [
+          "NETWORK",
+          "온프레미스 네트워크",
+          "정적 라우팅",
+          "플로팅 라우트"
+        ],
+        [
+          "NETWORK",
+          "온프레미스 네트워크",
+          "동적 라우팅",
+          "RIP 설정"
+        ]
+      ],
+      "holds": [
+        "기존 인계의 Stub network 보안·패킷 손실 단락 게시 보류. 해당 내용 검토 후 명시적으로 해제 필요."
+      ]
+    },
+    {
+      "filename": "15일차 Dynamic routing_IGP.txt",
+      "status": "pending",
+      "classification": [
+        [
+          "NETWORK",
+          "온프레미스 네트워크",
+          "동적 라우팅",
+          "IGP",
+          "Distance vector"
+        ],
+        [
+          "NETWORK",
+          "온프레미스 네트워크",
+          "동적 라우팅",
+          "IGP",
+          "Link state"
+        ],
+        [
+          "NETWORK",
+          "온프레미스 네트워크",
+          "동적 라우팅",
+          "IGP",
+          "Hybrid"
+        ],
+        [
+          "NETWORK",
+          "온프레미스 네트워크",
+          "동적 라우팅",
+          "EGP"
+        ],
+        [
+          "NETWORK",
+          "온프레미스 네트워크",
+          "동적 라우팅",
+          "RIP",
+          "RIPv1"
+        ],
+        [
+          "NETWORK",
+          "온프레미스 네트워크",
+          "동적 라우팅",
+          "RIP",
+          "RIPv2"
+        ]
+      ],
+      "holds": []
+    },
+    {
+      "filename": "18일차.txt",
+      "status": "pending",
+      "classification": [
+        [
+          "NETWORK",
+          "온프레미스 네트워크",
+          "VLAN 및 스위치 포트 설정",
+          "액세스 포트와 트렁크 포트"
+        ],
+        [
+          "NETWORK",
+          "온프레미스 네트워크",
+          "VLAN 및 스위치 포트 설정",
+          "라우터 서브인터페이스와 802.1Q"
+        ],
+        [
+          "NETWORK",
+          "온프레미스 네트워크",
+          "VLAN 및 스위치 포트 설정",
+          "Native VLAN"
+        ],
+        [
+          "NETWORK",
+          "온프레미스 네트워크",
+          "VLAN 및 스위치 포트 설정",
+          "VTP"
+        ],
+        [
+          "NETWORK",
+          "온프레미스 네트워크",
+          "스패닝 트리"
+        ],
+        [
+          "NETWORK",
+          "온프레미스 네트워크",
+          "EtherChannel"
+        ]
+      ],
+      "holds": []
+    },
+    {
+      "filename": "20일차 경로재분배,루프백가상장비설정.txt",
+      "status": "pending",
+      "classification": [
+        [
+          "NETWORK",
+          "온프레미스 네트워크",
+          "L3 스위치 라우팅",
+          "SVI를 이용한 Inter-VLAN"
+        ],
+        [
+          "NETWORK",
+          "온프레미스 네트워크",
+          "루프백 주소를 소스로 지정한 핑"
+        ],
+        [
+          "NETWORK",
+          "온프레미스 네트워크",
+          "경로 재분배",
+          "RIP 정적 경로 재분배"
+        ]
+      ],
+      "holds": []
+    }
+  ],
+  "concept_count": 40,
+  "category_count": 33,
+  "related_links": 8,
+  "source_files_unchanged": true,
+  "new_api_calls": 0
+}

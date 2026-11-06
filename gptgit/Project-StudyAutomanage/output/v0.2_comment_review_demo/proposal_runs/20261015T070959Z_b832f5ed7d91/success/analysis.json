@@ -1,0 +1,338 @@
+{
+  "material_type": {
+    "material_type": "실습",
+    "confidence": 0.93,
+    "reason": "스위치와 라우터의 VLAN, 트렁크, 서브인터페이스, VTP, 스패닝 트리 및 EtherChannel 설정 명령을 제시하는 구성이 중심입니다. VTP 동기화에 관한 짧은 설명도 포함되지만, 설정·수행 절차가 주된 목적이며 실행 결과나 성공 여부는 기록되어 있지 않습니다."
+  },
+  "summary": "VLAN과 트렁크, 라우터 서브인터페이스, VTP, 스패닝 트리 및 EtherChannel 설정 명령 예시를 모은 자료입니다.",
+  "topics": [
+    {
+      "name": "VLAN 및 스위치 포트 설정",
+      "children": [
+        {
+          "name": "액세스 포트와 트렁크 포트"
+        },
+        {
+          "name": "네이티브 VLAN"
+        }
+      ]
+    },
+    {
+      "name": "라우터 서브인터페이스 설정"
+    },
+    {
+      "name": "VTP"
+    },
+    {
+      "name": "스패닝 트리"
+    },
+    {
+      "name": "EtherChannel",
+      "children": [
+        {
+          "name": "LACP"
+        },
+        {
+          "name": "PAgP"
+        }
+      ]
+    }
+  ],
+  "keywords": [
+    {
+      "name": "VLAN",
+      "type": "네트워크 구성"
+    },
+    {
+      "name": "access port",
+      "type": "스위치 포트 모드"
+    },
+    {
+      "name": "trunk",
+      "type": "스위치 포트 모드"
+    },
+    {
+      "name": "native VLAN",
+      "type": "트렁크 설정"
+    },
+    {
+      "name": "802.1Q",
+      "type": "캡슐화"
+    },
+    {
+      "name": "VTP",
+      "type": "VLAN 관리 프로토콜"
+    },
+    {
+      "name": "Rapid-PVST",
+      "type": "스패닝 트리 모드"
+    },
+    {
+      "name": "PortFast",
+      "type": "스패닝 트리 설정"
+    },
+    {
+      "name": "EtherChannel",
+      "type": "링크 집성"
+    },
+    {
+      "name": "LACP",
+      "type": "링크 집성 프로토콜"
+    },
+    {
+      "name": "PAgP",
+      "type": "링크 집성 프로토콜"
+    }
+  ],
+  "concepts": [
+    {
+      "name": "VLAN",
+      "description": "VLAN 10·20·30을 생성하고 액세스 포트를 VLAN 10 또는 20에 할당하는 구성이다.",
+      "type": {
+        "category": "네트워크 구성",
+        "subtype": "논리적 네트워크"
+      }
+    },
+    {
+      "name": "액세스 포트",
+      "description": "fa0/1과 fa0/2를 액세스 모드로 설정하고 각각 VLAN 10과 VLAN 20에 할당한다.",
+      "type": {
+        "category": "네트워크 구성",
+        "subtype": "스위치 포트"
+      }
+    },
+    {
+      "name": "트렁크 포트",
+      "description": "스위치 연결 포트를 트렁크 모드로 설정하는 예시이며, 뒤의 EtherChannel 구성에서도 트렁크 설정을 사용한다.",
+      "type": {
+        "category": "네트워크 구성",
+        "subtype": "스위치 포트"
+      }
+    },
+    {
+      "name": "네이티브 VLAN",
+      "description": "스위치 트렁크에는 native vlan 10을, 라우터 fa0/0.10에는 encapsulation dot1q 10 native를 지정하는 예시다.",
+      "type": {
+        "category": "네트워크 구성",
+        "subtype": "트렁크 설정"
+      }
+    },
+    {
+      "name": "라우터 서브인터페이스",
+      "description": "fa0/0을 활성화하고 fa0/0.10·.20·.30에 VLAN 번호와 각 192.168.10·20·30.254/24 주소를 설정하는 예시다. 원문에는 두 가지 설정 구간이 있다.",
+      "type": {
+        "category": "네트워크 구성",
+        "subtype": "라우팅 인터페이스"
+      }
+    },
+    {
+      "name": "VTP",
+      "description": "VLAN DB 동기화를 주제로 domain과 password를 지정하는 설정 예시다. 원문의 동기화 설명은 간략하며 뒤의 최대값 메모는 미완성이다.",
+      "type": {
+        "category": "네트워크 프로토콜",
+        "subtype": "VLAN 관리"
+      }
+    },
+    {
+      "name": "스패닝 트리 설정",
+      "description": "SW1~3 공통 설정으로 spanning-tree portfast default와 spanning-tree mode rapid-pvst를 지정한다.",
+      "type": {
+        "category": "네트워크 구성",
+        "subtype": "스위치 루프 관리"
+      }
+    },
+    {
+      "name": "EtherChannel",
+      "description": "여러 인터페이스에 channel-group을 지정하고 auto·desi·active·passive·on 모드를 사용하는 구성 예시다.",
+      "type": {
+        "category": "네트워크 구성",
+        "subtype": "링크 집성"
+      }
+    },
+    {
+      "name": "LACP",
+      "description": "원문에서 active·passive를 LACP와 함께 메모하고 SW1과 SW3의 채널 그룹 2에 각각 지정한다.",
+      "type": {
+        "category": "네트워크 프로토콜",
+        "subtype": "링크 집성"
+      }
+    },
+    {
+      "name": "PAgP",
+      "description": "원문에서 PAgP를 언급하며 SW1과 SW2의 채널 그룹 1에 각각 auto와 축약형 desi를 지정한다.",
+      "type": {
+        "category": "네트워크 프로토콜",
+        "subtype": "링크 집성"
+      }
+    }
+  ],
+  "relationships": [
+    {
+      "from": "액세스 포트",
+      "relation": "자료에서 VLAN에 할당되는 설정 예시가 있다",
+      "to": "VLAN",
+      "description": "포트를 액세스 모드로 설정한 뒤 VLAN 10 또는 20을 지정하는 명령이 제시됩니다."
+    },
+    {
+      "from": "네이티브 VLAN",
+      "relation": "자료에서 트렁크 포트에 지정된다",
+      "to": "트렁크 포트",
+      "description": "스위치 트렁크 포트에 native vlan 10을 설정하는 예시가 있습니다."
+    },
+    {
+      "from": "라우터 서브인터페이스",
+      "relation": "자료에서 VLAN 캡슐화 설정을 포함한다",
+      "to": "VLAN",
+      "description": "서브인터페이스에 VLAN 번호를 지정하는 캡슐화 명령 예시가 있습니다."
+    },
+    {
+      "from": "VTP",
+      "relation": "자료에서 VLAN DB 동기화와 연결해 설명한다",
+      "to": "VLAN",
+      "description": "자료는 VTP를 VLAN DB 동기화로 설명합니다."
+    },
+    {
+      "from": "LACP",
+      "relation": "자료에서 EtherChannel 모드로 언급된다",
+      "to": "EtherChannel",
+      "description": "active와 passive 모드 및 채널 그룹 명령 예시가 제시됩니다."
+    },
+    {
+      "from": "PAgP",
+      "relation": "자료에서 EtherChannel 모드와 함께 언급된다",
+      "to": "EtherChannel",
+      "description": "PAgP 메모와 auto 및 축약된 desi 모드의 채널 그룹 명령 예시가 있습니다."
+    }
+  ],
+  "theory": {
+    "definitions": [
+      {
+        "subject": "VTP",
+        "content": "자료에서는 VTP를 VLAN DB 동기화로 설명하며, domain과 password를 지정해 그 정보로 동기화한다고 적습니다. 뒤의 '최대' 메모는 내용이 완성되지 않았습니다.",
+        "evidence": "vtp는 vlan DB 동기화\ndomain, password 를 지정하고 그 정보로 동기화\n최대 "
+      }
+    ]
+  },
+  "practice": [
+    {
+      "title": "VLAN 및 스위치 포트 설정 명령 예시",
+      "description": "VLAN 10, 20, 30을 생성하고, 포트를 트렁크 또는 액세스 모드로 설정해 VLAN 10 및 20에 할당하는 명령 예시입니다. 명령이 제시되어 있지만 실행 여부와 성공 여부는 확인되지 않습니다.",
+      "evidence": "conf t\nvlan 10\nexit\nvlan 20\nexit\nvlan 30\nexit\n\n\nint fa0/24\nsw mo tr\nint fa0/23\nsw mo tr\nint fa0/1\nsw mo acc\nsw acc vlan 10\nint fa0/2\nsw mo acc\nsw acc vlan 20",
+      "related_concepts": [
+        "VLAN",
+        "액세스 포트",
+        "트렁크 포트"
+      ]
+    },
+    {
+      "title": "라우터 서브인터페이스 설정 명령 예시",
+      "description": "R1의 fa0/0을 활성화하고 서브인터페이스에 VLAN 캡슐화와 IP 주소를 설정하는 명령 예시입니다. 한 구간은 VLAN 10과 20을, 다른 구간은 VLAN 10, 20, 30을 다루며 설정 결과는 제시되지 않습니다.",
+      "evidence": "R1\nconf t\nint fa0/0\nno sh\nint fa0/0.10\nencap dot 10\nip addr 192.168.10.254 255.255.255.0\nint fa0/0.20\nencap dot 20\nip addr 192.168.20.254 255.255.255.0\n\n\n\nen\nconf t\nint fa0/0\nno sh\nint fa0/0.10\nencap dot1q 10\nip addr 192.168.10.254 255.255.255.0\nint fa0/0.20\nencap dot1q 20\nip addr 192.168.20.254 255.255.255.0\nint fa0/0.30\nencap dot1q 30\nip addr 192.168.30.254 255.255.255.0",
+      "related_concepts": [
+        "라우터 서브인터페이스",
+        "VLAN"
+      ]
+    },
+    {
+      "title": "트렁크 네이티브 VLAN 설정 명령 예시",
+      "description": "스위치 트렁크 인터페이스에 네이티브 VLAN 10을 지정하고 라우터 서브인터페이스에 VLAN 10을 native로 표시하는 명령 예시입니다. 설정 확인이나 결과는 기록되어 있지 않습니다.",
+      "evidence": "-------------------------------------------\nint fa0/24\nswitchport trunk native vlan 10\nint fa0/23\nswitchport trunk native vlan 10\n\nint fa0/24\nswitchport trunk native vlan 10\n\n-------------------------------------\n\nconf t\nvtp domain cisco\nvtp password 1234\n\nvtp는 vlan DB 동기화\ndomain, password 를 지정하고 그 정보로 동기화\n최대 \n\nsw1\nint range fa0/23 - 24\nsw tr nati vlan 10\n\nsw\nint fa0/23\nsw tr nati vlan 10\n\nr1\nconf t\nint fa0/0.10\nencap dot1q 10 native",
+      "related_concepts": [
+        "네이티브 VLAN",
+        "트렁크 포트",
+        "라우터 서브인터페이스"
+      ]
+    },
+    {
+      "title": "VTP 설정 명령 예시",
+      "description": "VTP domain을 cisco로, password를 1234로 지정하는 명령 예시와 VLAN DB 동기화에 관한 메모가 있습니다. 설정 수행이나 동기화 결과는 확인되지 않습니다.",
+      "evidence": "conf t\nvtp domain cisco\nvtp password 1234\n\nvtp는 vlan DB 동기화\ndomain, password 를 지정하고 그 정보로 동기화\n최대 ",
+      "related_concepts": [
+        "VTP",
+        "VLAN"
+      ]
+    },
+    {
+      "title": "스패닝 트리 및 액세스 포트 설정 명령 예시",
+      "description": "스위치의 기본 PortFast 설정과 Rapid-PVST 모드 설정, 그리고 fa0/1과 fa0/2를 액세스 포트로 설정해 VLAN 10 및 20에 할당하는 명령 예시입니다. 실행이나 확인 결과는 제시되지 않습니다.",
+      "evidence": "SW1~3 공통설정\n\nen \nconf t\nspanning-tree portfast default\nspanning-tree mode rapid-pvst\n\nint fa0/1\nsw mo acc\nsw acc vlan 10\nint fa0/2\nsw mo acc\nsw acc vlan 20",
+      "related_concepts": [
+        "스패닝 트리 설정",
+        "액세스 포트",
+        "VLAN"
+      ]
+    },
+    {
+      "title": "EtherChannel 구성 명령 예시",
+      "description": "SW1·SW2·SW3의 인터페이스 범위에 트렁크와 channel-group을 설정하는 예시다. SW1의 그룹 1은 auto, SW2의 그룹 1은 desi이며, 그룹 2는 SW1 active·SW3 passive, 그룹 3은 SW2·SW3 모두 on이다. 배선과 상태 출력은 기록되어 있지 않아 구성 성공 여부는 확인되지 않는다.",
+      "evidence": "conf t\nint range fa0/1 - 4\nchannel-group ?\n\nlacp active passive\nPAGP \n\n\nsw1\nen\nconf t\nint fa0/1\nsw mo acc\nsw acc vlan 10\nint fa0/2\nsw mo acc\nsw acc vlan 20\nint range fa0/23-24\nsw mo tr\nchannel-group 1 mode auto\nint range fa0/21-22\nchannel-group 2 mode active\nsw mo tr\n\n\n\nsw2\nen\nconf t\nint fa0/1\nsw mo acc\nsw acc vlan 10\nint fa0/2\nsw mo acc\nsw acc vlan 20\nint range fa0/23-24\nsw mo tr\nchannel-group 1 mode desi\nint range fa0/19-20\nchannel-group 3 mode on\nsw mo tr\n\nsw3\nen\nconf t\nint fa0/1\nsw mo acc\nsw acc vlan 10\nint fa0/2\nsw mo acc\nsw acc vlan 20\nint range fa0/21-22\nsw mo tr\nchannel-group 2 mode passive\nint range fa0/19-20\nchannel-group 3 mode on\nsw mo tr",
+      "related_concepts": [
+        "EtherChannel",
+        "LACP",
+        "PAgP",
+        "트렁크 포트"
+      ]
+    }
+  ],
+  "schema_version": "0.2-draft",
+  "sections": [
+    {
+      "id": "vlan-ports",
+      "title": "VLAN 및 스위치 포트 설정",
+      "content_refs": [
+        "/concepts/0",
+        "/concepts/1",
+        "/concepts/2",
+        "/relationships/0",
+        "/practice/0"
+      ]
+    },
+    {
+      "id": "router-native-vlan",
+      "title": "라우터 서브인터페이스와 네이티브 VLAN",
+      "content_refs": [
+        "/concepts/3",
+        "/concepts/4",
+        "/relationships/1",
+        "/relationships/2",
+        "/practice/1",
+        "/practice/2"
+      ]
+    },
+    {
+      "id": "vtp",
+      "title": "VTP 설정과 VLAN DB 동기화",
+      "content_refs": [
+        "/concepts/5",
+        "/relationships/3",
+        "/theory/definitions/0",
+        "/practice/3"
+      ]
+    },
+    {
+      "id": "spanning-tree",
+      "title": "스패닝 트리 및 액세스 포트 설정",
+      "content_refs": [
+        "/concepts/6",
+        "/practice/4"
+      ]
+    },
+    {
+      "id": "etherchannel",
+      "title": "EtherChannel 구성과 모드",
+      "content_refs": [
+        "/concepts/7",
+        "/concepts/8",
+        "/concepts/9",
+        "/relationships/4",
+        "/relationships/5",
+        "/practice/5"
+      ]
+    }
+  ],
+  "source": {
+    "material_id": "475bb0dedd096ba1ba136d8a480894d332729b2fddfaca504a4eb7edae2fd18a",
+    "filename": "18일차.txt",
+    "extension": ".txt"
+  }
+}

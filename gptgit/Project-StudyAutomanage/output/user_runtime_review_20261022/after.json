@@ -1,0 +1,82 @@
+{
+  "inspect": {
+    "median_seconds": 0.36280699999997523,
+    "samples": [
+      {
+        "seconds": 0.39719019999995453,
+        "sqlite_connections": 2,
+        "policy_evaluations": 11,
+        "knowledge_indexes": 0
+      },
+      {
+        "seconds": 0.3601278999999522,
+        "sqlite_connections": 2,
+        "policy_evaluations": 11,
+        "knowledge_indexes": 0
+      },
+      {
+        "seconds": 0.36280699999997523,
+        "sqlite_connections": 2,
+        "policy_evaluations": 11,
+        "knowledge_indexes": 0
+      }
+    ],
+    "result_sha256": "fd212913720f6b41f26c2a9987675445cb85a2d87c214f9d91f286e0685bfb01"
+  },
+  "catalog": {
+    "median_seconds": 0.03862319999996089,
+    "samples": [
+      {
+        "seconds": 0.038572499999986576,
+        "sqlite_connections": 2,
+        "policy_evaluations": 0,
+        "knowledge_indexes": 1
+      },
+      {
+        "seconds": 0.0388929000000644,
+        "sqlite_connections": 2,
+        "policy_evaluations": 0,
+        "knowledge_indexes": 1
+      },
+      {
+        "seconds": 0.03862319999996089,
+        "sqlite_connections": 2,
+        "policy_evaluations": 0,
+        "knowledge_indexes": 1
+      }
+    ],
+    "result_sha256": "5b5b4726a1c609c30779f7d346ad1072c8d69015fa67f258dcb8414d245d88ac"
+  },
+  "approved": {
+    "median_seconds": 0.03964019999989432,
+    "samples": [
+      {
+        "seconds": 0.039548099999933584,
+        "sqlite_connections": 2,
+        "policy_evaluations": 11,
+        "knowledge_indexes": 1
+      },
+      {
+        "seconds": 0.03964019999989432,
+        "sqlite_connections": 2,
+        "policy_evaluations": 11,
+        "knowledge_indexes": 1
+      },
+      {
+        "seconds": 0.03966809999997167,
+        "sqlite_connections": 2,
+        "policy_evaluations": 11,
+        "knowledge_indexes": 1
+      }
+    ],
+    "result_sha256": "bff03e5685273be60ce743689645d924b277ae6f80d9d4672fcac567e326b9de"
+  },
+  "sparse_relations_600": {
+    "seconds": 0.011073200000055294,
+    "result_sha256": "474c83861e6e82f9de313bc59073d2e174b0d7d4fd447d72b9aaadf7bbf23d8b",
+    "relations": 0
+  },
+  "approval_db_unchanged": true,
+  "paid_api_calls": 0,
+  "notion_calls": 0
+}

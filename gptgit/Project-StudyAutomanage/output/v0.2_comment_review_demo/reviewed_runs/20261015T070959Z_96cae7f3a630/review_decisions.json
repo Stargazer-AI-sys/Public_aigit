@@ -1,0 +1,14 @@
+[
+  {
+    "candidate_id": "candidate-bfcd52ab692e6d95",
+    "outcome": "supported",
+    "reason": "2026-10-15에 Cisco 공식 CLI 문서를 조회해 공백 뒤 물음표가 인수·키워드 도움말을 표시한다는 설명을 확인했다. URL 접속 여부만으로 판정한 것이 아니다.",
+    "reference": {
+      "id": "cisco-cli-help",
+      "title": "Cisco IOS XE 17.x — Using the Cisco IOS Command-Line Interface",
+      "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/syst-mgmt/b-system-management/m_cf-cli-basics.html",
+      "verification_status": "source_checked",
+      "checked_on": "2026-10-15"
+    }
+  }
+]

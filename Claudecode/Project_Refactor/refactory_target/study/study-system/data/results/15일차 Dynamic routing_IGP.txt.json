@@ -1,0 +1,111 @@
+{
+  "filename": "15일차 Dynamic routing_IGP.txt",
+  "sha256": "5520ea4cfcab84de60fba38f45a7c0f5d68173bf9c58f525630414acfc5f0efc",
+  "analyzed_at": "2026-11-06T00:28:18+00:00",
+  "model": "gpt-6-luna",
+  "usage": {
+    "input_tokens": 4580,
+    "input_tokens_details": {
+      "cache_write_tokens": 652,
+      "cached_tokens": 3925
+    },
+    "output_tokens": 1409,
+    "output_tokens_details": {
+      "reasoning_tokens": 154
+    },
+    "total_tokens": 5989
+  },
+  "analysis": {
+    "summary": "IGP의 라우팅 방식과 RIP의 동작 및 RIPv1·RIPv2 차이를 정리하고 관련 설정 명령을 기록한 자료입니다.",
+    "categories": [
+      "3. IP 라우팅 / 라우팅 방식과 RIP"
+    ],
+    "concepts": [
+      "IGP",
+      "EGP",
+      "Distance vector",
+      "Link state",
+      "RIP",
+      "RIPv1",
+      "RIPv2",
+      "VLSM",
+      "EIGRP"
+    ],
+    "sections": [
+      {
+        "title": "동적 라우팅과 라우팅 방식",
+        "points": [
+          {
+            "subject": "IGP와 라우팅 방식",
+            "content": "IGP를 내부 게이트웨이 프로토콜로 설명하고, Distance vector의 예로 RIP와 IGRP, Link state의 예로 OSPF와 IS-IS를 기록했다. RIP의 메트릭은 홉 수 기준이며 최대 15라고 적었다.",
+            "evidence": "IGP 내부게이트웨이 프로토콜\n\tdistance vector : RIP[Metric(계산방식?):홉수기준 MAX 15]IGRP\n\t=> 주기적 정보(라우팅테이블) 교환 레거시 기술\n\tlink state OSPF[대역폭], IS-IS Metric 구성요소는 무엇인가?"
+          },
+          {
+            "subject": "라우팅 정보 교환과 모니터링",
+            "content": "Distance vector는 라우팅 테이블 정보를 주기적으로 교환하는 레거시 기술로, Link state는 상태 변화 시 정보를 교환하고 평상시 Hello packet으로 이웃 라우터를 모니터링한다고 기록했다. 40초 동안 응답이 없으면 테이블에서 삭제한다고 적었다.",
+            "evidence": "\t=> 주기적 정보(라우팅테이블) 교환 레거시 기술\n\tlink state OSPF[대역폭], IS-IS Metric 구성요소는 무엇인가?\n\t=> 상태 변화시 정보 교환, 평상시 주기적으로 이웃 라우터를 모니터링(Hello packet을 이용 40초동안 응답이 없으면 테이블 삭제)"
+          },
+          {
+            "subject": "EIGRP와 EGP",
+            "content": "EIGRP를 hybrid로 분류하고, 비용 계산은 IGRP를 기반으로 하며 상태 모니터링과 네트워크 변화 시 업데이트는 Link state 방식을 사용한다고 기록했다. EGP는 외부 게이트웨이 프로토콜로 적었다.",
+            "evidence": "\thybrid: EIGRP \n\t=> 비용계산은 IGRP를 기반으로하고 상태 모니터링 및 네트워크 변화시 업데이트는 link state 방식을 사용\n\n\n\n\nEGP 외부 게이트웨이 프로토콜"
+          }
+        ],
+        "practice": [],
+        "comment": {
+          "kind": "정정",
+          "text": "EIGRP는 IGRP에서 발전한 고급 거리 벡터(advanced distance vector) 프로토콜이며, Link state 방식으로 분류하지 않습니다. Hello 패킷 응답이 없어 경로를 무효화하는 시간은 OSPF에서 네트워크 유형 등에 따라 달라지므로, 40초를 모든 경우에 적용되는 값으로 일반화하면 안 됩니다."
+        }
+      },
+      {
+        "title": "RIP과 버전별 차이",
+        "points": [
+          {
+            "subject": "RIP 기본 동작",
+            "content": "RIP은 UDP 520을 사용하고 라우팅 테이블 정보를 30초 주기로 교환한다고 기록했다.",
+            "evidence": "RIP \nUDP520\n30초 주기로 정보교환(라우팅 테이블 정보)"
+          },
+          {
+            "subject": "RIPv1",
+            "content": "RIPv1은 classful 방식으로 서브넷 범위를 보지 않으며 VLSM을 지원하지 않는다고 기록했다. 예시로 172.16.1.0/24가 172.16.0.0/16 형태로 전달될 수 있고, 브로드캐스트 주소 255.255.255.255를 목적지로 하는 UDP 520 패킷을 주기적으로 보낸다고 적었다.",
+            "evidence": "RIPv1\n\tclassful => 서브넷 범위를 보지않음 서브넷 범위를 지정한 네트워크이면 쓸대없이 데이터가 가는 현상이 생길수 있다. *보통 A B C D.. 클래스만 구분함\n\t172.16.1.0/24 -> 172.16.0.0/16 형태로 가버리는게 v1에 대표적인 현상인데 이렇게 되면 받은 쪽에서는 테이블 길이가 길어짐\n\t테이블 길이가 길어지면 룩업시간이 길어짐\n\tVLSM 가변길이 서브넷 마스크 지원안함\t\n\t라우트는 브로드케스트 신호를 드랍하지만 예외적으로 ripv1은 허용함 실제로 와이어샤크에서 ripv1으로 설정된 라우터끼리 신호를 주고 받을때 udp 520포트로 주기적으로 날리는 신호의 데스티네이션 ip 값은 255.255.255.255 브로드케스트 신호이다."
+          },
+          {
+            "subject": "RIPv2",
+            "content": "RIPv2는 classless 방식이며 VLSM을 지원한다고 기록했다.",
+            "evidence": "RIPv2\n\tclassless => 서브넷 범위를 \n\tVLSM 가변길이 서브넷 마스크 지원"
+          }
+        ],
+        "practice": [],
+        "comment": {
+          "kind": "보충",
+          "text": "RIPv1은 경로 업데이트를 브로드캐스트하고 RIPv2는 멀티캐스트 주소 224.0.0.9를 사용합니다. RIP의 메트릭은 홉 수이며 16은 도달 불가를 뜻하므로, 최대 15홉까지 도달 가능합니다."
+        }
+      },
+      {
+        "title": "기록된 설정 명령",
+        "points": [
+          {
+            "subject": "도메인 이름 조회 비활성화 명령",
+            "content": "no ip domain lookup 명령을 기록했다.",
+            "evidence": "no ip domain lookup"
+          }
+        ],
+        "practice": [
+          {
+            "title": "도메인 이름 조회 비활성화",
+            "description": "기록된 설정 명령은 no ip domain lookup이다.",
+            "evidence": "no ip domain lookup"
+          }
+        ],
+        "comment": null
+      }
+    ],
+    "ccna_gaps": [
+      {
+        "category": "3. IP 라우팅 / 라우팅 방식과 RIP",
+        "text": "RIP의 메트릭 및 16홉의 의미, RIPv2의 멀티캐스트 업데이트 주소(224.0.0.9), RIPv1과 RIPv2의 업데이트 전송 차이가 빠져 있습니다. 자료에 언급된 EGP의 구체적인 라우팅 방식이나 예시는 다루지 않습니다."
+      }
+    ]
+  }
+}

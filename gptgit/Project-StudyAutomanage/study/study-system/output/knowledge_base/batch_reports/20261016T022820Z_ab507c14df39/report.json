@@ -1,0 +1,39 @@
+{
+  "items": [
+    {
+      "row": 1,
+      "filename": "12일차.docx",
+      "status": "reused",
+      "material_id": "b0b50be4b719e7a173222c5573ec85a40b1aaa9938e0de53a1eb6ef131f5832b",
+      "reason": "검증된 동일 원본 저장 결과 재사용"
+    },
+    {
+      "row": 2,
+      "filename": "15일차 Dynamic routing_IGP.txt",
+      "status": "reused",
+      "material_id": "acc194f4b63fceab8eb484dd97368a0f931a49fc93aaf18dab8a592e201b7526",
+      "reason": "검증된 동일 원본 저장 결과 재사용"
+    },
+    {
+      "row": 3,
+      "filename": "18일차.txt",
+      "status": "reused",
+      "material_id": "f3bb8b2cc0e14e125f71322253dd586df819d2fd4dfb2c6bec375778f980b187",
+      "reason": "검증된 동일 원본 저장 결과 재사용"
+    },
+    {
+      "row": 4,
+      "filename": "20일차 경로재분배,루프백가상장비설정.txt",
+      "status": "reused",
+      "material_id": "144ab5db4c077baf5b72682f78b4286f857fd0485ec0bb878a846147afff42f2",
+      "reason": "검증된 동일 원본 저장 결과 재사용"
+    }
+  ],
+  "new_api_attempts": 0,
+  "new_successes": 0,
+  "reused": 4,
+  "failed": 0,
+  "blocked": 0,
+  "recovered_cache_locks": 0,
+  "status": "PASS"
+}

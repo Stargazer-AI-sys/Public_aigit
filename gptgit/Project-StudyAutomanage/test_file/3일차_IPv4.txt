@@ -1,0 +1,57 @@
+■ IPv4
+5개의 클래스로 구분
+각 클래스는 MSB를 이용해 식별 할 수 있음.
+-MSB(Most Significant Bit-최상위 비트)
+-A Class : MSB가 0
+-B Class : MSB가 10
+-C Class : MSB가 110
+-D Class : MSB가 1110
+-E Class : MSB가 1111
+IPv4의 4개 옥텟 가운데 첫 번째 옥텟의 MSB만으로 식별 가능
+예)100.52.45.8의 클래스=> A Class
+160.1.1.2의 클래스=> B Class
+200.50.89.147의 클래스=> C Class
+224.30.54.70의 클래스=> D Class
+
+각 클래스는 네트워크 규모의 차이를 보임.
+A Class는 1번째 옥텟이 같아야 함.
+B Class는 2번째 옥텟까지 같아야 함.
+C Class는 3번째 옥텟까지 같아야 함.
+장비에 할당 가능한 주소는 C Class까지임.
+D Class는 Multicast용으로 사용
+E Class는 학술 및 연구용으로 예약된 주소임.
+
+
+Router(config-if)#no sh
+
+%LINK-5-CHANGED: Interface Serial3/0, changed state to down
+Router(config-if)#
+Router(config-if)#
+Router(config-if)#int s2/0
+Router(config-if)#no sh
+% 10.0.0.0 overlaps with Serial3/0
+Serial2/0: incorrect IP address assignment
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

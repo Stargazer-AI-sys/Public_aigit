@@ -1,0 +1,29 @@
+{
+  "review_version": 1,
+  "analysis_sha256": "29fa713523766a06c63da90e55df87e1ec5c4b784f651ea2742c286d79cbaee6",
+  "source": {
+    "material_id": "bc311d69fc2366ebe3ae69a6b0b4627fd79e437b96c97241398ba20313aacf4d",
+    "filename": "20일차 경로재분배,루프백가상장비설정.txt",
+    "extension": ".txt"
+  },
+  "candidates": [
+    {
+      "section_id": "loopback-ping",
+      "kind": "correction",
+      "text": "특정 루프백에서 출발하는 통신을 시험할 때 소스 주소를 지정하는 것이며, 루프백이 있다는 이유만으로 모든 핑에 소스 지정이 필수인 것은 아니다.",
+      "reason": "원문이 모든 루프백 환경의 핑에서 소스 지정을 필수로 읽힐 수 있다.",
+      "search_query": "Cisco extended ping source address outbound interface",
+      "id": "candidate-c1e2585f5137c003",
+      "status": "pending"
+    },
+    {
+      "section_id": "static-redistribution",
+      "kind": "correction",
+      "text": "정적 경로도 redistribute static으로 동적 라우팅 프로토콜에 주입할 수 있으므로 정적 경로는 재분배하지 않는다고 일반화하면 안 된다.",
+      "reason": "정적으로 연결된 라우터 간에는 사용하지 않는다는 원문 설명의 범위를 명확히 해야 한다.",
+      "search_query": "Cisco RIP redistribute static",
+      "id": "candidate-d9a10b33638d4de5",
+      "status": "pending"
+    }
+  ]
+}

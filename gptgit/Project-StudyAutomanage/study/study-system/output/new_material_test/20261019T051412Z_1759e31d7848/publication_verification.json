@@ -1,0 +1,22 @@
+{
+  "material_id": "546efd6392a367ed29521e0378a16b50d7e71f86a0e66c77a1a5f8e2c50ce908",
+  "notion_page_url": "https://www.notion.so/3fe062cd7cd18164bf3ccdc83d35128e",
+  "approved_materials": 6,
+  "managed_entities": 98,
+  "list_calls": 4,
+  "body_reads": 0,
+  "front_reads": 0,
+  "front_writes": 5,
+  "total_elapsed_seconds": 613.199,
+  "pending_operations": 0,
+  "previous_approvals_preserved": true,
+  "previous_page_ids_preserved": true,
+  "local_plan_receipt_mismatches": [],
+  "approval_db_unchanged_during_publication": true,
+  "errors": [],
+  "confirmation": "tool-response; local receipt audit",
+  "remote_body_readback_performed": false,
+  "screen_verified": false,
+  "paid_ai_calls_during_publication": 0,
+  "publication_report": "output\\notion_live\\runs\\20261019T052500Z_09ae147b0bb6\\report.json"
+}

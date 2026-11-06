@@ -1,0 +1,9 @@
+{
+  "mode": "mock",
+  "notion_sent": false,
+  "writes": 0,
+  "skipped": 144,
+  "reconciled": 0,
+  "errors": [],
+  "plan_digest": "748e4fd1e1f34169f0680c1af741130ba6ac9e22ba1f56672f18e01e10761ee8"
+}

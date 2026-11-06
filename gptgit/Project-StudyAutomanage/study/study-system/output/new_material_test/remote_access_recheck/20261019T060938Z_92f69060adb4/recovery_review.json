@@ -1,0 +1,60 @@
+{
+  "cause": "optional theory descendants were all null; normalization retained an empty parent object",
+  "repair": "omit optional containers emptied exclusively by optional-null normalization; canonical Schema unchanged",
+  "original_run": "output\\knowledge_base\\runs\\20261019T060750Z_f421b1ad41a0",
+  "recheck_run": "output\\new_material_test\\remote_access_recheck\\20261019T060938Z_92f69060adb4",
+  "material_id": "810c870e17cc301e1687c831edaea67d6db48fa82704c2da0d040547ccdc0bda",
+  "snapshot": "ecf1d8b9a39c04fa082788bc05e6ae46df3fbf3d405d057e1afb992e98affd21",
+  "status": "pending",
+  "classification": {
+    "paths": [
+      [
+        "NETWORK",
+        "5. 네트워크 보안 기초",
+        "보안 원칙과 장비·VPN 접근"
+      ],
+      [
+        "NETWORK",
+        "관련성 미확인"
+      ]
+    ],
+    "reasons": [
+      {
+        "path": [
+          "NETWORK",
+          "5. 네트워크 보안 기초",
+          "보안 원칙과 장비·VPN 접근"
+        ],
+        "source": "analysis.topics -> pinned curriculum map",
+        "matched_topic": "네트워크 관리 / 방화벽 / 2계층 방화벽 메모",
+        "curriculum_code": "5.1–5.5",
+        "scope": "core"
+      }
+    ],
+    "unclassified_topics": [
+      [
+        "네트워크 관리",
+        "원격 접속",
+        "Telnet 설정"
+      ]
+    ],
+    "scope_confirmed": false,
+    "curriculum_id": "cisco-ccna-200-301-v1.1-project-map"
+  },
+  "proposed_primary_path": [
+    "NETWORK",
+    "2. 네트워크 접속",
+    "무선 접속과 장비 관리"
+  ],
+  "proposed_secondary_path": [
+    "NETWORK",
+    "5. 네트워크 보안 기초",
+    "보안 원칙과 장비·VPN 접근"
+  ],
+  "classification_decision": "awaiting_user_review",
+  "additional_paid_calls": 0,
+  "notion_calls": 0,
+  "original_failure_preserved": true,
+  "previous_approvals_preserved": true,
+  "regression_tests_passed": 38
+}

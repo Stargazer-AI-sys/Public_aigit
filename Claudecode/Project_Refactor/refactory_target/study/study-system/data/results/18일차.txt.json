@@ -1,0 +1,180 @@
+{
+  "filename": "18일차.txt",
+  "sha256": "475bb0dedd096ba1ba136d8a480894d332729b2fddfaca504a4eb7edae2fd18a",
+  "analyzed_at": "2026-11-06T00:28:31+00:00",
+  "model": "gpt-6-luna",
+  "usage": {
+    "input_tokens": 5368,
+    "input_tokens_details": {
+      "cache_write_tokens": 1440,
+      "cached_tokens": 3925
+    },
+    "output_tokens": 1573,
+    "output_tokens_details": {
+      "reasoning_tokens": 0
+    },
+    "total_tokens": 6941
+  },
+  "analysis": {
+    "summary": "VLAN 및 트렁크와 라우터 서브인터페이스를 설정하고, VTP·STP 및 EtherChannel 모드 설정을 연습한다.",
+    "categories": [
+      "2. 네트워크 접속 / VLAN과 VLAN 간 연결",
+      "2. 네트워크 접속 / 트렁크·802.1Q·네이티브 VLAN",
+      "2. 네트워크 접속 / 스패닝 트리와 루프 방지",
+      "2. 네트워크 접속 / EtherChannel과 LACP",
+      "2. 네트워크 접속 / VTP와 PAgP"
+    ],
+    "concepts": [
+      "VLAN",
+      "액세스 포트",
+      "트렁크",
+      "Inter-VLAN 라우팅",
+      "라우터 서브인터페이스",
+      "802.1Q",
+      "네이티브 VLAN",
+      "VTP",
+      "Rapid PVST+",
+      "PortFast",
+      "EtherChannel",
+      "LACP",
+      "PAgP"
+    ],
+    "sections": [
+      {
+        "title": "VLAN·액세스 포트와 트렁크 설정",
+        "points": [
+          {
+            "subject": "VLAN 생성 및 포트 할당",
+            "content": "VLAN 10, 20, 30을 생성하고 액세스 포트를 VLAN 10과 VLAN 20에 할당한다.",
+            "evidence": "conf t\nvlan 10\nexit\nvlan 20\nexit\nvlan 30\nexit\n\n\nint fa0/24\nsw mo tr\nint fa0/23\nsw mo tr\nint fa0/1\nsw mo acc\nsw acc vlan 10\nint fa0/2\nsw mo acc\nsw acc vlan 20"
+          },
+          {
+            "subject": "트렁크 포트",
+            "content": "Fa0/23과 Fa0/24를 트렁크 모드로 설정한다.",
+            "evidence": "int fa0/24\nsw mo tr\nint fa0/23\nsw mo tr"
+          },
+          {
+            "subject": "네이티브 VLAN",
+            "content": "트렁크 포트의 네이티브 VLAN을 10으로 지정하는 명령이 기록되어 있다.",
+            "evidence": "-------------------------------------------\nint fa0/24\nswitchport trunk native vlan 10\nint fa0/23\nswitchport trunk native vlan 10\n\nint fa0/24\nswitchport trunk native vlan 10"
+          }
+        ],
+        "practice": [
+          {
+            "title": "스위치 VLAN 및 포트 설정",
+            "description": "VLAN을 생성하고 스위치 포트를 트렁크 또는 액세스 모드로 설정한 뒤, 액세스 포트를 VLAN 10과 20에 할당한다.",
+            "evidence": "conf t\nvlan 10\nexit\nvlan 20\nexit\nvlan 30\nexit\n\n\nint fa0/24\nsw mo tr\nint fa0/23\nsw mo tr\nint fa0/1\nsw mo acc\nsw acc vlan 10\nint fa0/2\nsw mo acc\nsw acc vlan 20\n\n\n\nconf t\nint fa0/24\nsw mo tr\nint fa0/1\nsw mo acc\nsw acc vlan 10\nint fa0/2\nsw mo acc\nsw acc vlan 20"
+          },
+          {
+            "title": "트렁크 네이티브 VLAN 설정",
+            "description": "스위치의 트렁크 포트에서 네이티브 VLAN을 10으로 지정한다.",
+            "evidence": "-------------------------------------------\nint fa0/24\nswitchport trunk native vlan 10\nint fa0/23\nswitchport trunk native vlan 10\n\nint fa0/24\nswitchport trunk native vlan 10"
+          }
+        ],
+        "comment": null
+      },
+      {
+        "title": "라우터 서브인터페이스를 이용한 VLAN 간 라우팅",
+        "points": [
+          {
+            "subject": "서브인터페이스와 802.1Q",
+            "content": "Fa0/0을 활성화하고 Fa0/0.10, Fa0/0.20, Fa0/0.30 서브인터페이스에 802.1Q 캡슐화와 IP 주소를 설정한다. Fa0/0.10을 VLAN 10의 네이티브 서브인터페이스로 지정하는 명령도 기록되어 있다.",
+            "evidence": "en\nconf t\nint fa0/0\nno sh\nint fa0/0.10\nencap dot1q 10\nip addr 192.168.10.254 255.255.255.0\nint fa0/0.20\nencap dot1q 20\nip addr 192.168.20.254 255.255.255.0\nint fa0/0.30\nencap dot1q 30\nip addr 192.168.30.254 255.255.255.0"
+          },
+          {
+            "subject": "서브인터페이스 주소",
+            "content": "VLAN 10, 20, 30에 각각 192.168.10.254/24, 192.168.20.254/24, 192.168.30.254/24 주소를 설정한다.",
+            "evidence": "int fa0/0.10\nencap dot1q 10\nip addr 192.168.10.254 255.255.255.0\nint fa0/0.20\nencap dot1q 20\nip addr 192.168.20.254 255.255.255.0\nint fa0/0.30\nencap dot1q 30\nip addr 192.168.30.254 255.255.255.0"
+          }
+        ],
+        "practice": [
+          {
+            "title": "라우터 서브인터페이스 설정",
+            "description": "물리 인터페이스를 활성화하고 VLAN별 서브인터페이스에 802.1Q 캡슐화 및 IP 주소를 설정한다.",
+            "evidence": "en\nconf t\nint fa0/0\nno sh\nint fa0/0.10\nencap dot1q 10\nip addr 192.168.10.254 255.255.255.0\nint fa0/0.20\nencap dot1q 20\nip addr 192.168.20.254 255.255.255.0\nint fa0/0.30\nencap dot1q 30\nip addr 192.168.30.254 255.255.255.0"
+          }
+        ],
+        "comment": {
+          "kind": "보충",
+          "text": "Inter-VLAN 라우팅을 위해 스위치 쪽 트렁크와 라우터 서브인터페이스의 VLAN 태그 및 네이티브 VLAN 설정이 서로 일치해야 합니다."
+        }
+      },
+      {
+        "title": "VTP 및 스패닝 트리",
+        "points": [
+          {
+            "subject": "VTP 설정 메모",
+            "content": "VTP domain을 cisco로, password를 1234로 지정하는 설정과 VTP가 VLAN DB를 동기화한다는 메모가 있다.",
+            "evidence": "conf t\nvtp domain cisco\nvtp password 1234\n\nvtp는 vlan DB 동기화\ndomain, password 를 지정하고 그 정보로 동기화"
+          },
+          {
+            "subject": "Rapid PVST+와 PortFast",
+            "content": "스위치에서 PortFast 기본 설정과 rapid-pvst 스패닝 트리 모드를 지정한다.",
+            "evidence": "SW1~3 공통설정\n\nen \nconf t\nspanning-tree portfast default\nspanning-tree mode rapid-pvst"
+          }
+        ],
+        "practice": [
+          {
+            "title": "VTP 도메인·암호 설정",
+            "description": "VTP domain과 password를 설정한다.",
+            "evidence": "conf t\nvtp domain cisco\nvtp password 1234"
+          },
+          {
+            "title": "스패닝 트리 설정",
+            "description": "PortFast 기본 설정과 rapid-pvst 모드를 적용한다.",
+            "evidence": "SW1~3 공통설정\n\nen \nconf t\nspanning-tree portfast default\nspanning-tree mode rapid-pvst"
+          }
+        ],
+        "comment": null
+      },
+      {
+        "title": "EtherChannel 설정 메모",
+        "points": [
+          {
+            "subject": "협상 모드 기록",
+            "content": "메모에는 LACP의 active·passive와 PAgP가 언급되어 있으며, 스위치별 EtherChannel 설정에 auto, desirable, active, passive, on 모드가 기록되어 있다.",
+            "evidence": "conf t\nint range fa0/1 - 4\nchannel-group ?\n\nlacp active passive\nPAGP "
+          },
+          {
+            "subject": "채널 그룹 구성",
+            "content": "스위치 간 인터페이스 범위에 channel-group을 설정하고 트렁크 모드를 지정하는 명령이 기록되어 있다.",
+            "evidence": "sw1\nen\nconf t\nint fa0/1\nsw mo acc\nsw acc vlan 10\nint fa0/2\nsw mo acc\nsw acc vlan 20\nint range fa0/23-24\nsw mo tr\nchannel-group 1 mode auto\nint range fa0/21-22\nchannel-group 2 mode active\nsw mo tr\n\n\n\nsw2\nen\nconf t\nint fa0/1\nsw mo acc\nsw acc vlan 10\nint fa0/2\nsw mo acc\nsw acc vlan 20\nint range fa0/23-24\nsw mo tr\nchannel-group 1 mode desi\nint range fa0/19-20\nchannel-group 3 mode on\nsw mo tr\n\nsw3\nen\nconf t\nint fa0/1\nsw mo acc\nsw acc vlan 10\nint fa0/2\nsw mo acc\nsw acc vlan 20\nint range fa0/21-22\nsw mo tr\nchannel-group 2 mode passive\nint range fa0/19-20\nchannel-group 3 mode on\nsw mo tr"
+          }
+        ],
+        "practice": [
+          {
+            "title": "EtherChannel 채널 그룹 설정",
+            "description": "각 스위치의 지정된 인터페이스 범위에 channel-group 모드를 설정하고 트렁크 모드를 지정한다.",
+            "evidence": "sw1\nen\nconf t\nint fa0/1\nsw mo acc\nsw acc vlan 10\nint fa0/2\nsw mo acc\nsw acc vlan 20\nint range fa0/23-24\nsw mo tr\nchannel-group 1 mode auto\nint range fa0/21-22\nchannel-group 2 mode active\nsw mo tr\n\n\n\nsw2\nen\nconf t\nint fa0/1\nsw mo acc\nsw acc vlan 10\nint fa0/2\nsw mo acc\nsw acc vlan 20\nint range fa0/23-24\nsw mo tr\nchannel-group 1 mode desi\nint range fa0/19-20\nchannel-group 3 mode on\nsw mo tr\n\nsw3\nen\nconf t\nint fa0/1\nsw mo acc\nsw acc vlan 10\nint fa0/2\nsw mo acc\nsw acc vlan 20\nint range fa0/21-22\nsw mo tr\nchannel-group 2 mode passive\nint range fa0/19-20\nchannel-group 3 mode on\nsw mo tr"
+          }
+        ],
+        "comment": {
+          "kind": "정정",
+          "text": "LACP에서 사용하는 모드는 active/passive이고, PAgP에서 사용하는 모드는 desirable/auto입니다. 따라서 서로 다른 프로토콜의 모드를 짝지어 구성할 수 없습니다."
+        }
+      }
+    ],
+    "ccna_gaps": [
+      {
+        "category": "2. 네트워크 접속 / VLAN과 VLAN 간 연결",
+        "text": "VLAN 30은 생성되고 라우터 서브인터페이스도 설정되어 있지만, VLAN 30에 연결할 액세스 포트 설정은 보이지 않는다."
+      },
+      {
+        "category": "2. 네트워크 접속 / 트렁크·802.1Q·네이티브 VLAN",
+        "text": "트렁크 양 끝의 설정 일치 확인과 802.1Q 태그 처리 설명은 다루지 않는다."
+      },
+      {
+        "category": "2. 네트워크 접속 / 스패닝 트리와 루프 방지",
+        "text": "루트 브리지 선출, 포트 역할·상태, BPDU 등 루프 방지 동작에 관한 내용은 없다."
+      },
+      {
+        "category": "2. 네트워크 접속 / EtherChannel과 LACP",
+        "text": "LACP와 PAgP의 협상 방식 및 호환 가능한 모드 조합에 대한 설명이 부족하다. auto/desirable은 PAgP 모드이고 active/passive는 LACP 모드이다."
+      },
+      {
+        "category": "2. 네트워크 접속 / VTP와 PAgP",
+        "text": "VTP의 server/client/transparent 모드, revision number 및 동기화 조건에 관한 설명은 없다. PAgP는 이름만 언급되며 설정 모드의 의미는 설명하지 않는다."
+      }
+    ]
+  }
+}

@@ -1,0 +1,80 @@
+{
+  "source_dir": "C:\\Users\\ICT\\Desktop\\Aigit\\gptgit\\Project-StudyAutomanage\\study\\study-system\\output\\test_tmp\\tmpan8oswxk\\source",
+  "files": [
+    {
+      "filename": "sample.txt",
+      "path": "C:\\Users\\ICT\\Desktop\\Aigit\\gptgit\\Project-StudyAutomanage\\study\\study-system\\output\\test_tmp\\tmpan8oswxk\\source\\sample.txt",
+      "status": "approved",
+      "material_id": "5417a2fe9a8fce1a186464c98f77d1e27f77624132363d0216b6a1ab42b7d058",
+      "snapshot": "1e34581938269cc4635c416d6009785f0ba555d01323ab6b2addbb2c6835b9fa",
+      "holds": [],
+      "paths": [
+        [
+          "NETWORK",
+          "2. 네트워크 접속",
+          "VLAN과 VLAN 간 연결"
+        ]
+      ]
+    },
+    {
+      "filename": "화면 확인용 신규.txt",
+      "path": "C:\\Users\\ICT\\Desktop\\Aigit\\gptgit\\Project-StudyAutomanage\\study\\study-system\\output\\test_tmp\\tmpan8oswxk\\source\\화면 확인용 신규.txt",
+      "status": "pending",
+      "material_id": "b1b7eab1cff4d3c2cf725a7fb8ceee6db020c10d40b3259edcf4e2dc226468f6",
+      "snapshot": "ca172ae13817a05bb07f18a515e4937393a86daac78a3ca6a618a0408f7e23b6",
+      "holds": [],
+      "paths": [
+        [
+          "NETWORK",
+          "2. 네트워크 접속",
+          "VLAN과 VLAN 간 연결"
+        ]
+      ]
+    }
+  ],
+  "counts": {
+    "approved": 1,
+    "pending": 1
+  },
+  "source_manifest": {
+    "root": "C:\\Users\\ICT\\Desktop\\Aigit\\gptgit\\Project-StudyAutomanage\\study\\study-system\\output\\test_tmp\\tmpan8oswxk\\source",
+    "files": [
+      {
+        "path": "sample.txt",
+        "sha256": "836408c94ae2b3dc8565dece8bf3386587c0cc04f189173eaef3f70fab18227a"
+      },
+      {
+        "path": "화면 확인용 신규.txt",
+        "sha256": "f2bc6a4cffe6fb60a28d091def40433256467250d27d970d402e0d93e830053e"
+      }
+    ],
+    "supported": 2
+  },
+  "ready": false,
+  "notion_sent": false,
+  "analysis": {
+    "items": [
+      {
+        "row": 1,
+        "filename": "화면 확인용 신규.txt",
+        "status": "success",
+        "material_id": "b1b7eab1cff4d3c2cf725a7fb8ceee6db020c10d40b3259edcf4e2dc226468f6",
+        "run": "C:\\Users\\ICT\\Desktop\\Aigit\\gptgit\\Project-StudyAutomanage\\study\\study-system\\output\\test_tmp\\tmpan8oswxk\\library\\runs\\20261020T023610Z_ffbc6879cd96",
+        "warnings": [
+          "AI 응답의 source를 무시하고 입력 기반 source로 교체했습니다."
+        ]
+      }
+    ],
+    "new_api_attempts": 0,
+    "new_successes": 1,
+    "reused": 0,
+    "failed": 0,
+    "blocked": 0,
+    "recovered_cache_locks": 0,
+    "status": "PASS",
+    "report_path": "C:\\Users\\ICT\\Desktop\\Aigit\\gptgit\\Project-StudyAutomanage\\study\\study-system\\output\\test_tmp\\tmpan8oswxk\\library\\batch_reports\\20261020T023610Z_37276da0bdee\\report.json"
+  },
+  "analysis_not_run": [],
+  "report_path": "C:\\Users\\ICT\\Desktop\\Aigit\\gptgit\\Project-StudyAutomanage\\study\\study-system\\output\\test_tmp\\tmpan8oswxk\\intake\\20261020T023610Z_7eef0977d7ad\\report.json",
+  "new_api_attempts": 0
+}

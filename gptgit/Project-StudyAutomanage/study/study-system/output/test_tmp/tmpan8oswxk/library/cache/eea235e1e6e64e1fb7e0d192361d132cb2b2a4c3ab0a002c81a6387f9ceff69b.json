@@ -1,0 +1,88 @@
+{
+  "context": {
+    "cache_format": 1,
+    "input_sha256": "80991898d9e80595111ec5f798303fdff3f09fabfde43077f5b069fe0db91a6f",
+    "prompt_sha256": "f24c9adc5960e1f094a03556e62d523883f9617d83329cbc40ebc5399419dabc",
+    "schema_sha256": "468684eae5625fcc4ca0b4301c81e205bf2a338ff6bcc480b4d81918305740fe",
+    "config": {
+      "provider": "mock-file",
+      "auxiliary_context_omitted": false,
+      "response_sha256": "ab5a47ab5c080ca1591d7970d799d02c3ebfe90487471fbd7e4f2fa18d15dfe7",
+      "processing_sha256": "017c23dfd74fbf267402c9a013ccada70b246bdb3222773e609aa44701700521"
+    }
+  },
+  "analysis": {
+    "schema_version": "0.2",
+    "source": {
+      "material_id": "f2bc6a4cffe6fb60a28d091def40433256467250d27d970d402e0d93e830053e",
+      "filename": "화면 확인용 신규.txt",
+      "extension": ".txt"
+    },
+    "material_type": {
+      "material_type": "실습",
+      "confidence": 1,
+      "reason": "설정 명령 예시"
+    },
+    "summary": "VLAN 10과 액세스 포트 설정 예시다.",
+    "topics": [
+      {
+        "name": "NETWORK",
+        "children": [
+          {
+            "name": "VLAN"
+          }
+        ]
+      }
+    ],
+    "keywords": [
+      {
+        "name": "VLAN"
+      }
+    ],
+    "concepts": [
+      {
+        "name": "VLAN",
+        "description": "예시의 VLAN 번호는 10이다."
+      }
+    ],
+    "practice": [
+      {
+        "title": "VLAN 설정",
+        "description": "VLAN 10을 만들고 Fa0/1에 VLAN 10을 지정하는 설정 예시다.",
+        "evidence": "vlan 10\nint fa0/1\nsw acc vlan 10",
+        "related_concepts": [
+          "VLAN"
+        ]
+      }
+    ],
+    "sections": [
+      {
+        "id": "vlan",
+        "title": "VLAN 설정",
+        "content_refs": [
+          "/concepts/0",
+          "/practice/0"
+        ]
+      }
+    ]
+  },
+  "analysis_sha256": "0e3bfab33a9eb3790db0385775295ababc46ccf79a0609b2b9fb0b7b1f8ab2b9",
+  "origin": {
+    "kind": "generated_result"
+  },
+  "review_request": {
+    "review_version": 1,
+    "analysis_sha256": "71d92587ff33375a7543989bec99a37c0382094d9f6a253e810eef82b638c1b7",
+    "source": {
+      "material_id": "f2bc6a4cffe6fb60a28d091def40433256467250d27d970d402e0d93e830053e",
+      "filename": "화면 확인용 신규.txt",
+      "extension": ".txt"
+    },
+    "candidates": []
+  },
+  "auxiliary_review": {
+    "status": "OK",
+    "issues": [],
+    "core_result_preserved": true
+  }
+}

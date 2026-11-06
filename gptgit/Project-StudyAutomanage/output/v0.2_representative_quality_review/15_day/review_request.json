@@ -1,0 +1,29 @@
+{
+  "review_version": 1,
+  "analysis_sha256": "72b2032bfee44a0ef7d11f245f89b4e22f26dcea819c664a07da15b4a9ffce7c",
+  "source": {
+    "material_id": "5520ea4cfcab84de60fba38f45a7c0f5d68173bf9c58f525630414acfc5f0efc",
+    "filename": "15일차 Dynamic routing_IGP.txt",
+    "extension": ".txt"
+  },
+  "candidates": [
+    {
+      "section_id": "routing-families",
+      "kind": "correction",
+      "text": "EIGRP는 링크상태 프로토콜이 아니라 거리 벡터 기반의 DUAL을 사용하는 프로토콜이다.",
+      "reason": "IGRP 기반과 링크상태의 혼합이라는 필기 설명을 기술 분류로 확정하지 않는다.",
+      "search_query": "RFC 7868 EIGRP Distance Vector DUAL",
+      "id": "candidate-c52275f29aaaa20b",
+      "status": "pending"
+    },
+    {
+      "section_id": "linkstate-neighbors",
+      "kind": "correction",
+      "text": "원문의 40초는 링크상태 프로토콜 공통값이 아니며, OSPF의 이웃 Down 판정은 인터페이스 Dead Interval 설정에 따른다.",
+      "reason": "40초·테이블 삭제를 모든 링크상태 프로토콜의 동작으로 일반화하면 오류가 된다.",
+      "search_query": "Cisco ip ospf dead-interval neighbor",
+      "id": "candidate-cf20d7548b6d92a3",
+      "status": "pending"
+    }
+  ]
+}

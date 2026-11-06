@@ -1,0 +1,1919 @@
+{
+  "format_version": 1,
+  "destination": "local-approved-snapshot",
+  "notion_sent": false,
+  "materials": [
+    {
+      "id": "144ab5db4c077baf5b72682f78b4286f857fd0485ec0bb878a846147afff42f2",
+      "analysis": {
+        "material_type": {
+          "material_type": "실습",
+          "confidence": 0.88,
+          "reason": "SVI와 라우팅·경로 재분배의 설정 및 확인 절차가 중심이며, 경로 재분배의 설명과 라우팅 테이블 관찰 기록도 포함합니다."
+        },
+        "summary": "SVI를 통한 VLAN 라우팅, 루프백을 이용한 핑 테스트, RIP 정적 경로 재분배의 설정과 확인을 다룹니다.",
+        "topics": [
+          {
+            "name": "L3 스위치 라우팅",
+            "children": [
+              {
+                "name": "SVI를 이용한 Inter-VLAN"
+              }
+            ]
+          },
+          {
+            "name": "루프백 주소를 소스로 지정한 핑"
+          },
+          {
+            "name": "경로 재분배",
+            "children": [
+              {
+                "name": "RIP 정적 경로 재분배"
+              }
+            ]
+          }
+        ],
+        "keywords": [
+          {
+            "name": "SVI",
+            "type": "네트워크 인터페이스"
+          },
+          {
+            "name": "Inter-VLAN",
+            "type": "라우팅"
+          },
+          {
+            "name": "IGP",
+            "type": "라우팅 프로토콜 분류"
+          },
+          {
+            "name": "EGP",
+            "type": "라우팅 프로토콜 분류"
+          },
+          {
+            "name": "경로 재분배",
+            "type": "라우팅"
+          },
+          {
+            "name": "RIP",
+            "type": "동적 라우팅 프로토콜"
+          },
+          {
+            "name": "루프백 인터페이스",
+            "type": "가상 인터페이스"
+          }
+        ],
+        "concepts": [
+          {
+            "name": "SVI",
+            "description": "VLAN에 IP 주소를 설정해 L3 스위치에서 VLAN 간 라우팅에 사용하는 인터페이스입니다.",
+            "type": {
+              "category": "네트워크",
+              "subtype": "가상 인터페이스"
+            }
+          },
+          {
+            "name": "Inter-VLAN 라우팅",
+            "description": "서로 다른 VLAN 사이에서 이루어지는 라우팅이며, 자료는 SVI를 이용하는 구성을 다룹니다.",
+            "type": {
+              "category": "네트워크",
+              "subtype": "라우팅"
+            }
+          },
+          {
+            "name": "루프백 인터페이스",
+            "description": "자료에서 가상의 장비를 추가하는 용도로 언급하며, 핑 테스트의 소스 IP로 사용합니다.",
+            "type": {
+              "category": "네트워크",
+              "subtype": "가상 인터페이스"
+            }
+          },
+          {
+            "name": "경로 재분배",
+            "description": "서로 다른 라우팅 프로토콜을 사용하는 네트워크 간에 경로 정보를 번역하고 공유하는 기능입니다.",
+            "type": {
+              "category": "네트워크",
+              "subtype": "라우팅 기능"
+            }
+          },
+          {
+            "name": "RIP",
+            "description": "자료에서 경로 재분배 대상 프로토콜로 사용되며, 정적 경로를 재분배하는 설정 예가 제시됩니다.",
+            "type": {
+              "category": "네트워크",
+              "subtype": "동적 라우팅 프로토콜"
+            }
+          },
+          {
+            "name": "정적 경로",
+            "description": "자료에서는 기본 경로와 특정 네트워크 경로를 설정한 뒤 RIP로 재분배하는 대상으로 다룹니다.",
+            "type": {
+              "category": "네트워크",
+              "subtype": "라우팅 경로"
+            }
+          },
+          {
+            "name": "트렁크 포트",
+            "description": "스위치 포트를 트렁크 모드로 설정하고 상태를 확인하도록 안내하는 예시다. 상태 확인 출력은 기록되어 있지 않다.",
+            "type": {
+              "category": "네트워크",
+              "subtype": "스위치 포트"
+            }
+          }
+        ],
+        "relationships": [
+          {
+            "from": "SVI",
+            "relation": "사용하여 구성",
+            "to": "Inter-VLAN 라우팅",
+            "description": "자료는 SVI를 이용한 Inter-VLAN 구성을 다룹니다."
+          },
+          {
+            "from": "정적 경로",
+            "relation": "RIP로 재분배",
+            "to": "RIP",
+            "description": "R1에서 정적 경로를 RIP로 재분배하는 설정이 제시됩니다."
+          }
+        ],
+        "theory": {
+          "definitions": [
+            {
+              "subject": "경로 재분배",
+              "content": "서로 다른 라우팅 프로토콜을 사용하는 네트워크 간에 경로 정보를 번역하고 공유하여 한쪽 프로토콜이 학습한 네트워크 정보를 다른 쪽 프로토콜로 전달하는 기능이라고 설명합니다.",
+              "evidence": "[경로 재분배]:서로 다른 라우팅 프로토콜(예: OSPF, EIGRP, RIP, BGP 등)을 사용하는 네트워크 간에 경로 정보를 번역하고 공유하여, 한쪽 프로토콜이 학습한 네트워크 정보를 다른 쪽 프로토콜로 전달하는 기능입니다."
+            }
+          ],
+          "principles": [
+            {
+              "subject": "RIP 정적 경로 재분배",
+              "content": "자료에서는 RIP에 정적 경로를 재분배할 때 메트릭을 10으로 지정하는 설정 예를 제시합니다.",
+              "evidence": "redistribute static metric 10 #RIP의 메트릭값을 10으로 재분배",
+              "related_concepts": [
+                "정적 경로",
+                "RIP"
+              ]
+            },
+            {
+              "subject": "경로 재분배의 적용 구간",
+              "content": "자료에서는 경로 재분배를 동적 라우팅 프로토콜로 연결된 구간에서 사용하며, 정적으로 연결된 라우터 간에는 사용하지 않는다고 설명합니다.",
+              "evidence": "***경로 재분배는 동적 라우팅 프로토콜로 연결된 구간에서 사용가능.\n-정적으로 연결된 라우터간에는 사용안함",
+              "related_concepts": [
+                "경로 재분배",
+                "RIP",
+                "정적 경로"
+              ]
+            },
+            {
+              "subject": "루프백 주소를 소스로 지정한 핑",
+              "content": "자료에서는 루프백 인터페이스를 가상 장비로 추가한 경우 확장 핑에 소스 IP를 기입해야 한다고 설명합니다. 예시 명령만 제시되어 있어 핑 성공 여부는 확인되지 않습니다.",
+              "evidence": "루프백 인터페이스로 가상의 장비를 추가했을때 핑테스트는\nR1#ping 192.168.10.1 source 192.168.30.1\n확장핑으로 소스 아이피를 기입해야된다.",
+              "related_concepts": [
+                "루프백 인터페이스"
+              ]
+            }
+          ]
+        },
+        "practice": [
+          {
+            "title": "L3 스위치의 SVI 및 트렁크 구성 확인",
+            "description": "스위치 포트를 VLAN에 할당하고 트렁크를 설정한 뒤, trunk 상태와 VLAN 인터페이스의 IP 및 활성화 여부를 확인하도록 안내합니다. 결과 출력은 기재되지 않았습니다.",
+            "evidence": "aSw1\nconf t\nint fa1/1\nsw mode acc\nsw acc vlan 10\nint fa1/2\nsw mo acc\nsw acc vlan 20\nint fa1/15\nsw mo tr\n\nsh vlan-switch\n\n ASW2\nconf t\nint fa1/1\nsw mode acc\nsw acc vlan 10\nint fa1/2\nsw mo acc\nsw acc vlan 20\nint range fa1/14 - 15\nsw mo tr\n\nconf t\nip routing\nvlan 10\nint vlan 10\nip addr 192.168.10.254 255.255.255.0\nvlan 20\nint vlan 20\nip addr 192.168.20.254 255.255.255.0\nin fa1/14\nsw mo tr\n\n설정 후 2가지 확인\n1. sh int trunk : fa0/14포트가 trunk로 지정되어 있는지, 캡슐화 프로토콜은 무엇인지 확인\n2. sh ip int b : vlan 10, vlan 20에 할당된 IP 및 SVI 활성화 여부 확인",
+            "related_concepts": [
+              "SVI",
+              "Inter-VLAN 라우팅",
+              "트렁크 포트"
+            ]
+          },
+          {
+            "title": "루프백 인터페이스를 소스로 지정한 핑 테스트",
+            "description": "루프백 주소를 소스 IP로 지정해 핑을 실행하는 명령 예가 있습니다. 핑 결과는 원문에 제시되지 않아 성공 여부를 확인할 수 없습니다.",
+            "evidence": "R1#ping 192.168.10.1 source 192.168.30.1",
+            "related_concepts": [
+              "루프백 인터페이스"
+            ]
+          },
+          {
+            "title": "RIP 정적 경로 재분배 설정 및 라우팅 테이블 확인",
+            "description": "R1에서 정적 경로를 RIP로 재분배하는 명령을 제시합니다. 이어서 학습되지 않은 ESW3의 라우팅 테이블에 192.168.40.0/24 경로가 표시된 관찰 기록이 있으며, 이 기록의 설정과 장비 간 연결 원인은 별도로 확정하지 않습니다.",
+            "evidence": "R1\nrouter rip\nredistribute static metric 10 #RIP의 메트릭값을 10으로 재분배\n#redistribute connected  #직접 연결된 네트워크 재분배\n\n 설정 하면  \n\n학습이 되지 않은 ESW3\n\nR    192.168.40.0/24 [120/10] via 172.16.12.2, 00:00:21, FastEthernet1/1\n     172.16.0.0/30 is subnetted, 1 subnets\n\n라우팅 테이블에 위와 같이 나온다.",
+            "related_concepts": [
+              "경로 재분배",
+              "RIP",
+              "정적 경로"
+            ]
+          }
+        ],
+        "schema_version": "0.2-draft",
+        "sections": [
+          {
+            "id": "svi-trunks",
+            "title": "SVI와 트렁크 구성",
+            "content_refs": [
+              "/concepts/0",
+              "/concepts/1",
+              "/concepts/6",
+              "/relationships/0",
+              "/practice/0"
+            ]
+          },
+          {
+            "id": "loopback-ping",
+            "title": "루프백 주소를 소스로 지정한 핑",
+            "content_refs": [
+              "/concepts/2",
+              "/theory/principles/2",
+              "/practice/1"
+            ],
+            "comment": {
+              "kind": "correction",
+              "text": "특정 루프백에서 출발하는 통신을 시험할 때 소스 주소를 지정하는 것이며, 루프백이 있다는 이유만으로 모든 핑에 소스 지정이 필수인 것은 아니다.",
+              "reference_ids": [
+                "cisco-extended-ping"
+              ]
+            }
+          },
+          {
+            "id": "static-redistribution",
+            "title": "정적 경로의 RIP 재분배",
+            "content_refs": [
+              "/concepts/3",
+              "/concepts/4",
+              "/concepts/5",
+              "/relationships/1",
+              "/theory/definitions/0",
+              "/theory/principles/0",
+              "/theory/principles/1",
+              "/practice/2"
+            ],
+            "comment": {
+              "kind": "correction",
+              "text": "정적 경로도 redistribute static으로 동적 라우팅 프로토콜에 주입할 수 있으므로 정적 경로는 재분배하지 않는다고 일반화하면 안 된다.",
+              "reference_ids": [
+                "cisco-redistribution"
+              ]
+            }
+          }
+        ],
+        "source": {
+          "material_id": "bc311d69fc2366ebe3ae69a6b0b4627fd79e437b96c97241398ba20313aacf4d",
+          "filename": "20일차 경로재분배,루프백가상장비설정.txt",
+          "extension": ".txt"
+        },
+        "references": [
+          {
+            "id": "cisco-extended-ping",
+            "title": "Cisco — Understand the Extended Ping and Extended Traceroute Commands",
+            "url": "https://www.cisco.com/c/en/us/support/docs/ip/routing-information-protocol-rip/13730-ext-ping-trace.html",
+            "verification_status": "source_checked",
+            "checked_on": "2026-10-15"
+          },
+          {
+            "id": "cisco-redistribution",
+            "title": "Cisco — Configure Routing Protocol Redistribution",
+            "url": "https://www.cisco.com/c/en/us/support/docs/ip/enhanced-interior-gateway-routing-protocol-eigrp/8606-redist.html",
+            "verification_status": "source_checked",
+            "checked_on": "2026-10-15"
+          }
+        ]
+      },
+      "base_analysis_digest": "62b7bab823f5050db2e79afe8e45bc66b6130b8f2dae9855d2e2b42676a7e762",
+      "content_edits": [],
+      "input_digest": "49cb99bc505c746d4f48f50b9a46e86c15d3262f483b9e3762ee87465000fd2b",
+      "classification": {
+        "paths": [
+          [
+            "NETWORK",
+            "2. 네트워크 접속",
+            "VLAN과 VLAN 간 연결"
+          ],
+          [
+            "NETWORK",
+            "3. IP 라우팅",
+            "라우팅 테이블과 경로 선택"
+          ],
+          [
+            "NETWORK",
+            "1. 네트워크 기초",
+            "통신과 IP 주소"
+          ],
+          [
+            "NETWORK",
+            "3. IP 라우팅",
+            "정적·기본·플로팅 경로"
+          ],
+          [
+            "NETWORK",
+            "3. IP 라우팅",
+            "라우팅 방식과 RIP"
+          ],
+          [
+            "NETWORK",
+            "3. IP 라우팅",
+            "경로 재분배 실습"
+          ],
+          [
+            "NETWORK",
+            "2. 네트워크 접속",
+            "트렁크·802.1Q·네이티브 VLAN"
+          ]
+        ],
+        "reasons": [
+          {
+            "path": [
+              "NETWORK",
+              "2. 네트워크 접속",
+              "VLAN과 VLAN 간 연결"
+            ],
+            "source": "analysis.topics -> pinned curriculum map",
+            "matched_topic": "L3 스위치 라우팅 / SVI를 이용한 Inter-VLAN",
+            "curriculum_code": "2.1",
+            "scope": "core"
+          },
+          {
+            "path": [
+              "NETWORK",
+              "3. IP 라우팅",
+              "라우팅 테이블과 경로 선택"
+            ],
+            "source": "analysis.topics -> pinned curriculum map",
+            "matched_topic": "L3 스위치 라우팅 / SVI를 이용한 Inter-VLAN",
+            "curriculum_code": "3.1–3.2",
+            "scope": "core"
+          },
+          {
+            "path": [
+              "NETWORK",
+              "1. 네트워크 기초",
+              "통신과 IP 주소"
+            ],
+            "source": "analysis.topics -> pinned curriculum map",
+            "matched_topic": "루프백 주소를 소스로 지정한 핑",
+            "curriculum_code": "1.5–1.10",
+            "scope": "core"
+          },
+          {
+            "path": [
+              "NETWORK",
+              "3. IP 라우팅",
+              "정적·기본·플로팅 경로"
+            ],
+            "source": "analysis.topics -> pinned curriculum map",
+            "matched_topic": "경로 재분배 / RIP 정적 경로 재분배",
+            "curriculum_code": "3.3",
+            "scope": "core"
+          },
+          {
+            "path": [
+              "NETWORK",
+              "3. IP 라우팅",
+              "라우팅 방식과 RIP"
+            ],
+            "source": "analysis.topics -> pinned curriculum map",
+            "matched_topic": "경로 재분배 / RIP 정적 경로 재분배",
+            "curriculum_code": "보충",
+            "scope": "extension"
+          },
+          {
+            "path": [
+              "NETWORK",
+              "3. IP 라우팅",
+              "경로 재분배 실습"
+            ],
+            "source": "analysis.topics -> pinned curriculum map",
+            "matched_topic": "경로 재분배 / RIP 정적 경로 재분배",
+            "curriculum_code": "보충",
+            "scope": "extension"
+          },
+          {
+            "path": [
+              "NETWORK",
+              "2. 네트워크 접속",
+              "트렁크·802.1Q·네이티브 VLAN"
+            ],
+            "source": "analysis.concepts.name -> pinned curriculum map",
+            "matched_topic": "트렁크 포트",
+            "curriculum_code": "2.2",
+            "scope": "core"
+          }
+        ],
+        "unclassified_topics": [],
+        "scope_confirmed": true,
+        "curriculum_id": "cisco-ccna-200-301-v1.1-project-map"
+      },
+      "policy_digest": "7ceed7c43848e31bc63f3dbea135d1d925a39d52d72cc815209cc6ddad5b17ec",
+      "holds": [],
+      "status": "approved",
+      "note": "",
+      "origin": "C:\\Users\\ICT\\Desktop\\Aigit\\gptgit\\Project-StudyAutomanage\\output\\v0.2_representative_quality_review\\20_day\\analysis.json",
+      "revision": 7,
+      "approved_snapshot": "55f1c4355f725b6352acd8d71ca1905f4b291dd7a5d3b0c1b2cbcaa6df8be654",
+      "updated_at": "2026-10-16T03:19:16.021071+00:00",
+      "snapshot": "55f1c4355f725b6352acd8d71ca1905f4b291dd7a5d3b0c1b2cbcaa6df8be654",
+      "locations": [
+        "C:\\Users\\ICT\\Desktop\\Aigit\\gptgit\\Project-StudyAutomanage\\study\\sourcefile\\20일차 경로재분배,루프백가상장비설정.txt"
+      ],
+      "current": true
+    },
+    {
+      "id": "acc194f4b63fceab8eb484dd97368a0f931a49fc93aaf18dab8a592e201b7526",
+      "analysis": {
+        "material_type": {
+          "material_type": "개념",
+          "confidence": 0.91,
+          "reason": "IGP와 RIP의 유형·특징 설명 및 RIPv1과 RIPv2의 비교가 중심입니다. 명령어가 하나 포함되어 있지만 설정 수행 절차나 확인 과제는 없습니다."
+        },
+        "summary": "IGP의 라우팅 방식과 RIP의 동작, RIPv1·RIPv2의 차이를 설명하며 일부 항목은 질문이나 메모 형태로 미완성입니다.",
+        "topics": [
+          {
+            "name": "동적 라우팅",
+            "children": [
+              {
+                "name": "IGP",
+                "children": [
+                  {
+                    "name": "Distance vector"
+                  },
+                  {
+                    "name": "Link state"
+                  },
+                  {
+                    "name": "Hybrid"
+                  }
+                ]
+              },
+              {
+                "name": "EGP"
+              },
+              {
+                "name": "RIP",
+                "children": [
+                  {
+                    "name": "RIPv1"
+                  },
+                  {
+                    "name": "RIPv2"
+                  }
+                ]
+              }
+            ]
+          }
+        ],
+        "keywords": [
+          {
+            "name": "IGP",
+            "type": "라우팅 프로토콜 분류"
+          },
+          {
+            "name": "EGP",
+            "type": "라우팅 프로토콜 분류"
+          },
+          {
+            "name": "RIP",
+            "type": "라우팅 프로토콜"
+          },
+          {
+            "name": "OSPF",
+            "type": "Link state 프로토콜"
+          },
+          {
+            "name": "IS-IS",
+            "type": "Link state 프로토콜"
+          },
+          {
+            "name": "IGRP",
+            "type": "Distance vector 프로토콜"
+          },
+          {
+            "name": "EIGRP",
+            "type": "Hybrid 프로토콜"
+          },
+          {
+            "name": "VLSM",
+            "type": "서브넷 마스크"
+          },
+          {
+            "name": "UDP 520",
+            "type": "포트"
+          },
+          {
+            "name": "Hello packet",
+            "type": "이웃 라우터 모니터링"
+          }
+        ],
+        "concepts": [
+          {
+            "name": "동적 라우팅",
+            "description": "자료에서 IGP와 EGP를 구분하고, IGP의 라우팅 방식과 RIP를 설명하는 주제입니다.",
+            "type": {
+              "category": "네트워크",
+              "subtype": "라우팅"
+            }
+          },
+          {
+            "name": "IGP",
+            "description": "자료에서 내부 게이트웨이 프로토콜로 제시하며, Distance vector·Link state·Hybrid 유형을 설명합니다.",
+            "type": {
+              "category": "네트워크",
+              "subtype": "라우팅 프로토콜 분류"
+            }
+          },
+          {
+            "name": "EGP",
+            "description": "자료에서 외부 게이트웨이 프로토콜로 제시하며, 추가 설명은 없습니다.",
+            "type": {
+              "category": "네트워크",
+              "subtype": "라우팅 프로토콜 분류"
+            }
+          },
+          {
+            "name": "Distance vector",
+            "description": "자료에서 RIP와 IGRP를 예로 들고, 주기적으로 라우팅 테이블 정보를 교환하는 방식으로 설명합니다.",
+            "type": {
+              "category": "네트워크",
+              "subtype": "라우팅 방식"
+            }
+          },
+          {
+            "name": "Link state",
+            "description": "자료에서 OSPF와 IS-IS를 예로 들며, 상태 변화 시 정보를 교환하고 평상시 이웃 라우터를 모니터링하는 방식으로 설명합니다.",
+            "type": {
+              "category": "네트워크",
+              "subtype": "라우팅 방식"
+            }
+          },
+          {
+            "name": "Hybrid",
+            "description": "자료에서 EIGRP를 예로 들며 IGRP 기반 비용 계산과 Link state 방식의 상태 모니터링·변화 업데이트를 결합한 것으로 설명합니다.",
+            "type": {
+              "category": "네트워크",
+              "subtype": "라우팅 방식"
+            }
+          },
+          {
+            "name": "RIP",
+            "description": "자료에서 UDP 520을 사용하고 30초 주기로 라우팅 테이블 정보를 교환하는 프로토콜로 설명합니다.",
+            "type": {
+              "category": "네트워크",
+              "subtype": "라우팅 프로토콜"
+            }
+          },
+          {
+            "name": "RIPv1",
+            "description": "자료에서 classful 방식으로 서브넷 범위를 보지 않고 VLSM을 지원하지 않는 RIP 버전으로 설명합니다.",
+            "type": {
+              "category": "네트워크",
+              "subtype": "라우팅 프로토콜 버전"
+            }
+          },
+          {
+            "name": "RIPv2",
+            "description": "원문에 classless와 VLSM 지원이 표기되어 있으나, 서브넷 범위에 대한 문장은 미완성이다.",
+            "type": {
+              "category": "네트워크",
+              "subtype": "라우팅 프로토콜 버전"
+            }
+          },
+          {
+            "name": "VLSM",
+            "description": "자료에서 가변길이 서브넷 마스크라고 풀이하며 RIPv1은 지원하지 않고 RIPv2는 지원한다고 설명합니다.",
+            "type": {
+              "category": "네트워크",
+              "subtype": "서브넷 마스크"
+            }
+          },
+          {
+            "name": "라우팅 테이블 정보 교환",
+            "description": "자료에서 Distance vector의 주기적 정보 교환과 RIP의 30초 주기 정보 교환을 설명합니다.",
+            "type": {
+              "category": "네트워크",
+              "subtype": "라우팅 동작"
+            }
+          },
+          {
+            "name": "Hello packet",
+            "description": "자료에서 Link state 방식이 평상시 이웃 라우터를 모니터링할 때 사용하는 것으로 설명합니다.",
+            "type": {
+              "category": "네트워크",
+              "subtype": "이웃 모니터링"
+            }
+          },
+          {
+            "name": "no ip domain lookup",
+            "description": "자료에 단독으로 적힌 명령어이며 용도나 수행 절차는 설명되지 않습니다.",
+            "type": {
+              "category": "네트워크",
+              "subtype": "명령어"
+            }
+          }
+        ],
+        "relationships": [
+          {
+            "from": "IGP",
+            "relation": "유형으로 제시됨",
+            "to": "Distance vector",
+            "description": "자료에서 IGP 아래에 Distance vector를 제시합니다."
+          },
+          {
+            "from": "IGP",
+            "relation": "유형으로 제시됨",
+            "to": "Link state",
+            "description": "자료에서 IGP 아래에 Link state를 제시합니다."
+          },
+          {
+            "from": "IGP",
+            "relation": "유형으로 제시됨",
+            "to": "Hybrid",
+            "description": "자료에서 IGP 아래에 Hybrid를 제시합니다."
+          },
+          {
+            "from": "Distance vector",
+            "relation": "예시로 포함",
+            "to": "RIP",
+            "description": "자료에서 Distance vector의 예로 RIP를 제시합니다."
+          },
+          {
+            "from": "RIP",
+            "relation": "버전으로 구분됨",
+            "to": "RIPv1"
+          },
+          {
+            "from": "RIP",
+            "relation": "버전으로 구분됨",
+            "to": "RIPv2"
+          },
+          {
+            "from": "RIPv1",
+            "relation": "지원하지 않음",
+            "to": "VLSM",
+            "description": "자료에서 RIPv1은 VLSM을 지원하지 않는다고 설명합니다."
+          },
+          {
+            "from": "RIPv2",
+            "relation": "지원함",
+            "to": "VLSM",
+            "description": "자료에서 RIPv2는 VLSM을 지원한다고 설명합니다."
+          }
+        ],
+        "theory": {
+          "definitions": [
+            {
+              "subject": "IGP",
+              "content": "자료에서 IGP를 내부 게이트웨이 프로토콜로 풀이합니다.",
+              "evidence": "IGP 내부게이트웨이 프로토콜"
+            },
+            {
+              "subject": "EGP",
+              "content": "자료에서 EGP를 외부 게이트웨이 프로토콜로 풀이합니다.",
+              "evidence": "EGP 외부 게이트웨이 프로토콜"
+            }
+          ],
+          "principles": [
+            {
+              "subject": "Distance vector",
+              "content": "자료에서는 RIP와 IGRP를 Distance vector의 예로 들고, 라우팅 테이블 정보를 주기적으로 교환하는 레거시 기술로 설명합니다.",
+              "evidence": "distance vector : RIP[Metric(계산방식?):홉수기준 MAX 15]IGRP\n\t=> 주기적 정보(라우팅테이블) 교환 레거시 기술",
+              "related_concepts": [
+                "Distance vector",
+                "RIP"
+              ]
+            },
+            {
+              "subject": "Link state",
+              "content": "자료에서는 상태 변화 시 정보를 교환하고 평상시에는 Hello packet으로 이웃 라우터를 모니터링하며, 40초 동안 응답이 없으면 테이블에서 삭제한다고 설명합니다.",
+              "evidence": "link state OSPF[대역폭], IS-IS Metric 구성요소는 무엇인가?\n\t=> 상태 변화시 정보 교환, 평상시 주기적으로 이웃 라우터를 모니터링(Hello packet을 이용 40초동안 응답이 없으면 테이블 삭제)",
+              "related_concepts": [
+                "Link state",
+                "Hello packet"
+              ]
+            },
+            {
+              "subject": "Hybrid",
+              "content": "자료에서는 EIGRP의 비용 계산이 IGRP를 기반으로 하며, 상태 모니터링과 네트워크 변화 시 업데이트는 Link state 방식을 사용한다고 설명합니다.",
+              "evidence": "hybrid: EIGRP \n\t=> 비용계산은 IGRP를 기반으로하고 상태 모니터링 및 네트워크 변화시 업데이트는 link state 방식을 사용",
+              "related_concepts": [
+                "Hybrid"
+              ]
+            },
+            {
+              "subject": "RIP",
+              "content": "자료에서는 RIP가 UDP 520을 사용해 30초 주기로 라우팅 테이블 정보를 교환한다고 설명합니다.",
+              "evidence": "RIP \nUDP520\n30초 주기로 정보교환(라우팅 테이블 정보)",
+              "related_concepts": [
+                "RIP",
+                "라우팅 테이블 정보 교환"
+              ]
+            },
+            {
+              "subject": "RIPv1 브로드캐스트",
+              "content": "자료에서는 RIPv1으로 설정된 라우터끼리 주기적으로 보내는 신호의 목적지 IP가 255.255.255.255인 브로드캐스트라고 관찰 내용을 서술합니다.",
+              "evidence": "실제로 와이어샤크에서 ripv1으로 설정된 라우터끼리 신호를 주고 받을때 udp 520포트로 주기적으로 날리는 신호의 데스티네이션 ip 값은 255.255.255.255 브로드케스트 신호이다.",
+              "related_concepts": [
+                "RIPv1",
+                "RIP"
+              ]
+            }
+          ],
+          "comparisons": [
+            {
+              "subject_a": "RIPv1",
+              "subject_b": "RIPv2",
+              "criteria": [
+                "주소 지정 방식(classful/classless 표기)",
+                "VLSM 지원"
+              ],
+              "evidence": "RIPv1\n\tclassful => 서브넷 범위를 보지않음 서브넷 범위를 지정한 네트워크이면 쓸대없이 데이터가 가는 현상이 생길수 있다. *보통 A B C D.. 클래스만 구분함\n\t172.16.1.0/24 -> 172.16.0.0/16 형태로 가버리는게 v1에 대표적인 현상인데 이렇게 되면 받은 쪽에서는 테이블 길이가 길어짐\n\t테이블 길이가 길어지면 룩업시간이 길어짐\n\tVLSM 가변길이 서브넷 마스크 지원안함\t\n\t라우트는 브로드케스트 신호를 드랍하지만 예외적으로 ripv1은 허용함 실제로 와이어샤크에서 ripv1으로 설정된 라우터끼리 신호를 주고 받을때 udp 520포트로 주기적으로 날리는 신호의 데스티네이션 ip 값은 255.255.255.255 브로드케스트 신호이다.\nRIPv2\n\tclassless => 서브넷 범위를 \n\tVLSM 가변길이 서브넷 마스크 지원",
+              "related_concepts": [
+                "RIPv1",
+                "RIPv2",
+                "VLSM"
+              ]
+            }
+          ]
+        },
+        "schema_version": "0.2-draft",
+        "sections": [
+          {
+            "id": "routing-families",
+            "title": "동적 라우팅과 IGP·EGP 분류",
+            "content_refs": [
+              "/concepts/0",
+              "/concepts/1",
+              "/concepts/2",
+              "/concepts/3",
+              "/concepts/5",
+              "/relationships/0",
+              "/relationships/2",
+              "/relationships/3",
+              "/theory/definitions/0",
+              "/theory/definitions/1",
+              "/theory/principles/0",
+              "/theory/principles/2"
+            ],
+            "comment": {
+              "kind": "correction",
+              "text": "EIGRP는 링크상태 프로토콜이 아니라 거리 벡터 기반의 DUAL을 사용하는 프로토콜이다.",
+              "reference_ids": [
+                "rfc7868"
+              ]
+            }
+          },
+          {
+            "id": "linkstate-neighbors",
+            "title": "링크상태 방식과 이웃 확인",
+            "content_refs": [
+              "/concepts/4",
+              "/concepts/11",
+              "/relationships/1",
+              "/theory/principles/1"
+            ],
+            "comment": {
+              "kind": "correction",
+              "text": "원문의 40초는 링크상태 프로토콜 공통값이 아니며, OSPF의 이웃 Down 판정은 인터페이스 Dead Interval 설정에 따른다.",
+              "reference_ids": [
+                "cisco-ospf-dead"
+              ]
+            }
+          },
+          {
+            "id": "rip-versions",
+            "title": "RIP 동작과 RIPv1·RIPv2 비교",
+            "content_refs": [
+              "/concepts/6",
+              "/concepts/7",
+              "/concepts/8",
+              "/concepts/9",
+              "/concepts/10",
+              "/relationships/4",
+              "/relationships/5",
+              "/relationships/6",
+              "/relationships/7",
+              "/theory/principles/3",
+              "/theory/principles/4",
+              "/theory/comparisons/0"
+            ]
+          },
+          {
+            "id": "cli-memo",
+            "title": "별도로 적힌 명령 메모",
+            "content_refs": [
+              "/concepts/12"
+            ]
+          }
+        ],
+        "source": {
+          "material_id": "5520ea4cfcab84de60fba38f45a7c0f5d68173bf9c58f525630414acfc5f0efc",
+          "filename": "15일차 Dynamic routing_IGP.txt",
+          "extension": ".txt"
+        },
+        "references": [
+          {
+            "id": "rfc7868",
+            "title": "RFC 7868 — EIGRP architecture",
+            "url": "https://www.rfc-editor.org/rfc/rfc7868.html",
+            "verification_status": "source_checked",
+            "checked_on": "2026-10-15"
+          },
+          {
+            "id": "cisco-ospf-dead",
+            "title": "Cisco IOS OSPF Command Reference — ip ospf dead-interval",
+            "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/iproute_ospf/command/iro-cr-book/m_ospf-a1.html",
+            "verification_status": "source_checked",
+            "checked_on": "2026-10-15"
+          }
+        ]
+      },
+      "base_analysis_digest": "9fe77ac74de3ee61bbafbcdb604aae039820df6cdfa4e023a90d6d8071034cf2",
+      "content_edits": [],
+      "input_digest": "d2e3c7ae20b550c29a5f92a7fe955d9fb301a33b61009505be1bfec7dc2cb42e",
+      "classification": {
+        "paths": [
+          [
+            "NETWORK",
+            "3. IP 라우팅",
+            "라우팅 테이블과 경로 선택"
+          ],
+          [
+            "NETWORK",
+            "3. IP 라우팅",
+            "라우팅 방식과 RIP"
+          ],
+          [
+            "NETWORK",
+            "1. 네트워크 기초",
+            "통신과 IP 주소"
+          ],
+          [
+            "NETWORK",
+            "4. IP 서비스",
+            "주소·이름·시간·운영 서비스"
+          ]
+        ],
+        "reasons": [
+          {
+            "path": [
+              "NETWORK",
+              "3. IP 라우팅",
+              "라우팅 테이블과 경로 선택"
+            ],
+            "source": "analysis.topics -> pinned curriculum map",
+            "matched_topic": "동적 라우팅 / IGP / Distance vector",
+            "curriculum_code": "3.1–3.2",
+            "scope": "core"
+          },
+          {
+            "path": [
+              "NETWORK",
+              "3. IP 라우팅",
+              "라우팅 방식과 RIP"
+            ],
+            "source": "analysis.topics -> pinned curriculum map",
+            "matched_topic": "동적 라우팅 / IGP / Distance vector",
+            "curriculum_code": "보충",
+            "scope": "extension"
+          },
+          {
+            "path": [
+              "NETWORK",
+              "1. 네트워크 기초",
+              "통신과 IP 주소"
+            ],
+            "source": "analysis.concepts.name -> pinned curriculum map",
+            "matched_topic": "VLSM",
+            "curriculum_code": "1.5–1.10",
+            "scope": "core"
+          },
+          {
+            "path": [
+              "NETWORK",
+              "4. IP 서비스",
+              "주소·이름·시간·운영 서비스"
+            ],
+            "source": "analysis.concepts.name -> pinned curriculum map",
+            "matched_topic": "no ip domain lookup",
+            "curriculum_code": "4.1–4.6",
+            "scope": "core"
+          }
+        ],
+        "unclassified_topics": [],
+        "scope_confirmed": true,
+        "curriculum_id": "cisco-ccna-200-301-v1.1-project-map"
+      },
+      "policy_digest": "7ceed7c43848e31bc63f3dbea135d1d925a39d52d72cc815209cc6ddad5b17ec",
+      "holds": [],
+      "status": "approved",
+      "note": "",
+      "origin": "C:\\Users\\ICT\\Desktop\\Aigit\\gptgit\\Project-StudyAutomanage\\output\\v0.2_representative_quality_review\\15_day\\analysis.json",
+      "revision": 8,
+      "approved_snapshot": "e454a04191f6bfc9e2b3fcef62d43146e8e52457ef3c39a995ffd477a25f2a13",
+      "updated_at": "2026-10-16T03:19:19.034150+00:00",
+      "snapshot": "e454a04191f6bfc9e2b3fcef62d43146e8e52457ef3c39a995ffd477a25f2a13",
+      "locations": [
+        "C:\\Users\\ICT\\Desktop\\Aigit\\gptgit\\Project-StudyAutomanage\\study\\sourcefile\\15일차 Dynamic routing_IGP.txt"
+      ],
+      "current": true
+    },
+    {
+      "id": "f3bb8b2cc0e14e125f71322253dd586df819d2fd4dfb2c6bec375778f980b187",
+      "analysis": {
+        "material_type": {
+          "material_type": "실습",
+          "confidence": 0.86,
+          "reason": "VLAN, 스위치 포트, 라우터 서브인터페이스, 스패닝 트리 및 EtherChannel을 설정하는 명령 예시가 중심입니다. 관련 개념 메모도 포함되며, 설정 성공 여부나 실행 결과는 제시되지 않습니다."
+        },
+        "summary": "VLAN과 스위치 포트, 라우터 서브인터페이스, native VLAN, VTP, 스패닝 트리 및 EtherChannel 설정 명령을 모은 실습 메모입니다.",
+        "topics": [
+          {
+            "name": "VLAN 및 스위치 포트 설정",
+            "children": [
+              {
+                "name": "액세스 포트와 트렁크 포트"
+              },
+              {
+                "name": "라우터 서브인터페이스와 802.1Q"
+              },
+              {
+                "name": "Native VLAN"
+              },
+              {
+                "name": "VTP"
+              }
+            ]
+          },
+          {
+            "name": "스패닝 트리"
+          },
+          {
+            "name": "EtherChannel"
+          }
+        ],
+        "keywords": [
+          {
+            "name": "VLAN",
+            "type": "네트워크 분할"
+          },
+          {
+            "name": "access port",
+            "type": "스위치 포트 설정"
+          },
+          {
+            "name": "trunk port",
+            "type": "스위치 포트 설정"
+          },
+          {
+            "name": "802.1Q",
+            "type": "태그 설정"
+          },
+          {
+            "name": "native VLAN",
+            "type": "트렁크 설정"
+          },
+          {
+            "name": "VTP",
+            "type": "VLAN DB 동기화"
+          },
+          {
+            "name": "Rapid PVST",
+            "type": "스패닝 트리"
+          },
+          {
+            "name": "PortFast",
+            "type": "스패닝 트리"
+          },
+          {
+            "name": "LACP",
+            "type": "EtherChannel 협상 방식"
+          },
+          {
+            "name": "PAgP",
+            "type": "EtherChannel 협상 방식"
+          }
+        ],
+        "concepts": [
+          {
+            "name": "VLAN",
+            "description": "메모에서는 VLAN 10, 20, 30을 생성하고 스위치 액세스 포트를 VLAN 10 또는 20에 할당하는 명령을 제시합니다.",
+            "type": {
+              "category": "네트워크",
+              "subtype": "논리적 네트워크"
+            }
+          },
+          {
+            "name": "액세스 포트",
+            "description": "`switchport mode access`와 `switchport access vlan` 축약 명령으로 포트를 액세스 모드로 지정하고 VLAN 10 또는 20에 할당하는 설정 예시가 있습니다.",
+            "type": {
+              "category": "스위치",
+              "subtype": "포트 모드"
+            }
+          },
+          {
+            "name": "트렁크 포트",
+            "description": "인터페이스에 `switchport mode trunk` 축약 명령을 적용하는 설정 예시가 있습니다. 일부 포트에는 native VLAN을 10으로 지정합니다.",
+            "type": {
+              "category": "스위치",
+              "subtype": "포트 모드"
+            }
+          },
+          {
+            "name": "라우터 서브인터페이스와 802.1Q",
+            "description": "라우터 Fa0/0의 서브인터페이스 Fa0/0.10, .20, .30에 VLAN 번호를 지정하는 `encapsulation dot1q` 설정과 각각의 IPv4 주소가 제시됩니다. 앞선 예시에는 불완전하거나 다른 형태로 적힌 `encap dot` 명령도 있습니다.",
+            "type": {
+              "category": "라우팅",
+              "subtype": "서브인터페이스"
+            }
+          },
+          {
+            "name": "Native VLAN",
+            "description": "스위치 트렁크 인터페이스에 native VLAN 10을 지정하는 예시와 라우터 서브인터페이스에서 `encapsulation dot1q 10 native`를 사용하는 예시가 있습니다.",
+            "type": {
+              "category": "스위치 설정",
+              "subtype": "트렁크 VLAN"
+            }
+          },
+          {
+            "name": "VTP",
+            "description": "VTP domain과 password를 지정하는 명령이 제시되며, 메모는 VTP를 VLAN DB 동기화로 설명합니다. ‘최대’ 뒤의 내용은 미완성입니다.",
+            "type": {
+              "category": "스위치 관리",
+              "subtype": "VLAN 정보 동기화"
+            }
+          },
+          {
+            "name": "스패닝 트리 설정",
+            "description": "SW1~3 공통 설정 메모에 `spanning-tree portfast default`와 `spanning-tree mode rapid-pvst` 명령이 있습니다.",
+            "type": {
+              "category": "스위치",
+              "subtype": "스패닝 트리 설정"
+            }
+          },
+          {
+            "name": "EtherChannel",
+            "description": "인터페이스 범위에 `channel-group`을 적용하는 예시가 있습니다. mode 값으로 auto, desirable의 축약형, active, passive, on이 기록되어 있고, 별도 메모에 LACP의 active/passive와 PAgP가 언급됩니다.",
+            "type": {
+              "category": "스위치",
+              "subtype": "링크 집성"
+            }
+          }
+        ],
+        "relationships": [
+          {
+            "from": "액세스 포트",
+            "relation": "VLAN에 할당하는 설정이 제시됨",
+            "to": "VLAN",
+            "description": "인터페이스에 액세스 모드를 지정한 뒤 VLAN 10 또는 20을 할당하는 명령이 이어집니다."
+          }
+        ],
+        "theory": {
+          "principles": [
+            {
+              "subject": "VTP에 관한 메모",
+              "content": "자료에서는 VTP를 VLAN DB 동기화라고 설명하고, domain과 password를 지정해 그 정보로 동기화한다고 적습니다. ‘최대’ 뒤의 메모는 완성되지 않았습니다.",
+              "evidence": "conf t\nvtp domain cisco\nvtp password 1234\n\nvtp는 vlan DB 동기화\ndomain, password 를 지정하고 그 정보로 동기화\n최대 ",
+              "related_concepts": [
+                "VTP"
+              ]
+            },
+            {
+              "subject": "VLAN별 라우터 서브인터페이스 설정 예시",
+              "content": "Fa0/0을 활성화하고 Fa0/0.10, .20, .30 서브인터페이스에 각각 `encapsulation dot1q` VLAN 번호 10, 20, 30과 192.168.10.254/24, 192.168.20.254/24, 192.168.30.254/24 주소를 지정하는 명령이 있습니다. 이는 설정 예시이며 실행 결과는 기록되어 있지 않습니다.",
+              "evidence": "en\nconf t\nint fa0/0\nno sh\nint fa0/0.10\nencap dot1q 10\nip addr 192.168.10.254 255.255.255.0\nint fa0/0.20\nencap dot1q 20\nip addr 192.168.20.254 255.255.255.0\nint fa0/0.30\nencap dot1q 30\nip addr 192.168.30.254 255.255.255.0",
+              "related_concepts": [
+                "라우터 서브인터페이스와 802.1Q"
+              ]
+            }
+          ]
+        },
+        "practice": [
+          {
+            "title": "VLAN 및 스위치 포트 설정 예시",
+            "description": "VLAN 10, 20, 30을 생성하고 Fa0/24·Fa0/23 또는 Fa0/24를 트렁크 모드로 지정하는 명령이 있습니다. Fa0/1과 Fa0/2에는 액세스 모드 및 VLAN 10과 20을 지정합니다. 여러 장비 설정으로 보이는 명령이 포함되지만 수행 결과는 확인되지 않습니다.",
+            "evidence": "conf t\nvlan 10\nexit\nvlan 20\nexit\nvlan 30\nexit\n\n\nint fa0/24\nsw mo tr\nint fa0/23\nsw mo tr\nint fa0/1\nsw mo acc\nsw acc vlan 10\nint fa0/2\nsw mo acc\nsw acc vlan 20\n\n\n\nconf t\nint fa0/24\nsw mo tr\nint fa0/1\nsw mo acc\nsw acc vlan 10\nint fa0/2\nsw mo acc\nsw acc vlan 20",
+            "related_concepts": [
+              "VLAN",
+              "액세스 포트",
+              "트렁크 포트"
+            ]
+          },
+          {
+            "title": "Native VLAN 설정 예시",
+            "description": "스위치 Fa0/24와 Fa0/23, 또는 Fa0/24에 native VLAN 10을 지정하는 명령과 라우터 Fa0/0.10에 `encapsulation dot1q 10 native`를 지정하는 예시가 있습니다. 설정 수행 및 동작 결과는 기록되어 있지 않습니다.",
+            "evidence": "-------------------------------------------\nint fa0/24\nswitchport trunk native vlan 10\nint fa0/23\nswitchport trunk native vlan 10\n\nint fa0/24\nswitchport trunk native vlan 10\n\n-------------------------------------\n\nconf t\nvtp domain cisco\nvtp password 1234\n\nvtp는 vlan DB 동기화\ndomain, password 를 지정하고 그 정보로 동기화\n최대 \n\nsw1\nint range fa0/23 - 24\nsw tr nati vlan 10\n\nsw\nint fa0/23\nsw tr nati vlan 10\n\nr1\nconf t\nint fa0/0.10\nencap dot1q 10 native",
+            "related_concepts": [
+              "Native VLAN",
+              "트렁크 포트",
+              "라우터 서브인터페이스와 802.1Q"
+            ]
+          },
+          {
+            "title": "스패닝 트리 및 액세스 포트 설정 예시",
+            "description": "SW1~3 공통 설정으로 PortFast 기본 설정과 Rapid PVST 모드를 지정하고, Fa0/1과 Fa0/2를 각각 VLAN 10과 20의 액세스 포트로 설정하는 명령이 있습니다. 실행 결과는 기록되어 있지 않습니다.",
+            "evidence": "SW1~3 공통설정\n\nen \nconf t\nspanning-tree portfast default\nspanning-tree mode rapid-pvst\n\nint fa0/1\nsw mo acc\nsw acc vlan 10\nint fa0/2\nsw mo acc\nsw acc vlan 20",
+            "related_concepts": [
+              "스패닝 트리 설정",
+              "액세스 포트",
+              "VLAN"
+            ]
+          },
+          {
+            "title": "EtherChannel 설정 예시",
+            "description": "SW1~3의 인터페이스 범위에 channel-group을 적용하며, 그룹별로 auto, desirable 축약형, active, passive 또는 on 모드를 지정하는 명령이 있습니다. 일부 포트 범위에는 트렁크 모드 명령도 포함됩니다. 장비 간 연결 성립이나 설정 성공 여부는 기록되어 있지 않습니다.",
+            "evidence": "sw1\nen\nconf t\nint fa0/1\nsw mo acc\nsw acc vlan 10\nint fa0/2\nsw mo acc\nsw acc vlan 20\nint range fa0/23-24\nsw mo tr\nchannel-group 1 mode auto\nint range fa0/21-22\nchannel-group 2 mode active\nsw mo tr\n\n\n\nsw2\nen\nconf t\nint fa0/1\nsw mo acc\nsw acc vlan 10\nint fa0/2\nsw mo acc\nsw acc vlan 20\nint range fa0/23-24\nsw mo tr\nchannel-group 1 mode desi\nint range fa0/19-20\nchannel-group 3 mode on\nsw mo tr\n\nsw3\nen\nconf t\nint fa0/1\nsw mo acc\nsw acc vlan 10\nint fa0/2\nsw mo acc\nsw acc vlan 20\nint range fa0/21-22\nsw mo tr\nchannel-group 2 mode passive\nint range fa0/19-20\nchannel-group 3 mode on\nsw mo tr",
+            "related_concepts": [
+              "EtherChannel",
+              "트렁크 포트"
+            ]
+          }
+        ],
+        "schema_version": "0.2",
+        "sections": [
+          {
+            "id": "vlan-ports",
+            "title": "VLAN 및 스위치 포트 설정",
+            "content_refs": [
+              "/concepts/0",
+              "/concepts/1",
+              "/concepts/2",
+              "/relationships/0",
+              "/practice/0"
+            ]
+          },
+          {
+            "id": "router-subinterfaces",
+            "title": "라우터 서브인터페이스와 Native VLAN",
+            "content_refs": [
+              "/concepts/3",
+              "/concepts/4",
+              "/theory/principles/1",
+              "/practice/1"
+            ]
+          },
+          {
+            "id": "vtp",
+            "title": "VTP 메모",
+            "content_refs": [
+              "/concepts/5",
+              "/theory/principles/0"
+            ]
+          },
+          {
+            "id": "spanning-tree",
+            "title": "스패닝 트리 설정",
+            "content_refs": [
+              "/concepts/6",
+              "/practice/2"
+            ]
+          },
+          {
+            "id": "etherchannel",
+            "title": "EtherChannel 설정",
+            "content_refs": [
+              "/concepts/7",
+              "/practice/3"
+            ]
+          }
+        ],
+        "source": {
+          "material_id": "475bb0dedd096ba1ba136d8a480894d332729b2fddfaca504a4eb7edae2fd18a",
+          "filename": "18일차.txt",
+          "extension": ".txt"
+        }
+      },
+      "base_analysis_digest": "5f69236068bc5228e438779cbfef2b517f1472ee2af01c278edf34a1c78ec6aa",
+      "content_edits": [],
+      "input_digest": "07369511adc4b8d7f758afad3747676d463065860d549706337964deac0e8594",
+      "classification": {
+        "paths": [
+          [
+            "NETWORK",
+            "2. 네트워크 접속",
+            "VLAN과 VLAN 간 연결"
+          ],
+          [
+            "NETWORK",
+            "2. 네트워크 접속",
+            "트렁크·802.1Q·네이티브 VLAN"
+          ],
+          [
+            "NETWORK",
+            "2. 네트워크 접속",
+            "VTP와 PAgP"
+          ],
+          [
+            "NETWORK",
+            "2. 네트워크 접속",
+            "스패닝 트리와 루프 방지"
+          ],
+          [
+            "NETWORK",
+            "2. 네트워크 접속",
+            "EtherChannel과 LACP"
+          ]
+        ],
+        "reasons": [
+          {
+            "path": [
+              "NETWORK",
+              "2. 네트워크 접속",
+              "VLAN과 VLAN 간 연결"
+            ],
+            "source": "analysis.topics -> pinned curriculum map",
+            "matched_topic": "VLAN 및 스위치 포트 설정 / 액세스 포트와 트렁크 포트",
+            "curriculum_code": "2.1",
+            "scope": "core"
+          },
+          {
+            "path": [
+              "NETWORK",
+              "2. 네트워크 접속",
+              "트렁크·802.1Q·네이티브 VLAN"
+            ],
+            "source": "analysis.topics -> pinned curriculum map",
+            "matched_topic": "VLAN 및 스위치 포트 설정 / 액세스 포트와 트렁크 포트",
+            "curriculum_code": "2.2",
+            "scope": "core"
+          },
+          {
+            "path": [
+              "NETWORK",
+              "2. 네트워크 접속",
+              "VTP와 PAgP"
+            ],
+            "source": "analysis.topics -> pinned curriculum map",
+            "matched_topic": "VLAN 및 스위치 포트 설정 / VTP",
+            "curriculum_code": "보충",
+            "scope": "extension"
+          },
+          {
+            "path": [
+              "NETWORK",
+              "2. 네트워크 접속",
+              "스패닝 트리와 루프 방지"
+            ],
+            "source": "analysis.topics -> pinned curriculum map",
+            "matched_topic": "스패닝 트리",
+            "curriculum_code": "2.5",
+            "scope": "core"
+          },
+          {
+            "path": [
+              "NETWORK",
+              "2. 네트워크 접속",
+              "EtherChannel과 LACP"
+            ],
+            "source": "analysis.topics -> pinned curriculum map",
+            "matched_topic": "EtherChannel",
+            "curriculum_code": "2.4",
+            "scope": "core"
+          }
+        ],
+        "unclassified_topics": [],
+        "scope_confirmed": true,
+        "curriculum_id": "cisco-ccna-200-301-v1.1-project-map"
+      },
+      "policy_digest": "7ceed7c43848e31bc63f3dbea135d1d925a39d52d72cc815209cc6ddad5b17ec",
+      "holds": [],
+      "status": "approved",
+      "note": "",
+      "origin": "C:\\Users\\ICT\\Desktop\\Aigit\\gptgit\\Project-StudyAutomanage\\output\\live_api_validation_v0.2\\20261016T014148Z_c78ecce6899c\\success\\analysis.json",
+      "revision": 5,
+      "approved_snapshot": "e916cd6ce1f9ee2891e7ec1d49b04d30ebfc64db8e54f1a5fe7d78c3a5ebf763",
+      "updated_at": "2026-10-16T03:19:25.130398+00:00",
+      "snapshot": "e916cd6ce1f9ee2891e7ec1d49b04d30ebfc64db8e54f1a5fe7d78c3a5ebf763",
+      "locations": [
+        "C:\\Users\\ICT\\Desktop\\Aigit\\gptgit\\Project-StudyAutomanage\\study\\sourcefile\\18일차.txt"
+      ],
+      "current": true
+    }
+  ],
+  "categories": [
+    {
+      "path": "NETWORK / 1. 네트워크 기초",
+      "material_ids": [
+        "144ab5db4c077baf5b72682f78b4286f857fd0485ec0bb878a846147afff42f2",
+        "acc194f4b63fceab8eb484dd97368a0f931a49fc93aaf18dab8a592e201b7526"
+      ]
+    },
+    {
+      "path": "NETWORK / 1. 네트워크 기초 / 통신과 IP 주소",
+      "material_ids": [
+        "144ab5db4c077baf5b72682f78b4286f857fd0485ec0bb878a846147afff42f2",
+        "acc194f4b63fceab8eb484dd97368a0f931a49fc93aaf18dab8a592e201b7526"
+      ]
+    },
+    {
+      "path": "NETWORK / 2. 네트워크 접속",
+      "material_ids": [
+        "144ab5db4c077baf5b72682f78b4286f857fd0485ec0bb878a846147afff42f2",
+        "f3bb8b2cc0e14e125f71322253dd586df819d2fd4dfb2c6bec375778f980b187"
+      ]
+    },
+    {
+      "path": "NETWORK / 2. 네트워크 접속 / EtherChannel과 LACP",
+      "material_ids": [
+        "f3bb8b2cc0e14e125f71322253dd586df819d2fd4dfb2c6bec375778f980b187"
+      ]
+    },
+    {
+      "path": "NETWORK / 2. 네트워크 접속 / VLAN과 VLAN 간 연결",
+      "material_ids": [
+        "144ab5db4c077baf5b72682f78b4286f857fd0485ec0bb878a846147afff42f2",
+        "f3bb8b2cc0e14e125f71322253dd586df819d2fd4dfb2c6bec375778f980b187"
+      ]
+    },
+    {
+      "path": "NETWORK / 2. 네트워크 접속 / VTP와 PAgP",
+      "material_ids": [
+        "f3bb8b2cc0e14e125f71322253dd586df819d2fd4dfb2c6bec375778f980b187"
+      ]
+    },
+    {
+      "path": "NETWORK / 2. 네트워크 접속 / 스패닝 트리와 루프 방지",
+      "material_ids": [
+        "f3bb8b2cc0e14e125f71322253dd586df819d2fd4dfb2c6bec375778f980b187"
+      ]
+    },
+    {
+      "path": "NETWORK / 2. 네트워크 접속 / 트렁크·802.1Q·네이티브 VLAN",
+      "material_ids": [
+        "144ab5db4c077baf5b72682f78b4286f857fd0485ec0bb878a846147afff42f2",
+        "f3bb8b2cc0e14e125f71322253dd586df819d2fd4dfb2c6bec375778f980b187"
+      ]
+    },
+    {
+      "path": "NETWORK / 3. IP 라우팅",
+      "material_ids": [
+        "144ab5db4c077baf5b72682f78b4286f857fd0485ec0bb878a846147afff42f2",
+        "acc194f4b63fceab8eb484dd97368a0f931a49fc93aaf18dab8a592e201b7526"
+      ]
+    },
+    {
+      "path": "NETWORK / 3. IP 라우팅 / 경로 재분배 실습",
+      "material_ids": [
+        "144ab5db4c077baf5b72682f78b4286f857fd0485ec0bb878a846147afff42f2"
+      ]
+    },
+    {
+      "path": "NETWORK / 3. IP 라우팅 / 라우팅 방식과 RIP",
+      "material_ids": [
+        "144ab5db4c077baf5b72682f78b4286f857fd0485ec0bb878a846147afff42f2",
+        "acc194f4b63fceab8eb484dd97368a0f931a49fc93aaf18dab8a592e201b7526"
+      ]
+    },
+    {
+      "path": "NETWORK / 3. IP 라우팅 / 라우팅 테이블과 경로 선택",
+      "material_ids": [
+        "144ab5db4c077baf5b72682f78b4286f857fd0485ec0bb878a846147afff42f2",
+        "acc194f4b63fceab8eb484dd97368a0f931a49fc93aaf18dab8a592e201b7526"
+      ]
+    },
+    {
+      "path": "NETWORK / 3. IP 라우팅 / 정적·기본·플로팅 경로",
+      "material_ids": [
+        "144ab5db4c077baf5b72682f78b4286f857fd0485ec0bb878a846147afff42f2"
+      ]
+    },
+    {
+      "path": "NETWORK / 4. IP 서비스",
+      "material_ids": [
+        "acc194f4b63fceab8eb484dd97368a0f931a49fc93aaf18dab8a592e201b7526"
+      ]
+    },
+    {
+      "path": "NETWORK / 4. IP 서비스 / 주소·이름·시간·운영 서비스",
+      "material_ids": [
+        "acc194f4b63fceab8eb484dd97368a0f931a49fc93aaf18dab8a592e201b7526"
+      ]
+    }
+  ],
+  "concepts": [
+    {
+      "id": "72ac622ee2a30c1edeb7062af804b1323b1aacad82b403643e5e774d35928fdf",
+      "name": "Distance vector",
+      "aliases": [
+        "Distance vector"
+      ],
+      "sources": [
+        {
+          "material_id": "acc194f4b63fceab8eb484dd97368a0f931a49fc93aaf18dab8a592e201b7526",
+          "filename": "15일차 Dynamic routing_IGP.txt",
+          "pointer": "/concepts/3",
+          "description": "자료에서 RIP와 IGRP를 예로 들고, 주기적으로 라우팅 테이블 정보를 교환하는 방식으로 설명합니다.",
+          "approval_status": "approved"
+        }
+      ],
+      "different_descriptions": false,
+      "interpretation": "원문별 설명 보존; 서로 다르다고 오류·모순으로 자동 판정하지 않음"
+    },
+    {
+      "id": "9e48c430bba87fa0155e348f01fbf6dd23c88108b973d86025b94940e43dc41b",
+      "name": "EGP",
+      "aliases": [
+        "EGP"
+      ],
+      "sources": [
+        {
+          "material_id": "acc194f4b63fceab8eb484dd97368a0f931a49fc93aaf18dab8a592e201b7526",
+          "filename": "15일차 Dynamic routing_IGP.txt",
+          "pointer": "/concepts/2",
+          "description": "자료에서 외부 게이트웨이 프로토콜로 제시하며, 추가 설명은 없습니다.",
+          "approval_status": "approved"
+        }
+      ],
+      "different_descriptions": false,
+      "interpretation": "원문별 설명 보존; 서로 다르다고 오류·모순으로 자동 판정하지 않음"
+    },
+    {
+      "id": "4dd5b8546ee6f1137e012f6a1ed2fd3a9e65382636d1298ea2e0c1e1fad91a23",
+      "name": "EtherChannel",
+      "aliases": [
+        "EtherChannel"
+      ],
+      "sources": [
+        {
+          "material_id": "f3bb8b2cc0e14e125f71322253dd586df819d2fd4dfb2c6bec375778f980b187",
+          "filename": "18일차.txt",
+          "pointer": "/concepts/7",
+          "description": "인터페이스 범위에 `channel-group`을 적용하는 예시가 있습니다. mode 값으로 auto, desirable의 축약형, active, passive, on이 기록되어 있고, 별도 메모에 LACP의 active/passive와 PAgP가 언급됩니다.",
+          "approval_status": "approved"
+        }
+      ],
+      "different_descriptions": false,
+      "interpretation": "원문별 설명 보존; 서로 다르다고 오류·모순으로 자동 판정하지 않음"
+    },
+    {
+      "id": "e27df696c86d8605455dc51ed9f068518a52e4545c0d0ea24711722fc517fca3",
+      "name": "Hello packet",
+      "aliases": [
+        "Hello packet"
+      ],
+      "sources": [
+        {
+          "material_id": "acc194f4b63fceab8eb484dd97368a0f931a49fc93aaf18dab8a592e201b7526",
+          "filename": "15일차 Dynamic routing_IGP.txt",
+          "pointer": "/concepts/11",
+          "description": "자료에서 Link state 방식이 평상시 이웃 라우터를 모니터링할 때 사용하는 것으로 설명합니다.",
+          "approval_status": "approved"
+        }
+      ],
+      "different_descriptions": false,
+      "interpretation": "원문별 설명 보존; 서로 다르다고 오류·모순으로 자동 판정하지 않음"
+    },
+    {
+      "id": "4a27f91df4201372d787764fc1c4aec6a51af145d2c21c00b2f39a2904547e16",
+      "name": "Hybrid",
+      "aliases": [
+        "Hybrid"
+      ],
+      "sources": [
+        {
+          "material_id": "acc194f4b63fceab8eb484dd97368a0f931a49fc93aaf18dab8a592e201b7526",
+          "filename": "15일차 Dynamic routing_IGP.txt",
+          "pointer": "/concepts/5",
+          "description": "자료에서 EIGRP를 예로 들며 IGRP 기반 비용 계산과 Link state 방식의 상태 모니터링·변화 업데이트를 결합한 것으로 설명합니다.",
+          "approval_status": "approved"
+        }
+      ],
+      "different_descriptions": false,
+      "interpretation": "원문별 설명 보존; 서로 다르다고 오류·모순으로 자동 판정하지 않음"
+    },
+    {
+      "id": "cb0c56d31243d333dc327dafd6a5f0efee509a31c3610ef12241adcb1ad087df",
+      "name": "IGP",
+      "aliases": [
+        "IGP"
+      ],
+      "sources": [
+        {
+          "material_id": "acc194f4b63fceab8eb484dd97368a0f931a49fc93aaf18dab8a592e201b7526",
+          "filename": "15일차 Dynamic routing_IGP.txt",
+          "pointer": "/concepts/1",
+          "description": "자료에서 내부 게이트웨이 프로토콜로 제시하며, Distance vector·Link state·Hybrid 유형을 설명합니다.",
+          "approval_status": "approved"
+        }
+      ],
+      "different_descriptions": false,
+      "interpretation": "원문별 설명 보존; 서로 다르다고 오류·모순으로 자동 판정하지 않음"
+    },
+    {
+      "id": "bfc05faf4077a6360baaadebba5e3e50171ceca1af2e91d9499f77dd9054c11c",
+      "name": "Inter-VLAN 라우팅",
+      "aliases": [
+        "Inter-VLAN 라우팅"
+      ],
+      "sources": [
+        {
+          "material_id": "144ab5db4c077baf5b72682f78b4286f857fd0485ec0bb878a846147afff42f2",
+          "filename": "20일차 경로재분배,루프백가상장비설정.txt",
+          "pointer": "/concepts/1",
+          "description": "서로 다른 VLAN 사이에서 이루어지는 라우팅이며, 자료는 SVI를 이용하는 구성을 다룹니다.",
+          "approval_status": "approved"
+        }
+      ],
+      "different_descriptions": false,
+      "interpretation": "원문별 설명 보존; 서로 다르다고 오류·모순으로 자동 판정하지 않음"
+    },
+    {
+      "id": "5b98cb9be997201c75f8bb3cecb38201849bb78b4a4dfed0452a6dd055186565",
+      "name": "Link state",
+      "aliases": [
+        "Link state"
+      ],
+      "sources": [
+        {
+          "material_id": "acc194f4b63fceab8eb484dd97368a0f931a49fc93aaf18dab8a592e201b7526",
+          "filename": "15일차 Dynamic routing_IGP.txt",
+          "pointer": "/concepts/4",
+          "description": "자료에서 OSPF와 IS-IS를 예로 들며, 상태 변화 시 정보를 교환하고 평상시 이웃 라우터를 모니터링하는 방식으로 설명합니다.",
+          "approval_status": "approved"
+        }
+      ],
+      "different_descriptions": false,
+      "interpretation": "원문별 설명 보존; 서로 다르다고 오류·모순으로 자동 판정하지 않음"
+    },
+    {
+      "id": "7b9447de5e86bb9d9858469c75bbff645e3347363d7ff44a9554d55137443c3b",
+      "name": "RIP",
+      "aliases": [
+        "RIP"
+      ],
+      "sources": [
+        {
+          "material_id": "144ab5db4c077baf5b72682f78b4286f857fd0485ec0bb878a846147afff42f2",
+          "filename": "20일차 경로재분배,루프백가상장비설정.txt",
+          "pointer": "/concepts/4",
+          "description": "자료에서 경로 재분배 대상 프로토콜로 사용되며, 정적 경로를 재분배하는 설정 예가 제시됩니다.",
+          "approval_status": "approved"
+        },
+        {
+          "material_id": "acc194f4b63fceab8eb484dd97368a0f931a49fc93aaf18dab8a592e201b7526",
+          "filename": "15일차 Dynamic routing_IGP.txt",
+          "pointer": "/concepts/6",
+          "description": "자료에서 UDP 520을 사용하고 30초 주기로 라우팅 테이블 정보를 교환하는 프로토콜로 설명합니다.",
+          "approval_status": "approved"
+        }
+      ],
+      "different_descriptions": true,
+      "interpretation": "원문별 설명 보존; 서로 다르다고 오류·모순으로 자동 판정하지 않음"
+    },
+    {
+      "id": "3a733a81ec662100fe4bd0252bd3f63fd693881aabedf71880fc801916df42e6",
+      "name": "RIPv1",
+      "aliases": [
+        "RIPv1"
+      ],
+      "sources": [
+        {
+          "material_id": "acc194f4b63fceab8eb484dd97368a0f931a49fc93aaf18dab8a592e201b7526",
+          "filename": "15일차 Dynamic routing_IGP.txt",
+          "pointer": "/concepts/7",
+          "description": "자료에서 classful 방식으로 서브넷 범위를 보지 않고 VLSM을 지원하지 않는 RIP 버전으로 설명합니다.",
+          "approval_status": "approved"
+        }
+      ],
+      "different_descriptions": false,
+      "interpretation": "원문별 설명 보존; 서로 다르다고 오류·모순으로 자동 판정하지 않음"
+    },
+    {
+      "id": "5e7a5f209eff17d5f9da032f6dfcacde60f7d3ebd9bbb3abfe91f78a40de6c28",
+      "name": "RIPv2",
+      "aliases": [
+        "RIPv2"
+      ],
+      "sources": [
+        {
+          "material_id": "acc194f4b63fceab8eb484dd97368a0f931a49fc93aaf18dab8a592e201b7526",
+          "filename": "15일차 Dynamic routing_IGP.txt",
+          "pointer": "/concepts/8",
+          "description": "원문에 classless와 VLSM 지원이 표기되어 있으나, 서브넷 범위에 대한 문장은 미완성이다.",
+          "approval_status": "approved"
+        }
+      ],
+      "different_descriptions": false,
+      "interpretation": "원문별 설명 보존; 서로 다르다고 오류·모순으로 자동 판정하지 않음"
+    },
+    {
+      "id": "1c6bfe16056e096012f83d3f5f5ca970e19d292814944ee4af0c3f97f16520ed",
+      "name": "SVI",
+      "aliases": [
+        "SVI"
+      ],
+      "sources": [
+        {
+          "material_id": "144ab5db4c077baf5b72682f78b4286f857fd0485ec0bb878a846147afff42f2",
+          "filename": "20일차 경로재분배,루프백가상장비설정.txt",
+          "pointer": "/concepts/0",
+          "description": "VLAN에 IP 주소를 설정해 L3 스위치에서 VLAN 간 라우팅에 사용하는 인터페이스입니다.",
+          "approval_status": "approved"
+        }
+      ],
+      "different_descriptions": false,
+      "interpretation": "원문별 설명 보존; 서로 다르다고 오류·모순으로 자동 판정하지 않음"
+    },
+    {
+      "id": "f34f1410cc6e4b5f105010c224c6f6e0d58eabd6b6531217c00ba85f5ed7be41",
+      "name": "VLAN",
+      "aliases": [
+        "VLAN"
+      ],
+      "sources": [
+        {
+          "material_id": "f3bb8b2cc0e14e125f71322253dd586df819d2fd4dfb2c6bec375778f980b187",
+          "filename": "18일차.txt",
+          "pointer": "/concepts/0",
+          "description": "메모에서는 VLAN 10, 20, 30을 생성하고 스위치 액세스 포트를 VLAN 10 또는 20에 할당하는 명령을 제시합니다.",
+          "approval_status": "approved"
+        }
+      ],
+      "different_descriptions": false,
+      "interpretation": "원문별 설명 보존; 서로 다르다고 오류·모순으로 자동 판정하지 않음"
+    },
+    {
+      "id": "a46f7ce30d7144aec80dbce63187f7437ad5f81860e952b22afb74589ccd4c92",
+      "name": "VLSM",
+      "aliases": [
+        "VLSM"
+      ],
+      "sources": [
+        {
+          "material_id": "acc194f4b63fceab8eb484dd97368a0f931a49fc93aaf18dab8a592e201b7526",
+          "filename": "15일차 Dynamic routing_IGP.txt",
+          "pointer": "/concepts/9",
+          "description": "자료에서 가변길이 서브넷 마스크라고 풀이하며 RIPv1은 지원하지 않고 RIPv2는 지원한다고 설명합니다.",
+          "approval_status": "approved"
+        }
+      ],
+      "different_descriptions": false,
+      "interpretation": "원문별 설명 보존; 서로 다르다고 오류·모순으로 자동 판정하지 않음"
+    },
+    {
+      "id": "c79f24b68e87b2627917fdab34c647530ca3d27011d42d1af0a0fcdaf95ba6d6",
+      "name": "VTP",
+      "aliases": [
+        "VTP"
+      ],
+      "sources": [
+        {
+          "material_id": "f3bb8b2cc0e14e125f71322253dd586df819d2fd4dfb2c6bec375778f980b187",
+          "filename": "18일차.txt",
+          "pointer": "/concepts/5",
+          "description": "VTP domain과 password를 지정하는 명령이 제시되며, 메모는 VTP를 VLAN DB 동기화로 설명합니다. ‘최대’ 뒤의 내용은 미완성입니다.",
+          "approval_status": "approved"
+        }
+      ],
+      "different_descriptions": false,
+      "interpretation": "원문별 설명 보존; 서로 다르다고 오류·모순으로 자동 판정하지 않음"
+    },
+    {
+      "id": "d12f4dba9d71b05cd12c4226442cf043e82acb44b55c193507039f33e9793aa3",
+      "name": "no ip domain lookup",
+      "aliases": [
+        "no ip domain lookup"
+      ],
+      "sources": [
+        {
+          "material_id": "acc194f4b63fceab8eb484dd97368a0f931a49fc93aaf18dab8a592e201b7526",
+          "filename": "15일차 Dynamic routing_IGP.txt",
+          "pointer": "/concepts/12",
+          "description": "자료에 단독으로 적힌 명령어이며 용도나 수행 절차는 설명되지 않습니다.",
+          "approval_status": "approved"
+        }
+      ],
+      "different_descriptions": false,
+      "interpretation": "원문별 설명 보존; 서로 다르다고 오류·모순으로 자동 판정하지 않음"
+    },
+    {
+      "id": "67ca7c9ae72f2e2fd3cc216d9e0721468d6519d5c72b09ac1aac1980da91c7ea",
+      "name": "경로 재분배",
+      "aliases": [
+        "경로 재분배"
+      ],
+      "sources": [
+        {
+          "material_id": "144ab5db4c077baf5b72682f78b4286f857fd0485ec0bb878a846147afff42f2",
+          "filename": "20일차 경로재분배,루프백가상장비설정.txt",
+          "pointer": "/concepts/3",
+          "description": "서로 다른 라우팅 프로토콜을 사용하는 네트워크 간에 경로 정보를 번역하고 공유하는 기능입니다.",
+          "approval_status": "approved"
+        }
+      ],
+      "different_descriptions": false,
+      "interpretation": "원문별 설명 보존; 서로 다르다고 오류·모순으로 자동 판정하지 않음"
+    },
+    {
+      "id": "d9f9cd0c4c7ccd8106a3c1bfa7d1ba56f261ed6875789e0f3c8646f25c31a0bf",
+      "name": "네이티브 VLAN",
+      "aliases": [
+        "Native VLAN"
+      ],
+      "sources": [
+        {
+          "material_id": "f3bb8b2cc0e14e125f71322253dd586df819d2fd4dfb2c6bec375778f980b187",
+          "filename": "18일차.txt",
+          "pointer": "/concepts/4",
+          "description": "스위치 트렁크 인터페이스에 native VLAN 10을 지정하는 예시와 라우터 서브인터페이스에서 `encapsulation dot1q 10 native`를 사용하는 예시가 있습니다.",
+          "approval_status": "approved"
+        }
+      ],
+      "different_descriptions": false,
+      "interpretation": "원문별 설명 보존; 서로 다르다고 오류·모순으로 자동 판정하지 않음"
+    },
+    {
+      "id": "05d63034c352f80b32e9cd5bc256b6562e61d4869ba870850cc53289129233ba",
+      "name": "동적 라우팅",
+      "aliases": [
+        "동적 라우팅"
+      ],
+      "sources": [
+        {
+          "material_id": "acc194f4b63fceab8eb484dd97368a0f931a49fc93aaf18dab8a592e201b7526",
+          "filename": "15일차 Dynamic routing_IGP.txt",
+          "pointer": "/concepts/0",
+          "description": "자료에서 IGP와 EGP를 구분하고, IGP의 라우팅 방식과 RIP를 설명하는 주제입니다.",
+          "approval_status": "approved"
+        }
+      ],
+      "different_descriptions": false,
+      "interpretation": "원문별 설명 보존; 서로 다르다고 오류·모순으로 자동 판정하지 않음"
+    },
+    {
+      "id": "98a0f0acedbcd73fccc92b2f549db005c010a95ac9d806abd080cd543241e931",
+      "name": "라우터 서브인터페이스와 802.1Q",
+      "aliases": [
+        "라우터 서브인터페이스와 802.1Q"
+      ],
+      "sources": [
+        {
+          "material_id": "f3bb8b2cc0e14e125f71322253dd586df819d2fd4dfb2c6bec375778f980b187",
+          "filename": "18일차.txt",
+          "pointer": "/concepts/3",
+          "description": "라우터 Fa0/0의 서브인터페이스 Fa0/0.10, .20, .30에 VLAN 번호를 지정하는 `encapsulation dot1q` 설정과 각각의 IPv4 주소가 제시됩니다. 앞선 예시에는 불완전하거나 다른 형태로 적힌 `encap dot` 명령도 있습니다.",
+          "approval_status": "approved"
+        }
+      ],
+      "different_descriptions": false,
+      "interpretation": "원문별 설명 보존; 서로 다르다고 오류·모순으로 자동 판정하지 않음"
+    },
+    {
+      "id": "cad1e73dfee9e6da9ccfc1f534c7a7ce3179a74c10ba7060eec563495a1a3bf0",
+      "name": "라우팅 테이블 정보 교환",
+      "aliases": [
+        "라우팅 테이블 정보 교환"
+      ],
+      "sources": [
+        {
+          "material_id": "acc194f4b63fceab8eb484dd97368a0f931a49fc93aaf18dab8a592e201b7526",
+          "filename": "15일차 Dynamic routing_IGP.txt",
+          "pointer": "/concepts/10",
+          "description": "자료에서 Distance vector의 주기적 정보 교환과 RIP의 30초 주기 정보 교환을 설명합니다.",
+          "approval_status": "approved"
+        }
+      ],
+      "different_descriptions": false,
+      "interpretation": "원문별 설명 보존; 서로 다르다고 오류·모순으로 자동 판정하지 않음"
+    },
+    {
+      "id": "5becd21b0ba031c506fae41037380df7a4e58f689569ca314132aa6c325c9cb5",
+      "name": "루프백 인터페이스",
+      "aliases": [
+        "루프백 인터페이스"
+      ],
+      "sources": [
+        {
+          "material_id": "144ab5db4c077baf5b72682f78b4286f857fd0485ec0bb878a846147afff42f2",
+          "filename": "20일차 경로재분배,루프백가상장비설정.txt",
+          "pointer": "/concepts/2",
+          "description": "자료에서 가상의 장비를 추가하는 용도로 언급하며, 핑 테스트의 소스 IP로 사용합니다.",
+          "approval_status": "approved"
+        }
+      ],
+      "different_descriptions": false,
+      "interpretation": "원문별 설명 보존; 서로 다르다고 오류·모순으로 자동 판정하지 않음"
+    },
+    {
+      "id": "c9c4bfafa58580dba499fef14c83801babbf441de05681226ce71fb6dc6dc972",
+      "name": "스패닝 트리",
+      "aliases": [
+        "스패닝 트리 설정"
+      ],
+      "sources": [
+        {
+          "material_id": "f3bb8b2cc0e14e125f71322253dd586df819d2fd4dfb2c6bec375778f980b187",
+          "filename": "18일차.txt",
+          "pointer": "/concepts/6",
+          "description": "SW1~3 공통 설정 메모에 `spanning-tree portfast default`와 `spanning-tree mode rapid-pvst` 명령이 있습니다.",
+          "approval_status": "approved"
+        }
+      ],
+      "different_descriptions": false,
+      "interpretation": "원문별 설명 보존; 서로 다르다고 오류·모순으로 자동 판정하지 않음"
+    },
+    {
+      "id": "a57ee0d5b8f37ff2a2ebf9c598ed0a7ffc1e6858c1f1bbacc668ec7fcfc84988",
+      "name": "액세스 포트",
+      "aliases": [
+        "액세스 포트"
+      ],
+      "sources": [
+        {
+          "material_id": "f3bb8b2cc0e14e125f71322253dd586df819d2fd4dfb2c6bec375778f980b187",
+          "filename": "18일차.txt",
+          "pointer": "/concepts/1",
+          "description": "`switchport mode access`와 `switchport access vlan` 축약 명령으로 포트를 액세스 모드로 지정하고 VLAN 10 또는 20에 할당하는 설정 예시가 있습니다.",
+          "approval_status": "approved"
+        }
+      ],
+      "different_descriptions": false,
+      "interpretation": "원문별 설명 보존; 서로 다르다고 오류·모순으로 자동 판정하지 않음"
+    },
+    {
+      "id": "810fa09f3040a885d2466b8f0898a34a69224c45dea9f5b45cfab7c3485762c2",
+      "name": "정적 경로",
+      "aliases": [
+        "정적 경로"
+      ],
+      "sources": [
+        {
+          "material_id": "144ab5db4c077baf5b72682f78b4286f857fd0485ec0bb878a846147afff42f2",
+          "filename": "20일차 경로재분배,루프백가상장비설정.txt",
+          "pointer": "/concepts/5",
+          "description": "자료에서는 기본 경로와 특정 네트워크 경로를 설정한 뒤 RIP로 재분배하는 대상으로 다룹니다.",
+          "approval_status": "approved"
+        }
+      ],
+      "different_descriptions": false,
+      "interpretation": "원문별 설명 보존; 서로 다르다고 오류·모순으로 자동 판정하지 않음"
+    },
+    {
+      "id": "a16551bcd5719207b36ed84613a9056d09ebdf6a405e82237ecd71777d6756c1",
+      "name": "트렁크 포트",
+      "aliases": [
+        "트렁크 포트"
+      ],
+      "sources": [
+        {
+          "material_id": "144ab5db4c077baf5b72682f78b4286f857fd0485ec0bb878a846147afff42f2",
+          "filename": "20일차 경로재분배,루프백가상장비설정.txt",
+          "pointer": "/concepts/6",
+          "description": "스위치 포트를 트렁크 모드로 설정하고 상태를 확인하도록 안내하는 예시다. 상태 확인 출력은 기록되어 있지 않다.",
+          "approval_status": "approved"
+        },
+        {
+          "material_id": "f3bb8b2cc0e14e125f71322253dd586df819d2fd4dfb2c6bec375778f980b187",
+          "filename": "18일차.txt",
+          "pointer": "/concepts/2",
+          "description": "인터페이스에 `switchport mode trunk` 축약 명령을 적용하는 설정 예시가 있습니다. 일부 포트에는 native VLAN을 10으로 지정합니다.",
+          "approval_status": "approved"
+        }
+      ],
+      "different_descriptions": true,
+      "interpretation": "원문별 설명 보존; 서로 다르다고 오류·모순으로 자동 판정하지 않음"
+    }
+  ],
+  "related": {
+    "144ab5db4c077baf5b72682f78b4286f857fd0485ec0bb878a846147afff42f2": [
+      {
+        "shared_concepts": [
+          "RIP"
+        ],
+        "same_source_hash": false,
+        "kind": "shared_concepts",
+        "semantic_duplicate_confirmed": false,
+        "material_id": "acc194f4b63fceab8eb484dd97368a0f931a49fc93aaf18dab8a592e201b7526",
+        "filename": "15일차 Dynamic routing_IGP.txt"
+      },
+      {
+        "shared_concepts": [
+          "트렁크 포트"
+        ],
+        "same_source_hash": false,
+        "kind": "shared_concepts",
+        "semantic_duplicate_confirmed": false,
+        "material_id": "f3bb8b2cc0e14e125f71322253dd586df819d2fd4dfb2c6bec375778f980b187",
+        "filename": "18일차.txt"
+      }
+    ],
+    "acc194f4b63fceab8eb484dd97368a0f931a49fc93aaf18dab8a592e201b7526": [
+      {
+        "shared_concepts": [
+          "RIP"
+        ],
+        "same_source_hash": false,
+        "kind": "shared_concepts",
+        "semantic_duplicate_confirmed": false,
+        "material_id": "144ab5db4c077baf5b72682f78b4286f857fd0485ec0bb878a846147afff42f2",
+        "filename": "20일차 경로재분배,루프백가상장비설정.txt"
+      }
+    ],
+    "f3bb8b2cc0e14e125f71322253dd586df819d2fd4dfb2c6bec375778f980b187": [
+      {
+        "shared_concepts": [
+          "트렁크 포트"
+        ],
+        "same_source_hash": false,
+        "kind": "shared_concepts",
+        "semantic_duplicate_confirmed": false,
+        "material_id": "144ab5db4c077baf5b72682f78b4286f857fd0485ec0bb878a846147afff42f2",
+        "filename": "20일차 경로재분배,루프백가상장비설정.txt"
+      }
+    ]
+  }
+}

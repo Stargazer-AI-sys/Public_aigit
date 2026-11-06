@@ -1,0 +1,34 @@
+{
+  "task": "GUIDE-02",
+  "role": "Claude production connection",
+  "observed_at": "2026-10-28T22:23:23.8845159+09:00",
+  "status": "blocked_before_model_call",
+  "reason": "Claude auth status returned subscriptionType=null; start_claude.ps1 requires claude.ai / pro",
+  "authentication": {
+    "loggedIn": true,
+    "authMethod": "claude.ai",
+    "apiProvider": "firstParty",
+    "subscriptionType": null
+  },
+  "model_called": false,
+  "session_id": null,
+  "model": null,
+  "usage": null,
+  "html_modified": false,
+  "structural_checks": 0,
+  "auto_review_rejection": false,
+  "reference_reads": [
+    "README.md lines 1-150",
+    "../skills/simple-user-guide/SKILL.md full",
+    "request.json, approval.md, plan.md, screen-approval.md full",
+    "management_log.md requested lines 422-535; output partially truncated",
+    "tools/start_claude.ps1, start_master.ps1, open_workspace.ps1 full",
+    "automation-agents/claude README, CLAUDE, coordination, settings full",
+    "guide HTML full",
+    "process-debug SKILL full",
+    "targeted rg results in automation workflow, validation, guide raw, project_hub_ui"
+  ],
+  "read_output_line_count": null,
+  "read_limitations": "General exec reads were not automatically counted. One combined output was truncated; requested range is not asserted as fully received. No token estimate.",
+  "current_html_sha256": "3028447b8d4118043eda18cc1a364532994094b0300c5b7db525f13afda8bbad"
+}

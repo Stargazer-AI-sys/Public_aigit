@@ -1,0 +1,29 @@
+test_bad_packet_type_rejected (test_workflow.WorkflowTests.test_bad_packet_type_rejected) ... ok
+test_block_resume_preserves_attempt_and_task (test_workflow.WorkflowTests.test_block_resume_preserves_attempt_and_task) ... ok
+test_complete_cycle_and_resume_from_disk (test_workflow.WorkflowTests.test_complete_cycle_and_resume_from_disk) ... ok
+test_completed_evidence_tamper_invalidates_report (test_workflow.WorkflowTests.test_completed_evidence_tamper_invalidates_report) ... ok
+test_completion_requires_review_and_evidence (test_workflow.WorkflowTests.test_completion_requires_review_and_evidence) ... ok
+test_duplicate_init_is_noop_and_different_request_rejected (test_workflow.WorkflowTests.test_duplicate_init_is_noop_and_different_request_rejected) ... ok
+test_failed_qa_is_recorded_but_cannot_pass (test_workflow.WorkflowTests.test_failed_qa_is_recorded_but_cannot_pass) ... ok
+test_fourth_review_escalates_even_with_different_defects (test_workflow.WorkflowTests.test_fourth_review_escalates_even_with_different_defects) ... ok
+test_idempotent_operation_and_collision (test_workflow.WorkflowTests.test_idempotent_operation_and_collision) ... ok
+test_lock_prevents_simultaneous_writer (test_workflow.WorkflowTests.test_lock_prevents_simultaneous_writer) ... ok
+test_modified_after_review_cannot_complete (test_workflow.WorkflowTests.test_modified_after_review_cannot_complete) ... ok
+test_path_escape_and_empty_evidence_rejected (test_workflow.WorkflowTests.test_path_escape_and_empty_evidence_rejected) ... ok
+test_predecessor_and_self_review_blocked (test_workflow.WorkflowTests.test_predecessor_and_self_review_blocked) ... ok
+test_qa_requires_normal_error_and_all_criteria (test_workflow.WorkflowTests.test_qa_requires_normal_error_and_all_criteria) ... ok
+test_qa_reviewer_cannot_be_developer (test_workflow.WorkflowTests.test_qa_reviewer_cannot_be_developer) ... ok
+test_reopen_invalidates_downstream_and_keeps_history (test_workflow.WorkflowTests.test_reopen_invalidates_downstream_and_keeps_history) ... ok
+test_repeat_defect_escalates_and_needs_reassessment (test_workflow.WorkflowTests.test_repeat_defect_escalates_and_needs_reassessment) ... ok
+test_replayed_operation_detects_artifact_drift (test_workflow.WorkflowTests.test_replayed_operation_detects_artifact_drift) ... ok
+test_request_version_drift_and_secrets_rejected (test_workflow.WorkflowTests.test_request_version_drift_and_secrets_rejected) ... ok
+test_revision_preserves_previous_submission_and_limitations (test_workflow.WorkflowTests.test_revision_preserves_previous_submission_and_limitations) ... ok
+test_secret_evidence_is_not_copied (test_workflow.WorkflowTests.test_secret_evidence_is_not_copied) ... ok
+test_timeline_can_be_rebuilt_without_state_mutation (test_workflow.WorkflowTests.test_timeline_can_be_rebuilt_without_state_mutation) ... ok
+test_waiting_can_be_blocked_and_resumed (test_workflow.WorkflowTests.test_waiting_can_be_blocked_and_resumed) ... ok
+test_wrong_provider_and_missing_criteria (test_workflow.WorkflowTests.test_wrong_provider_and_missing_criteria) ... ok
+
+----------------------------------------------------------------------
+Ran 24 tests in 9.905s
+
+OK

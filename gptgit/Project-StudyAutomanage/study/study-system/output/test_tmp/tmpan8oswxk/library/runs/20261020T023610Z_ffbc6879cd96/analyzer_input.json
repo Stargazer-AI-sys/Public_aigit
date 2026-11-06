@@ -1,0 +1,6 @@
+{
+  "material_id": "f2bc6a4cffe6fb60a28d091def40433256467250d27d970d402e0d93e830053e",
+  "filename": "화면 확인용 신규.txt",
+  "extension": ".txt",
+  "extracted_text": "vlan 10\nint fa0/1\nsw acc vlan 10\nnew material source"
+}

@@ -1,0 +1,11 @@
+[
+  {
+    "path": "/relationships/1",
+    "section_id": "router-subinterfaces",
+    "method": "unique_section_with_both_endpoint_concepts",
+    "endpoint_refs": [
+      "/concepts/3",
+      "/concepts/4"
+    ]
+  }
+]

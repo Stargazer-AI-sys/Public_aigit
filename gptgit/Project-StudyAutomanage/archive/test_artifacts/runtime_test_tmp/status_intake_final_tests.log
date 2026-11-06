@@ -1,0 +1,6 @@
+이전 CSV 보관: C:\Users\ICT\Desktop\Aigit\gptgit\Project-StudyAutomanage\study\study-system\output\test_tmp\tmpj77dqq6n\inventory.backup_20261020T234701Z_92e2864766bb.csv
+EFFICIENCY_METRICS {"copied_materials": 11, "unrelated_policy_reapprovals_before": 11, "unrelated_policy_reapprovals_after": 0, "same_reason_reholds_before": 1, "same_reason_reholds_after": 0, "handoff_full_lines": 33, "handoff_short_lines": 1, "handoff_full_chars": 2418, "handoff_short_chars": 61, "original_db_sha256_unchanged": true, "paid_api_calls": 0}
+----------------------------------------------------------------------
+Ran 69 tests in 43.262s
+
+OK

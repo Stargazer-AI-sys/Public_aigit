@@ -1,0 +1,20 @@
+{
+  "material_id": "48ad38993b65414c77de9d44263ae4e2f1e5091935b386a34e49bf5eeb9e5fb6",
+  "snapshot": "fd6198c741331445e739d547d5c3ee3d49f670b1a87949df14e91d54af48a90c",
+  "paths": [
+    [
+      "NETWORK",
+      "1. 네트워크 기초",
+      "통신과 IP 주소"
+    ],
+    [
+      "NETWORK",
+      "1. 네트워크 기초",
+      "스위칭·무선·가상화 기초"
+    ]
+  ],
+  "approved_materials": 8,
+  "planned_materials": 8,
+  "preserved_materials": 7,
+  "approval_db_sha256": "2f83027aa68fbf82c6524e72414c0e90e9ee76c8e3321bd5dd03feafb08cdc86"
+}

@@ -1,0 +1,287 @@
+{
+  "status": "SUCCESS",
+  "material_id": "6a3b013e1a8df696d37209438367329973945018c2e31f4541caefc258254acc",
+  "analysis": {
+    "material_type": {
+      "material_type": "실습",
+      "confidence": 0.94,
+      "reason": "VLAN·트렁크·Router-on-a-stick·ACL의 설정 명령과 접근 조건을 적용하는 절차가 중심이며, 앞부분에는 ARP·MAC·라우팅 테이블과 LAN 통신 순서 설명도 포함됩니다. 설정 명령은 제시되지만 실행 결과나 성공 여부는 기록되어 있지 않습니다."
+    },
+    "summary": "LAN 통신 원리를 소개하고 스위치 VLAN·트렁크, Router-on-a-stick, ACL 설정 예시를 제시합니다.",
+    "topics": [
+      {
+        "name": "LAN 네트워크",
+        "children": [
+          {
+            "name": "주소·전달 테이블과 통신 순서"
+          },
+          {
+            "name": "VLAN 간 라우팅",
+            "children": [
+              {
+                "name": "액세스 포트와 트렁크"
+              },
+              {
+                "name": "Router-on-a-stick"
+              }
+            ]
+          },
+          {
+            "name": "접근 제어",
+            "children": [
+              {
+                "name": "ACL"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "keywords": [
+      {
+        "name": "ARP Table",
+        "type": "테이블"
+      },
+      {
+        "name": "MAC Table",
+        "type": "테이블"
+      },
+      {
+        "name": "Routing Table",
+        "type": "테이블"
+      },
+      {
+        "name": "VLAN",
+        "type": "네트워크 분할"
+      },
+      {
+        "name": "트렁크",
+        "type": "스위치 포트"
+      },
+      {
+        "name": "Router-on-a-stick",
+        "type": "라우팅 구성"
+      },
+      {
+        "name": "ACL",
+        "type": "접근 제어"
+      }
+    ],
+    "concepts": [
+      {
+        "name": "ARP Table",
+        "description": "자료는 ARP Table을 IP와 MAC 주소의 변환용 테이블로 설명하며, PC·라우터 등에서 목적지 IP에 대응하는 MAC 주소를 확인하는 데 사용한다고 적습니다. arp 또는 show arp 명령으로 확인할 수 있다고 안내합니다.",
+        "type": {
+          "category": "네트워크 테이블",
+          "subtype": "주소 변환"
+        }
+      },
+      {
+        "name": "MAC Table",
+        "description": "자료는 MAC Table을 MAC 주소와 포트를 확인하는 테이블로 소개합니다. 목적지 MAC 주소에 대응하는 포트를 스위치가 찾는 LAN 통신 순서도 함께 설명합니다.",
+        "type": {
+          "category": "네트워크 테이블",
+          "subtype": "스위치 전달"
+        }
+      },
+      {
+        "name": "Routing Table",
+        "description": "자료는 Routing Table을 IP와 포트를 확인하는 테이블로 소개합니다. 이 항목에 대한 추가 동작 설명이나 설정 예시는 제시하지 않습니다.",
+        "type": {
+          "category": "네트워크 테이블",
+          "subtype": "라우팅"
+        }
+      },
+      {
+        "name": "LAN 통신 순서",
+        "description": "자료에서는 송신 시스템이 목적지 IP에 대응하는 MAC 주소를 ARP Table에서 찾고, 없으면 브로드캐스트 주소를 목적지 MAC으로 사용한다고 설명합니다. 스위치는 MAC Table에서 목적지 포트를 찾으며, 없으면 모든 포트로 프레임을 전송합니다. 수신 시스템은 목적지 IP를 자신의 IP와 비교하고, 자료에 적힌 순서에서는 응답 프레임을 받은 스위치가 출발지 MAC을 MAC Table에 기록한 뒤 유니캐스트하며, 송신 시스템은 회신 프레임을 기준으로 ARP Table을 저장한다고 설명합니다.",
+        "type": {
+          "category": "통신 동작",
+          "subtype": "LAN 프레임 전달"
+        }
+      },
+      {
+        "name": "VLAN 액세스 포트",
+        "description": "스위치의 지정 인터페이스 범위에 VLAN을 할당하고 access 모드로 설정하는 명령 예시가 있습니다. SW3의 Fa0/1–3은 VLAN 30, SW2의 Fa0/1–2는 VLAN 20, SW1의 Fa0/1–3은 VLAN 10으로 설정하도록 제시합니다.",
+        "type": {
+          "category": "스위치 구성",
+          "subtype": "액세스 포트"
+        }
+      },
+      {
+        "name": "트렁크 포트",
+        "description": "자료는 트렁크 포트가 프레임에 VLAN tagging을 붙이는 기능을 갖는다고 설명합니다. SW3의 Fa0/24와 SW1·SW2의 Fa0/23–24를 trunk 모드로 설정하는 예시를 제시하고, 각 스위치의 VLAN DB에 VLAN 10, 20, 30 정보가 있어야 한다고 적습니다.",
+        "type": {
+          "category": "스위치 구성",
+          "subtype": "트렁크"
+        }
+      },
+      {
+        "name": "Router-on-a-stick",
+        "description": "R1의 G0/0을 활성화하고 G0/0.10, G0/0.20, G0/0.30 하위 인터페이스에 각각 dot1q VLAN ID 10, 20, 30과 192.168.10.254/24, 192.168.20.254/24, 192.168.30.254/24 주소를 설정하는 예시가 있습니다. 자료는 이 구성을 마친 뒤 서로 다른 VLAN 간 통신이 가능한 상태라고 설명하지만, 실행 결과는 제시하지 않습니다.",
+        "type": {
+          "category": "라우터 구성",
+          "subtype": "VLAN 하위 인터페이스"
+        }
+      },
+      {
+        "name": "ACL",
+        "description": "자료는 ACL을 접근통제목록으로 소개하고 일반적으로 L3 또는 라우터에 구현하며 표준과 확장 유형으로 분류한다고 설명합니다. 확장은 특정 프로토콜을 제어할 수 있다고 적고, VLAN 10의 웹 접근·VLAN 30의 FTP 접근·메일 서비스 허용 조건에 대응하는 ACL 명령 예시를 제시합니다.",
+        "type": {
+          "category": "네트워크 보안",
+          "subtype": "접근 제어 목록"
+        }
+      },
+      {
+        "name": "VLAN",
+        "description": "자료는 스위치 액세스 포트를 VLAN 10·20·30에 할당하고, 각 스위치의 VLAN DB에 해당 VLAN 정보를 구성한 뒤 라우터 하위 인터페이스에 dot1q VLAN ID를 지정하는 예시를 제시합니다.",
+        "type": {
+          "category": "스위치 구성",
+          "subtype": "VLAN"
+        }
+      }
+    ],
+    "relationships": [
+      {
+        "from": "트렁크 포트",
+        "relation": "프레임에 VLAN 태그를 붙이는 기능을 수행한다",
+        "to": "VLAN 액세스 포트",
+        "description": "자료는 트렁크 포트의 태깅 기능과 별도로 각 스위치 액세스 포트의 VLAN 할당 예시를 설명합니다."
+      },
+      {
+        "from": "Router-on-a-stick",
+        "relation": "하위 인터페이스에 VLAN ID를 지정한다",
+        "to": "VLAN",
+        "description": "R1의 하위 인터페이스별 dot1q 설정에 VLAN ID 10, 20, 30이 제시되어 있습니다."
+      }
+    ],
+    "theory": {
+      "definitions": [
+        {
+          "subject": "ARP Table, MAC Table, Routing Table",
+          "content": "자료는 ARP Table을 IP와 MAC 주소 변환용, MAC Table을 MAC 주소와 포트 확인용, Routing Table을 IP와 포트 확인용 테이블로 나열합니다.",
+          "evidence": "PC, 서버, 스위치, 라우터의 통신 원리에서 가장 많이 사용된느 기능은 Table이다.\n1. ARP Table : IP<=>MAC주소 변환용 테이블\n =>PC, Router등에서 사용\n =>목적지 IP에 상응하는 MAC주소 확인용\n =>arp 또는 show arp명려으로 확인 가능\n2. MAC Table : MAC<=>Port 확인용 테이블\n3. Routing Table : IP<=>Port 확인용 테이블"
+        },
+        {
+          "subject": "트렁크 포트",
+          "content": "자료는 트렁크 포트가 프레임에 VLAN tagging을 붙이는 기능을 갖는다고 설명합니다.",
+          "evidence": "Step 2. 스위치에 트렁크 포트 생성\n- 트렁크 포트는 프레임에 Vlan tagging(꼬리표)를 붙이는 기능을 갖는다."
+        },
+        {
+          "subject": "ACL",
+          "content": "자료는 ACL을 접근통제목록으로 소개하고, 일반적으로 L3 또는 라우터에 구현하며 표준과 확장의 두 유형으로 나눈다고 설명합니다. 확장은 특정 프로토콜에 대한 제어가 가능하다고 적습니다.",
+          "evidence": "ACL(Access Control List)-접근통제목록\n=>일반적으로  L3또는 라우터에 구현\n=>표준, 확장의 2가지 유형으로 분류\n=>확장은 특정 프로토콜에 대한 제어 가능"
+        }
+      ],
+      "principles": [
+        {
+          "subject": "자료에 제시된 LAN 통신 순서",
+          "content": "자료에서는 송신 시스템이 목적지 IP에 대응하는 MAC 주소를 ARP Table에서 찾고, 없으면 브로드캐스트 주소를 목적지 MAC으로 사용한다고 설명합니다. 스위치는 목적지 MAC에 대응하는 포트를 찾고, 찾지 못하면 모든 포트로 전송합니다. 수신 시스템은 자신의 IP와 목적지 IP를 비교하며, 이후 응답 프레임을 받은 스위치가 출발지 MAC을 학습하고 유니캐스트한 뒤 송신 시스템이 회신 프레임을 기준으로 ARP Table을 저장한다고 서술합니다.",
+          "evidence": "LAN통신 순서\n1. 송신 시스템은 ARP Table에서 목적지 IP에 상응하는 MAC주소 확인. 없으면 브로드 캐스트(FFFFFFFFFFFF)주소를 목적지 MAC주소로 입력. 있으면 해당 MAC주소를 목적지 주소로 선택\n2. 스위치는 자신의 MAC Table에서 목적지 MAC주소에 상응하는 포트 확인. 없으면 모든 포트에 프레임 전송(브로드 캐스팅)\n3. 수신 시스템은 자신의 IP와 목적지 IP를 비교. 맞으면 응답. 틀리면 무시\n4. 반송신호를 받은 스위치는 출발지 MAC주소를 MAC Table에 기록 후 유니 캐스팅\n5. 송신 시스템은 회신 프레임을 기준으로 자신의 ARP Table에 목적지 MAC주소를 저장. 이후 동일한 목적지로 프레임 전송 시 유니 캐스팅.",
+          "related_concepts": [
+            "ARP Table",
+            "MAC Table",
+            "LAN 통신 순서"
+          ]
+        },
+        {
+          "subject": "스위치별 VLAN 정보",
+          "content": "자료는 트렁크 기능을 위해 각 스위치의 VLAN DB에 VLAN 10, 20, 30 정보가 있어야 한다고 설명하고, SW1·SW2·SW3에 누락된 VLAN을 추가하는 명령 예시를 제시합니다.",
+          "evidence": "Trunk기능은 각 스위치의 VLAN DB에 해당 vlan정보가 있어야 가능하다. 따라서, 각 스위치에 vlan10, 20, 30이 모두 학습되어야 함.\nSW1\nconf t\nvlan 20\nvlan 30\n\nSW2\nconf t\nvlan 10\nvlan 30\n\nSW3\nconf t\nvlan 10\nvlan 20",
+          "related_concepts": [
+            "트렁크 포트",
+            "VLAN 액세스 포트"
+          ]
+        }
+      ]
+    },
+    "practice": [
+      {
+        "title": "스위치 액세스 포트의 VLAN 설정",
+        "description": "SW3 Fa0/1–3에 VLAN 30, SW2 Fa0/1–2에 VLAN 20, SW1 Fa0/1–3에 VLAN 10을 할당하고 access 모드로 설정하는 명령 예시입니다. 실행 여부나 결과는 기록되어 있지 않습니다.",
+        "evidence": "Step 1. 각 스위치별 Vlan설정\nSW3\nen\nconf t\nint range fa0/1 - 3\nsw acc vlan 30\nsw mode access\n\nSW2\nen\nconf t\nint range fa0/1 - 2\nsw acc vlan 20\nsw mode access\n\nSW1\nen\nconf t\nint range fa0/1 - 3\nsw acc vlan 10\nsw mode access",
+        "related_concepts": [
+          "VLAN 액세스 포트"
+        ]
+      },
+      {
+        "title": "스위치 트렁크 및 VLAN DB 설정",
+        "description": "SW3 Fa0/24와 SW1·SW2 Fa0/23–24를 trunk 모드로 설정하고, 각 스위치에 VLAN 10, 20, 30 정보를 추가하는 명령 예시입니다. SW3에는 VLAN 표시 확인 명령도 제시되어 있으나 확인 결과는 없습니다.",
+        "evidence": "Step 2. 스위치에 트렁크 포트 생성\n- 트렁크 포트는 프레임에 Vlan tagging(꼬리표)를 붙이는 기능을 갖는다.\nSW3\nconf t\nint fa0/24\nsw mode trunk\ndo sh vlan\n\nSW2, SW1\nconf t\nint range fa0/23 - 24\nsw mode trunk\n\nTrunk기능은 각 스위치의 VLAN DB에 해당 vlan정보가 있어야 가능하다. 따라서, 각 스위치에 vlan10, 20, 30이 모두 학습되어야 함.\nSW1\nconf t\nvlan 20\nvlan 30\n\nSW2\nconf t\nvlan 10\nvlan 30\n\nSW3\nconf t\nvlan 10\nvlan 20",
+        "related_concepts": [
+          "트렁크 포트",
+          "VLAN 액세스 포트"
+        ]
+      },
+      {
+        "title": "Router-on-a-stick 하위 인터페이스 설정",
+        "description": "R1의 G0/0을 활성화하고 하위 인터페이스별 dot1q VLAN ID와 IP 주소를 설정하는 명령 예시입니다. 자료는 서로 다른 VLAN 간 통신이 가능한 상태라고 서술하지만, 별도의 확인 명령이나 실행 결과는 없습니다.",
+        "evidence": "Step 3. Router-on-a-stick구성\nR1\nen\nconf t\nint g0/0\nno sh\nint g0/0.10\nencap dot1q 10\nip addr 192.168.10.254 255.255.255.0\nint g0/0.20\nencap dot1q 20\nip addr 192.168.20.254 255.255.255.0\nint g0/0.30\nencap dot1q 30\nip addr 192.168.30.254 255.255.255.0\n\n※이제 서로 다른  vlan간 통신 가능 상태",
+        "related_concepts": [
+          "Router-on-a-stick"
+        ]
+      },
+      {
+        "title": "ACL 설정 및 인터페이스 적용",
+        "description": "ACL 100에 VLAN 10의 TCP 80·UDP 53 허용, TCP 80 거부, VLAN 30의 TCP 21 허용, TCP 21 거부, 나머지 IP 허용 명령을 제시하고 R1 G0/0.20에 outbound 방향으로 적용합니다. 명령 예시만 있으며 정책 동작의 확인 결과는 없습니다.",
+        "evidence": "ACL조건\n- Vlan 10은 Web접근 가능\n- Vlan 30은 FTP접근 가능\n- Mail서비스는 모두 가능\n\nR1\nconf t\nacc 100 permit tcp 192.168.10.0 0.0.0.255 any eq 80\nacc 100 permit udp 192.168.10.0 0.0.0.255 any eq 53\nacc 100 deny tcp any any eq 80\nacc 100 permit tcp 192.168.30.0 0.0.0.255 any eq 21\nacc 100 deny tcp any any eq 21\nacc 100 permit ip any any\nint g0/0.20\nip access-group 100 out",
+        "related_concepts": [
+          "ACL"
+        ]
+      }
+    ],
+    "schema_version": "0.2",
+    "sections": [
+      {
+        "id": "lan-tables",
+        "title": "LAN 통신 원리와 테이블",
+        "content_refs": [
+          "/concepts/0",
+          "/concepts/1",
+          "/concepts/2",
+          "/concepts/3",
+          "/theory/definitions/0",
+          "/theory/principles/0"
+        ]
+      },
+      {
+        "id": "vlan-trunk",
+        "title": "스위치 VLAN 및 트렁크 설정",
+        "content_refs": [
+          "/concepts/4",
+          "/concepts/5",
+          "/relationships/0",
+          "/theory/definitions/1",
+          "/theory/principles/1",
+          "/practice/0",
+          "/practice/1",
+          "/concepts/8"
+        ]
+      },
+      {
+        "id": "router-on-a-stick",
+        "title": "Router-on-a-stick",
+        "content_refs": [
+          "/concepts/6",
+          "/relationships/1",
+          "/practice/2",
+          "/concepts/8"
+        ]
+      },
+      {
+        "id": "acl",
+        "title": "ACL 접근 제어",
+        "content_refs": [
+          "/concepts/7",
+          "/theory/definitions/2",
+          "/practice/3"
+        ]
+      }
+    ],
+    "source": {
+      "material_id": "6a3b013e1a8df696d37209438367329973945018c2e31f4541caefc258254acc",
+      "filename": "1일차_LAN구성.txt",
+      "extension": ".txt"
+    }
+  }
+}

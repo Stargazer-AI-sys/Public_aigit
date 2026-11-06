@@ -1,0 +1,42 @@
+-------------------------------------------------------------------------------->8
+Version: 4.97.0 (244584)
+Sha1: 
+Started on: 2026-10-27 03:46:23.341
+Resources: C:\Users\Stargazer\AppData\Local\Temp\DockerDesktopInstallers\1793072772381678100\resources
+OS: Windows 10 Home
+Edition: Core
+Id: 2009
+Build: 26200
+BuildLabName: 26100.1.amd64fre.ge_release.240331-1435
+File: C:\Users\Stargazer\AppData\Local\Docker\install-log.txt
+CommandLine: "C:\Users\STARGA~1\AppData\Local\Temp\DockerDesktopInstallers\1793072772381678100\Docker Desktop Installer.exe" install -package C:\Users\STARGA~1\AppData\Local\Temp\DockerDesktopInstallers\1793072772381678100\DockerDesktop.d4w --user --quiet --backend=wsl-2 --no-windows-containers -vm-package C:\Users\STARGA~1\AppData\Local\Temp\DockerDesktopInstallers\1793072772381678100\DockerDesktopVM.d4w
+You can send feedback, including this log file, at https://dockr.ly/desktop-feedback
+[2026-10-27T03:46:23.446428700Z][Installer][I] No installation found
+[2026-10-27T03:46:23.468212200Z][PerUserInstallHandler][I] Running per user installation
+[2026-10-27T03:46:23.485260600Z][InstallWorkflow][I] Using package: C:\Users\STARGA~1\AppData\Local\Temp\DockerDesktopInstallers\1793072772381678100\DockerDesktop.d4w
+[2026-10-27T03:46:23.635900300Z][InstallWorkflow][I] Phase 0: Pre-check
+[2026-10-27T03:46:24.934744600Z][InstallWorkflow][I] Checking prerequisites
+[2026-10-27T03:46:25.585154300Z][InstallWorkflow][I] Selected backend mode: wsl-2
+[2026-10-27T03:46:25.707631200Z][InstallWorkflow][I] Phase 1: Staging
+[2026-10-27T03:46:25.721724500Z][DeployArtifacts][I] Unpacking C:\Users\STARGA~1\AppData\Local\Temp\DockerDesktopInstallers\1793072772381678100\DockerDesktop.d4w to C:\Users\Stargazer\AppData\Local\Programs\DockerDesktop.staging
+[2026-10-27T03:46:25.724844700Z][DeployArtifacts][I] Unpacking with C:\Users\STARGA~1\AppData\Local\Temp\DockerDesktopInstallers\1793072772381678100\7zr.exe
+[2026-10-27T03:46:46.673700200Z][DeployArtifacts][I] Unpacking C:\Users\STARGA~1\AppData\Local\Temp\DockerDesktopInstallers\1793072772381678100\DockerDesktopVM.d4w to C:\Users\Stargazer\AppData\Local\Programs\DockerDesktop.staging
+[2026-10-27T03:46:46.674700200Z][DeployArtifacts][I] Unpacking with C:\Users\STARGA~1\AppData\Local\Temp\DockerDesktopInstallers\1793072772381678100\7zr.exe
+[2026-10-27T03:46:55.173529500Z][InstallWorkflow][I] Phase 3: Activation (file-by-file move)
+[2026-10-27T03:46:55.609397100Z][InstallWorkflow][I] Moved 169 file(s) from 'C:\Users\Stargazer\AppData\Local\Programs\DockerDesktop.staging' to 'C:\Users\Stargazer\AppData\Local\Programs\DockerDesktop'
+[2026-10-27T03:46:55.632312200Z][InstallWorkflow][I] Phase 4: Components
+[2026-10-27T03:46:55.634786900Z][InstallWorkflow][I] Saving C:\Users\Stargazer\AppData\Roaming\Docker\install-settings.json
+[2026-10-27T03:46:55.649381800Z][InstallWorkflow][I] Deploying component Docker.Installer.ShortcutAction
+[2026-10-27T03:46:55.724274600Z][InstallWorkflow-ShortcutAction][I] Creating shortcut: C:\Users\Stargazer\AppData\Roaming\Microsoft\Windows\Start Menu\Docker Desktop.lnk/Docker Desktop
+[2026-10-27T03:46:55.738441400Z][InstallWorkflow][I] Deploying component Docker.Installer.ShortcutAction
+[2026-10-27T03:46:55.745485900Z][InstallWorkflow-ShortcutAction][I] Creating shortcut: C:\Users\Stargazer\OneDrive\Desktop\Docker Desktop.lnk/Docker Desktop
+[2026-10-27T03:46:55.749522100Z][InstallWorkflow][I] Deploying component Docker.Installer.AutoStartAction
+[2026-10-27T03:46:55.751525900Z][InstallWorkflow][I] Deploying component Docker.Installer.PathAction
+[2026-10-27T03:46:55.848350500Z][InstallWorkflow][I] Deploying component Docker.Installer.ExecAction
+[2026-10-27T03:46:55.852438800Z][InstallWorkflow-ExecAction][I] Running: C:\Users\Stargazer\AppData\Local\Programs\DockerDesktop\InstallerCli.exe --user -i with timeout=-1
+[2026-10-27T03:46:56.494086500Z][InstallWorkflow][I] Registering new product
+[2026-10-27T03:46:56.494086500Z][RegisterProductStep][I] Registering product information
+[2026-10-27T03:46:56.511312600Z][RegisterProductStep][I] Registering docker-desktop url-protocol
+[2026-10-27T03:46:56.512426200Z][InstallWorkflow][I] Phase 5: Validation
+[2026-10-27T03:46:56.518912800Z][InstallWorkflow][I] Phase 6: Cleanup
+[2026-10-27T03:46:56.519911500Z][InstallWorkflow][I] Installation succeeded

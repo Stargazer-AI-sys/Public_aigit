@@ -1,0 +1,348 @@
+{
+  "source_dir": "C:\\Users\\ICT\\Desktop\\Aigit\\gptgit\\Project-StudyAutomanage\\study\\sourcefile",
+  "files": [
+    {
+      "filename": "12일차.docx",
+      "path": "C:\\Users\\ICT\\Desktop\\Aigit\\gptgit\\Project-StudyAutomanage\\study\\sourcefile\\12일차.docx",
+      "status": "approved",
+      "material_id": "b0b50be4b719e7a173222c5573ec85a40b1aaa9938e0de53a1eb6ef131f5832b",
+      "snapshot": "b525571ce20fba175c55673d633738f6352ac2c3461775e35f31efd2158fda2c",
+      "holds": [],
+      "paths": [
+        [
+          "NETWORK",
+          "1. 네트워크 기초",
+          "장비·구조·물리 연결"
+        ],
+        [
+          "NETWORK",
+          "3. IP 라우팅",
+          "라우팅 테이블과 경로 선택"
+        ],
+        [
+          "NETWORK",
+          "3. IP 라우팅",
+          "라우팅 방식과 RIP"
+        ],
+        [
+          "NETWORK",
+          "3. IP 라우팅",
+          "정적·기본·플로팅 경로"
+        ],
+        [
+          "NETWORK",
+          "1. 네트워크 기초",
+          "스위칭·무선·가상화 기초"
+        ]
+      ]
+    },
+    {
+      "filename": "15일차 Dynamic routing_IGP.txt",
+      "path": "C:\\Users\\ICT\\Desktop\\Aigit\\gptgit\\Project-StudyAutomanage\\study\\sourcefile\\15일차 Dynamic routing_IGP.txt",
+      "status": "approved",
+      "material_id": "acc194f4b63fceab8eb484dd97368a0f931a49fc93aaf18dab8a592e201b7526",
+      "snapshot": "e454a04191f6bfc9e2b3fcef62d43146e8e52457ef3c39a995ffd477a25f2a13",
+      "holds": [],
+      "paths": [
+        [
+          "NETWORK",
+          "3. IP 라우팅",
+          "라우팅 테이블과 경로 선택"
+        ],
+        [
+          "NETWORK",
+          "3. IP 라우팅",
+          "라우팅 방식과 RIP"
+        ],
+        [
+          "NETWORK",
+          "1. 네트워크 기초",
+          "통신과 IP 주소"
+        ],
+        [
+          "NETWORK",
+          "4. IP 서비스",
+          "주소·이름·시간·운영 서비스"
+        ]
+      ]
+    },
+    {
+      "filename": "18일차.txt",
+      "path": "C:\\Users\\ICT\\Desktop\\Aigit\\gptgit\\Project-StudyAutomanage\\study\\sourcefile\\18일차.txt",
+      "status": "approved",
+      "material_id": "f3bb8b2cc0e14e125f71322253dd586df819d2fd4dfb2c6bec375778f980b187",
+      "snapshot": "e916cd6ce1f9ee2891e7ec1d49b04d30ebfc64db8e54f1a5fe7d78c3a5ebf763",
+      "holds": [],
+      "paths": [
+        [
+          "NETWORK",
+          "2. 네트워크 접속",
+          "VLAN과 VLAN 간 연결"
+        ],
+        [
+          "NETWORK",
+          "2. 네트워크 접속",
+          "트렁크·802.1Q·네이티브 VLAN"
+        ],
+        [
+          "NETWORK",
+          "2. 네트워크 접속",
+          "VTP와 PAgP"
+        ],
+        [
+          "NETWORK",
+          "2. 네트워크 접속",
+          "스패닝 트리와 루프 방지"
+        ],
+        [
+          "NETWORK",
+          "2. 네트워크 접속",
+          "EtherChannel과 LACP"
+        ]
+      ]
+    },
+    {
+      "filename": "1일차_LAN구성.txt",
+      "path": "C:\\Users\\ICT\\Desktop\\Aigit\\gptgit\\Project-StudyAutomanage\\study\\sourcefile\\1일차_LAN구성.txt",
+      "status": "approved",
+      "material_id": "21fc0e118cc9d9378925e30fdbe338b7f5231c8f342ba69df8b612f07b7ca54c",
+      "snapshot": "9c2156d68b04745bf9a93042482492c7f98d8c33d9fb6da9b172e7a22fa343b8",
+      "holds": [],
+      "paths": [
+        [
+          "NETWORK",
+          "2. 네트워크 접속",
+          "VLAN과 VLAN 간 연결"
+        ],
+        [
+          "NETWORK",
+          "2. 네트워크 접속",
+          "트렁크·802.1Q·네이티브 VLAN"
+        ],
+        [
+          "NETWORK",
+          "3. IP 라우팅",
+          "라우팅 테이블과 경로 선택"
+        ],
+        [
+          "NETWORK",
+          "5. 네트워크 보안 기초",
+          "접근 제어와 접속 보안"
+        ],
+        [
+          "NETWORK",
+          "1. 네트워크 기초",
+          "스위칭·무선·가상화 기초"
+        ]
+      ]
+    },
+    {
+      "filename": "20일차 경로재분배,루프백가상장비설정.txt",
+      "path": "C:\\Users\\ICT\\Desktop\\Aigit\\gptgit\\Project-StudyAutomanage\\study\\sourcefile\\20일차 경로재분배,루프백가상장비설정.txt",
+      "status": "approved",
+      "material_id": "144ab5db4c077baf5b72682f78b4286f857fd0485ec0bb878a846147afff42f2",
+      "snapshot": "55f1c4355f725b6352acd8d71ca1905f4b291dd7a5d3b0c1b2cbcaa6df8be654",
+      "holds": [],
+      "paths": [
+        [
+          "NETWORK",
+          "2. 네트워크 접속",
+          "VLAN과 VLAN 간 연결"
+        ],
+        [
+          "NETWORK",
+          "3. IP 라우팅",
+          "라우팅 테이블과 경로 선택"
+        ],
+        [
+          "NETWORK",
+          "1. 네트워크 기초",
+          "통신과 IP 주소"
+        ],
+        [
+          "NETWORK",
+          "3. IP 라우팅",
+          "정적·기본·플로팅 경로"
+        ],
+        [
+          "NETWORK",
+          "3. IP 라우팅",
+          "라우팅 방식과 RIP"
+        ],
+        [
+          "NETWORK",
+          "3. IP 라우팅",
+          "경로 재분배 실습"
+        ],
+        [
+          "NETWORK",
+          "2. 네트워크 접속",
+          "트렁크·802.1Q·네이티브 VLAN"
+        ]
+      ]
+    },
+    {
+      "filename": "2일차_라우팅테이블구성.txt",
+      "path": "C:\\Users\\ICT\\Desktop\\Aigit\\gptgit\\Project-StudyAutomanage\\study\\sourcefile\\2일차_라우팅테이블구성.txt",
+      "status": "approved",
+      "material_id": "546efd6392a367ed29521e0378a16b50d7e71f86a0e66c77a1a5f8e2c50ce908",
+      "snapshot": "4ffdf108ea4cfac9053b64ff65096184329fa8fc38d970f373f454c6fde5ca04",
+      "holds": [],
+      "paths": [
+        [
+          "NETWORK",
+          "3. IP 라우팅",
+          "라우팅 테이블과 경로 선택"
+        ],
+        [
+          "NETWORK",
+          "3. IP 라우팅",
+          "라우팅 방식과 RIP"
+        ],
+        [
+          "NETWORK",
+          "3. IP 라우팅",
+          "정적·기본·플로팅 경로"
+        ]
+      ]
+    },
+    {
+      "filename": "2일차_원격접속.txt",
+      "path": "C:\\Users\\ICT\\Desktop\\Aigit\\gptgit\\Project-StudyAutomanage\\study\\sourcefile\\2일차_원격접속.txt",
+      "status": "approved",
+      "material_id": "810c870e17cc301e1687c831edaea67d6db48fa82704c2da0d040547ccdc0bda",
+      "snapshot": "f08fd8793a7046197449bf15b50c6ffde0406ee62526886671d08afb55ea9928",
+      "holds": [],
+      "paths": [
+        [
+          "NETWORK",
+          "2. 네트워크 접속",
+          "무선 접속과 장비 관리"
+        ],
+        [
+          "NETWORK",
+          "5. 네트워크 보안 기초",
+          "보안 원칙과 장비·VPN 접근"
+        ]
+      ]
+    },
+    {
+      "filename": "3일차 7계층 OSI.txt",
+      "path": "C:\\Users\\ICT\\Desktop\\Aigit\\gptgit\\Project-StudyAutomanage\\study\\sourcefile\\3일차 7계층 OSI.txt",
+      "status": "approved",
+      "material_id": "48ad38993b65414c77de9d44263ae4e2f1e5091935b386a34e49bf5eeb9e5fb6",
+      "snapshot": "fd6198c741331445e739d547d5c3ee3d49f670b1a87949df14e91d54af48a90c",
+      "holds": [],
+      "paths": [
+        [
+          "NETWORK",
+          "1. 네트워크 기초",
+          "통신과 IP 주소"
+        ],
+        [
+          "NETWORK",
+          "1. 네트워크 기초",
+          "스위칭·무선·가상화 기초"
+        ]
+      ]
+    },
+    {
+      "filename": "3일차 ssh 연결.txt",
+      "path": "C:\\Users\\ICT\\Desktop\\Aigit\\gptgit\\Project-StudyAutomanage\\study\\sourcefile\\3일차 ssh 연결.txt",
+      "status": "approved",
+      "material_id": "aed8c1e95f915f8bcbc512479c0a62f132aa79d4df5b6c9e28aaca311b1e36d0",
+      "snapshot": "4ac3936d23bd4a0ad26c1d71554f690ff6c574839b6ef1a29e4010d61b62d200",
+      "holds": [],
+      "paths": [
+        [
+          "NETWORK",
+          "1. 네트워크 기초",
+          "통신과 IP 주소"
+        ],
+        [
+          "NETWORK",
+          "3. IP 라우팅",
+          "라우팅 방식과 RIP"
+        ],
+        [
+          "NETWORK",
+          "4. IP 서비스",
+          "트래픽 처리와 관리 전송"
+        ]
+      ]
+    },
+    {
+      "filename": "4일차 [ipv4].txt",
+      "path": "C:\\Users\\ICT\\Desktop\\Aigit\\gptgit\\Project-StudyAutomanage\\study\\sourcefile\\4일차 [ipv4].txt",
+      "status": "approved",
+      "material_id": "1ebe62f0f584c9646966af91d95967dfa215764387e141fbe5c37afb58d4a84e",
+      "snapshot": "f668648d9de802c8534ebd054884cc386e87542bef5f1d8473f2de424e4274f9",
+      "holds": [],
+      "paths": [
+        [
+          "NETWORK",
+          "1. 네트워크 기초",
+          "통신과 IP 주소"
+        ],
+        [
+          "NETWORK",
+          "4. IP 서비스",
+          "주소·이름·시간·운영 서비스"
+        ]
+      ]
+    }
+  ],
+  "counts": {
+    "approved": 10
+  },
+  "source_manifest": {
+    "root": "C:\\Users\\ICT\\Desktop\\Aigit\\gptgit\\Project-StudyAutomanage\\study\\sourcefile",
+    "files": [
+      {
+        "path": "12일차.docx",
+        "sha256": "bc86db8089b8e84a49a80114657d596b3458b9d124880bb7b2965844526661a5"
+      },
+      {
+        "path": "15일차 Dynamic routing_IGP.txt",
+        "sha256": "5520ea4cfcab84de60fba38f45a7c0f5d68173bf9c58f525630414acfc5f0efc"
+      },
+      {
+        "path": "18일차.txt",
+        "sha256": "475bb0dedd096ba1ba136d8a480894d332729b2fddfaca504a4eb7edae2fd18a"
+      },
+      {
+        "path": "1일차_LAN구성.txt",
+        "sha256": "6a3b013e1a8df696d37209438367329973945018c2e31f4541caefc258254acc"
+      },
+      {
+        "path": "20일차 경로재분배,루프백가상장비설정.txt",
+        "sha256": "bc311d69fc2366ebe3ae69a6b0b4627fd79e437b96c97241398ba20313aacf4d"
+      },
+      {
+        "path": "2일차_라우팅테이블구성.txt",
+        "sha256": "edf4ed37f8551bdb99e36837b3c373cd8a8729a8c0de82dbe091233fc35377a6"
+      },
+      {
+        "path": "2일차_원격접속.txt",
+        "sha256": "d7bab40eb0785349ae73364c61ea15ad5ec0c178f979f467f1d7cd9904a3f203"
+      },
+      {
+        "path": "3일차 7계층 OSI.txt",
+        "sha256": "f7bdb87ad9ce7c657d40c849cce63e5159beab8468631a79bd8f2fbea6d392d1"
+      },
+      {
+        "path": "3일차 ssh 연결.txt",
+        "sha256": "83759605cda2e73158d0e459567927b62efd2dd13c7c54e9af019fdce875a399"
+      },
+      {
+        "path": "4일차 [ipv4].txt",
+        "sha256": "ea20da289029afd465875704ab2ba2da5548c6827aa80522a505702958e6180c"
+      }
+    ],
+    "supported": 10
+  },
+  "ready": true,
+  "notion_sent": false,
+  "inventory": "C:\\Users\\ICT\\Desktop\\Aigit\\gptgit\\Project-StudyAutomanage\\study\\study-system\\output\\notion_live\\intake\\20261020T011556Z_ae5b57604277\\inventory.csv",
+  "report_path": "C:\\Users\\ICT\\Desktop\\Aigit\\gptgit\\Project-StudyAutomanage\\study\\study-system\\output\\notion_live\\intake\\20261020T011556Z_ae5b57604277\\report.json"
+}

@@ -1,0 +1,32 @@
+[
+  {
+    "path": "/theory/principles/0/evidence",
+    "method": "unique_exact_anchor_span_recovery",
+    "before": "1. 테이블 룩업(다른 서브넷 회선이 2개 이상 적용되는 IP가 둘다 통과 가능한 아이피 대역인경우 프리픽스 길이가 긴쪽을 우선함) _longest prefix\n2. AD값이 적은게 우선시함\n3. cost 낮은 비용을 우선시함",
+    "after": "1. 테이블 룩업(다른 서브넷 회선이 2개 이상 적용되는 IP가 둘다 통과 가능한 아이피 대역인경우 프리픽스 길이가 긴쪽을 우선함) _longest prefix\n2. AD값이 적은게 우선시함  192.168.4.0[(1)/0] via ....\n3. cost 낮은 비용을 우선시함",
+    "start_line": 63,
+    "end_line": 65,
+    "source_start": 2130,
+    "source_end": 2285
+  },
+  {
+    "path": "/theory/principles/2/evidence",
+    "method": "unique_exact_anchor_span_recovery",
+    "before": "-> 인터페이스 1개 초과일때 위와 같이 디폴트 라우트 설정(stub network에서 설정하듯이) 해버리면 패킷이 반절 소실되는 상황이 발생할 수 있다.\nstub network 는 모든 아이피에 대해 패킷을 수신 송신하므로 보안성이 없다.",
+    "after": "-> 인터페이스 1개 초과일때 위와 같이 디폴트 라우트 설정(stub network에서 설정하듯이) 해버리면 패킷이 반절 소실되는 상황이 발생할 수 있다.\n1타임아웃 2핑성공 3타임아웃 4핑성공\nstub network 는 모든 아이피에 대해 패킷을 수신 송신하므로 보안성이 없다.",
+    "start_line": 55,
+    "end_line": 57,
+    "source_start": 1740,
+    "source_end": 1896
+  },
+  {
+    "path": "/theory/comparisons/0/evidence",
+    "method": "unique_exact_anchor_span_recovery",
+    "before": "IGP 하나의 AS에서..\nEGP 서로 다른 AS에서...",
+    "after": "IGP 하나의 AS에서..\n경로 계산 방식\ndistance vector 주기적\nlink state 네트워크 상태가 변했을때\nadveanced distance vecrtor 위에 두가지 믹싱해서 나온기술\nEGP 서로 다른 AS에서...",
+    "start_line": 9,
+    "end_line": 14,
+    "source_start": 260,
+    "source_end": 390
+  }
+]

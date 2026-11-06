@@ -1,0 +1,87 @@
+{
+  "status": "PASS",
+  "scope": "optional-comment policy and Schema reanalysis",
+  "requirements_updated": "8.7; auxiliary only, severely unclear sections only, later material may fill gaps",
+  "schema_changed": false,
+  "schema_sha256": "6a56acad3ac773ba0c62218b0c4972ed5dbb408fcd8b9a316b200119ae68e751",
+  "schema_conclusion": "Existing optional comment/references structure already permits zero comments; no new fields required.",
+  "checks": [
+    {
+      "name": "all_comments_and_sources_omitted",
+      "expected_valid": true,
+      "actual_valid": true,
+      "pass": true
+    },
+    {
+      "name": "existing_reviewed_example",
+      "expected_valid": true,
+      "actual_valid": true,
+      "pass": true
+    },
+    {
+      "name": "canonical_comment_null_use_omission_instead",
+      "expected_valid": false,
+      "actual_valid": false,
+      "pass": true
+    },
+    {
+      "name": "canonical_empty_references_use_omission_instead",
+      "expected_valid": false,
+      "actual_valid": false,
+      "pass": true
+    },
+    {
+      "name": "published_comment_without_source_ids",
+      "expected_valid": false,
+      "actual_valid": false,
+      "pass": true
+    },
+    {
+      "name": "multiple_comments_in_one_section",
+      "expected_valid": false,
+      "actual_valid": false,
+      "pass": true
+    },
+    {
+      "name": "missing_core_summary_not_allowed",
+      "expected_valid": false,
+      "actual_valid": false,
+      "pass": true
+    },
+    {
+      "name": "missing_core_sections_not_allowed",
+      "expected_valid": false,
+      "actual_valid": false,
+      "pass": true
+    }
+  ],
+  "passed_checks": 8,
+  "current_runtime_diagnostics": [
+    {
+      "name": "core_without_comments",
+      "current_status": "SUCCESS",
+      "current_error": null,
+      "actual_ai_call": false
+    },
+    {
+      "name": "malformed_auxiliary_candidate",
+      "current_status": "FAILED",
+      "current_error": "COMMENT_REVIEW_ERROR",
+      "actual_ai_call": false
+    }
+  ],
+  "implementation_gaps": [
+    "Current proposal guidelines still trigger on broader ambiguity/error cases than the new threshold.",
+    "Malformed auxiliary candidates or bad comment sources can still fail an otherwise valid core analysis.",
+    "Future-material knowledge integration is not implemented by this per-material schema."
+  ],
+  "next_implementation": [
+    "Narrow comment/proposal prompts to the new auxiliary policy.",
+    "Separate auxiliary validation and preserve validated core results when auxiliary fields can be safely isolated.",
+    "Retain failures for core parsing, source quotation, schema, and storage errors."
+  ],
+  "live_api_test_scope": "Representative one material: core generation, source fidelity, evidence, schema, storage; zero comments acceptable; no comment-seeking retry.",
+  "actual_api_calls": 0,
+  "official_records_updated": false,
+  "guides_updated": false
+}

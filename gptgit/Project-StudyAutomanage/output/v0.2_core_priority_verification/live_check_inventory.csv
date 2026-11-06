@@ -1,0 +1,188 @@
+﻿filename,path,extension,size_bytes,created_at,modified_at,sha256,text_length,status,error,text
+18일차.txt,C:\Users\ICT\Desktop\Aigit\gptgit\Project-StudyAutomanage\test_file\18일차.txt,.txt,2281,2026-10-15T13:22:16,2026-10-15T13:22:16,475bb0dedd096ba1ba136d8a480894d332729b2fddfaca504a4eb7edae2fd18a,2051,success,,"
+
+conf t
+vlan 10
+exit
+vlan 20
+exit
+vlan 30
+exit
+
+
+int fa0/24
+sw mo tr
+int fa0/23
+sw mo tr
+int fa0/1
+sw mo acc
+sw acc vlan 10
+int fa0/2
+sw mo acc
+sw acc vlan 20
+
+
+
+conf t
+int fa0/24
+sw mo tr
+int fa0/1
+sw mo acc
+sw acc vlan 10
+int fa0/2
+sw mo acc
+sw acc vlan 20
+
+R1
+conf t
+int fa0/0
+no sh
+int fa0/0.10
+encap dot 10
+ip addr 192.168.10.254 255.255.255.0
+int fa0/0.20
+encap dot 20
+ip addr 192.168.20.254 255.255.255.0
+
+
+
+en
+conf t
+int fa0/0
+no sh
+int fa0/0.10
+encap dot1q 10
+ip addr 192.168.10.254 255.255.255.0
+int fa0/0.20
+encap dot1q 20
+ip addr 192.168.20.254 255.255.255.0
+int fa0/0.30
+encap dot1q 30
+ip addr 192.168.30.254 255.255.255.0
+
+-------------------------------------------
+int fa0/24
+switchport trunk native vlan 10
+int fa0/23
+switchport trunk native vlan 10
+
+int fa0/24
+switchport trunk native vlan 10
+
+-------------------------------------
+
+conf t
+vtp domain cisco
+vtp password 1234
+
+vtp는 vlan DB 동기화
+domain, password 를 지정하고 그 정보로 동기화
+최대 
+
+sw1
+int range fa0/23 - 24
+sw tr nati vlan 10
+
+sw
+int fa0/23
+sw tr nati vlan 10
+
+r1
+conf t
+int fa0/0.10
+encap dot1q 10 native
+----------------------------------------------------
+
+ 0060.2F2D.5D19
+
+000b.be40.2251
+
+SW1~3 공통설정
+
+en 
+conf t
+spanning-tree portfast default
+spanning-tree mode rapid-pvst
+
+int fa0/1
+sw mo acc
+sw acc vlan 10
+int fa0/2
+sw mo acc
+sw acc vlan 20
+
+--------------------------------------------------------
+
+conf t
+int range fa0/1 - 4
+channel-group ?
+
+lacp active passive
+PAGP 
+
+
+sw1
+en
+conf t
+int fa0/1
+sw mo acc
+sw acc vlan 10
+int fa0/2
+sw mo acc
+sw acc vlan 20
+int range fa0/23-24
+sw mo tr
+channel-group 1 mode auto
+int range fa0/21-22
+channel-group 2 mode active
+sw mo tr
+
+
+
+sw2
+en
+conf t
+int fa0/1
+sw mo acc
+sw acc vlan 10
+int fa0/2
+sw mo acc
+sw acc vlan 20
+int range fa0/23-24
+sw mo tr
+channel-group 1 mode desi
+int range fa0/19-20
+channel-group 3 mode on
+sw mo tr
+
+sw3
+en
+conf t
+int fa0/1
+sw mo acc
+sw acc vlan 10
+int fa0/2
+sw mo acc
+sw acc vlan 20
+int range fa0/21-22
+sw mo tr
+channel-group 2 mode passive
+int range fa0/19-20
+channel-group 3 mode on
+sw mo tr
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+"

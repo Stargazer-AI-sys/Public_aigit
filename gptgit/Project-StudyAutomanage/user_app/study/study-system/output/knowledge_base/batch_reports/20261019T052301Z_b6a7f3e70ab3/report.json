@@ -1,0 +1,18 @@
+{
+  "items": [
+    {
+      "row": 1,
+      "filename": "2일차_라우팅테이블구성.txt",
+      "status": "success",
+      "material_id": "546efd6392a367ed29521e0378a16b50d7e71f86a0e66c77a1a5f8e2c50ce908",
+      "run": "C:\\Users\\ICT\\Desktop\\Aigit\\gptgit\\Project-StudyAutomanage\\study\\study-system\\output\\knowledge_base\\runs\\20261019T052228Z_fa011cf0942c"
+    }
+  ],
+  "new_api_attempts": 1,
+  "new_successes": 1,
+  "reused": 0,
+  "failed": 0,
+  "blocked": 0,
+  "recovered_cache_locks": 0,
+  "status": "PASS"
+}

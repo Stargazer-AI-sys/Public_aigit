@@ -1,0 +1,327 @@
+{
+  "format_version": 2,
+  "category_layout": "ccna-basic-17",
+  "parent_page_id": "3fb062cd-7cd1-80c6-ab73-d56d5fadc0a5",
+  "verified_on": "2026-10-19",
+  "navigation_pages": [
+    {
+      "id": "3fe062cd-7cd1-8139-aeb6-f6aecf72977b",
+      "url": "https://app.notion.com/p/3fe062cd7cd18139aeb6f6aecf72977b?pvs=204",
+      "properties": {
+        "title": "1. 네트워크 기초"
+      }
+    },
+    {
+      "id": "3fe062cd-7cd1-8159-af76-d840845dedee",
+      "url": "https://app.notion.com/p/3fe062cd7cd18159af76d840845dedee?pvs=204",
+      "properties": {
+        "title": "2. 네트워크 접속"
+      }
+    },
+    {
+      "id": "3fe062cd-7cd1-8138-8041-eb53e303c9cc",
+      "url": "https://app.notion.com/p/3fe062cd7cd181388041eb53e303c9cc?pvs=204",
+      "properties": {
+        "title": "3. IP 라우팅"
+      }
+    },
+    {
+      "id": "3fe062cd-7cd1-81f6-94d0-dfd47ea91c7d",
+      "url": "https://app.notion.com/p/3fe062cd7cd181f694d0dfd47ea91c7d?pvs=204",
+      "properties": {
+        "title": "4. IP 서비스"
+      }
+    },
+    {
+      "id": "3fe062cd-7cd1-8106-8d8d-e8a96028a03d",
+      "url": "https://app.notion.com/p/3fe062cd7cd181068d8de8a96028a03d?pvs=204",
+      "properties": {
+        "title": "5. 네트워크 보안 기초"
+      }
+    },
+    {
+      "id": "3fe062cd-7cd1-8195-a3b6-f3fe48189ad7",
+      "url": "https://app.notion.com/p/3fe062cd7cd18195a3b6f3fe48189ad7?pvs=204",
+      "properties": {
+        "title": "6. 자동화와 프로그래밍"
+      }
+    }
+  ],
+  "views": [],
+  "notes": {
+    "empty_domains": [
+      5,
+      6
+    ],
+    "practice_filter_basis": "현재 승인 자료의 원본 페이지 ID. 신규 자료 추가 시 분야별 실습 보기 필터 갱신 필요.",
+    "approval_ui": "로컬 승인 화면 유지"
+  },
+  "management_page": {
+    "id": "3fe062cd-7cd1-81d7-8cd6-d173f6594c75",
+    "url": "https://app.notion.com/p/3fe062cd7cd181d78cd6d173f6594c75?pvs=204",
+    "properties": {
+      "title": "학습 데이터 관리"
+    }
+  },
+  "archive_page": {
+    "id": "3fe062cd-7cd1-8190-b1d7-e4e60035e3f5",
+    "url": "https://app.notion.com/p/3fe062cd7cd18190b1d7e4e60035e3f5?pvs=204",
+    "properties": {
+      "title": "이전 연결 보기 보관"
+    }
+  },
+  "index_pages": [
+    {
+      "id": "3fe062cd-7cd1-8115-be2c-cf26275aea30",
+      "url": "https://app.notion.com/p/3fe062cd7cd18115be2ccf26275aea30?pvs=204",
+      "properties": {
+        "title": "개념 찾아보기"
+      }
+    },
+    {
+      "id": "3fe062cd-7cd1-81bb-9c61-cdb9454abf18",
+      "url": "https://app.notion.com/p/3fe062cd7cd181bb9c61cdb9454abf18?pvs=204",
+      "properties": {
+        "title": "학습자료"
+      }
+    },
+    {
+      "id": "3fe062cd-7cd1-8147-8ea1-f99fb7ae9ef8",
+      "url": "https://app.notion.com/p/3fe062cd7cd181478ea1f99fb7ae9ef8?pvs=204",
+      "properties": {
+        "title": "실습 찾아보기"
+      }
+    }
+  ],
+  "legacy_views": [
+    {
+      "page_id": "3fe062cd-7cd1-8139-aeb6-f6aecf72977b",
+      "kind": "category",
+      "view_url": "view://3fe062cd-7cd1-815c-8be0-000c958bcaf4",
+      "configuration": {
+        "parent_page_id": "3fe062cd-7cd1-8139-aeb6-f6aecf72977b",
+        "data_source_id": "5deb4fcd-a1a5-4d20-943e-063950b1e801",
+        "name": "세부 학습 항목",
+        "type": "list",
+        "configure": "FILTER \"상위 분야\" = \"3fe062cd7cd181748e8ed3658761672b\"; SHOW \"이름\", \"학습 경로\"; SORT BY \"학습 경로\" ASC"
+      }
+    },
+    {
+      "page_id": "3fe062cd-7cd1-8139-aeb6-f6aecf72977b",
+      "kind": "concept",
+      "view_url": "view://3fe062cd-7cd1-8152-9ed2-000cadcbe66f",
+      "configuration": {
+        "parent_page_id": "3fe062cd-7cd1-8139-aeb6-f6aecf72977b",
+        "data_source_id": "6705c5ab-b746-4d01-9666-1c05126f2655",
+        "name": "관련 개념",
+        "type": "table",
+        "configure": "FILTER \"분야\" = \"3fe062cd7cd181748e8ed3658761672b\"; QUICK FILTER \"이름\"; SHOW \"이름\", \"학습자료\"; SORT BY \"이름\" ASC"
+      }
+    },
+    {
+      "page_id": "3fe062cd-7cd1-8139-aeb6-f6aecf72977b",
+      "kind": "material",
+      "view_url": "view://3fe062cd-7cd1-81f1-a20c-000c0769c75d",
+      "configuration": {
+        "parent_page_id": "3fe062cd-7cd1-8139-aeb6-f6aecf72977b",
+        "data_source_id": "3fb062cd-7cd1-8065-a893-000bf1eefb6b",
+        "name": "학습자료와 원문",
+        "type": "table",
+        "configure": "FILTER \"분야\" = \"3fe062cd7cd181748e8ed3658761672b\"; SHOW \"이름\", \"개념\", \"실습\", \"관련 자료\", \"원본 위치\"; SORT BY \"이름\" ASC"
+      }
+    },
+    {
+      "page_id": "3fe062cd-7cd1-8139-aeb6-f6aecf72977b",
+      "kind": "practice",
+      "view_url": "view://3fe062cd-7cd1-81f6-8783-000ca3bae121",
+      "configuration": {
+        "parent_page_id": "3fe062cd-7cd1-8139-aeb6-f6aecf72977b",
+        "data_source_id": "3ae95fe6-100b-4f56-bf6c-ab2a58a858a3",
+        "name": "관련 자료의 실습",
+        "type": "table",
+        "configure": "FILTER \"학습자료\" IN (\"3fe062cd7cd181a6b38ee6d1a668909f\", \"3fe062cd7cd18167a9a3c20998aadab6\", \"3fe062cd7cd1816da520f8909ffc646b\"); SHOW \"이름\", \"학습자료\", \"개념\"; SORT BY \"이름\" ASC"
+      }
+    },
+    {
+      "page_id": "3fe062cd-7cd1-8159-af76-d840845dedee",
+      "kind": "category",
+      "view_url": "view://3fe062cd-7cd1-8102-b2d4-000c0850402c",
+      "configuration": {
+        "parent_page_id": "3fe062cd-7cd1-8159-af76-d840845dedee",
+        "data_source_id": "5deb4fcd-a1a5-4d20-943e-063950b1e801",
+        "name": "세부 학습 항목",
+        "type": "list",
+        "configure": "FILTER \"상위 분야\" = \"3fb062cd7cd18138a60be0500c909da6\"; SHOW \"이름\", \"학습 경로\"; SORT BY \"학습 경로\" ASC"
+      }
+    },
+    {
+      "page_id": "3fe062cd-7cd1-8159-af76-d840845dedee",
+      "kind": "concept",
+      "view_url": "view://3fe062cd-7cd1-819a-9234-000c654f7257",
+      "configuration": {
+        "parent_page_id": "3fe062cd-7cd1-8159-af76-d840845dedee",
+        "data_source_id": "6705c5ab-b746-4d01-9666-1c05126f2655",
+        "name": "관련 개념",
+        "type": "table",
+        "configure": "FILTER \"분야\" = \"3fb062cd7cd18138a60be0500c909da6\"; QUICK FILTER \"이름\"; SHOW \"이름\", \"학습자료\"; SORT BY \"이름\" ASC"
+      }
+    },
+    {
+      "page_id": "3fe062cd-7cd1-8159-af76-d840845dedee",
+      "kind": "material",
+      "view_url": "view://3fe062cd-7cd1-8135-aef5-000c5344adbc",
+      "configuration": {
+        "parent_page_id": "3fe062cd-7cd1-8159-af76-d840845dedee",
+        "data_source_id": "3fb062cd-7cd1-8065-a893-000bf1eefb6b",
+        "name": "학습자료와 원문",
+        "type": "table",
+        "configure": "FILTER \"분야\" = \"3fb062cd7cd18138a60be0500c909da6\"; SHOW \"이름\", \"개념\", \"실습\", \"관련 자료\", \"원본 위치\"; SORT BY \"이름\" ASC"
+      }
+    },
+    {
+      "page_id": "3fe062cd-7cd1-8159-af76-d840845dedee",
+      "kind": "practice",
+      "view_url": "view://3fe062cd-7cd1-81c6-9a2a-000c4e152eb3",
+      "configuration": {
+        "parent_page_id": "3fe062cd-7cd1-8159-af76-d840845dedee",
+        "data_source_id": "3ae95fe6-100b-4f56-bf6c-ab2a58a858a3",
+        "name": "관련 자료의 실습",
+        "type": "table",
+        "configure": "FILTER \"학습자료\" IN (\"3fb062cd7cd181dc975dfeae2f1329ed\", \"3fe062cd7cd18167a9a3c20998aadab6\"); SHOW \"이름\", \"학습자료\", \"개념\"; SORT BY \"이름\" ASC"
+      }
+    },
+    {
+      "page_id": "3fe062cd-7cd1-8138-8041-eb53e303c9cc",
+      "kind": "category",
+      "view_url": "view://3fe062cd-7cd1-81cb-b6f2-000cac2d71b7",
+      "configuration": {
+        "parent_page_id": "3fe062cd-7cd1-8138-8041-eb53e303c9cc",
+        "data_source_id": "5deb4fcd-a1a5-4d20-943e-063950b1e801",
+        "name": "세부 학습 항목",
+        "type": "list",
+        "configure": "FILTER \"상위 분야\" = \"3fe062cd7cd18150aad2f26b6cac1663\"; SHOW \"이름\", \"학습 경로\"; SORT BY \"학습 경로\" ASC"
+      }
+    },
+    {
+      "page_id": "3fe062cd-7cd1-8138-8041-eb53e303c9cc",
+      "kind": "concept",
+      "view_url": "view://3fe062cd-7cd1-81b4-9e1a-000cda51dfd9",
+      "configuration": {
+        "parent_page_id": "3fe062cd-7cd1-8138-8041-eb53e303c9cc",
+        "data_source_id": "6705c5ab-b746-4d01-9666-1c05126f2655",
+        "name": "관련 개념",
+        "type": "table",
+        "configure": "FILTER \"분야\" = \"3fe062cd7cd18150aad2f26b6cac1663\"; QUICK FILTER \"이름\"; SHOW \"이름\", \"학습자료\"; SORT BY \"이름\" ASC"
+      }
+    },
+    {
+      "page_id": "3fe062cd-7cd1-8138-8041-eb53e303c9cc",
+      "kind": "material",
+      "view_url": "view://3fe062cd-7cd1-81e1-abb8-000c10c54013",
+      "configuration": {
+        "parent_page_id": "3fe062cd-7cd1-8138-8041-eb53e303c9cc",
+        "data_source_id": "3fb062cd-7cd1-8065-a893-000bf1eefb6b",
+        "name": "학습자료와 원문",
+        "type": "table",
+        "configure": "FILTER \"분야\" = \"3fe062cd7cd18150aad2f26b6cac1663\"; SHOW \"이름\", \"개념\", \"실습\", \"관련 자료\", \"원본 위치\"; SORT BY \"이름\" ASC"
+      }
+    },
+    {
+      "page_id": "3fe062cd-7cd1-8138-8041-eb53e303c9cc",
+      "kind": "practice",
+      "view_url": "view://3fe062cd-7cd1-81e3-bef2-000cd95ff14f",
+      "configuration": {
+        "parent_page_id": "3fe062cd-7cd1-8138-8041-eb53e303c9cc",
+        "data_source_id": "3ae95fe6-100b-4f56-bf6c-ab2a58a858a3",
+        "name": "관련 자료의 실습",
+        "type": "table",
+        "configure": "FILTER \"학습자료\" IN (\"3fe062cd7cd181a6b38ee6d1a668909f\", \"3fe062cd7cd18167a9a3c20998aadab6\", \"3fe062cd7cd1816da520f8909ffc646b\"); SHOW \"이름\", \"학습자료\", \"개념\"; SORT BY \"이름\" ASC"
+      }
+    },
+    {
+      "page_id": "3fe062cd-7cd1-81f6-94d0-dfd47ea91c7d",
+      "kind": "category",
+      "view_url": "view://3fe062cd-7cd1-81a5-9ea4-000c45bd6bb0",
+      "configuration": {
+        "parent_page_id": "3fe062cd-7cd1-81f6-94d0-dfd47ea91c7d",
+        "data_source_id": "5deb4fcd-a1a5-4d20-943e-063950b1e801",
+        "name": "세부 학습 항목",
+        "type": "list",
+        "configure": "FILTER \"상위 분야\" = \"3fe062cd7cd181d5a927d3897c57c60c\"; SHOW \"이름\", \"학습 경로\"; SORT BY \"학습 경로\" ASC"
+      }
+    },
+    {
+      "page_id": "3fe062cd-7cd1-81f6-94d0-dfd47ea91c7d",
+      "kind": "concept",
+      "view_url": "view://3fe062cd-7cd1-81fc-9ec9-000ca8c592bf",
+      "configuration": {
+        "parent_page_id": "3fe062cd-7cd1-81f6-94d0-dfd47ea91c7d",
+        "data_source_id": "6705c5ab-b746-4d01-9666-1c05126f2655",
+        "name": "관련 개념",
+        "type": "table",
+        "configure": "FILTER \"분야\" = \"3fe062cd7cd181d5a927d3897c57c60c\"; QUICK FILTER \"이름\"; SHOW \"이름\", \"학습자료\"; SORT BY \"이름\" ASC"
+      }
+    },
+    {
+      "page_id": "3fe062cd-7cd1-81f6-94d0-dfd47ea91c7d",
+      "kind": "material",
+      "view_url": "view://3fe062cd-7cd1-8130-85b2-000ce66b1d7b",
+      "configuration": {
+        "parent_page_id": "3fe062cd-7cd1-81f6-94d0-dfd47ea91c7d",
+        "data_source_id": "3fb062cd-7cd1-8065-a893-000bf1eefb6b",
+        "name": "학습자료와 원문",
+        "type": "table",
+        "configure": "FILTER \"분야\" = \"3fe062cd7cd181d5a927d3897c57c60c\"; SHOW \"이름\", \"개념\", \"실습\", \"관련 자료\", \"원본 위치\"; SORT BY \"이름\" ASC"
+      }
+    },
+    {
+      "page_id": "3fe062cd-7cd1-81f6-94d0-dfd47ea91c7d",
+      "kind": "practice",
+      "view_url": "view://3fe062cd-7cd1-81d9-9dfb-000c0c4d3dc5",
+      "configuration": {
+        "parent_page_id": "3fe062cd-7cd1-81f6-94d0-dfd47ea91c7d",
+        "data_source_id": "3ae95fe6-100b-4f56-bf6c-ab2a58a858a3",
+        "name": "관련 자료의 실습",
+        "type": "table",
+        "configure": "FILTER \"학습자료\" IN (\"3fe062cd7cd181a6b38ee6d1a668909f\"); SHOW \"이름\", \"학습자료\", \"개념\"; SORT BY \"이름\" ASC"
+      }
+    },
+    {
+      "page_id": "3fb062cd-7cd1-80c6-ab73-d56d5fadc0a5",
+      "kind": "material",
+      "view_url": "view://3fe062cd-7cd1-81da-a243-000c29dab03d",
+      "configuration": {
+        "kind": "material",
+        "data_source_id": "3fb062cd-7cd1-8065-a893-000bf1eefb6b",
+        "name": "학습자료",
+        "type": "table",
+        "configure": "SHOW \"이름\", \"개념\", \"실습\", \"관련 자료\"; QUICK FILTER \"분야\"; SORT BY \"이름\" ASC"
+      }
+    },
+    {
+      "page_id": "3fb062cd-7cd1-80c6-ab73-d56d5fadc0a5",
+      "kind": "concept",
+      "view_url": "view://3fe062cd-7cd1-8195-bd40-000c8fda7f10",
+      "configuration": {
+        "kind": "concept",
+        "data_source_id": "6705c5ab-b746-4d01-9666-1c05126f2655",
+        "name": "개념 찾아보기",
+        "type": "table",
+        "configure": "SHOW \"이름\", \"분야\", \"학습자료\"; QUICK FILTER \"이름\", \"분야\"; SORT BY \"이름\" ASC"
+      }
+    },
+    {
+      "page_id": "3fb062cd-7cd1-80c6-ab73-d56d5fadc0a5",
+      "kind": "practice",
+      "view_url": "view://3fe062cd-7cd1-8130-af3c-000c9f9d2d22",
+      "configuration": {
+        "kind": "practice",
+        "data_source_id": "3ae95fe6-100b-4f56-bf6c-ab2a58a858a3",
+        "name": "실습 찾아보기",
+        "type": "table",
+        "configure": "SHOW \"이름\", \"학습자료\", \"개념\"; QUICK FILTER \"개념\"; SORT BY \"이름\" ASC"
+      }
+    }
+  ],
+  "presentation": "reader-v1"
+}

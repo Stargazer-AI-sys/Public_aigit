@@ -1,0 +1,231 @@
+{
+  "schema": "output\\study_material_analysis_schema_v0.2_draft.json",
+  "example": "output\\examples\\18_day_analysis_v0.2_draft.json",
+  "actual_ai_call": false,
+  "schema_self_check": "PASS",
+  "example_validation": "PASS",
+  "example_errors": [],
+  "source_and_seven_quotes_unchanged": true,
+  "example_section_content_coverage": true,
+  "section_count": 5,
+  "comment_count": 1,
+  "passed_cases": 23,
+  "total_cases": 23,
+  "checks": [
+    {
+      "case": "normal_18_day_example",
+      "expected_valid": true,
+      "actual_valid": true,
+      "pass": true,
+      "errors": []
+    },
+    {
+      "case": "no_comments_is_valid",
+      "expected_valid": true,
+      "actual_valid": true,
+      "pass": true,
+      "errors": []
+    },
+    {
+      "case": "wrong_schema_version",
+      "expected_valid": false,
+      "actual_valid": false,
+      "pass": true,
+      "errors": [
+        "schema:/schema_version: '0.2-draft' was expected"
+      ]
+    },
+    {
+      "case": "unknown_material_type",
+      "expected_valid": false,
+      "actual_valid": false,
+      "pass": true,
+      "errors": [
+        "schema:/material_type/material_type: 'unknown' is not one of ['개념', '참고자료', '실습', '프로젝트', '문제/예제', '기타']"
+      ]
+    },
+    {
+      "case": "long_summary",
+      "expected_valid": false,
+      "actual_valid": false,
+      "pass": true,
+      "errors": [
+        "schema:/summary: 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx' is too long"
+      ]
+    },
+    {
+      "case": "two_sentence_summary",
+      "expected_valid": false,
+      "actual_valid": false,
+      "pass": true,
+      "errors": [
+        "summary: more than one sentence"
+      ]
+    },
+    {
+      "case": "no_analysis_content",
+      "expected_valid": false,
+      "actual_valid": false,
+      "pass": true,
+      "errors": [
+        "schema:/sections: [] should be non-empty"
+      ]
+    },
+    {
+      "case": "broken_section_pointer",
+      "expected_valid": false,
+      "actual_valid": false,
+      "pass": true,
+      "errors": [
+        "sections/vlan-ports: unresolved content pointer /practice/999"
+      ]
+    },
+    {
+      "case": "duplicate_section_ids",
+      "expected_valid": false,
+      "actual_valid": false,
+      "pass": true,
+      "errors": [
+        "sections: duplicate ids"
+      ]
+    },
+    {
+      "case": "duplicate_reference_ids",
+      "expected_valid": false,
+      "actual_valid": false,
+      "pass": true,
+      "errors": [
+        "references: duplicate ids"
+      ]
+    },
+    {
+      "case": "two_comments_in_a_section",
+      "expected_valid": false,
+      "actual_valid": false,
+      "pass": true,
+      "errors": [
+        "schema:/sections/4/comment: [{'kind': 'correction', 'text': '기존 분석의 미완성 메모라는 해석과 달리, channel-group ?는 입력 가능한 인수·옵션을 조회하는 도움말 구문이다.', 'reference_ids': ['cisco-cli-help']}, {'kind': 'correction', 'text': '기존 분석의 미완성 메모라는 해석과 달리, channel-group ?는 입력 가능한 인수·옵션을 조회하는 도움말 구문이다.', 'reference_ids': ['cisco-cli-help']}] is not of type 'object'"
+      ]
+    },
+    {
+      "case": "missing_comment_reference",
+      "expected_valid": false,
+      "actual_valid": false,
+      "pass": true,
+      "errors": [
+        "comment: missing reference missing",
+        "references: unused references in final display example"
+      ]
+    },
+    {
+      "case": "no_comment_source",
+      "expected_valid": false,
+      "actual_valid": false,
+      "pass": true,
+      "errors": [
+        "schema:/sections/4/comment/reference_ids: [] should be non-empty"
+      ]
+    },
+    {
+      "case": "unverified_comment_source",
+      "expected_valid": false,
+      "actual_valid": false,
+      "pass": true,
+      "errors": [
+        "comment: reference cisco-cli-help is not source_checked; keep in review"
+      ]
+    },
+    {
+      "case": "checked_source_without_date",
+      "expected_valid": false,
+      "actual_valid": false,
+      "pass": true,
+      "errors": [
+        "schema:/references/0: 'checked_on' is a required property"
+      ]
+    },
+    {
+      "case": "invalid_check_date",
+      "expected_valid": false,
+      "actual_valid": false,
+      "pass": true,
+      "errors": [
+        "schema:/references/0/checked_on: '2026-02-30' is not a 'date'"
+      ]
+    },
+    {
+      "case": "invalid_source_url",
+      "expected_valid": false,
+      "actual_valid": false,
+      "pass": true,
+      "errors": [
+        "schema:/references/0/url: 'not-a-url' does not match '^https?://'"
+      ]
+    },
+    {
+      "case": "multiline_comment",
+      "expected_valid": false,
+      "actual_valid": false,
+      "pass": true,
+      "errors": [
+        "schema:/sections/4/comment/text: '첫 줄\\n다음 줄' does not match '^[^\\\\r\\\\n]+$'"
+      ]
+    },
+    {
+      "case": "two_sentence_comment",
+      "expected_valid": false,
+      "actual_valid": false,
+      "pass": true,
+      "errors": [
+        "sections/etherchannel: comment has more than one sentence"
+      ]
+    },
+    {
+      "case": "wrong_original_hash",
+      "expected_valid": false,
+      "actual_valid": false,
+      "pass": true,
+      "errors": [
+        "source: SHA-256 does not match source bytes"
+      ]
+    },
+    {
+      "case": "invented_quote",
+      "expected_valid": false,
+      "actual_valid": false,
+      "pass": true,
+      "errors": [
+        "evidence: quote not found in source"
+      ]
+    },
+    {
+      "case": "broken_concept_link",
+      "expected_valid": false,
+      "actual_valid": false,
+      "pass": true,
+      "errors": [
+        "relationships: missing concept"
+      ]
+    },
+    {
+      "case": "duplicate_concept_name",
+      "expected_valid": false,
+      "actual_valid": false,
+      "pass": true,
+      "errors": [
+        "concepts: duplicate names",
+        "relationships: missing concept",
+        "related_concepts: missing concept",
+        "related_concepts: missing concept"
+      ]
+    }
+  ],
+  "limitations": [
+    "Draft has not been integrated into the v0.5 Analyzer or API response schema.",
+    "Technical accuracy, usefulness, single-topic grouping, and citation support require content review.",
+    "source_checked is a recorded review result, not proof supplied by schema validation.",
+    "The cited Cisco CLI page was read during this conversation; this validator makes no web requests.",
+    "Sentence punctuation checks are heuristic; no new fixed character limit for comments was specified.",
+    "Content references use document-local JSON Pointers; reordering arrays requires updating references."
+  ]
+}

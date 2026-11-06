@@ -1,0 +1,105 @@
+<!doctype html><html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>EDGE 외부 연결·NAT/PAT·인터넷 IP 통신 검증 가이드</title><style>
+:root{color-scheme:light}*{box-sizing:border-box}body{margin:0;background:#fff;color:#20252b;font:16px/1.75 system-ui,-apple-system,"Segoe UI","Malgun Gothic",sans-serif}main{max-width:960px;margin:auto;padding:42px 28px 70px}h1{font-size:29px;line-height:1.4;margin:0 0 12px}h2{font-size:23px;margin:42px 0 16px;padding-bottom:8px;border-bottom:1px solid #d9dee4}h3{font-size:18px;margin:26px 0 10px}p{margin:10px 0}a{color:#245c88;text-underline-offset:3px}.meta{color:#606973;font-size:14px}.note{padding:12px 16px;border-left:3px solid #7893a8;background:#f5f7f9;margin:18px 0}.success{border-left-color:#528368}nav{padding:16px 0;border-bottom:1px solid #d9dee4}nav a{display:inline-block;margin:4px 16px 4px 0}table{border-collapse:collapse;width:100%;font-size:14px;margin:14px 0}th,td{padding:10px 12px;text-align:left;border:1px solid #d9dee4;vertical-align:top}th{background:#f3f5f7;font-weight:600}.table-wrap{overflow-x:auto}pre{background:#f5f6f8;border:1px solid #e0e4e8;border-radius:4px;padding:14px 16px;overflow-x:auto;line-height:1.6;font-size:14px}code{font-family:ui-monospace,SFMono-Regular,Consolas,monospace}p code,li code,td code{background:#f1f3f5;padding:1px 4px;border-radius:3px}li{margin:7px 0}footer{margin-top:40px;border-top:1px solid #d9dee4;padding-top:16px;font-size:13px;color:#606973}@media(max-width:600px){main{padding:24px 16px}h1{font-size:25px}h2{font-size:21px}th,td{padding:8px}pre{font-size:13px}}@media print{main{max-width:none;padding:0}nav{display:none}h2{break-after:avoid}pre,table,.note{break-inside:avoid}a{color:inherit}body{font-size:11pt}}
+</style></head><body><main>
+<header><p class="meta">네트워크 엔지니어 취업 프로젝트 · Phase 1 · 검증일 2026-10-11 · 주소 설명 정정 2026-10-18</p><h1>EDGE 외부 연결·NAT/PAT<br>인터넷 IP 통신 검증 가이드</h1><p>PNETLab의 EDGE를 VMware NAT 네트워크에 연결하고, 내부 VLAN 단말이 기본 경로와 PAT를 통해 외부 IP까지 통신하는 절차입니다.</p></header><div class="note success"><strong>[확정] 검증 완료</strong><br>EDGE 외부 IP Ping 10/10, PC20 외부 IP Ping 및 NAT 변환 확인, Linux 실습 경로 Ping 손실 0%. PNETLab 재부팅 후 기본 경로·외부 IP·PC20 통신 유지.</div>
+<nav aria-label="목차"><a href="#scope">1. 환경·목표</a><a href="#wan">2. 외부 연결</a><a href="#edge">3. EDGE 경로</a><a href="#nat">4. CORE·PAT</a><a href="#linux">5. Linux 경로 검증</a><a href="#persist">6. 재부팅 검증</a><a href="#ops">7. 문제 확인·원복</a></nav>
+<section id="scope"><h2>$1 목표·선행 환경</h2><p>목표는 <strong>실습 단말 → ASW1 → CORE-TEST → EDGE PAT → VMware NAT → 외부 IP</strong> 연결 확인입니다. VMware NAT가 외부망을 대행하므로 이 실습은 이중 NAT 구조입니다.</p><p>선행 문서: <a href="Linux_PNETLab_통신검증_가이드.html">Linux 연결 가이드</a> · <a href="CORE_EDGE_연결_검증_가이드.html">CORE–EDGE 연결 가이드</a>.</p>
+<div class="table-wrap"><table><thead><tr><th>항목</th><th>현재 검증 환경</th></tr></thead><tbody><tr><td>ASW / CORE / EDGE</td><td>ASW1 / CORE-TEST / EDGE-TEST</td></tr><tr><td>Core–Edge 전송망</td><td>CORE Gi0/3 10.255.0.1/30 ↔ EDGE Gi0/0 10.255.0.2/30</td></tr><tr><td>VLAN10 / VLAN20 게이트웨이</td><td>CORE 10.10.10.1/24 / 10.10.20.1/24</td></tr><tr><td>PC20</td><td>10.10.20.10/24, GW 10.10.20.1</td></tr><tr><td>Linux 실습 NIC</td><td>ens34 10.10.10.100/24</td></tr><tr><td>Linux 관리 NIC</td><td>ens32 192.168.111.100/24 및 .128/24</td></tr><tr><td>VMnet8</td><td>NAT, 192.168.111.0/24, 게이트웨이 .2</td></tr><tr><td>PNETLab 관리 연결</td><td>eth0 → pnet0, DHCP 192.168.111.136/24</td></tr><tr><td>VMnet2</td><td>기존 Linux 실습 Host-only 연결 유지</td></tr></tbody></table></div>
+<p>EDGE는 내부 VLAN10·20에 대한 정적 경로가 이미 있고, ASW의 중복 게이트웨이 IP는 제거된 상태여야 합니다. 아래 명령은 이번 환경 기준이며 이름·주소는 실제 환경과 대조합니다.</p><p class="note"><strong>검증 범위:</strong> 외부 IP 연결성, NAT/PAT, 경로 및 재부팅 유지. DNS 이름 해석·HTTP/HTTPS 서비스·AWS/VPN은 이 문서의 완료 범위에 포함하지 않습니다.</p></section>
+<section id="wan"><h2>$2 외부 연결·주소 확인</h2><h3>%1 PNETLab 기본 경로</h3><p><strong>PNETLab VM Linux 콘솔</strong>에서 실행합니다.</p>
+<pre><code>hostname
+ip route show default</code></pre>
+<p>실제 출력: hostname pnetlab, default via 192.168.111.2 dev pnet0 dhcp src 192.168.111.136. ens32가 나오면 Linux 테스트 서버에서 조회한 것인지 확인합니다.</p><h3>%2 DHCP 범위와 후보 IP</h3><p>VMware Virtual Network Editor → VMnet8 → DHCP Settings에서 시작·끝 주소를 확인합니다.</p>
+<div class="table-wrap"><table><thead><tr><th>항목</th><th>실제 확인값</th></tr></thead><tbody><tr><td>DHCP 시작 / 끝</td><td>192.168.111.128 / 192.168.111.254</td></tr><tr><td>EDGE 외부 고정 IP 후보</td><td>192.168.111.110/24 · DHCP 범위 밖</td></tr><tr><td>기존 Linux .128</td><td>2026-10-18 출력 기준 DHCP 임대 주소 · 과거 수동 입력 보고와 구분</td></tr></tbody></table></div>
+<p class="note">[정정 2026-10-18] Linux ens32는 .100 수동 주소와 DHCP를 함께 사용하며 현재 .128은 DHCP 임대 주소입니다. 과거 사용자의 수동 입력 보고는 당시 정보로 유지합니다. 확인된 수동 .100과 EDGE .110은 DHCP 범위 밖이며, 이번 출력에서 충돌 증거는 없습니다. 전체 VM의 무충돌 검증은 수행하지 않았습니다. 후속 절차는 <a href="Phase1_DNS_및_잔여검증_가이드.html#linux">DNS·잔여 검증 가이드 3절</a>을 확인합니다.</p><p><strong>Linux 테스트 서버</strong>에서 후보 주소의 ARP 응답을 확인합니다. arping이 없을 때만 설치합니다.</p>
+<pre><code>apt update
+apt install -y iputils-arping
+arping -D -I ens32 -c 3 192.168.111.110</code></pre>
+<p><strong>실제 결과:</strong> Sent 3 probes, Received 0 responses. 검사 당시 응답 장비가 감지되지 않았다는 의미이며, 주소 예약이나 향후 중복 없음의 보장은 아닙니다.</p><h3>%3 PNETLab Network 추가</h3><ol><li>토폴로지 빈 공간 우클릭 → Add an object → Network.</li><li>Name: <strong>WAN-VMNET8</strong>.</li><li>Type: <strong>Management / Cloud0 / pnet0</strong>에 해당하는 항목.</li><li><strong>EDGE-TEST Gi0/1 ↔ WAN-VMNET8</strong> 연결.</li></ol><p>기존 LINUX-LAB / pnet1 및 Gi0/0 내부 연결은 유지합니다. no shutdown은 포트 활성화이며 케이블 연결을 대신하지 않습니다. 추가 VMware NIC는 이 단계에서 필요하지 않습니다.</p></section>
+<section id="edge"><h2>$3 EDGE 외부 IP·기본 경로</h2><p><strong>EDGE-TEST Cisco 콘솔:</strong></p>
+<pre><code>configure terminal
+interface GigabitEthernet0/1
+ description TO-WAN-VMNET8
+ ip address 192.168.111.110 255.255.255.0
+ no shutdown
+exit
+ip route 0.0.0.0 0.0.0.0 192.168.111.2
+end</code></pre>
+<h3>%1 VMware NAT 게이트웨이 검증</h3>
+<pre><code>show ip interface brief | include GigabitEthernet0/1
+ping 192.168.111.2 source 192.168.111.110</code></pre>
+<p><strong>실제 결과:</strong> Gi0/1 192.168.111.110 up/up, Ping 100% (5/5).</p><h3>%2 EDGE 자체 인터넷 IP 검증</h3>
+<pre><code>show ip route 0.0.0.0
+ping 1.1.1.1 source 192.168.111.110 repeat 10</code></pre>
+<p><strong>실제 결과:</strong> 기본 경로 next-hop 192.168.111.2, Ping 100% (10/10). 숫자 IP 시험이므로 DNS는 사용하지 않습니다. 이 결과만으로 내부 단말 PAT를 검증한 것은 아닙니다.</p></section>
+<section id="nat"><h2>$4 CORE 기본 경로·EDGE PAT</h2><h3>%1 CORE-TEST</h3>
+<pre><code>configure terminal
+ip route 0.0.0.0 0.0.0.0 10.255.0.2
+end</code></pre>
+<p>CORE가 직접 연결·개별 경로로 알지 못하는 목적지를 EDGE로 보냅니다. EDGE의 기존 내부 VLAN 반환 경로는 유지합니다.</p><h3>%2 EDGE-TEST</h3>
+<pre><code>configure terminal
+interface GigabitEthernet0/0
+ ip nat inside
+exit
+interface GigabitEthernet0/1
+ ip nat outside
+exit
+ip access-list standard LAB-NAT
+ permit 10.10.10.0 0.0.0.255
+ permit 10.10.20.0 0.0.0.255
+exit
+ip nat inside source list LAB-NAT interface GigabitEthernet0/1 overload
+end</code></pre>
+<p>VLAN10·20 출발 주소를 EDGE의 Gi0/1 주소로 변환합니다. overload는 여러 내부 흐름을 하나의 외부 IP로 구분하는 PAT 설정입니다. <strong>LAB-NAT는 NAT 대상 선택용 ACL</strong>이며, 인터페이스에 적용한 차단·허용 정책 전체를 뜻하지 않습니다.</p><h3>%3 PC20에서 검증</h3>
+<pre><code>ping 1.1.1.1</code></pre>
+<p><strong>테스트 직후 EDGE-TEST:</strong></p>
+<pre><code>show ip nat translations</code></pre>
+<p><strong>실제 기록의 예:</strong></p>
+<pre><code>icmp 192.168.111.110:15180 10.10.20.10:15180 1.1.1.1:15180 1.1.1.1:15180</code></pre>
+<div class="table-wrap"><table><thead><tr><th>필드</th><th>이 시험의 의미</th></tr></thead><tbody><tr><td>Inside local</td><td>10.10.20.10 · 원래 내부 주소</td></tr><tr><td>Inside global</td><td>192.168.111.110 · EDGE 변환 후 주소</td></tr><tr><td>Outside local / global</td><td>1.1.1.1 · 외부 목적지</td></tr><tr><td>ICMP 행의 콜론 뒤 수치</td><td>ICMP 식별자 · TCP/UDP 포트와 구분</td></tr></tbody></table></div>
+<p><strong>완료 기준:</strong> PC20 Ping 성공 및 해당 PC 주소의 변환 행 확인. ICMP 기록은 만료될 수 있으므로 Ping 직후 조회합니다.</p></section>
+<section id="linux"><h2>$5 Linux의 실습 경로 검증</h2><p>Linux는 ens32의 기존 기본 경로로도 인터넷에 접근할 수 있습니다. 따라서 일반 Ping 성공만으로 EDGE 실습 경로를 통과했다고 판단하지 않습니다.</p><h3>%1 목적지 한 개만 실습망으로 보내기</h3><p><strong>Linux 테스트 서버:</strong> 기존 동일 /32 경로가 없는지 확인하고, 없을 때만 임시 추가합니다.</p>
+<pre><code>ip route show 1.1.1.1/32
+ip route add 1.1.1.1/32 via 10.10.10.1 dev ens34
+ip route get 1.1.1.1
+ping -c 4 1.1.1.1</code></pre>
+<p><strong>실제 경로:</strong></p>
+<pre><code>1.1.1.1 via 10.10.10.1 dev ens34 src 10.10.10.100</code></pre>
+<p><strong>실제 결과:</strong> Ping 손실 0%. 기본 경로는 변경하지 않고 /32만 더 구체적인 경로로 선택했습니다.</p><h3>%2 Linux NAT 확인</h3><p><strong>EDGE-TEST:</strong></p>
+<pre><code>show ip nat translations | include 10.10.10.100</code></pre>
+<p>이번 제공 출력에는 Linux → 91.189.91.96:80 / 91.189.91.58:80 TCP NAT 행이 표시됐습니다. 이는 별도의 TCP 변환 확인이며, 위 Ping의 ICMP NAT 행과 동일한 증거는 아닙니다. Linux Ping 경로·성공 결과와 구분해 기록합니다.</p><h3>%3 임시 경로 제거</h3>
+<pre><code>ip route del 1.1.1.1/32 via 10.10.10.1 dev ens34
+ip route show 1.1.1.1/32
+ip route get 1.1.1.1</code></pre>
+<p><strong>확인 기준:</strong> 전용 /32 경로가 없고 기존 ens32 경로로 돌아왔는지 확인합니다. 이 /32는 영구 프로필에 추가하지 않습니다. 실제 작업에서는 삭제 절차를 안내했으나 제거 결과 출력은 미수집 상태입니다.</p></section>
+<section id="persist"><h2>$6 저장·재부팅 검증</h2><p><strong>CORE-TEST·EDGE-TEST 각각:</strong></p>
+<pre><code>copy running-config startup-config</code></pre>
+<p>PC20 설정은 기존 저장 상태를 유지합니다. PNETLab VM을 정상 재부팅한 뒤 ASW1·CORE-TEST·EDGE-TEST·PC20을 실행합니다. 이번 단계의 Linux /32는 임시 테스트용이며 영구화하지 않습니다.</p><p><strong>CORE-TEST:</strong></p>
+<pre><code>show ip route 0.0.0.0</code></pre>
+<p><strong>EDGE-TEST:</strong></p>
+<pre><code>show ip interface brief | include GigabitEthernet0/1</code></pre>
+<p><strong>PC20:</strong></p>
+<pre><code>ping 1.1.1.1</code></pre>
+<div class="table-wrap"><table><thead><tr><th>항목</th><th>재부팅 후 결과</th></tr></thead><tbody><tr><td>CORE 기본 경로</td><td>next-hop 10.255.0.2 유지</td></tr><tr><td>EDGE Gi0/1</td><td>192.168.111.110, up/up 유지</td></tr><tr><td>PC20 외부 IP 통신</td><td>성공 · 사용자 확인</td></tr></tbody></table></div>
+<p class="meta">재부팅 후 PC20 시험은 성공 보고를 받았으며 전체 패킷 손실률 출력은 별도 수집하지 않았습니다. 이 시험에서 NAT 동작 유지도 함께 확인됐습니다.</p></section>
+<section id="ops"><h2>$7 문제 확인·원복·다음 작업</h2><h3>%1 확인 순서</h3>
+<div class="table-wrap"><table><thead><tr><th>증상</th><th>확인 지점</th></tr></thead><tbody><tr><td>EDGE → .2 실패</td><td>Gi0/1 up/up → Cloud0 연결 → 주소/마스크 → ARP</td></tr><tr><td>EDGE → .2 성공, 외부 IP 실패</td><td>EDGE 기본 경로 → VMware NAT / 호스트 인터넷 상태</td></tr><tr><td>EDGE 자체 성공, PC20 실패</td><td>PC20 IP·GW → CORE 기본 경로 → EDGE 내부 반환 경로 → NAT inside/outside·ACL·변환</td></tr><tr><td>Linux만 실패 또는 관리망으로 나감</td><td>ip route get 목적지 → ens34 및 src 주소 → 테스트 /32와 NAT 대상 확인</td></tr><tr><td>재부팅 후 실패</td><td>노드 실행 → 저장된 외부 IP·기본 경로 → PAT 설정 재확인</td></tr></tbody></table></div>
+<p>첫 손실은 ARP 학습 가능성이 있으나 무조건 정상으로 간주하지 않습니다. 반복 시험의 손실이 지속되면 위 순서로 원인을 확인합니다.</p><h3>%2 이번 추가 설정만 원복할 때</h3><p><strong>CORE-TEST:</strong></p>
+<pre><code>configure terminal
+no ip route 0.0.0.0 0.0.0.0 10.255.0.2
+end</code></pre>
+<p><strong>EDGE-TEST:</strong></p>
+<pre><code>configure terminal
+no ip nat inside source list LAB-NAT interface GigabitEthernet0/1 overload
+interface GigabitEthernet0/0
+ no ip nat inside
+exit
+interface GigabitEthernet0/1
+ no ip nat outside
+ shutdown
+ no ip address
+exit
+no ip route 0.0.0.0 0.0.0.0 192.168.111.2
+no ip access-list standard LAB-NAT
+end</code></pre>
+<p>다른 NAT 설정·세션이 있다면 해당 명령이 바로 수락되지 않을 수 있습니다. 운영 트래픽을 확인하고 오류를 진단하며 전체 변환을 무작정 삭제하지 않습니다. 내부 VLAN 반환 경로·CORE SVI·ASW Trunk와 VMnet8 관리 설정은 유지합니다. Linux의 임시 /32 제거는 $5 절차를 따릅니다.</p><h3>%3 남은 작업</h3><ul><li><strong>다음 단계: DNS 설정·도메인 이름 해석 검증.</strong></li><li>Linux .128 / DHCP 범위 중복 정리, 임시 /32 제거 확인.</li><li>최종 주소 정책 및 ARP / MAC / NAT 증거 정리.</li><li>HTTP/HTTPS 동작, AWS / Hybrid 연결은 후속 검증.</li></ul></section><footer>작성일 2026-10-11 · 근거: <a href="../docs/04_records/%EC%9E%91%EC%97%85%20%EA%B8%B0%EB%A1%9D.md">작업 기록.md</a> / <a href="../docs/02_design/network%20project%20%EC%A7%84%ED%96%89%EC%83%81%ED%99%A9.md">network project 진행상황.md</a> 및 제공된 출력 · 최소 디자인의 독립 HTML</footer></main></body></html>

@@ -1,0 +1,330 @@
+{
+  "created_on": "2026-10-19",
+  "purpose": "Source snapshot before code review and duplicate implementation consolidation",
+  "scope": "allowlisted source, tests, launchers and schemas; no source materials, approval DB, credentials, caches, receipts or runtime output",
+  "archive": "source_before_review.zip",
+  "files": {
+    "study/study-system/analyzer/__init__.py": {
+      "sha256": "c94a8f3e3fa0fba52c095713bb289427bfc15216f03dd2a4cf2288a40d76cfac",
+      "bytes": 80
+    },
+    "study/study-system/analyzer/auxiliary.py": {
+      "sha256": "537219fae1535a11435653d4c32520ef66cfa6878c14fe6d1fcd08acb7a9d988",
+      "bytes": 3509
+    },
+    "study/study-system/analyzer/batch.py": {
+      "sha256": "dd79344132a04694d89ec38671fa0130da8c8b0f2b2957e0cc68073d03cb437e",
+      "bytes": 8497
+    },
+    "study/study-system/analyzer/budget.py": {
+      "sha256": "0c4433c2584c0452e4dd5ecb2ba6e851442c310758b722fab1e09b72cd17461e",
+      "bytes": 4813
+    },
+    "study/study-system/analyzer/cache.py": {
+      "sha256": "9ff013319fa7bea28ebf227589eebe3dc87927ff2af308890ae8f7f03bff43b0",
+      "bytes": 12578
+    },
+    "study/study-system/analyzer/classification.py": {
+      "sha256": "ddf394f62a0e149e1bef70539dc904d0e308b7ae7a82b725814c432c46217104",
+      "bytes": 8802
+    },
+    "study/study-system/analyzer/comment_review.py": {
+      "sha256": "636fc53266120deca71d9b62e273619eca1733d53e69e64ebcbaf747527201e0",
+      "bytes": 7116
+    },
+    "study/study-system/analyzer/concept_refs.py": {
+      "sha256": "8c2c064804d01e989521de5c212440f561d2b6c2f44251bfcf376e3bb67f992e",
+      "bytes": 4084
+    },
+    "study/study-system/analyzer/core.py": {
+      "sha256": "fe27c3554337376fe65359e39fe0cac20eb50ebbeb4c1ab7cb138ccf914dba27",
+      "bytes": 11381
+    },
+    "study/study-system/analyzer/curriculum.py": {
+      "sha256": "2d5f5aae32d52ba3c81781b35eb71c68d060f7875ee8adc7b5a0a9f6608f11a3",
+      "bytes": 10040
+    },
+    "study/study-system/analyzer/evidence.py": {
+      "sha256": "46fe26dbb9c04e9041a0f4f0efdd60724027d4095e850476bcfd1d211fe129aa",
+      "bytes": 3196
+    },
+    "study/study-system/analyzer/knowledge.py": {
+      "sha256": "d9faf4758ba222848bd8da87725593d0cd6c497ecc8bc3564fd06e2fe0f87843",
+      "bytes": 12987
+    },
+    "study/study-system/analyzer/main.py": {
+      "sha256": "dc2a2bb5b819cab45217701cd0d780617f457f2cc3a9554a7505d02fd092aaa3",
+      "bytes": 16988
+    },
+    "study/study-system/analyzer/notion_cli.py": {
+      "sha256": "a0a6504d708c3e37dd368136ff15bb45fce67d9fcba8b7296499c5e7aeb26d6d",
+      "bytes": 3313
+    },
+    "study/study-system/analyzer/notion_front.py": {
+      "sha256": "5e92c4f7729a2a282a65983f4004d94adfc3343ed0d6e355630043cc013ecf64",
+      "bytes": 7916
+    },
+    "study/study-system/analyzer/notion_mcp.py": {
+      "sha256": "105cd523eb2a387124255fb27138c92c805ebc51cb264c735cae71d5f31a5038",
+      "bytes": 30724
+    },
+    "study/study-system/analyzer/notion_publisher.py": {
+      "sha256": "105c0473cad710e77fdf92401ca07dbac989201301c2a6056a6067a464c03a9f",
+      "bytes": 15208
+    },
+    "study/study-system/analyzer/notion_reader.py": {
+      "sha256": "126eb1dfdff774fa73205ce4a559fed7c99204e0b55a64321549b8df3a3815ae",
+      "bytes": 16769
+    },
+    "study/study-system/analyzer/notion_sync.py": {
+      "sha256": "87672384f42ea0da8255e6006cf36bf410ff612f04715f727a2f55ee533eb7e4",
+      "bytes": 27676
+    },
+    "study/study-system/analyzer/openai_provider.py": {
+      "sha256": "c7c6f826f3dcbaf2462188e0a5a4cd72ed7ed66564972b41a5b4ce616aa7ad20",
+      "bytes": 12379
+    },
+    "study/study-system/analyzer/organizer.py": {
+      "sha256": "168ddb5f07bf8b413eb1c15bd1e4161c89349498de9866b8d87dbed083ffa1e1",
+      "bytes": 6492
+    },
+    "study/study-system/analyzer/quality.py": {
+      "sha256": "764c607a621f3de084f9f9c880829713104734ae2284cde7072e0079b38bb401",
+      "bytes": 8271
+    },
+    "study/study-system/analyzer/recheck.py": {
+      "sha256": "83991a10842e6ada5dfef1654903ccd0b0b73169c37c1a6a98950b0decb8b837",
+      "bytes": 1693
+    },
+    "study/study-system/analyzer/render.py": {
+      "sha256": "8b39c172f3a0b1fccb361df2343d01884fcb739b8341b95fa7f2d8516769b471",
+      "bytes": 4849
+    },
+    "study/study-system/analyzer/review.html": {
+      "sha256": "dea5317327e6e777d5c167c10c20fe2909c5f491d81e52d19c918ae60aa818d8",
+      "bytes": 12556
+    },
+    "study/study-system/analyzer/review_server.py": {
+      "sha256": "a4a38441267a4a94bbdbd2c37d20039536b1b4ebf01c490c101d2f912ae28554",
+      "bytes": 6179
+    },
+    "study/study-system/analyzer/schemas.py": {
+      "sha256": "738e51cc7ec610e0fbe36a43da6eb3e344b3fab8f3afaa8fb66999f36577ef99",
+      "bytes": 1555
+    },
+    "study/study-system/analyzer/workspace.py": {
+      "sha256": "e33f4f8f8426ac1e95945a5ff174e8b09f947e6b69d9a5aaf0c44e7200ac8977",
+      "bytes": 20450
+    },
+    "study/study-system/collector/__init__.py": {
+      "sha256": "85a9770defcf618f16511f9d6b185b231d0856a182bf7411e9b3839325f8e689",
+      "bytes": 37
+    },
+    "study/study-system/collector/extractor.py": {
+      "sha256": "8dc7cfce2ad6f4bc6b44c3cbfdc198dc86352f02cc298721de9d44f142e71f69",
+      "bytes": 1481
+    },
+    "study/study-system/collector/hasher.py": {
+      "sha256": "7db8f1302c0a2fba12727c24d886c782b38f9f9e482bd29c229fae2e1ca43fa5",
+      "bytes": 591
+    },
+    "study/study-system/collector/main.py": {
+      "sha256": "ad469e8aa80a69a182f33abd27e616fc36e5274f382bfe5bdedd9fda8f78f07a",
+      "bytes": 3608
+    },
+    "study/study-system/collector/scanner.py": {
+      "sha256": "fae2f221c1c96372c80d1585e2a41e515e355ea74aa196de0843d99445bfa19a",
+      "bytes": 901
+    },
+    "study/study-system/launch.py": {
+      "sha256": "bc62966f66ba9629d141e5a93820cdfcc4cb4b2727e847cc99261cb05b08a71c",
+      "bytes": 687
+    },
+    "study/study-system/output/study_material_analysis_schema_v0.1.json": {
+      "sha256": "8d2dc241bfb4e62d13dd66b43b0e701e7793bad8dfb6e839668f3522bfc87b45",
+      "bytes": 7227
+    },
+    "study/study-system/output/study_material_analysis_schema_v0.2.json": {
+      "sha256": "2cd093aceb9a997bc46c679fcb82234f686b178f5341ce780a3ca856f393d16a",
+      "bytes": 11039
+    },
+    "study/study-system/output/study_material_analysis_schema_v0.2_draft.json": {
+      "sha256": "6a56acad3ac773ba0c62218b0c4972ed5dbb408fcd8b9a316b200119ae68e751",
+      "bytes": 11094
+    },
+    "study/study-system/requirements.txt": {
+      "sha256": "ee15bff8306de355f04d0e203f3795ca043b73cf1d41d559dc712699cf6d9476",
+      "bytes": 38
+    },
+    "study/study-system/run_analyzer.cmd": {
+      "sha256": "8d3531431ee05e634e803e7475b5420d8dda0157f44f4ffd50e57063c006696b",
+      "bytes": 454
+    },
+    "study/study-system/smoke_check.py": {
+      "sha256": "ba9e9144d73a308cc2b4b7275fd90e54003822ac11b1bf8ba4d3e2b02d389271",
+      "bytes": 2631
+    },
+    "study/study-system/tests/test_auxiliary.py": {
+      "sha256": "f0d75bd55cc0ed6860bc46d2233a0493b2c895f496ad64ab221766c8128a9d14",
+      "bytes": 8127
+    },
+    "study/study-system/tests/test_budget_quality.py": {
+      "sha256": "8f0e2c272ae6899f4fe58c8898dbda5a4bae0714ce541fc64f269fa37b44e24f",
+      "bytes": 8378
+    },
+    "study/study-system/tests/test_cache.py": {
+      "sha256": "b7f15211c6a4571f07cef61956ea3e225d14e9f332df0fdf3882075f6954ef31",
+      "bytes": 6537
+    },
+    "study/study-system/tests/test_comment_review.py": {
+      "sha256": "fd77a063eb2e48ece17ab20063629757c72d2d221cc05eac26c01743adf20f6b",
+      "bytes": 8368
+    },
+    "study/study-system/tests/test_concept_refs.py": {
+      "sha256": "7362707158720c513eb3f8690c15fb58d41a0980a9b0e05d6189db6b5ab89402",
+      "bytes": 5541
+    },
+    "study/study-system/tests/test_credential_redaction.py": {
+      "sha256": "1a6164c3d3d0d1b4eb3524d6a6b22b9f88241179e8a32c984f5ce9683e6045c1",
+      "bytes": 670
+    },
+    "study/study-system/tests/test_efficiency.py": {
+      "sha256": "f50ea7b0e7eac37dd4b11cc0ff26df11e1cb317fc06097e538145abc470eebd0",
+      "bytes": 12583
+    },
+    "study/study-system/tests/test_evidence.py": {
+      "sha256": "69499ae5e786a203aa6fc7a608db966de2b23df389731a1e9d7b30861966d035",
+      "bytes": 5439
+    },
+    "study/study-system/tests/test_knowledge.py": {
+      "sha256": "6eb0e216f13f0986e6446d41ba9e10bc072ed4cbd20b0bcbead6125d262dc825",
+      "bytes": 10327
+    },
+    "study/study-system/tests/test_notion_bridge.cjs": {
+      "sha256": "a454c52b248b6de52566cee885d99bbbcd370c2044b797288d8d14bb629a2054",
+      "bytes": 7672
+    },
+    "study/study-system/tests/test_notion_bridge.py": {
+      "sha256": "287e480d9afbd578d79f8c4183b4350f97ac3d3d526da11b6b39294f701cb46f",
+      "bytes": 3786
+    },
+    "study/study-system/tests/test_notion_delta.py": {
+      "sha256": "3c2791e2378f4df8f2cc7d8b38afa508235b6d19b33dfa093ff77b7d8ba461d2",
+      "bytes": 14142
+    },
+    "study/study-system/tests/test_notion_front.py": {
+      "sha256": "814ce356a1961daf0cfca8741f846f5eff05656c16915f7830a8fed655ac38cd",
+      "bytes": 7370
+    },
+    "study/study-system/tests/test_notion_mcp.py": {
+      "sha256": "6dc340dabd5423ef53313f0e278f340a594fc595e16eaf2ad3125c255a70b0e0",
+      "bytes": 13651
+    },
+    "study/study-system/tests/test_notion_publisher.py": {
+      "sha256": "5ab4ccf4e1e1c60dfbad716c86de97c57a822656c7920313d676cee3fb8a0c6f",
+      "bytes": 16471
+    },
+    "study/study-system/tests/test_notion_reader.py": {
+      "sha256": "2b2b98ebe3be0deb3bfefb340b54065680b4fd6cc54bfad653d661d6d1fb1a5f",
+      "bytes": 3993
+    },
+    "study/study-system/tests/test_notion_staged.py": {
+      "sha256": "59a6de4c2451882764400e0a567af3f77bd920a41388af3cd9d0221ed7f3f79e",
+      "bytes": 7349
+    },
+    "study/study-system/tests/test_notion_staged_replay.py": {
+      "sha256": "95edcf12739a4f2580b3a66b74b83b4d653e1088522a1879117d5869bc3df43c",
+      "bytes": 7718
+    },
+    "study/study-system/tests/test_notion_sync.py": {
+      "sha256": "5fa5c9f5cf8d3b6d01d8de181a6ded0a769c05535db19095e34a7227ffa8468e",
+      "bytes": 14188
+    },
+    "study/study-system/tests/test_openai.py": {
+      "sha256": "429ddb40edcd3624df4aeccd65122c09879973342604c4c91825fdb459ea39d6",
+      "bytes": 6943
+    },
+    "study/study-system/tests/test_optional_nulls.py": {
+      "sha256": "4bfec17f6f5a22d1c55a1103d6323ab4d88284cde7bdd83651c8bf072823c5e2",
+      "bytes": 2017
+    },
+    "study/study-system/tests/test_organizer.py": {
+      "sha256": "081402182c3f00990a055fcc1fea49c5bae8f0cd881b94c4d2a153813a9c07d3",
+      "bytes": 17820
+    },
+    "study/study-system/tests/test_pipeline.py": {
+      "sha256": "ba1f1040258c747045c8b1cd60bfbcb44c169fc9980dde38bab4ff674493c367",
+      "bytes": 7193
+    },
+    "study/study-system/tests/test_release_v02.py": {
+      "sha256": "3a379f525f0702eb4ec05ab67d1f99825e4e318877b276804270eefb0c0cbcb8",
+      "bytes": 12627
+    },
+    "study/study-system/tests/test_section_links.py": {
+      "sha256": "8561e4c1af67aac7c20b5dd552003029ee99077d15b209594322c272bbd1cd5d",
+      "bytes": 2846
+    },
+    "study/study-system/tools/notion_bridge/dispatch.js": {
+      "sha256": "415d4024c19d04bad33ba2cf44c7faee7734f4e9eac7cc6683ea6822f6bc53d5",
+      "bytes": 2208
+    },
+    "study/study-system/tools/notion_bridge/run_dispatch.js": {
+      "sha256": "641c86d3856b7a2264185f12a7b4be4f58038f3dc921714b0148a393858f5e82",
+      "bytes": 4029
+    },
+    "study/study-system/tools/notion_bridge/state.mjs": {
+      "sha256": "7b60165a8124724d4d25c2bedd91824674a6e531e2477eed0ad110b2bce5517a",
+      "bytes": 8207
+    },
+    "study/study-system/tools/notion_bridge/verify.py": {
+      "sha256": "c31b84e97e0712989dbd512c24a14ca35c447d0b8812fc8985d3684fe56aef40",
+      "bytes": 7755
+    },
+    "tools/build_analyzer_distribution.py": {
+      "sha256": "4858484464bdb9c10eba81813be438bb7f9925c22e485c56ef99530f25b4f90d",
+      "bytes": 1881
+    },
+    "tools/project_status.cmd": {
+      "sha256": "5e8dd8b56225e3eb906f30a46dd8c2ddb5047df7cd384fee321a9a8d51a163b9",
+      "bytes": 362
+    },
+    "tools/project_status.py": {
+      "sha256": "3707bbd4d12b933c6836727734e41f86d9194cc09e1f7511b563abb6aae10c0d",
+      "bytes": 4293
+    },
+    "tools/run_classification_review.cmd": {
+      "sha256": "ce48dfaa41a7ea3f98ca8bcdb69f3f1900712090d72215beeeb97d622a67a25a",
+      "bytes": 117
+    },
+    "tools/run_network_api_check.cmd": {
+      "sha256": "626a8ea8c2092af289eb043afc2bc091e59c572428dead57854edb6a8e4a4c90",
+      "bytes": 1022
+    },
+    "tools/run_notion_local.cmd": {
+      "sha256": "359d68e4499d1d9a12d52b7626273010bcd855bb3b046f831370973168366155",
+      "bytes": 225
+    },
+    "tools/validate_analysis_v0_2_draft.py": {
+      "sha256": "1a842f406a3dabaa4ae999ff57febc79380028c87104aae08285f286e3de77ac",
+      "bytes": 9939
+    }
+  },
+  "retirement_candidates": [
+    {
+      "symbol": "NotionMCP.write original single-page implementation",
+      "file": "study/study-system/analyzer/notion_mcp.py",
+      "reason": "duplicate body/property/checkpoint logic; retain public API by delegating to write_many"
+    },
+    {
+      "symbol": "NotionPublisher.write override",
+      "file": "study/study-system/analyzer/notion_publisher.py",
+      "reason": "redundant after inheriting shared guarded adapter"
+    }
+  ],
+  "retained_compatibility": [
+    "NotionMCP.write_many strict verification and recovery path",
+    "notion_front.refresh strict fallback",
+    "v0.1 and v0.2-draft schema support"
+  ],
+  "restore": "Extract selected original files from the ZIP into the project only after reviewing compatible sources; keep current approval DB and Notion outbox. No automatic overwrite or Git actions."
+}

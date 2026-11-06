@@ -1,0 +1,17 @@
+{
+  "mode": "notion-mcp",
+  "notion_sent": true,
+  "writes": 1,
+  "skipped": 0,
+  "reconciled": 0,
+  "errors": [
+    {
+      "key": "category:70c9ff4e2bd298310e77c4f47eaed599b2324fc4a5ab503126bc1a3a3ddeac5e",
+      "code": "NOTION_TOOL_ERROR",
+      "retry_after": null
+    }
+  ],
+  "plan_digest": "75517bcb89bd80075540e6ed7205051ef2f2a337b5e65e25f2ba0861f9e9ee64",
+  "approval_db_unchanged": true,
+  "result_path": "output\\notion_live\\runs\\20261016T043711Z_24c6e33eb68a\\report.json"
+}

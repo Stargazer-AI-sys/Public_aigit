@@ -1,0 +1,11 @@
+{
+  "mode": "notion-mcp",
+  "notion_sent": false,
+  "writes": 0,
+  "skipped": 38,
+  "reconciled": 0,
+  "errors": [],
+  "plan_digest": "75517bcb89bd80075540e6ed7205051ef2f2a337b5e65e25f2ba0861f9e9ee64",
+  "approval_db_unchanged": true,
+  "result_path": "output\\notion_live\\runs\\20261016T045517Z_e47261c2bf4e\\report.json"
+}

@@ -1,0 +1,54 @@
+{
+  "status": "PASS",
+  "automated_unit_tests": {
+    "passed": 60,
+    "total": 60,
+    "transport": "mock only"
+  },
+  "runs": [
+    {
+      "directory": "output\\v0.2_integration_demo\\runs\\20261015T070212Z_b0ee80481f22",
+      "status": "SUCCESS",
+      "actual_ai_call": false,
+      "result_reused": false
+    },
+    {
+      "directory": "output\\v0.2_integration_demo\\runs\\20261015T070213Z_aa585451d2ed",
+      "status": "SUCCESS",
+      "actual_ai_call": false,
+      "result_reused": true
+    }
+  ],
+  "source_preserved": true,
+  "actual_ai_calls": 0,
+  "default_schema": "v0.1 (unchanged)",
+  "v0.2_selection": "explicit --schema",
+  "comment_policy": "reviewed local context only",
+  "limitations": [
+    "No live API request was made.",
+    "Automatic external-source retrieval and new technical review are not implemented.",
+    "v0.2 comment usefulness and section grouping still require content review.",
+    "Existing v0.1 responses are not silently converted to v0.2."
+  ],
+  "modified_existing_modules": [
+    "study/study-system/analyzer/budget.py",
+    "study/study-system/analyzer/cache.py",
+    "study/study-system/analyzer/core.py",
+    "study/study-system/analyzer/main.py",
+    "study/study-system/analyzer/openai_provider.py",
+    "study/study-system/analyzer/quality.py",
+    "study/study-system/analyzer/recheck.py"
+  ],
+  "added_modules": [
+    "study/study-system/analyzer/knowledge.py",
+    "study/study-system/tests/test_knowledge.py"
+  ],
+  "extracted_original_materials_unchanged": true,
+  "runtime_source_directory": "study/study-system",
+  "test_environment": "Windows / Python 3.14 / PYTHONUTF8=1; existing virtualenv dependencies",
+  "notes": [
+    "Windows corrupt-ledger connection cleanup fixed without changing limits.",
+    "Official records and user guides were not updated.",
+    "Original v0.5 package and v0.1 Schema preserved."
+  ]
+}

@@ -1,0 +1,42 @@
+{
+  "ok": true,
+  "audit": {
+    "mode": "offline-snapshot-audit",
+    "remote_freshness_checked": false,
+    "scope": "selected",
+    "expected_entities": 2,
+    "entities": 2,
+    "unique_sync_keys": 2,
+    "stored_receipts": 109,
+    "receipt_confirmations": {
+      "write-response": 2
+    },
+    "physical_stamp_checked_entities": 0,
+    "kinds": {
+      "material": 2
+    },
+    "errors": [],
+    "pending_operations": 0,
+    "lock_files": [],
+    "operations": {
+      "success": 363
+    },
+    "front_pages": 10,
+    "front_database_blocks": 0,
+    "unknown_internal_link_targets": [],
+    "front_layout_compared": false,
+    "ok": true
+  },
+  "checks": {
+    "updated_five_front_bodies_match": true,
+    "both_materials_linked_from_home": true,
+    "both_materials_linked_from_index": true,
+    "both_materials_linked_from_domains": true,
+    "no_pending_fronts": true
+  },
+  "fresh_remote_materials": 2,
+  "fresh_remote_fronts": 5,
+  "readback_fetch_calls": 14,
+  "readback_note": "first 7 fetches could not be persisted due to tool input size; repeated and saved in chunks; historical fronts used only to identify existing links",
+  "pc_visual_checked": false
+}

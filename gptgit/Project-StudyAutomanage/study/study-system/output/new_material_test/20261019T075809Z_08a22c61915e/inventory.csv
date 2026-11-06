@@ -1,0 +1,119 @@
+﻿filename,path,extension,size_bytes,created_at,modified_at,sha256,text_length,status,error,text
+3일차 7계층 OSI.txt,C:\Users\ICT\Desktop\Aigit\gptgit\Project-StudyAutomanage\study\sourcefile\3일차 7계층 OSI.txt,.txt,5910,2026-10-19T12:12:47,2026-09-03T16:56:30,f7bdb87ad9ce7c657d40c849cce63e5159beab8468631a79bd8f2fbea6d392d1,3081,success,,"7계층 application
+6계층 presentation
+5계층 session
+사용자 확인가능
+4계층 transport
+3계층 network
+2계층 datalink
+1계층 physical
+별도 프로그램 사용해서 확인
+
+장점 
+
+1. 개발자 및 엔지니어가 프로토콜에 대한 이해를 쉽게 할 수 있다.
+=> 개발자는 자신이 개발하는 프로그램의 계층을 미리 지정함으로써 사용될 프로토콜 종류를 개발과정에서 추가할 수 있다.
+=>엔지니어는 자신이 관리하는 장비의 계층을 확인하면 사용되는 프로토콜의 종류를 짐작할 수 있다.
+2. 사용자의 편의성 확장
+=> 제조자가 다른 장비의 호환성을 통해 장비를 더 쉽게 사용할 수 있게 됨
+3. 캡슐화 과정에 대한 이해를 쉽게 함으로써 네트워크 장애시 빠른 대처가 가능하다.
+
+7계층에 대한 이해
+1. 통신 프로그램 실행(*.exe)
+=> 프로그램 실행하는 자체가 7계층의 구현
+=> 이때 이미 사용될 TCP/UDP  의 종류와 포트번호는 결정됨
+
+2. 실행된 프로그램의 화면을 표현하기 위한 프로토콜들이 동작
+=>압축 및 암호화 기능도 함께 동작(6계층)
+
+3. 통신의 연결 유지 종료 및 통신 방향을 결정 프로세스를 관리(PID)하는 계층 (5계층)
+*tcp 3-웨이 핸드쉐이크 3-way handshake? ark  
+PID 관리 시 보안이 강화 될 수 있음 서로 다른 pid
+cmd - netstat -ao 프로세스 아이디 확인시 왜 ? 백도어 확인할때 씀(내가 모르는 프로세스를 확인할때 씀)★★
+
+ex 속도 협상 예를들어 10Mbps 100Mbps 가 pc에서 10mbps 설정되어 있고 스위치 컨피크 인터페이스에 100mbps로 고정 설정이 되어 있는 경우 통신이 되지 않는 상황도 있었다.
+요즘은 이정도는 auto로 자동협상
+
+4. 7계층에서 실행된 프로그램의 형태(신뢰TCP)/비신뢰(UDP) 포트번호 지정 (4계층)
+5. 트래픽의 출발지/목적지 주소 지정(IP). 네트워크 경로 지정(RIP ospf 등 프로토콜), IP관련 테이블 매핑(ARP) (3계층) ★★
+6. 목적지의 내 외부 구분 (와이어샤크 확인)(LAN WAN )(2계층)
+시리얼 인터페이스 경우 encap 을 통한 프로토콜 변경 지원 
+7. 모든 트래픽의 신호 변환 (1계층)
+ex 게임실행 
+1. 사용자가 실행아이콘을 더블클릭 => application
+2. 게임 실행화면에 표현되는 여러가지 포맷(파일형식) => presentation
+3. 서버와의 세션 수립,  유지, 종료 및 통신 방향 결정 (로그인?) =>  session
+4. 게임 진행에 필요한 각종 서비스 관련 포트 =>transport
+5. 게임서버와 사용자 시스템간 상호 식별 및 사용자 정보가 네트워크로 넘어갈 때 경로를 지정 =>network
+6. 게임서버가 lan에 있는지 아니면 wan에 존재하는 구분 => datalink
+7. 모든 트래픽의 출력과 신호 종류 구분(연결된 NIC의 종류 기반) => physical
+
+frame 의 크기가 1400byte 라고 하면 그 속에 실제 데이터인 message 의 크기는 얼마인가 
+현재 사용중인 프로그램은 web 1342
+
+라우터가 스위치로 받은 패킷의 크기는 1380byte이다 라우터의 acl에서 차단목록에 포함시킨 tcp의 패킷이라고 했을 때 이 패킷속에 있는 메세지의 크기는 얼마인가? 1340
+
+이더넷 프레임(2계층) 구조
+preable 7바이트 101010101010...
+sfd 1바이트 10101011 시작 
+nic 버퍼에 저장 후 시작되면 버림
+
+destination MAC 6바이트 
+ex FFFF로 올경우 ARP 테이블에 없을경우 브로드케스트를 돌림
+->목적지 주소임
+
+Source MAC 6바이트 : 출발지 MAC 주소로 스위치는 이 주소를 MAC-address-table에 등록 이런 이유로 브로드 캐스트 MAC주소는 MAC table 에 학습될 수 없음
+->출발지 주소임
+
+802.1Q tag 4바이트 (vlan 태크 옵션)
+
+ethertype 2바이트 (위에 상위 계층은 어떤거다 알려주는 역활 ex ipv4 arp ipv6 )
+-type or length(2byte) : 3계층 헤더의 종류를 표시하는 영역으로 IP, ARP, ICMP, IPv6를 미리 알려주는 역활
+data => 페이로드
+
+FCS 4바이트 crc 오류 검출 => 0000을 4바이트 처리 데이터의 끝을 알림
+
+ipv4 packet 4계층
+-header 길이 : 4bit 처리하며 IPv4 ipv6등을 구분
+-total length : 패킷의 전체 길이 표시 최대길이는 이론적으로 65536바이트의 길이가 최대 길이이나 MTU로 처리하기 때문에 일반적인 이더넷 통신은 1500바이트를 사용
+MTU 장비가 최대한 보낼수 있는 길이 커낵터 형식에 따라 다름 FDDI 
+
+indentification 16비트 데이터 그룹을 표시하기 위한거 똑같은 그룹번호를 부여하면 이게 어떤관련된 데이터인지 알수 있게 하는것
+fragment offset 13비트  MTU에서나 패킷이 한번에 보낼수 있는 용량이 한도가 있기때문에 쪼개고 거기에 붙히는 데이터인데 데이터 수신 받는 입장에서 따로따로 받게 됬을때 프레그먼트 옵셋 값을 통해서 순서를 정렬하게 된다.
+
+
+protocol 8비트
+C:\Windows\System32\drivers\etc protocol 파일에서 해당 프로토콜비트에 관한 숫자를 확인할수 있음
+
+
+
+
+
+ 
+
+
+++++++++++++++++++++++++++++++++++++++++
+Memory 분류
+1.  주기억장치 cpu와 직접 통신가능
+ - ram static 정적 전압 메모리
+sram
+=>cashe 반복적으로 사용되는 자료 보관 cpu l1 l2 l3 캐쉬
+=>buffer 속도 보상을 목적으로 사용
+tcp segment window size 
+20 8 20 18
+dram
+sdram(syncronous dram)
+rdram(rambus dram)
+ddr sdram (double data rate sdram)
+
+ - rom
+rom prom eprom eeprom flash
+
+2.  보조기억장치 cpu와 직접통신 불가능 주기억장치와 장치를 통해서 통신 (ex sata )
+ - 자기드라이브  hdd
+ - 광학드라이브 cd
+ - 전자기 드라이브 ssd
+
+
+
+"

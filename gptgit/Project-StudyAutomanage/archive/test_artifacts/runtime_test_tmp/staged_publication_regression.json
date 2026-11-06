@@ -1,0 +1,44 @@
+{
+  "tests_run": 88,
+  "failures": 0,
+  "errors": 0,
+  "skipped": 0,
+  "success": true,
+  "saved_case_replay": {
+    "mode": "offline saved-case replay",
+    "old_actual_calls": 87,
+    "new_mock_calls": 55,
+    "new_commands": {
+      "query_data_sources": 4,
+      "notion_create_pages": 3,
+      "notion_update_page:replace_content": 25,
+      "notion_update_page:update_properties": 23
+    },
+    "old_actual_bridge_exchanges": 17,
+    "new_mock_bridge_exchanges": 5,
+    "normal_body_reads": 0,
+    "duplicate_body_or_property_writes": 0,
+    "approval_db_unchanged": true,
+    "actual_notion_calls": 0,
+    "paid_ai_calls": 0
+  },
+  "live_notion_calls": 0,
+  "paid_ai_calls": 0,
+  "additional_recovery_run": {
+    "module": "test_notion_staged",
+    "tests_run": 5,
+    "failures": 0,
+    "errors": 0,
+    "success": true,
+    "includes_partial_allocation_after_reader_digest_change": true
+  },
+  "changed_files": [
+    "analyzer/notion_sync.py",
+    "analyzer/notion_publisher.py",
+    "analyzer/notion_mcp.py",
+    "analyzer/notion_front.py",
+    "tests/test_notion_staged.py",
+    "tests/test_notion_staged_replay.py",
+    "tests/test_notion_front.py"
+  ]
+}

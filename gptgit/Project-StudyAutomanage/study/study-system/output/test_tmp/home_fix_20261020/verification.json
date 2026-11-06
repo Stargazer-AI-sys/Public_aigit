@@ -1,0 +1,60 @@
+{
+  "checks": {
+    "complete_3fb062cd7cd180c6ab73d56d5fadc0a5": true,
+    "complete_3fe062cd7cd18139aeb6f6aecf72977b": true,
+    "complete_3fe062cd7cd181e194d8f2703c0637af": true,
+    "body_matches_3fb062cd7cd180c6ab73d56d5fadc0a5": true,
+    "osi_link_3fb062cd7cd180c6ab73d56d5fadc0a5": true,
+    "body_matches_3fe062cd7cd18139aeb6f6aecf72977b": true,
+    "osi_link_3fe062cd7cd18139aeb6f6aecf72977b": true,
+    "home_to_domain": true,
+    "osi_classification": true,
+    "approval_db_unchanged": true,
+    "all_107_receipts_unchanged": true,
+    "only_home_domain_changed": true,
+    "no_pending_fronts": true,
+    "unchanged_list_only": true,
+    "unchanged_front_writes_zero": true
+  },
+  "changed_front_ids": [
+    "3fe062cd7cd18139aeb6f6aecf72977b",
+    "3fb062cd7cd180c6ab73d56d5fadc0a5"
+  ],
+  "audit": {
+    "mode": "offline-snapshot-audit",
+    "remote_freshness_checked": false,
+    "scope": "selected",
+    "expected_entities": 1,
+    "entities": 1,
+    "unique_sync_keys": 1,
+    "stored_receipts": 107,
+    "receipt_confirmations": {
+      "write-response": 1
+    },
+    "physical_stamp_checked_entities": 0,
+    "kinds": {
+      "material": 1
+    },
+    "errors": [],
+    "pending_operations": 0,
+    "lock_files": [],
+    "operations": {
+      "success": 361
+    },
+    "front_pages": 10,
+    "front_database_blocks": 0,
+    "unknown_internal_link_targets": [],
+    "front_layout_compared": false,
+    "ok": true
+  },
+  "remote_readback_calls": 3,
+  "browser_visual_checked": false,
+  "ok": true,
+  "audit_evidence": {
+    "fresh_remote_fronts": 2,
+    "historical_navigation_responses_reused": 8,
+    "historical_purpose": "known internal link targets only; not current remote validation"
+  },
+  "publication_report": "output/notion_live/runs/20261019T232103Z_71ae4d3f2f5a/report.json",
+  "unchanged_report": "output/notion_live/runs/20261019T232256Z_dc41e66ee1db/report.json"
+}

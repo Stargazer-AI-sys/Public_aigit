@@ -1,0 +1,11 @@
+test_approval_change_blocks_prepared_package (test_notion_prepared.PreparedTests.test_approval_change_blocks_prepared_package) ... ok
+test_manual_front_edit_is_preserved (test_notion_prepared.PreparedTests.test_manual_front_edit_is_preserved) ... ok
+test_modified_package_is_rejected (test_notion_prepared.PreparedTests.test_modified_package_is_rejected) ... ok
+test_new_material_binds_returned_id_and_repeat_writes_nothing (test_notion_prepared.PreparedTests.test_new_material_binds_returned_id_and_repeat_writes_nothing) ... ok
+test_prepare_contains_all_17_categories_including_empty_without_writes (test_notion_prepared.PreparedTests.test_prepare_contains_all_17_categories_including_empty_without_writes) ... ok
+test_setting_change_blocks_before_any_remote_call (test_notion_prepared.PreparedTests.test_setting_change_blocks_before_any_remote_call) ... ok
+
+----------------------------------------------------------------------
+Ran 6 tests in 8.759s
+
+OK

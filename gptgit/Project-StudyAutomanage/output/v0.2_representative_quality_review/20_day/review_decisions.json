@@ -1,0 +1,26 @@
+[
+  {
+    "candidate_id": "candidate-c1e2585f5137c003",
+    "outcome": "supported",
+    "reason": "이번 대화에서 공식 자료 본문을 조회하고 해당 정정 문장이 출처의 설명과 일치함을 검토했다.",
+    "reference": {
+      "id": "cisco-extended-ping",
+      "title": "Cisco — Understand the Extended Ping and Extended Traceroute Commands",
+      "url": "https://www.cisco.com/c/en/us/support/docs/ip/routing-information-protocol-rip/13730-ext-ping-trace.html",
+      "verification_status": "source_checked",
+      "checked_on": "2026-10-15"
+    }
+  },
+  {
+    "candidate_id": "candidate-d9a10b33638d4de5",
+    "outcome": "supported",
+    "reason": "이번 대화에서 공식 자료 본문을 조회하고 해당 정정 문장이 출처의 설명과 일치함을 검토했다.",
+    "reference": {
+      "id": "cisco-redistribution",
+      "title": "Cisco — Configure Routing Protocol Redistribution",
+      "url": "https://www.cisco.com/c/en/us/support/docs/ip/enhanced-interior-gateway-routing-protocol-eigrp/8606-redist.html",
+      "verification_status": "source_checked",
+      "checked_on": "2026-10-15"
+    }
+  }
+]

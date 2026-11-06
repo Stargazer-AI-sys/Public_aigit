@@ -1,0 +1,8 @@
+{
+  "at": "2026-10-28T12:46:01.702837+00:00",
+  "packet_sha256": "e856c9a18775868d28f7ddfca067e34aa98b41a4232358f4274fdf0b005d59c6",
+  "request_sha256": "aa970bd618fca0ffde33da9db27e70b5439e947a92f6ad18cc56de4602878a7a",
+  "model": "openai/gpt-6-luna",
+  "status": "claimed",
+  "sources": []
+}

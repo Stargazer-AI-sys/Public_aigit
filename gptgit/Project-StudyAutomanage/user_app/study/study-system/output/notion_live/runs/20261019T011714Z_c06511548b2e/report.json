@@ -1,0 +1,30 @@
+{
+  "mode": "notion-mcp",
+  "notion_sent": true,
+  "writes": 72,
+  "skipped": 72,
+  "reconciled": 0,
+  "errors": [],
+  "plan_digest": "7d4534c10c261005bdc0c84b1e42ab05553e73667fa9cd3417d0be9a7fae3929",
+  "phase_seconds": {
+    "content": 1353.283,
+    "relations": 6.53
+  },
+  "elapsed_seconds": 1359.814,
+  "transport_metrics": {
+    "tool_calls": {
+      "query_data_sources": 4,
+      "fetch": 288,
+      "notion_update_page": 144
+    },
+    "tool_seconds": {
+      "query_data_sources": 56.5861260999809,
+      "fetch": 227.79657530010445,
+      "notion_update_page": 1061.0998593000113
+    },
+    "exchanges": 13,
+    "batch_creates": 0
+  },
+  "approval_db_unchanged": true,
+  "result_path": "C:\\Users\\ICT\\Desktop\\Aigit\\gptgit\\Project-StudyAutomanage\\study\\study-system\\output\\notion_live\\runs\\20261019T011714Z_c06511548b2e\\report.json"
+}

@@ -1,0 +1,32 @@
+{
+  "method": "manual_source_grounded_concept_completion",
+  "origin_run": "C:\\Users\\ICT\\Desktop\\Aigit\\gptgit\\Project-StudyAutomanage\\study\\study-system\\output\\knowledge_base\\runs\\20261019T032342Z_9275ca30e632",
+  "original_response_preserved": true,
+  "paid_calls": 0,
+  "auto_approved": false,
+  "changes": [
+    {
+      "path": "/concepts/8",
+      "value": {
+        "name": "VLAN",
+        "description": "자료는 스위치 액세스 포트를 VLAN 10·20·30에 할당하고, 각 스위치의 VLAN DB에 해당 VLAN 정보를 구성한 뒤 라우터 하위 인터페이스에 dot1q VLAN ID를 지정하는 예시를 제시합니다.",
+        "type": {
+          "category": "스위치 구성",
+          "subtype": "VLAN"
+        }
+      }
+    },
+    {
+      "path": "/sections/1/content_refs",
+      "added": "/concepts/8"
+    },
+    {
+      "path": "/sections/2/content_refs",
+      "added": "/concepts/8"
+    }
+  ],
+  "content_review_notes": [
+    "원래 응답의 relationships/0은 트렁크 포트의 태깅 기능을 VLAN 액세스 포트에 연결한 표현이므로 의미·방향을 사용자 검토할 필요가 있습니다.",
+    "자료는 LAN 이론과 VLAN·트렁크·Router-on-a-stick·ACL 명령 예시가 섞인 자료입니다."
+  ]
+}

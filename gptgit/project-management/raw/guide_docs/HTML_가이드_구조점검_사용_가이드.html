@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>HTML 가이드 구조 점검</title>
+<style>
+:root{color-scheme:light}*{box-sizing:border-box}body{margin:0;background:#fff;color:#20252b;font:16px/1.75 system-ui,-apple-system,"Segoe UI","Malgun Gothic",sans-serif}main{max-width:960px;margin:auto;padding:42px 28px 70px}h1{font-size:29px;line-height:1.4;margin:0 0 12px}h2{font-size:23px;margin:42px 0 16px;padding-bottom:8px;border-bottom:1px solid #d9dee4}h3{font-size:18px;margin:26px 0 10px}p{margin:10px 0}a{color:#245c88;text-underline-offset:3px}.meta{color:#606973;font-size:14px}.note{padding:12px 16px;border-left:3px solid #7893a8;background:#f5f7f9;margin:18px 0}.caution{border-left-color:#a76c32}nav{padding:16px 0;border-bottom:1px solid #d9dee4}nav a{display:inline-block;margin:4px 16px 4px 0}table{border-collapse:collapse;width:100%;font-size:14px;margin:14px 0}th,td{padding:10px 12px;text-align:left;border:1px solid #d9dee4;vertical-align:top}th{background:#f3f5f7}.table-wrap{overflow-x:auto}pre{background:#f5f6f8;border:1px solid #e0e4e8;border-radius:4px;padding:14px 16px;overflow-x:auto;line-height:1.6;font-size:14px}code{font-family:ui-monospace,SFMono-Regular,Consolas,monospace}p code,li code,td code{background:#f1f3f5;padding:1px 4px;border-radius:3px}li{margin:7px 0}footer{margin-top:40px;border-top:1px solid #d9dee4;padding-top:16px;font-size:13px;color:#606973}@media(max-width:600px){main{padding:24px 16px}h1{font-size:25px}h2{font-size:21px}th,td{padding:8px}pre{font-size:13px}}@media print{main{max-width:none;padding:0}nav{display:none}h2{break-after:avoid}pre,table,.note{break-inside:avoid}a{color:inherit}body{font-size:11pt}}
+</style>
+</head>
+<body><main>
+<header><p class="meta">프로젝트 관리 · v0.1 · 2026-10-15</p><h1>HTML 가이드 구조 점검</h1><p>가이드 완성 → 해당 파일만 로컬 1회 점검 → 결과 확인</p></header>
+<p class="note">AI는 가이드를 작성·수정한 뒤 <a href="../docs/02_design/management_workflow.md">관리 워크플로 5.2절</a>과 simple-user-guide의 「로컬 1회 구조 점검」에 따라 해당 HTML만 검사합니다. 정상 통과했다면 사용자가 다시 실행할 필요는 없습니다.</p>
+<nav aria-label="목차"><a href="#scope">1. 언제 무엇을 검사하나</a><a href="#run">2. 직접 실행하는 방법</a><a href="#result">3. 결과 확인</a></nav>
+
+<section id="scope"><h2>1. 언제 무엇을 검사하나</h2>
+<p>가이드 작성·수정을 마친 뒤 최종 HTML을 한 번 검사합니다. 발견한 오류를 수정했다면 영향받는 파일만 다시 검사합니다.</p>
+<ul><li>상대 링크로 연결한 파일·폴더가 존재하는지 확인합니다.</li><li>같은 HTML의 목차가 실제 ID에 연결되는지, ID가 중복됐는지 확인합니다.</li><li>검사기는 원본을 읽기만 합니다. 예약 실행·자동 수정·Git 작업·가이드 속 명령 실행은 하지 않습니다.</li></ul>
+<p><strong>확인:</strong> AI의 완료 보고에 검사한 파일, 실제 결과, 검사하지 않은 범위가 구분되어 있어야 합니다. 내용 정확성과 화면 가독성 검토는 별도입니다.</p>
+</section>
+
+<section id="run"><h2>2. 직접 실행하는 방법 — 필요할 때만</h2>
+<p>PowerShell 7이 필요합니다. Windows 기본 PowerShell 5.1 창에서도 아래처럼 PowerShell 7 실행기를 직접 지정할 수 있습니다. 현재 폴더에 의존하지 않도록 절대경로를 사용합니다.</p>
+<p>아래는 <strong>현재 Stargazer PC에서 이 가이드 자체를 점검하는 예시</strong>입니다. 다른 PC에서는 관리 프로젝트와 사용 가능한 PowerShell 7의 실제 위치를 먼저 확인해 바꿉니다. Codex 번들 경로는 앱 환경에 따라 달라질 수 있습니다.</p>
+<pre><code>$managementRoot = "C:\Users\Stargazer\OneDrive\Desktop\aigit\gptgit\project-management"
+$powerShell7 = "$env:USERPROFILE\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.exe"
+$checkerPath = Join-Path $managementRoot "tools\check_project_docs.ps1"
+$targetProjectRoot = $managementRoot
+$guidePath = Join-Path $targetProjectRoot "guide_docs\HTML_가이드_구조점검_사용_가이드.html"
+&amp; $powerShell7 -NoProfile -File $checkerPath -ProjectRoot $targetProjectRoot -Files $guidePath
+$LASTEXITCODE</code></pre>
+<p>다른 가이드는 아래 대상 프로젝트와 HTML 경로만 바꿔 지정합니다.</p>
+<div class="table-wrap"><table><thead><tr><th>변수·옵션</th><th>역할</th></tr></thead><tbody>
+<tr><td><code>$managementRoot</code></td><td>점검 도구가 있는 관리 프로젝트의 절대경로</td></tr>
+<tr><td><code>$targetProjectRoot</code> / <code>$guidePath</code></td><td>점검할 프로젝트와 HTML의 절대경로. 다른 프로젝트를 검사할 때 이 두 값을 바꿉니다.</td></tr>
+<tr><td><code>-NoProfile</code> / <code>-File</code></td><td>개인 시작 설정을 불러오지 않고 지정한 스크립트를 실행합니다.</td></tr>
+<tr><td><code>-ProjectRoot</code> / <code>-Files</code></td><td>검사 대상 프로젝트와 파일을 지정합니다.</td></tr>
+</tbody></table></div>
+<p><strong>확인:</strong> JSON 결과 뒤의 숫자가 <code>0</code>인지 확인합니다. 파일 경로·버전·실행 정책 문제로 시작하지 못했다면 검사가 완료된 것이 아닙니다.</p>
+</section>
+
+<section id="result"><h2>3. 결과 확인</h2>
+<div class="table-wrap"><table><thead><tr><th>결과</th><th>확인·조치</th></tr></thead><tbody>
+<tr><td><code>CHECKED_ITEMS_OK</code> / 종료 코드 <code>0</code></td><td>검사한 범위에서 문제 없음. <code>skipped_checks</code>의 제외 항목도 확인합니다.</td></tr>
+<tr><td><code>ISSUES_FOUND</code> / 종료 코드 <code>1</code></td><td><code>findings</code>의 파일·줄·대상을 확인합니다. 링크나 ID를 요청 범위에서 수정한 뒤 해당 파일만 다시 검사합니다.</td></tr>
+<tr><td><code>CHECK_ERROR</code> / 종료 코드 <code>2</code></td><td>실행 조건 오류입니다. 메시지와 프로젝트 경로를 확인합니다.</td></tr>
+</tbody></table></div>
+<p>대표 오류는 <code>broken_relative_link</code>(연결 파일 없음), <code>missing_html_id</code>(같은 문서의 연결 대상 ID 없음), <code>duplicate_html_id</code>(중복 ID)입니다.</p>
+<p class="note">외부 사이트 연결, 다른 문서 내부의 ID, 동적으로 생성된 링크, 내용 정확성·화면 품질은 검사하지 않습니다. <code>CHECKED_ITEMS_OK</code>를 이 항목들의 검증 완료로 해석하지 않습니다.</p>
+<p>실행 자체가 차단되면 PowerShell 7 실행기와 절대경로를 먼저 확인합니다. 실행 정책을 자동 변경하거나 우회하지 않습니다. 이 도구가 없는 환경에서는 미점검 사유를 남깁니다.</p>
+<p><strong>확인:</strong> 오류가 해결된 결과와 검사 제외 범위를 함께 보고하면 구조 점검을 마칩니다.</p>
+</section>
+
+<footer>v0.1 · 2026-10-15 · simple-user-guide v0.2 적용<br><a href="../README.md">프로젝트 안내</a> · <a href="../docs/02_design/management_workflow.md">관리 워크플로</a> · <a href="../tools/check_project_docs.ps1">점검 스크립트</a><br>이 가이드는 사용 절차입니다. 이번 제작 후의 실제 1회 검사 결과는 채팅 완료 보고에서 확인합니다.</footer>
+</main></body></html>

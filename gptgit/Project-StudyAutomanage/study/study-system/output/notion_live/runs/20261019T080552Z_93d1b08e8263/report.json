@@ -1,0 +1,52 @@
+{
+  "mode": "notion-mcp",
+  "notion_sent": false,
+  "writes": 0,
+  "skipped": 8,
+  "reconciled": 0,
+  "errors": [],
+  "plan_digest": "ad9d710185c4fab69b16155dba162b2047703387e2b063efd1d72a90a7b4d285",
+  "publication_policy": "local-source",
+  "normal_write_confirmation": "tool-response",
+  "phase_seconds": {
+    "complete": 0.784,
+    "front": 0.107
+  },
+  "elapsed_seconds": 34.018,
+  "transport_metrics": {
+    "tool_calls": {
+      "query_data_sources": 1
+    },
+    "tool_seconds": {
+      "query_data_sources": 33.11795119999442
+    },
+    "exchanges": 1,
+    "batch_creates": 0,
+    "request_json_bytes": 145,
+    "response_json_bytes": 16296,
+    "local_changed_entities": 0,
+    "revision_reused_pages": 8,
+    "changed_revision_reused_pages": 0,
+    "body_read_pages": 0,
+    "revision_bootstrap_pages": 0,
+    "publication_policy": "local-source",
+    "acknowledged_pages": 0
+  },
+  "publication_sequence": "complete-only",
+  "entity_notion_sent": false,
+  "front_completion": "complete",
+  "front_pages": {
+    "total": 1,
+    "unchanged": 1,
+    "reads": 0,
+    "writes": 0,
+    "recovered": 0,
+    "errors": [],
+    "verified_page_ids": [],
+    "acknowledged_page_ids": [],
+    "publication_policy": "local-source"
+  },
+  "approval_db_unchanged": true,
+  "total_elapsed_seconds": 34.018,
+  "result_path": "output\\notion_live\\runs\\20261019T080552Z_93d1b08e8263\\report.json"
+}

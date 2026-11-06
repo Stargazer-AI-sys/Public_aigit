@@ -1,0 +1,23 @@
+{
+  "provider": "mock-file",
+  "actual_ai_call": false,
+  "api_request_attempted": false,
+  "response_received": false,
+  "result_reused": true,
+  "cache_key": "8dfd847bfef36c9660a21f99639c393602cac65c82b3e543230702e13b47fa9f",
+  "cached_origin": {
+    "kind": "generated_result"
+  },
+  "completed_stages": [
+    "input_validation",
+    "cache_validation",
+    "schema_validation"
+  ],
+  "content_review_required": true,
+  "warnings": [],
+  "usage": {
+    "input_tokens": 0,
+    "output_tokens": 0,
+    "total_tokens": 0
+  }
+}

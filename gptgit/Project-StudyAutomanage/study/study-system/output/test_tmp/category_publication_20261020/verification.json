@@ -1,0 +1,27 @@
+{
+  "ok": true,
+  "checks": {
+    "seven_fresh_remote_bodies_match_saved_plan": true,
+    "all_17_categories_displayed": true,
+    "no_pending_front_writes": true,
+    "approval_db_unchanged": true,
+    "three_indexes_unchanged": true,
+    "all_107_receipts_unchanged": true,
+    "no_pending_operations": true,
+    "no_unknown_internal_link_ids": true,
+    "all_eight_material_pages_linked": true,
+    "basic_original_links_preserved": true,
+    "unchanged_only_one_inventory_call": true,
+    "unchanged_zero_front_reads_and_writes": true
+  },
+  "fresh_remote_readback_pages": 7,
+  "category_count": 17,
+  "approved_material_count": 8,
+  "receipt_count": 107,
+  "unknown_internal_link_ids": [],
+  "readback_scope": "home and six domain pages; existing material bodies not rewritten",
+  "pc_app_visual_checked": false,
+  "unchanged_report": "C:\\Users\\ICT\\Desktop\\Aigit\\gptgit\\Project-StudyAutomanage\\study\\study-system\\output\\notion_live\\runs\\20261020T000159Z_2ad5dd99df42\\report.json",
+  "recovery_report": "output\\notion_live\\runs\\20261019T235726Z_55bf8cb8ec25\\report.json",
+  "note": "one initial front replace was rejected by automatic approval review; restored all original Basics links and verified the complete authorized three-section payload, then explicit recovery succeeded"
+}

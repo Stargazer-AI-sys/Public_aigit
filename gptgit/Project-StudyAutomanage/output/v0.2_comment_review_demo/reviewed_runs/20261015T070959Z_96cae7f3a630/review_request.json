@@ -1,0 +1,20 @@
+{
+  "review_version": 1,
+  "analysis_sha256": "97adf1455391c92056b3f19d040348077eb16b1db282530292b72831a3d8e571",
+  "source": {
+    "material_id": "475bb0dedd096ba1ba136d8a480894d332729b2fddfaca504a4eb7edae2fd18a",
+    "filename": "18일차.txt",
+    "extension": ".txt"
+  },
+  "candidates": [
+    {
+      "section_id": "etherchannel",
+      "kind": "correction",
+      "text": "channel-group ?는 명령의 입력 인수·옵션을 확인하는 도움말 구문이다.",
+      "reason": "기존 분석에서 도움말 조회를 미완성 메모로 해석했다.",
+      "search_query": "Cisco IOS context sensitive help question mark",
+      "id": "candidate-bfcd52ab692e6d95",
+      "status": "pending"
+    }
+  ]
+}

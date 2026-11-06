@@ -1,0 +1,55 @@
+{
+  "provider": "openai",
+  "actual_ai_call": true,
+  "completed_stages": [
+    "input_validation",
+    "prompt_generation",
+    "response_received",
+    "json_parse",
+    "optional_null_normalization",
+    "source_injection",
+    "schema_validation"
+  ],
+  "warnings": [],
+  "evidence_mode": "source_line_ranges",
+  "model": "gpt-6-luna",
+  "reasoning_effort": "low",
+  "timeout_seconds": 90,
+  "max_output_tokens": 6000,
+  "api_request_attempted": true,
+  "response_received": true,
+  "automatic_retries": 0,
+  "usage": {
+    "input_tokens": 7023,
+    "input_tokens_details": {
+      "cache_write_tokens": 7020,
+      "cached_tokens": 0
+    },
+    "output_tokens": 2400,
+    "output_tokens_details": {
+      "reasoning_tokens": 214
+    },
+    "total_tokens": 9423
+  },
+  "response_id": "resp_09c9df0c814ae797016ad08626222c87d0b1d8e0060379b732",
+  "response_status": "completed",
+  "budget_reservation_id": "48a22c16e3644dd5955ec49362e75f6c",
+  "request_id": "req_34abb43208734e4daae9e6276fa002a2",
+  "response_model": "gpt-6-luna",
+  "elapsed_seconds": 23.507,
+  "budget": {
+    "stage": "representative_verification",
+    "call_limit": 5,
+    "calls_used": 5,
+    "calls_remaining": 0,
+    "budget_usd": 1.0,
+    "estimated_or_reserved_usd": 0.010168845,
+    "remaining_usd": 0.989831155,
+    "pricing_checked_at": "2026-10-12",
+    "billing_verified": false,
+    "ledger_path": "C:\\Users\\ICT\\.study_analyzer\\verification_budget.sqlite3"
+  },
+  "result_reused": false,
+  "cache_key": "eb0e4f974792fddb6f56846c40960753a271d18ef18ef6cf1148e7f0e4a06f36",
+  "force_reanalysis": false
+}

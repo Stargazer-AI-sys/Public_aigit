@@ -1,0 +1,6 @@
+interface:
+  display_name: "Process Debug"
+  short_description: "작업별 세션·문서 참조·사용 규모를 On/Off로 점검하고 요약"
+  default_prompt: "Use $process-debug to turn process_debug On for the current approved workflow."
+policy:
+  allow_implicit_invocation: false

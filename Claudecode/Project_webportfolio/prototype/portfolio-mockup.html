@@ -1,0 +1,1022 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>포트폴리오 Home 목업</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;700;800&family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+/* 레이아웃: 상단 플로팅 필 내비 + 좌측 섹션 인디케이터 + 중앙 760~1040px 본문 + 우측 진행률 슬롯(예약) */
+:root {
+  --bg: #F4F8FD;
+  --sky: #D6E7FA;
+  --surface: #FFFFFF;
+  --ink: #0E1726;
+  --muted: #5B6677;
+  --line: #DCE4EF;
+  --accent: #4B89DC;
+  --accent-ink: #2A66B8;
+  --accent-soft: #E3EEFB;
+  --cloud: rgba(255,255,255,.85);
+  --btn-dark: #111827;
+  --btn-dark-ink: #FFFFFF;
+  --btn-line: #C9D6E8;
+  --display: "Manrope", "Noto Sans KR", system-ui, sans-serif;
+  --body: "Noto Sans KR", system-ui, -apple-system, "Segoe UI", sans-serif;
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0A1019; --sky: #12233D; --surface: #111A27; --ink: #EAF1FB; --muted: #9AA8BC;
+    --line: #223049; --accent: #6FA3EA; --accent-ink: #8DB8F2; --accent-soft: #17283F;
+    --cloud: rgba(75,137,220,.14); --btn-dark: #EAF1FB; --btn-dark-ink: #0A1019; --btn-line: #4A6289; color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0A1019; --sky: #12233D; --surface: #111A27; --ink: #EAF1FB; --muted: #9AA8BC;
+  --line: #223049; --accent: #6FA3EA; --accent-ink: #8DB8F2; --accent-soft: #17283F;
+  --cloud: rgba(75,137,220,.14); --btn-dark: #EAF1FB; --btn-dark-ink: #0A1019; --btn-line: #4A6289; color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body { margin: 0; background: var(--bg); color: var(--ink); font-family: var(--body); line-height: 1.65; -webkit-font-smoothing: antialiased; }
+h1, h2, h3 { font-family: var(--display); letter-spacing: -0.03em; line-height: 1.15; margin: 0; text-wrap: balance; }
+h1, .section-lead, .hero .side p, .block > .wrap > p { word-break: keep-all; }
+.section-lead, .hero .side p, .block > .wrap > p { text-wrap: pretty; }
+/* 단어를 나열하는 쉼표에서는 줄을 나누지 않는다. 좁은 화면에서는 넘치지 않도록 풀어 준다. */
+@media (min-width: 641px) { .nb { white-space: nowrap; } }
+p { margin: 0; }
+a { color: inherit; }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 8px; }
+
+.sky { position: absolute; inset: 0 0 auto 0; height: 760px; background: linear-gradient(180deg, var(--sky) 0%, var(--bg) 100%); overflow: hidden; z-index: 0; }
+.cloud { position: absolute; background: var(--cloud); border-radius: 999px; filter: blur(22px); }
+.c1 { width: 240px; height: 70px; left: 1%; top: 70px; }
+.c2 { width: 300px; height: 80px; left: 36%; top: 210px; }
+.c3 { width: 220px; height: 60px; right: 4%; top: 60px; }
+.c4 { width: 260px; height: 70px; right: 22%; top: 130px; }
+.page { position: relative; z-index: 1; }
+
+.nav { position: fixed; top: 16px; left: 50%; transform: translateX(-50%); z-index: 20; }
+.tools { position: fixed; top: 16px; right: 16px; z-index: 20; display: flex; gap: 8px; align-items: center; }
+.pill { display: flex; gap: 2px; padding: 5px; border-radius: 999px; background: color-mix(in srgb, var(--surface) 78%, transparent); backdrop-filter: blur(14px); border: 1px solid var(--line); box-shadow: 0 6px 24px rgba(30,60,110,.08); }
+.pill a, .iconbtn { display: inline-flex; align-items: center; gap: 7px; height: 38px; padding: 0 13px; border-radius: 999px; font-size: 14px; font-weight: 500; text-decoration: none; color: var(--muted); border: 0; background: transparent; cursor: pointer; transition: background .15s, color .15s; white-space: nowrap; }
+.pill a:hover, .iconbtn:hover { color: var(--ink); background: var(--accent-soft); }
+.pill a[aria-current="true"] { background: var(--accent-soft); color: var(--accent-ink); }
+.nav svg, .btn svg { width: 17px; height: 17px; flex: none; stroke: currentColor; fill: none; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+.iconbtn.round { width: 48px; height: 48px; padding: 0; justify-content: center; background: color-mix(in srgb, var(--surface) 78%, transparent); border: 1px solid var(--btn-line); backdrop-filter: blur(14px); color: var(--ink); }
+/* 모드 아이콘은 글자색을 따르게 해 다크 모드에서도 보이게 한다. 해 아이콘은 선으로만 그려져 fill 대신 stroke를 쓴다. */
+#mode svg { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+.cta { display: inline-flex; align-items: center; gap: 10px; height: 48px; padding: 0 20px 0 8px; border-radius: 999px; background: var(--btn-dark); color: var(--btn-dark-ink); text-decoration: none; font-weight: 700; font-size: 14px; white-space: nowrap; }
+.cta .dot { width: 32px; height: 32px; border-radius: 50%; background: var(--accent); display: grid; place-items: center; }
+.cta .dot svg { stroke: #fff; width: 16px; height: 16px; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+
+/* 좌측 레일: 세로 캡슐 안에 점이 쌓이고, 현재 위치는 위아래로 길어진다. 클릭 영역은 32x40px. */
+.rail { position: fixed; left: 16px; top: 50%; transform: translateY(-50%); display: flex; flex-direction: column; gap: 2px; padding: 6px; border-radius: 999px; background: color-mix(in srgb, var(--surface) 78%, transparent); backdrop-filter: blur(14px); border: 1px solid var(--line); box-shadow: 0 6px 24px rgba(30,60,110,.08); z-index: 10; }
+.rail a { position: relative; display: grid; place-items: center; width: 32px; height: 40px; border-radius: 999px; text-decoration: none; }
+.rail a::before { content: ""; width: 6px; height: 6px; border-radius: 999px; background: var(--muted); opacity: .45; transition: height .25s ease, background .2s, opacity .2s; }
+.rail a:hover::before { opacity: 1; }
+.rail a[aria-current="true"]::before { height: 28px; background: var(--accent); opacity: 1; }
+.rail a span { position: absolute; left: 44px; top: 50%; transform: translateY(-50%); padding: 4px 11px; border-radius: 999px; background: var(--btn-dark); color: var(--btn-dark-ink); font-size: 12.5px; font-weight: 500; white-space: nowrap; opacity: 0; pointer-events: none; transition: opacity .15s; }
+.rail a:hover span, .rail a:focus-visible span { opacity: 1; }
+.slot { position: fixed; right: 14px; top: 50%; transform: translateY(-50%); z-index: 10; width: 72px; padding: 12px 6px; border: 1.5px dashed var(--line); border-radius: 16px; text-align: center; font-size: 11px; line-height: 1.4; color: var(--muted); background: color-mix(in srgb, var(--surface) 60%, transparent); }
+.slot b { display: block; font-family: var(--display); font-size: 12px; color: var(--accent-ink); }
+
+.wrap { width: min(1040px, calc(100% - 32px)); margin: 0 auto; }
+section { padding: 96px 0; scroll-margin-top: 20px; }
+.eyebrow { font: 700 13px var(--display); letter-spacing: .04em; color: var(--accent-ink); margin-bottom: 14px; }
+.btn { display: inline-flex; align-items: center; gap: 8px; height: 44px; padding: 0 20px; border-radius: 999px; border: 1px solid var(--btn-line); background: var(--surface); color: var(--ink); font-weight: 500; font-size: 14px; text-decoration: none; transition: transform .15s, border-color .15s; }
+.btn:hover { transform: translateY(-1px); border-color: var(--accent); }
+.btn.primary { background: var(--accent); border-color: var(--accent); color: #fff; font-weight: 700; }
+.tag { display: inline-block; padding: 3px 11px; border-radius: 999px; background: var(--accent-soft); color: var(--accent-ink); font-size: 12.5px; font-weight: 500; }
+
+#home { padding-top: 150px; padding-bottom: 72px; }
+.hero { display: grid; grid-template-columns: auto 1fr; gap: 48px; align-items: center; }
+.hero h1 { font-size: clamp(34px, 4.4vw, 54px); font-weight: 800; }
+.hero .actions { display: flex; gap: 10px; margin-top: 26px; flex-wrap: wrap; }
+.hello { color: var(--muted); font-size: 15px; }
+.hero .side .lead { color: var(--ink); font-weight: 500; margin-top: 10px; }
+.hero .side .sub { color: var(--muted); font-size: 15px; margin-top: 14px; }
+.proof { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-top: 64px; }
+.proof div, .proof a { border: 1px solid var(--line); background: var(--surface); border-radius: 18px; padding: 18px 20px; }
+.proof b { display: block; font: 800 26px var(--display); letter-spacing: -.03em; }
+.proof span { color: var(--muted); font-size: 13.5px; }
+.proof a { display: block; color: inherit; text-decoration: none; transition: border-color .2s; }
+.proof a:hover, .proof a:focus-visible { border-color: var(--accent); }
+.proof a span { color: var(--accent-ink); }
+
+h2 { font-size: clamp(28px, 3.4vw, 40px); font-weight: 800; }
+.section-lead { color: var(--muted); margin-top: 14px; }
+.principles { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; margin-top: 36px; }
+.card { border: 1px solid var(--line); background: var(--surface); border-radius: 22px; padding: 26px; }
+.card .n { font: 800 13px var(--display); color: var(--accent-ink); }
+.card h3 { font-size: 21px; margin: 8px 0 8px; }
+.card p { color: var(--muted); font-size: 15px; }
+.card .src { margin-top: 16px; padding-top: 14px; border-top: 1px dashed var(--line); font-size: 13px; color: var(--muted); }
+.card .src b { color: var(--ink); font-weight: 500; }
+
+.chips { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 28px; }
+.chip { height: 36px; padding: 0 16px; border-radius: 999px; border: 1px solid var(--line); background: var(--surface); color: var(--muted); font: 500 13.5px var(--body); cursor: pointer; }
+.chip[aria-pressed="true"] { background: var(--btn-dark); color: var(--btn-dark-ink); border-color: var(--btn-dark); }
+.case { margin-top: 20px; border: 1px solid var(--line); background: var(--surface); border-radius: 28px; overflow: hidden; }
+.shot { aspect-ratio: 16/7; background: linear-gradient(135deg, var(--accent-soft), var(--sky)); display: grid; place-items: center; border-bottom: 1px solid var(--line); position: relative; }
+.shot .frame { width: 56%; height: 74%; background: var(--surface); border: 1px solid var(--line); border-radius: 14px; box-shadow: 0 14px 40px rgba(30,60,110,.14); padding: 14px; display: flex; flex-direction: column; gap: 8px; }
+.shot .bar { height: 8px; width: 38%; border-radius: 8px; background: var(--line); display: block; }
+.shot .row { height: 10px; border-radius: 8px; background: var(--accent-soft); display: block; }
+.shot .row.a { width: 90%; } .shot .row.b { width: 72%; } .shot .row.c { background: var(--accent); opacity: .85; width: 34%; height: 24px; margin-top: auto; border-radius: 999px; }
+.shot small { position: absolute; left: 16px; bottom: 12px; color: var(--muted); font-size: 12px; }
+.case-body { padding: 30px; display: grid; grid-template-columns: 1.15fr .85fr; gap: 36px; }
+.case h3 { font-size: 26px; margin: 6px 0 10px; }
+.facts { display: grid; gap: 16px; align-content: start; }
+.fact h4 { margin: 0 0 4px; font: 700 12.5px var(--display); letter-spacing: .04em; color: var(--accent-ink); }
+.fact p, .fact li { font-size: 14.5px; color: var(--muted); }
+.fact ul { margin: 0; padding-left: 18px; }
+.fact .tags { display: flex; gap: 6px; flex-wrap: wrap; }
+.fact a { color: var(--accent-ink); font-weight: 500; }
+.flow { display: grid; gap: 10px; }
+.flow .step { display: grid; grid-template-columns: 78px 1fr; gap: 12px; padding: 14px 16px; border-radius: 16px; background: var(--bg); border: 1px solid var(--line); }
+.flow .step b { font: 700 12.5px var(--display); color: var(--accent-ink); letter-spacing: .03em; padding-top: 2px; }
+.flow .step p { font-size: 14.5px; color: var(--ink); }
+.flow .step.how { background: var(--accent-soft); border-color: transparent; }
+.more { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; margin-top: 14px; }
+.more .card { border-style: dashed; background: transparent; }
+.more .card h3 { font-size: 17px; color: var(--muted); }
+
+/* 실제 내용 반영: 운영 경험 → AI 적용을 짝지은 카드, 프로젝트 4건 */
+.split { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; margin-top: 28px; }
+.split div { padding: 16px 20px; border-radius: 18px; border: 1px solid var(--line); background: var(--surface); }
+.split div.me { background: var(--accent-soft); border-color: transparent; }
+.split b { display: block; font: 700 13px var(--display); color: var(--accent-ink); margin-bottom: 4px; }
+.split span { font-size: 14.5px; }
+.lines { margin: 14px 0 0; display: grid; gap: 12px; }
+.lines div { display: grid; grid-template-columns: 78px 1fr; gap: 10px; }
+.lines dt { font: 700 12.5px var(--display); color: var(--accent-ink); padding-top: 2px; }
+.lines dd { margin: 0; font-size: 14.5px; color: var(--muted); }
+.jump { display: inline-block; margin-top: 16px; font-size: 13.5px; font-weight: 500; color: var(--accent-ink); }
+.plist { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; margin-top: 32px; }
+.pcard { border: 1px solid var(--line); background: var(--surface); border-radius: 24px; padding: 26px; display: flex; flex-direction: column; gap: 14px; scroll-margin-top: 84px; }
+.pcard.wide { grid-column: 1 / -1; display: grid; grid-template-columns: 1fr 1.25fr; gap: 28px; }
+.pcard.wide .main { display: flex; flex-direction: column; gap: 14px; }
+.pcard .shot { aspect-ratio: auto; min-height: 240px; border: 1px solid var(--line); border-radius: 16px; }
+.pcard .shot .frame { width: 72%; height: 68%; }
+.pcard h3 { font-size: 22px; }
+.pcard .sum { color: var(--muted); font-size: 15px; }
+.phead { display: flex; align-items: center; justify-content: space-between; gap: 10px; flex-wrap: wrap; }
+.state { font-size: 12.5px; color: var(--muted); border: 1px solid var(--line); border-radius: 999px; padding: 2px 10px; }
+.pfoot { margin-top: auto; display: flex; gap: 6px; flex-wrap: wrap; }
+.pcard .learn { font-size: 14.5px; font-weight: 500; color: var(--accent-ink); }
+@media (max-width: 960px) { .pcard.wide { grid-template-columns: 1fr; } }
+@media (max-width: 640px) { .split, .plist { grid-template-columns: 1fr; } }
+.pcard.feature { grid-column: 1 / -1; gap: 18px; }
+.pcard.feature h3 { font-size: clamp(24px, 3vw, 30px); }
+.tl { list-style: none; margin: 0; padding: 0; }
+.tl li { display: grid; grid-template-columns: 96px 1fr; gap: 14px; padding: 16px 0; border-top: 1px solid var(--line); }
+.tl time { font: 700 13px var(--display); color: var(--accent-ink); padding-top: 3px; font-variant-numeric: tabular-nums; }
+.tl b { display: block; font-size: 16px; font-weight: 700; margin-bottom: 3px; }
+.tl p { color: var(--muted); font-size: 14.5px; }
+.split.flat { margin-top: 0; }
+.mail { display: inline-block; margin-top: 8px; color: inherit; font-weight: 700; font-size: 16px; opacity: 1; }
+@media (max-width: 640px) { .tl li { grid-template-columns: 1fr; gap: 4px; } }
+
+/* 상세 페이지: 해시로 전환하는 프로젝트별 보기. 개요 → 분석·계획 → 폴더 구조 → 순서도 → 문제 → 개선 순서를 두 프로젝트가 공유한다. */
+.pcard .more-link { align-self: flex-start; }
+body.in-detail .rail { display: none; }
+.detail-head { padding: 120px 0 0; }
+.back { display: inline-block; font-size: 14px; font-weight: 500; color: var(--accent-ink); text-decoration: none; margin-bottom: 22px; }
+.back:hover { text-decoration: underline; }
+.detail-head h1 { font-size: clamp(28px, 4.4vw, 50px); font-weight: 800; margin-top: 14px; }
+.detail-head .section-lead { font-size: 17px; }
+.toc { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 26px; }
+.toc a { padding: 6px 14px; border: 1px solid var(--line); border-radius: 999px; background: var(--surface); color: var(--muted); font-size: 13.5px; text-decoration: none; }
+.toc a:hover { color: var(--ink); border-color: var(--accent); }
+.legend { display: flex; flex-wrap: wrap; gap: 8px 18px; margin-top: 18px; font-size: 13px; color: var(--muted); }
+.block { padding: 64px 0 0; scroll-margin-top: 60px; }
+.block:last-of-type { padding-bottom: 40px; }
+.block h2 { font-size: clamp(24px, 2.8vw, 32px); }
+.block h3 { font-size: 18px; margin: 30px 0 12px; }
+.block > .wrap > p { color: var(--muted); margin-top: 12px; }
+.tiles { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-top: 24px; }
+.tile { border: 1px solid var(--line); background: var(--surface); border-radius: 18px; padding: 18px; }
+.tile b { display: block; font: 800 24px var(--display); letter-spacing: -.03em; font-variant-numeric: tabular-nums; }
+.tile span { display: block; color: var(--muted); font-size: 13.5px; margin-top: 2px; }
+.tbl { overflow-x: auto; margin-top: 16px; border: 1px solid var(--line); border-radius: 18px; background: var(--surface); }
+.tbl table { width: 100%; min-width: 620px; border-collapse: collapse; font-size: 14.5px; }
+.tbl th, .tbl td { padding: 13px 16px; text-align: left; vertical-align: top; border-top: 1px solid var(--line); }
+.tbl thead th { border-top: 0; font: 700 12.5px var(--display); letter-spacing: .03em; color: var(--accent-ink); white-space: nowrap; }
+.tbl tbody th { font-weight: 700; white-space: nowrap; }
+.tbl td { color: var(--muted); }
+.tree { margin: 16px 0 0; padding: 20px 22px; overflow-x: auto; border: 1px solid var(--line); border-radius: 18px; background: var(--surface); font: 13.5px/1.75 ui-monospace, "Cascadia Code", Consolas, monospace; white-space: pre; color: var(--ink); }
+.tree i { font-style: normal; color: var(--muted); }
+.tree b { font-weight: 700; color: var(--accent-ink); }
+figure.diagram { margin: 20px 0 0; }
+.scroll-x { overflow-x: auto; border: 1px solid var(--line); border-radius: 18px; background: var(--surface); padding: 18px; }
+.scroll-x svg { display: block; width: 100%; min-width: 760px; height: auto; color: var(--muted); }
+.scroll-x .box { fill: var(--bg); stroke: var(--line); stroke-width: 1.5; }
+.scroll-x .box.on { fill: var(--accent-soft); stroke: var(--accent); }
+.scroll-x .box.me { fill: var(--btn-dark); stroke: var(--btn-dark); }
+.scroll-x .box.todo { fill: none; stroke: var(--muted); stroke-dasharray: 5 4; }
+.scroll-x .t { fill: var(--ink); font: 700 14px var(--body); text-anchor: middle; }
+.scroll-x .s { fill: var(--muted); font: 400 12px var(--body); text-anchor: middle; }
+.scroll-x .me-t { fill: var(--btn-dark-ink); font: 700 14px var(--body); text-anchor: middle; }
+.scroll-x .me-s { fill: var(--btn-dark-ink); opacity: .75; font: 400 12px var(--body); text-anchor: middle; }
+.scroll-x .lb { fill: var(--muted); font: 500 12px var(--body); }
+.scroll-x .lbh { fill: var(--accent-ink); font: 700 13px var(--body); }
+figcaption { margin-top: 12px; color: var(--muted); font-size: 13.5px; }
+.issues { display: grid; gap: 12px; margin-top: 20px; }
+.issue { border: 1px solid var(--line); background: var(--surface); border-radius: 20px; padding: 22px 24px; display: grid; grid-template-columns: 34px 1fr; gap: 4px 12px; }
+.issue .no { font: 800 15px var(--display); color: var(--accent-ink); padding-top: 1px; font-variant-numeric: tabular-nums; }
+.issue h3 { margin: 0; font-size: 17px; }
+.issue dl { grid-column: 2; margin: 10px 0 0; display: grid; gap: 7px; }
+.issue dl div { display: grid; grid-template-columns: 56px 1fr; gap: 10px; }
+.issue dt { font: 700 12.5px var(--display); color: var(--accent-ink); padding-top: 2px; }
+.issue dd { margin: 0; font-size: 14.5px; color: var(--muted); }
+.st { display: inline-block; padding: 1px 9px; border-radius: 999px; font-size: 12px; font-weight: 500; white-space: nowrap; border: 1px solid var(--line); color: var(--muted); }
+.st.done { background: var(--accent); border-color: var(--accent); color: #fff; }
+.st.part { background: var(--accent-soft); border-color: transparent; color: var(--accent-ink); }
+.ev { font-size: 12px; font-weight: 500; color: var(--accent-ink); }
+.detail-next { margin-top: 56px; display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+@media (max-width: 760px) { .tiles { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 640px) { .detail-head { padding-top: 96px; } .issue { grid-template-columns: 1fr; } .issue dl { grid-column: 1; } .issue dl div { grid-template-columns: 1fr; gap: 0; } }
+
+footer { padding: 72px 0 96px; }
+.end { border-radius: 28px; background: var(--btn-dark); color: var(--btn-dark-ink); padding: 44px; display: flex; align-items: center; justify-content: space-between; gap: 24px; flex-wrap: wrap; }
+.end h2 { font-size: clamp(24px, 3vw, 32px); }
+.end p { opacity: .7; margin-top: 8px; font-size: 15px; }
+.end .btn.primary { height: 48px; }
+.note { margin-top: 20px; text-align: center; color: var(--muted); font-size: 12.5px; }
+
+@media (max-width: 960px) {
+  .hero { grid-template-columns: 1fr; }
+  .case-body { grid-template-columns: 1fr; }
+  .slot, .rail { display: none; }
+}
+@media (max-width: 640px) {
+  .pill a span { display: none; }
+  .pill a { padding: 0 12px; }
+  .cta { padding: 0 4px; height: 40px; }
+  .iconbtn.round { width: 40px; height: 40px; }
+  .tools { right: 10px; gap: 6px; }
+  .cta .t { display: none; }
+  .principles, .more, .proof { grid-template-columns: 1fr; }
+  section { padding: 64px 0; }
+  .end { padding: 30px; }
+}
+/* 가장 좁은 화면에서도 H1이 3줄이 되지 않도록 글자 크기를 줄인다. */
+@media (max-width: 374px) {
+  .hero h1 { font-size: 28px; }
+  .detail-head h1 { font-size: 24px; }
+}
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } * { transition: none !important; } }
+
+/* 실제 화면 캡처. 카드와 2열 목록에서는 같은 비율로 왼쪽 위를 기준으로 잘라 크기를 맞추고, 누르면 팝업으로 전체를 보여 준다. */
+.shot.photo { display: block; padding: 0; overflow: hidden; aspect-ratio: 16/10; background: var(--surface); }
+.shot.photo img { display: block; width: 100%; height: 100%; object-fit: cover; object-position: left top; }
+.shots { display: grid; grid-template-columns: repeat(2, 1fr); gap: 18px; margin-top: 20px; }
+.shots figure { margin: 0; }
+.shots .wide { grid-column: 1 / -1; }
+.shots a { display: block; border: 1px solid var(--line); border-radius: 18px; overflow: hidden; background: var(--surface); }
+.shots img { display: block; width: 100%; height: auto; }
+.shots figcaption { margin-top: 10px; }
+.pcard.wide .shot.photo { aspect-ratio: auto; min-height: 320px; }
+.pcard.wide > * { min-width: 0; }
+.shots figure:not(.wide) img { aspect-ratio: 16/10; object-fit: cover; object-position: left top; }
+a[href^="img/"] { cursor: zoom-in; }
+.lightbox { padding: 0; border: 0; background: transparent; max-width: 94vw; max-height: 94vh; overflow: visible; }
+.lightbox::backdrop { background: rgba(8, 12, 20, .8); }
+.lightbox img { display: block; max-width: 94vw; max-height: 86vh; width: auto; height: auto; border-radius: 12px; box-shadow: 0 24px 60px rgba(0,0,0,.45); }
+.lightbox p { margin: 12px auto 0; max-width: 90ch; color: #e6ebf3; font-size: 13.5px; text-align: center; }
+.lightbox .close { position: absolute; top: -16px; right: -16px; width: 36px; height: 36px; border: 0; border-radius: 50%; background: #fff; color: #111; font-size: 20px; line-height: 1; cursor: pointer; box-shadow: 0 6px 18px rgba(0,0,0,.3); }
+@media (max-width: 640px) { .shots { grid-template-columns: 1fr; } .lightbox .close { top: 8px; right: 8px; } }
+</style>
+</head>
+<body>
+<div class="sky" aria-hidden="true"><i class="cloud c1"></i><i class="cloud c2"></i><i class="cloud c3"></i><i class="cloud c4"></i></div>
+
+<nav class="nav" aria-label="주 메뉴">
+  <div class="pill">
+    <a href="#home" data-nav="home" aria-current="true"><svg viewBox="0 0 24 24"><path d="M3 11 12 3l9 8M5 10v10h5v-6h4v6h5V10"/></svg><span>Home</span></a>
+    <a href="#how" data-nav="how"><svg viewBox="0 0 24 24"><path d="M9 3h6M10 3v6l-5 9a2 2 0 0 0 2 3h10a2 2 0 0 0 2-3l-5-9V3"/></svg><span>Working Style</span></a>
+    <a href="#projects" data-nav="projects"><svg viewBox="0 0 24 24"><path d="M12 3l1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8zM19 16l.8 2.2L22 19l-2.2.8L19 22l-.8-2.2L16 19l2.2-.8z"/></svg><span>AI Workflows</span></a>
+  </div>
+</nav>
+<div class="tools">
+  <button class="iconbtn round" id="mode" type="button" aria-label="라이트/다크 전환"><svg id="modeIcon" viewBox="0 0 24 24"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg></button>
+  <a class="cta" href="#contact"><i class="dot"><svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></i><span class="t">연락하기</span></a>
+</div>
+
+<nav class="rail" aria-label="섹션 이동"><a href="#home" data-rail="home" aria-current="true" aria-label="Home"><span>Home</span></a><a href="#how" data-rail="how" aria-label="Working Style"><span>Working Style</span></a><a href="#projects" data-rail="projects" aria-label="AI Workflows"><span>AI Workflows</span></a></nav>
+<aside class="slot" aria-label="진행률 자리(예약)"><b>진행률</b>대시보드<br>예약 영역</aside>
+
+<main class="page" id="view-main">
+<section id="home"><div class="wrap">
+  <div class="hero">
+    <div>
+      <h1>AI가 만들고,<br>기준은 제가 세웁니다</h1>
+      <div class="actions">
+        <a class="btn" href="#how">Working Style 보기</a>
+        <a class="btn primary" href="#projects">AI Workflows 보기 ↗</a>
+      </div>
+    </div>
+    <div class="side">
+      <p class="hello">안녕하세요, 유승철입니다</p>
+      <p class="lead">금융거래 플랫폼을 8년간 운영하며 익힌 확인과 기록의 습관으로 AI의 결과를 검토합니다.</p>
+      <p class="sub">퇴사 후 클라우드·네트워크 과정을 수강하며 진행하는 개인 학습입니다.<br>이 프로젝트는 AI로 운영 프로세스를 강화하려고 제작했습니다.</p>
+    </div>
+  </div>
+  <div class="proof">
+    <div><b>8년</b><span>금융거래 플랫폼 서비스 운영</span></div>
+    <a href="#how"><b>4가지 기준</b><span>AI Workflows에서 중요한 4가지 기준 →</span></a>
+    <div><b>2026.09~</b><span>간단한 프롬프트에서 시작해 진행 중</span></div>
+  </div>
+</div></section>
+
+<section id="how"><div class="wrap">
+  <p class="eyebrow">Working Style</p>
+  <h2>운영에서 익힌 방식을 AI에게도 그대로 적용합니다</h2>
+  <p class="section-lead">장애를 확인하고 기록할 때 처리하던 방식이 AI의 결과를 검토하는 기준이 됐습니다.<br>각 방식을 실제 경험과 사례로 보여드립니다.</p>
+  <div class="split">
+    <div class="me"><b>제가 맡은 일</b><span>프로세스 이슈 발견, 목표와 우선순위 설정, 결과 사용 및 검토, 변경 승인</span></div>
+    <div><b>AI가 맡은 일</b><span>코드 작성·수정, 테스트 실행, 원인 분석, 문서 초안 작성</span></div>
+  </div>
+  <div class="principles">
+    <article class="card"><span class="n">01</span><h3>완료는 보고가 아니라 근거로 판단합니다</h3><dl class="lines"><div><dt>운영에서</dt><dd>고객이 말한 문제를 프로세스, API 통신, 로그로 직접 좁혔고 주문 이슈는 서버 시세와 API 수신 데이터를 대조해 검증했습니다.</dd></div><div><dt>AI와 함께</dt><dd>게시 성공 보고에도 자료를 찾을 수 없어 완료 기준을 “홈에서 본문까지 읽기”로 바꿨고 가이드 작성은 검사 결과를 근거로 마무리하게 했습니다.</dd></div></dl><a class="jump" href="#p-case1">CASE 01 사용자 관점의 완료 기준 →</a></article>
+    <article class="card"><span class="n">02</span><h3>만드는 쪽과 검증하는 쪽을 나눕니다</h3><dl class="lines"><div><dt>운영에서</dt><dd>QA와 운영을 거치며 요구사항 확인, 테스트, 오류 전달, 수정 재검증, 릴리즈까지의 검증 과정을 맡았습니다.</dd></div><div><dt>AI와 함께</dt><dd>마스터 AI가 작성과 검토를 다른 담당에게 나눠 맡기고, 검토 담당은 원본을 고치지 않게 했습니다. 근거와 대조해 잘못 적힌 초안을 반려한 사례도 있습니다.</dd></div></dl><a class="jump" href="#p-case2">CASE 02 프로젝트 구조와 협업 방식 →</a></article>
+    <article class="card"><span class="n">03</span><h3>반복되면 규칙과 도구로 바꿉니다</h3><dl class="lines"><div><dt>운영에서</dt><dd>주문 처리 큐 누적과 데이터 유실 장애가 반복되었을 때 확인 기준이 잘못되어 잘못 처리된 경험이 있었습니다. 우선 확인 항목과 대응 절차를 정리해 팀에 공유했습니다.</dd></div><div><dt>AI와 함께</dt><dd>제가 다시 지시한 내용을 세어 보니 “작업기록 남겨줘”, “진행해줘”가 16번이었습니다. 담당 AI의 모델을 매번 확인하던 일도 시작 전 검사와 훅으로 바꿨습니다.</dd></div></dl><a class="jump" href="#p-case3">CASE 03 비용과 검증 범위의 조정 →</a></article>
+    <article class="card"><span class="n">04</span><h3>기록하되, 확인한 것과 아닌 것을 나눕니다</h3><dl class="lines"><div><dt>운영에서</dt><dd>장애 내용과 해결 과정을 Telegram과 Wiki에 남겼고 고객에게는 확실하게 확인된 상황만 전달하고 조치 범위를 쉬운 말로 설명했습니다.</dd></div><div><dt>AI와 함께</dt><dd>새 세션이 작업기록만으로 이어받게 하고 보고에서는 확인과 미검증을 구분하게 했습니다.</dd></div></dl><a class="jump" href="#p-reflection">REFLECTION 현재 위치와 다음 단계 →</a></article>
+  </div>
+</div></section>
+
+<section id="projects"><div class="wrap">
+  <p class="eyebrow">AI 활용 개인 프로젝트</p>
+  <h2>AI에게 일을 맡기는 방식을 고쳐 온 기록</h2>
+  <p class="section-lead">학습 자동화와 프로세스 개선 프로젝트에서 겪은 일을 세 가지 사례로 나눴습니다.<br>완성된 서비스 소개가 아니라, 직접 쓰면서 이슈를 발견하고 AI의 결과를 검토한 과정입니다.</p>
+  <div class="plist">
+    <article class="pcard wide" id="p-case1">
+      <div class="main">
+        <div class="phead"><span class="tag">CASE 01 · 사용자 관점의 완료 기준</span><span class="state">학습 자동화 · 2026.11.06 기준</span></div>
+        <h3>“올라갔는데, 왜 찾을 수 없을까?”</h3>
+        <p class="sum">흩어진 학습 메모를 AI로 분석·분류하고 제가 확인한 뒤 Notion 지식베이스에 올리는 자동화입니다.</p>
+        <div class="flow">
+          <div class="step"><b>문제</b><p>게시 성공 보고를 받았지만 홈과 해당 분야에서 자료를 찾을 수 없었습니다.</p></div>
+          <div class="step how"><b>제 판단</b><p>완료 기준을 “홈 → 분야 → 본문 읽기”로 바꾸고 실제 동선까지 확인하게 했습니다.</p></div>
+          <div class="step"><b>결과</b><p>홈의 분야별 자료 수, 자료별 정리, 개념 찾아보기에서 본문까지 이어집니다.</p></div>
+        </div>
+        <p class="learn">저장에 성공했는지보다 사용자가 실제로 찾아 읽을 수 있는지를 먼저 확인합니다.</p>
+        <a class="btn primary more-link" href="#case1-detail">근거와 상세 내용 보기 →</a>
+        <div class="pfoot"><span class="tag">Python</span><span class="tag">Notion</span><span class="tag">LLM 분석</span></div>
+      </div>
+      <a class="shot photo" href="img/case01-notion-home.png"><img src="img/case01-notion-home.png" alt="Notion 홈 화면. 학습 분야 6개와 분야별 자료 수, 최근 학습자료 목록이 보인다." loading="lazy"></a>
+    </article>
+
+    <article class="pcard wide" id="p-case2">
+      <div class="main">
+        <div class="phead"><span class="tag">CASE 02 · 프로젝트 구조와 협업 방식</span><span class="state">프로세스 개선 · 2026.11.06 기준</span></div>
+        <h3>더 나은 구조에서, 더 나은 작업이 이어지도록</h3>
+        <p class="sum">여러 AI가 함께 일할 때 누가 무엇을 맡고 결과를 어디에 남기는지 구조부터 나눈 사례입니다.</p>
+        <div class="flow">
+          <div class="step"><b>문제</b><p>프롬프트와 결과를 제가 AI 사이에서 복사해 옮겼고, 개선할 곳과 시험할 곳의 기록이 섞이기 시작했습니다.</p></div>
+          <div class="step how"><b>제 판단</b><p>개선 원본과 독립 시험 프로젝트를 나누고, 마스터 AI가 담당에게 전달하고 회수하도록 역할을 정했습니다.</p></div>
+          <div class="step"><b>결과</b><p>마스터 1개가 담당 6개에게 위키 작성과 검토를 나눠 맡긴 소규모 시험을 통과했습니다. 위키는 6개 분류로 다시 정리했습니다.</p></div>
+        </div>
+        <p class="learn">맡을 사람과 기록할 곳이 정해져야 AI를 늘려도 일이 섞이지 않습니다.</p>
+        <a class="btn primary more-link" href="#case2-detail">근거와 상세 내용 보기 →</a>
+        <div class="pfoot"><span class="tag">Codex</span><span class="tag">Claude Code</span><span class="tag">Hermes</span><span class="tag">herdr</span><span class="tag">Obsidian</span><span class="tag">Python</span></div>
+      </div>
+      <a class="shot photo" href="img/case02-herdr-parallel.png"><img src="img/case02-herdr-parallel.png" alt="herdr 한 화면에 마스터 1개와 담당 6개의 터미널이 3열로 배치된 모습" loading="lazy"></a>
+    </article>
+
+    <article class="pcard wide" id="p-case3">
+      <div class="main">
+        <div class="phead"><span class="tag">CASE 03 · 비용과 검증 범위의 조정</span><span class="state">프로세스 개선 · 2026.11.06 기준</span></div>
+        <h3>더 많이 실행하기 전에, 반복을 살폈습니다</h3>
+        <p class="sum">여러 AI에게 일을 맡기며 실행과 사용량이 늘어날 때, 무엇이 필요한 검증이고 무엇이 줄일 반복인지 나눈 사례입니다.</p>
+        <div class="flow">
+          <div class="step"><b>문제</b><p>제가 같은 지시를 31번 다시 했고 마스터 AI의 컨텍스트는 94%까지 찼습니다. 여러 AI 시험에서는 담당 6개가 모두 마스터용 모델로 실행됐습니다.</p></div>
+          <div class="step how"><b>제 판단</b><p>비용·범위·공개 결정은 남기고 기록 저장과 진행 같은 반복 지시는 규칙으로 바꾸기로 했습니다. 담당 모델은 역할별로 정해 강제했습니다.</p></div>
+          <div class="step"><b>결과</b><p>역할별 모델 규칙과 시작 전 검사를 적용했습니다. 마스터용 모델로 담당을 시작하면 훅이 실행 전에 막습니다.</p></div>
+        </div>
+        <p class="learn">줄이는 것은 반복이고, 검증은 줄이지 않습니다.</p>
+        <a class="btn primary more-link" href="#case3-detail">근거와 상세 내용 보기 →</a>
+        <div class="pfoot"><span class="tag">모델 배분</span><span class="tag">컨텍스트 관리</span><span class="tag">훅</span><span class="tag">작업 효율 리뷰</span></div>
+      </div>
+      <a class="shot photo" href="img/case03-question-full.png"><img src="img/case03-card.png" alt="herdr 6담당 시험 결과 보고 뒤, 모든 모델을 Astra로 한 이유를 묻는 질문과 AI의 답변" loading="lazy"></a>
+    </article>
+
+    <article class="pcard feature" id="p-reflection">
+      <div class="phead"><span class="tag">REFLECTION · 현재 위치와 다음 단계</span><span class="state">2026.11.06 기준</span></div>
+      <h3>운영 경험을, 더 나은 질문과 검토로 연결합니다</h3>
+      <p class="sum">세 사례 모두 AI의 보고를 그대로 받지 않고 던진 질문에서 방향이 바뀌었습니다. 그 질문들과 지금 위치를 정리했습니다.</p>
+      <ol class="tl">
+        <li><time>10.19</time><div><b>게시가 끝났다는데, 왜 홈에서 찾을 수 없을까</b><p>저장 성공만 검사하고 있었습니다. 완료 기준을 홈 → 분야 → 본문까지 읽기로 바꿨습니다. <a class="ev" href="#p-case1">CASE 01</a></p></div></li>
+        <li><time>10.29</time><div><b>제가 같은 말을 몇 번이나 반복하고 있을까</b><p>코드 품질 대신 제 결정 지점과 비용을 기준으로 점검했습니다. 짧은 재지시 31건 중 약 16건은 규칙으로 없앨 수 있다고 봤습니다. <a class="ev" href="#p-case3">CASE 03</a></p></div></li>
+        <li><time>11.04</time><div><b>개선은 어디서 하고, 시험은 어디서 할까</b><p>AI가 개선 위치를 시험 프로젝트로 옮긴다고 기록한 것을 바로잡고 두 프로젝트의 역할을 나눴습니다. <a class="ev" href="#p-case2">CASE 02</a></p></div></li>
+        <li><time>11.06</time><div><b>“현재 테스트이기 때문에 모든 모델을 아스트라로 한 거야?”</b><p>모델을 지정하지 않아 기본 설정을 이어받은 것이었습니다. 시험 결과를 바로잡아 기록하고 역할별 모델을 규칙과 시작 전 검사로 강제했습니다. <a class="ev" href="#p-case3">CASE 03</a></p></div></li>
+      </ol>
+      <div class="split flat">
+        <div class="me"><b>현재 위치</b><span>역할, 검증, 기록 위치를 나눈 구조와 담당 시작 검사를 갖췄습니다. 요구사항부터 문서화까지 한 번에 완주한 시험과 Claude·Hermes 실제 연결은 아직입니다.</span></div>
+        <div><b>다음 단계</b><span>독립 시험 프로젝트에서 작은 신규 명세 하나로 전체 과정을 완주하고, 막힌 곳은 개선 원본으로 가져와 고칩니다. 학습 자동화는 나머지 자료를 분석·게시합니다.</span></div>
+      </div>
+      <p class="learn">더 나은 결과는 더 긴 프롬프트보다 완료 기준, 역할, 검증 근거를 먼저 물을 때 나왔습니다.</p>
+    </article>
+  </div>
+</div></section>
+</main>
+
+<!-- CASE 01 상세 -->
+<main class="page" id="case1-detail" data-detail hidden>
+  <header class="detail-head"><div class="wrap">
+    <a class="back" href="#p-case1">← AI Workflows로 돌아가기</a>
+    <p class="eyebrow">CASE 01 · 사용자 관점의 완료 기준 · 학습 자동화</p>
+    <h1>저장이 아니라, 찾아 읽을 수 있어야 완료입니다</h1>
+    <p class="section-lead">네트워크 학습 자료를 AI로 분석·분류하고 제가 확인한 결과를 Notion에 올리는 프로그램입니다.<br>게시 성공 보고를 받고도 자료를 찾지 못한 일을 계기로 완료 기준을 사용자의 동선으로 바꿨습니다.</p>
+    <nav class="toc" aria-label="상세 페이지 목차">
+      <a href="#case1-detail" data-jump="c1-overview">개요</a><a href="#case1-detail" data-jump="c1-plan">분석 및 계획</a><a href="#case1-detail" data-jump="c1-screens">실제 화면</a><a href="#case1-detail" data-jump="c1-flow">프로세스</a><a href="#case1-detail" data-jump="c1-issue">발생한 문제</a><a href="#case1-detail" data-jump="c1-next">개선할 내용</a>
+    </nav>
+    <p class="legend"><span><b class="ev">확인</b> 파일과 실행 기록에서 직접 봄</span><span><b class="ev">측정 조건</b> 수치마다 범위를 함께 표시</span><span>수치 출처: 작업기록(~2026.10.22), 작업 효율 리뷰·재설계 기록(~2026.10.29), 화면 캡처(2026.11.06)</span></p>
+  </div></header>
+
+  <section class="block" id="c1-overview"><div class="wrap">
+    <h2>개요</h2>
+    <p>Project-StudyAutomanage가 기준 프로그램이고 일반 사용자용 실행본까지 분리했습니다.<br>이후 제게 필요한 흐름만 남기기로 결정해 Project_Refactor의 별도 사본에서 간소화 재설계를 시험하고 있습니다.</p>
+    <div class="tiles">
+      <div class="tile"><b>11건</b><span>사용자용 실행본에 보존된 승인 자료</span></div>
+      <div class="tile"><b>6분야</b><span>CCNA v1.1 기반 학습 분류</span></div>
+      <div class="tile"><b>34 → 9</b><span>재설계 전후 분석 프로그램 파일 수</span></div>
+      <div class="tile"><b>5건</b><span>11.06 화면 기준, 재설계 흐름으로 분석해 게시한 자료</span></div>
+    </div>
+    <div class="split">
+      <div class="me"><b>제가 맡은 일</b><span>완료 기준 정의, 내용과 분류 확인, 유료 호출 범위 허용, 게시 실행, 구조 단순화 결정</span></div>
+      <div><b>AI가 맡은 일</b><span>프로그램 개발·수정, 테스트 실행, 코드 리뷰, 원인 분석, Notion 게시 중계</span></div>
+    </div>
+  </div></section>
+
+  <section class="block" id="c1-plan"><div class="wrap">
+    <h2>분석 및 계획</h2>
+    <p>요구사항 정의서로 범위를 먼저 고정했습니다.<br>핵심 질문은 “OSPF.docx가 어디 있는가”에서 “OSPF를 이해하려면 어떤 자료가 있는가”로 찾는 방식을 바꾸는 것입니다.</p>
+    <h3>요구사항</h3>
+    <div class="tbl"><table>
+      <thead><tr><th scope="col">항목</th><th scope="col">정의한 내용</th></tr></thead>
+      <tbody>
+        <tr><th scope="row">핵심 흐름</th><td>기존 학습자료 → AI 분석 → 지식 단위 재구성 → Notion 지식베이스 → 신규자료 지속 반영</td></tr>
+        <tr><th scope="row">원본 보존</th><td>원본 파일을 기준으로 삼고 프로그램이 수정하지 않습니다. AI 결과는 원본과 분리해 관리합니다.</td></tr>
+        <tr><th scope="row">사람의 확인</th><td>AI는 분류를 추천하고 확인을 거친 결과만 Notion에 반영합니다.</td></tr>
+        <tr><th scope="row">범위</th><td>TXT와 DOCX, NETWORK 분야. 화면 분류는 공식 학습 범위인 CCNA v1.1을 기준으로 합니다.</td></tr>
+        <tr><th scope="row">제외</th><td>학습 진도 관리, 원본 수정, 기존 폴더 구조를 그대로 옮기는 방식</td></tr>
+      </tbody>
+    </table></div>
+    <h3>진행 중 바꾼 완료 기준</h3>
+    <div class="split">
+      <div><b>처음 기준</b><span>자료가 Notion DB에 저장되고 연결 보기와 페이지 이동이 동작하면 완료</span></div>
+      <div class="me"><b>10.19에 바꾼 기준</b><span>자료 저장에 더해 홈, 해당 분야, 본문 사이의 접근 경로와 분류 표시까지 확인해야 완료</span></div>
+    </div>
+    <h3>사용자가 도착하는 경로</h3>
+    <div class="flow">
+      <div class="step"><b>1 홈</b><p>CCNA 분야 6개와 분야별 자료 수, 최근 학습자료를 한 화면에서 봅니다.</p></div>
+      <div class="step"><b>2 분야·목록</b><p>분야 또는 학습자료 목록에서 자료별 핵심 정리와 분류를 봅니다.</p></div>
+      <div class="step"><b>3 개념</b><p>개념을 고르면 그 개념이 나오는 자료로 이동합니다.</p></div>
+      <div class="step how"><b>4 본문</b><p>여기까지 실제로 도착해야 게시 완료로 판단합니다.</p></div>
+    </div>
+  </div></section>
+
+  <section class="block" id="c1-screens"><div class="wrap">
+    <h2>실제 화면</h2>
+    <p>이미지를 누르면 화면 가운데에 크게 열립니다.</p>
+    <div class="shots">
+      <figure><a href="img/case01-notion-home.png"><img src="img/case01-notion-home.png" alt="Notion 홈. 학습 분야 6개와 분야별 자료 수, 최근 학습자료 목록" loading="lazy"></a><figcaption>홈: 분야별 자료 수와 최근 학습자료가 함께 보이고, 분야와 자료로 바로 이동합니다.</figcaption></figure>
+      <figure><a href="img/case01-notion-materials.png"><img src="img/case01-notion-materials.png" alt="Notion 학습자료 목록. 자료마다 요약과 CCNA 분류가 붙어 있다" loading="lazy"></a><figcaption>학습자료: 자료마다 핵심 정리와 CCNA 분류를 붙였습니다.</figcaption></figure>
+      <figure><a href="img/case01-notion-concepts.png"><img src="img/case01-notion-concepts.png" alt="Notion 개념 찾아보기. 개념 이름 옆에 해당 자료 링크가 나열되어 있다" loading="lazy"></a><figcaption>개념 찾아보기: 개념을 고르면 그 개념이 나오는 자료로 이동합니다.</figcaption></figure>
+      <figure><a href="img/case01-app-preview.png"><img src="img/case01-app-preview.png" alt="게시 전 미리보기. 홈 화면에 들어갈 분야와 최근 학습자료 목록" loading="lazy"></a><figcaption>게시 전 미리보기: 게시할 홈 화면을 먼저 보고 확인합니다. 파란 글씨는 Notion에서 페이지 링크가 됩니다.</figcaption></figure>
+      <figure class="wide"><a href="img/case01-app-analysis.png"><img src="img/case01-app-analysis.png" alt="로컬 자료 분석 화면. 파일명, 상태(게시 대기, 새 자료, 게시 완료), 요약 목록과 모델 선택" loading="lazy"></a><figcaption>재설계한 자료 분석 화면: 분석할 자료를 고르고 상태(새 자료, 게시 대기, 게시 완료)를 확인합니다. 분석은 자료마다 유료 API를 1번 호출합니다.</figcaption></figure>
+      <figure class="wide"><a href="img/case01-publish-session.png"><img src="img/case01-publish-session.png" alt="Claude Code가 게시 패키지를 읽고 Notion 자료 페이지를 만드는 터미널 화면" loading="lazy"></a><figcaption>게시 실행: 채팅 AI(Claude Code)가 게시 패키지와 안내 문서를 따라 자료 페이지를 만들고 홈·목록·분야를 갱신합니다. AI가 작업기록과 실제 파일 상태가 다른 부분을 “확인하지 못했다”고 구분해 보고한 장면도 담겨 있습니다.</figcaption></figure>
+    </div>
+  </div></section>
+
+  <section class="block" id="c1-flow"><div class="wrap">
+    <h2>프로세스 순서도</h2>
+    <figure class="diagram">
+      <div class="scroll-x" tabindex="0" role="group" aria-label="프로세스 순서도, 좁은 화면에서는 가로로 스크롤합니다">
+      <svg viewBox="0 0 960 300" role="img" aria-label="기존 프로그램은 수집, 분석, 분류, 승인, 게시 준비, 게시, 화면 확인의 일곱 단계이고, 재설계는 승인 단계를 없애 미리보기 확인으로 대신한다.">
+        <defs><marker id="arrow-s" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 10 5 0 10z" fill="currentColor"/></marker></defs>
+        <text class="lbh" x="4" y="18">기준 프로그램 (Project-StudyAutomanage)</text>
+        <g>
+          <rect class="box" x="4" y="30" width="118" height="74" rx="12"/><text class="t" x="63" y="60">원본 수집</text><text class="s" x="63" y="82">해시로 변경 감지</text>
+          <rect class="box" x="142" y="30" width="118" height="74" rx="12"/><text class="t" x="201" y="60">AI 분석</text><text class="s" x="201" y="82">형식·근거 검사</text>
+          <rect class="box" x="280" y="30" width="118" height="74" rx="12"/><text class="t" x="339" y="60">학습 분류</text><text class="s" x="339" y="82">CCNA 6분야</text>
+          <rect class="box me" x="418" y="30" width="118" height="74" rx="12"/><text class="me-t" x="477" y="60">사용자 승인</text><text class="me-s" x="477" y="82">승인 또는 보류</text>
+          <rect class="box" x="556" y="30" width="118" height="74" rx="12"/><text class="t" x="615" y="60">게시 준비</text><text class="s" x="615" y="82">변경분·미리보기</text>
+          <rect class="box" x="694" y="30" width="118" height="74" rx="12"/><text class="t" x="753" y="60">Notion 게시</text><text class="s" x="753" y="82">채팅 AI가 중계</text>
+          <rect class="box on" x="832" y="30" width="124" height="74" rx="12"/><text class="t" x="894" y="60">화면 확인</text><text class="s" x="894" y="82">홈→분야→본문</text>
+        </g>
+        <g fill="none" stroke="currentColor" stroke-width="1.6">
+          <path d="M122 67H140" marker-end="url(#arrow-s)"/><path d="M260 67H278" marker-end="url(#arrow-s)"/><path d="M398 67H416" marker-end="url(#arrow-s)"/><path d="M536 67H554" marker-end="url(#arrow-s)"/><path d="M674 67H692" marker-end="url(#arrow-s)"/><path d="M812 67H830" marker-end="url(#arrow-s)"/>
+        </g>
+        <text class="lbh" x="4" y="150">간소화 재설계 (Project_Refactor, 시험 중)</text>
+        <g>
+          <rect class="box" x="4" y="162" width="118" height="74" rx="12"/><text class="t" x="63" y="192">자료 선택</text><text class="s" x="63" y="214">해시로 상태 판정</text>
+          <rect class="box" x="142" y="162" width="118" height="74" rx="12"/><text class="t" x="201" y="192">AI 분석 1회</text><text class="s" x="201" y="214">자동 재시도 없음</text>
+          <rect class="box" x="280" y="162" width="118" height="74" rx="12"/><text class="t" x="339" y="192">분류 포함</text><text class="s" x="339" y="214">분류표에서 선택</text>
+          <rect class="box todo" x="418" y="162" width="118" height="74" rx="12"/><text class="s" x="477" y="192">승인 단계</text><text class="s" x="477" y="214">제거</text>
+          <rect class="box me" x="556" y="162" width="118" height="74" rx="12"/><text class="me-t" x="615" y="192">미리보기 확인</text><text class="me-s" x="615" y="214">사용자</text>
+          <rect class="box" x="694" y="162" width="118" height="74" rx="12"/><text class="t" x="753" y="192">Notion 게시</text><text class="s" x="753" y="214">파일명으로 갱신</text>
+          <rect class="box on" x="832" y="162" width="124" height="74" rx="12"/><text class="t" x="894" y="192">결과 기록</text><text class="s" x="894" y="214">중복 페이지 없음</text>
+        </g>
+        <g fill="none" stroke="currentColor" stroke-width="1.6">
+          <path d="M122 199H140" marker-end="url(#arrow-s)"/><path d="M260 199H278" marker-end="url(#arrow-s)"/>
+          <path d="M398 199H408V262H546V199H554" marker-end="url(#arrow-s)"/>
+          <path d="M674 199H692" marker-end="url(#arrow-s)"/><path d="M812 199H830" marker-end="url(#arrow-s)"/>
+        </g>
+        <text class="lb" x="477" y="282" text-anchor="middle">승인 대신 미리보기로 바로 이동</text>
+      </svg>
+      </div>
+      <figcaption>어두운 칸이 제가 확인하는 지점입니다. 재설계의 승인 제거는 제 결정이고, 재설계의 최종 결과물은 아직 만들지 않았습니다. 두 흐름 모두 실제 게시는 채팅 AI가 중계합니다.</figcaption>
+    </figure>
+  </div></section>
+
+  <section class="block" id="c1-issue"><div class="wrap">
+    <h2>발생한 문제</h2>
+    <div class="issues">
+      <article class="issue"><span class="no">1</span><h3>게시 성공 보고를 받았는데 자료를 찾을 수 없었습니다</h3><dl>
+        <div><dt>근거</dt><dd>10.19 OSI 자료는 도구 호출 3회, 오류 0으로 게시됐고 무변경 재실행도 쓰기 0이었습니다. 그런데 제가 홈에서 찾지 못했습니다. 조회 결과 별도 목록에만 있고 홈과 분야에는 링크가 없었습니다. <span class="ev">확인</span></dd></div>
+        <div><dt>원인</dt><dd>호출을 줄이는 최소 모드가 홈과 분야 갱신을 뺐습니다. 저장 성공만 검사했기 때문에 모든 검사가 통과했습니다.</dd></div>
+        <div><dt>조치</dt><dd>이전 게시 완료 보고를 정정하고 완료 기준을 바꿨습니다. 재분석이나 재승인 없이 10.20에 수정했습니다.</dd></div>
+      </dl></article>
+      <article class="issue"><span class="no">2</span><h3>관리용 DB가 사용자 화면에 그대로 노출됐습니다</h3><dl>
+        <div><dt>근거</dt><dd>개념 페이지에 관리 속성과 긴 관계 목록이 먼저 보이고 주제 본문은 비어 있었습니다. DB 4개와 연결 보기 19개를 옮기고 항목 72개와 안내 화면 10개를 다시 만들었습니다. <span class="ev">확인</span></dd></div>
+        <div><dt>원인</dt><dd>데이터 구조의 완료와 사용자 화면의 완료를 구분하지 않았고 시안과 비교하기 전에 완료로 보고했습니다.</dd></div>
+      </dl></article>
+      <article class="issue"><span class="no">3</span><h3>게시 내용에 PC 경로와 실습 비밀번호가 포함됐습니다</h3><dl>
+        <div><dt>근거</dt><dd>10.28 재설계 과정에서 기존 Notion 페이지에 PC 절대 경로와 가림 규칙이 놓친 비밀번호 값을 발견했습니다. 해당 페이지는 삭제했습니다. <span class="ev">확인</span></dd></div>
+        <div><dt>조치</dt><dd>자료 페이지에는 파일명, 해시, 분석 시각만 넣고 가림 규칙을 보강했습니다. 10.29 시험 패키지에서 비밀번호 4곳 가림과 경로 없음을 확인했습니다.</dd></div>
+      </dl></article>
+      <article class="issue"><span class="no">4</span><h3>형식 검사 통과가 내용의 정확성을 보장하지 않았습니다</h3><dl>
+        <div><dt>근거</dt><dd>Schema와 원문 근거 검사를 통과한 OSI 분석은 구조만 확인된 상태입니다. 원문의 수치와 계층 설명은 기술적으로 검증하지 않았고 이 사실을 알린 뒤 원문 기반 정리로 승인했습니다. <span class="ev">확인</span></dd></div>
+        <div><dt>영향</dt><dd>게시된 내용의 기술 사실은 보장하지 않습니다. 필요하면 Notion에서 직접 정정하기로 결정했습니다.</dd></div>
+      </dl></article>
+      <article class="issue"><span class="no">5</span><h3>게시 한 번에 호출과 페이지가 지나치게 늘었습니다</h3><dl>
+        <div><dt>근거</dt><dd>화면 개편 게시 실행에서 전체 페이지 조회 288회, 쓰기 144회, DB 목록 4회로 Notion을 436회 호출했습니다. 255자 원격접속 자료 1건에도 자료·개념·실습·분류 8페이지를 새로 만들고 기존 8페이지를 갱신했습니다. <span class="ev">확인</span></dd></div>
+        <div><dt>원인</dt><dd>쓰기를 건너뛰더라도 전체 본문을 먼저 가져왔고, 긴 JSON의 터미널 전달과 인코딩 오류로 복구도 늘었습니다. 전체 개편과 복구를 포함한 실행이라 자료 한 건의 평소 비용은 아닙니다.</dd></div>
+        <div><dt>배경</dt><dd>기능을 더하면서 분석 프로그램이 34개 파일, 약 5,900줄이 됐습니다. 제게 필요한 흐름은 분석, 분류, 게시 내용 정리, Notion 반영, AI 코멘트의 5단계였습니다.</dd></div>
+      </dl></article>
+    </div>
+  </div></section>
+
+  <section class="block" id="c1-next"><div class="wrap">
+    <h2>개선할 내용</h2>
+    <p>게시 횟수와 속도처럼 비용과 관련된 개선도 함께 정리했습니다.</p>
+    <div class="tbl"><table>
+      <thead><tr><th scope="col">상태</th><th scope="col">개선 내용</th><th scope="col">결과 또는 완료 기준</th></tr></thead>
+      <tbody>
+        <tr><td><span class="st done">완료</span></td><td>홈과 분야 반영 누락 수정, 완료 기준에 접근 경로 포함</td><td>10.20 원본·승인·게시 자료 10건까지 진행. 미완료 전송과 불명확한 내부 링크 0</td></tr>
+        <tr><td><span class="st done">완료</span></td><td>불필요한 재승인과 보류 재발 제거</td><td>복사 DB 기준 재승인 4 → 0건, 동일 사유 보류 재발 1 → 0건</td></tr>
+        <tr><td><span class="st done">완료</span></td><td>유효한 결과 재사용, 요청 한도, 자동 재시도 제한</td><td>변경이 없는 페이지의 재조회는 줄이고 원본 변경 감지와 중복 게시 확인은 유지</td></tr>
+        <tr><td><span class="st done">완료</span></td><td>사용자용 코드의 반복 계산 축소</td><td>승인 목록 0.124 → 0.040초(3회 중앙값, 승인 11건), DB 연결 16 → 2회, 반환값 해시 동일</td></tr>
+        <tr><td><span class="st part">시험 중</span></td><td>필요한 흐름만 남긴 간소화 재설계(AI 분석은 자료마다 1회 호출, 자동 재시도 없음)</td><td>Python·HTML 34개 파일 약 5,900줄 → 9개 파일 965줄. 테스트 13개 통과. 11.06 자료 4건을 추가로 분석해 게시했고 화면 기준 5건이 보입니다.</td></tr>
+        <tr><td><span class="st part">다음</span></td><td>이미 게시한 자료를 다시 게시하는 기능 필요 여부 결정</td><td>현재는 표시 코드를 고쳐도 기존 페이지가 바뀌지 않아 게시 기록을 비우는 우회만 가능</td></tr>
+        <tr><td><span class="st part">다음</span></td><td>나머지 자료 분석·게시(유료라 별도 허용 후 진행)</td><td>긴 자료에서 출력 한도 8000토큰이 충분한지 확인</td></tr>
+        <tr><td><span class="st">이후</span></td><td>재설계 결과를 최종본으로 정리하고 채팅 AI 중계 없는 자동 게시 검토</td><td>인증 방식과 접근 범위를 정한 뒤 진행. 자동 승인과 무인 게시는 허용하지 않은 상태</td></tr>
+      </tbody>
+    </table></div>
+    <div class="detail-next">
+      <a class="btn" href="#p-case1">← AI Workflows로 돌아가기</a>
+      <a class="btn primary" href="#case2-detail">CASE 02 상세 보기 →</a>
+    </div>
+  </div></section>
+</main>
+
+<!-- CASE 02 상세 -->
+<main class="page" id="case2-detail" data-detail hidden>
+  <header class="detail-head"><div class="wrap">
+    <a class="back" href="#p-case2">← AI Workflows로 돌아가기</a>
+    <p class="eyebrow">CASE 02 · 프로젝트 구조와 협업 방식 · project-management · project-prototype</p>
+    <h1>맡을 사람과 기록할 곳부터 나눴습니다</h1>
+    <p class="section-lead">여러 AI가 함께 일하려면 누가 무엇을 맡고 결과를 어디에 남기는지가 먼저 정해져야 했습니다.<br>개선하는 곳과 시험하는 곳을 나누고, 마스터 AI가 담당에게 일을 나눠 맡기는 구조를 만들어 시험했습니다.</p>
+    <nav class="toc" aria-label="상세 페이지 목차">
+      <a href="#case2-detail" data-jump="c2-overview">개요</a><a href="#case2-detail" data-jump="c2-plan">분석 및 계획</a><a href="#case2-detail" data-jump="c2-tree">폴더 구조</a><a href="#case2-detail" data-jump="c2-flow">프로세스</a><a href="#case2-detail" data-jump="c2-screens">실제 화면</a><a href="#case2-detail" data-jump="c2-issue">발생한 문제</a><a href="#case2-detail" data-jump="c2-next">개선할 내용</a>
+    </nav>
+    <p class="legend"><span><b class="ev">확인</b> 파일과 실행 기록에서 직접 봄</span><span>수치 출처: 점검 보고서(2026.10.29), 작업기록·위임 보고·시험 보고(~2026.11.06)</span></p>
+  </div></header>
+
+  <section class="block" id="c2-overview"><div class="wrap">
+    <h2>개요</h2>
+    <p>2026년 10월 13일 역할 정의에서 시작한 개인 학습 프로젝트입니다.<br>11.04에 개선 원본과 시험 프로젝트를 나눴고, 11.06에는 herdr에서 마스터 1개와 담당 6개로 소규모 시험을 했습니다.</p>
+    <div class="tiles">
+      <div class="tile"><b>2개</b><span>개선 원본(project-management)과 독립 시험(project-prototype)</span></div>
+      <div class="tile"><b>1 + 6</b><span>11.06 herdr 시험의 마스터와 담당 pane</span></div>
+      <div class="tile"><b>20개</b><span>11.05 내용별로 다시 정리한 위키 문서</span></div>
+      <div class="tile"><b>6분류</b><span>기능, 구조, 결정, 운영, 이력, 탐색</span></div>
+    </div>
+    <div class="split">
+      <div class="me"><b>제가 맡은 일</b><span>프로젝트 역할 결정과 정정, 시험 조건 제시(6개 이상 pane을 눈으로 확인), 실행 범위와 훅 신뢰 승인</span></div>
+      <div><b>AI가 맡은 일</b><span>마스터의 분담·전달·회수·통합, 담당별 작성과 독립 검토, 형식 검사, 위키 재구성</span></div>
+    </div>
+  </div></section>
+
+  <section class="block" id="c2-plan"><div class="wrap">
+    <h2>분석 및 계획</h2>
+    <p>10.29 점검에서 사람이 AI 사이를 손으로 잇는 구간과, 실행 방식에 따라 지침이 빠지는 문제를 확인했습니다.<br>담당을 늘리기 전에 프로젝트와 역할, 기록 위치부터 정하기로 했습니다.</p>
+    <h3>두 프로젝트의 역할</h3>
+    <div class="tbl"><table>
+      <thead><tr><th scope="col">위치</th><th scope="col">역할</th><th scope="col">넣지 않는 것</th></tr></thead>
+      <tbody>
+        <tr><th scope="row">공통(gptgit)</th><td>공통 AI 규칙, 공유 위임 스킬, 모델 검사 도구</td><td>프로젝트별 역할과 상세 기록</td></tr>
+        <tr><th scope="row">project-management</th><td>프로세스 개선의 논의, 설계, 검증, 작업기록 원본</td><td>개별 프로젝트의 소스와 상세 실행 기록</td></tr>
+        <tr><th scope="row">project-prototype</th><td>개선된 프로세스를 독립적으로 적용하는 시험</td><td>관리 작업의 이력, 보류, 세션, 설치 경로</td></tr>
+      </tbody>
+    </table></div>
+    <h3>역할 분담(project-prototype 기준)</h3>
+    <div class="tbl"><table>
+      <thead><tr><th scope="col">역할</th><th scope="col">책임</th><th scope="col">금지</th></tr></thead>
+      <tbody>
+        <tr><th scope="row">마스터</th><td>사용자 창구, 담당 전달·회수, 근거 대조와 통과 판정</td><td>근거 없는 완료 판정, 범위와 비용 임의 확대</td></tr>
+        <tr><th scope="row">Codex 기획</th><td>요구사항을 설계, Task, 시험 조건에 연결</td><td>승인 없는 요구사항 변경</td></tr>
+        <tr><th scope="row">Claude 기획 검토</th><td>고정된 기획서의 누락, 충돌, 실행 가능성 지적</td><td>원본 직접 수정</td></tr>
+        <tr><th scope="row">Claude 개발</th><td>승인된 Task 제작과 자체 시험</td><td>자기 결과 최종 승인</td></tr>
+        <tr><th scope="row">독립 QA</th><td>제작자와 다른 세션에서 실제 사용 시험</td><td>제작자의 성공 보고로 시험 대체</td></tr>
+        <tr><th scope="row">Hermes 문서화</th><td>검증된 결과로 작업기록·위키 초안 작성</td><td>근거 밖 사실과 완료 상태 추가</td></tr>
+      </tbody>
+    </table></div>
+    <h3>협업 규칙</h3>
+    <div class="flow">
+      <div class="step"><b>1 소유권</b><p>한 파일에는 한 시점에 한 작성자만 둡니다. 검토 담당은 제작 파일을 고치지 않습니다.</p></div>
+      <div class="step"><b>2 최소 입력</b><p>담당은 자기 Task와 필요한 원본만 받습니다. 작업기록 탐색은 마스터가 맡습니다.</p></div>
+      <div class="step"><b>3 전용 탭</b><p>마스터 탭은 나누지 않고 담당은 새 탭에서 시작합니다(11.06).</p></div>
+      <div class="step how"><b>4 기록 위치</b><p>실행별 상태와 근거는 실행 기록에, 짧은 최신 인계는 작업기록에, 설명은 위키에 둡니다.</p></div>
+    </div>
+  </div></section>
+
+  <section class="block" id="c2-tree"><div class="wrap">
+    <h2>폴더 구조</h2>
+    <p>구조와 협업에 관련된 폴더만 추렸습니다.<br>시험 프로젝트에는 관리 작업의 이력과 PC 경로를 넣지 않습니다.</p>
+<pre class="tree"><b>gptgit/</b>
+├─ AGENTS.md                         <i># 공통 규칙: 역할별 모델, 위임 기준</i>
+├─ skills/delegation-reporting/      <i># 담당 위임과 보고 공유 스킬</i>
+├─ tools/
+│  ├─ check_agent_model.py           <i># 역할별 허용 모델 검사</i>
+│  ├─ start_managed_agent.py         <i># 담당 시작</i>
+│  └─ agent_model_hook.py            <i># 금지 모델 시작 명령 차단 훅</i>
+│
+├─ <b>project-management/</b>              <i># 개선 원본</i>
+│  ├─ docs/04_records/management_log.md  <i># 최신 인계와 남은 업무</i>
+│  ├─ report_docs/                   <i># 날짜별 위임 보고</i>
+│  ├─ tests_result/                  <i># 시험 결과(11.06 herdr 6담당)</i>
+│  ├─ skills/wiki-editor/            <i># 위키 편집 기준·스키마·검사기</i>
+│  ├─ wiki/                          <i># features · architecture · decisions</i>
+│  │                                 <i>#   operations · log · index</i>
+│  └─ raw/                           <i># 과거 원문 보관(수정 안 함)</i>
+│
+└─ <b>project-prototype/</b>               <i># 독립 시험</i>
+   ├─ docs/workflow.md               <i># 기획 검토·개발 QA·문서화 순서</i>
+   ├─ docs/context-and-agents.md     <i># 최소 입력·병렬 작업·인계</i>
+   ├─ docs/records/work_log.md       <i># 자체 작업의 최신 인계</i>
+   ├─ templates/                     <i># 작업명세서 · 개발기획서 · Task 입력</i>
+   ├─ tools/                         <i># 역할 시작기 · 전달 도구 · 상태 원장</i>
+   └─ wiki/                          <i># 같은 6분류 위키</i></pre>
+  </div></section>
+
+  <section class="block" id="c2-flow"><div class="wrap">
+    <h2>프로세스 순서도</h2>
+    <figure class="diagram">
+      <div class="scroll-x" tabindex="0" role="group" aria-label="프로세스 순서도, 좁은 화면에서는 가로로 스크롤합니다">
+      <svg viewBox="0 0 960 268" role="img" aria-label="요구사항 승인에서 완료 판정까지 여섯 단계. 기획과 개발에는 각각 검토와 독립 QA 반복이 있고, 같은 결함이 반복되면 마스터가 재평가한다.">
+        <defs><marker id="arrow-p" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 10 5 0 10z" fill="currentColor"/></marker></defs>
+        <g>
+          <rect class="box me" x="4" y="28" width="134" height="88" rx="14"/>
+          <text class="me-t" x="71" y="60">요구사항 승인</text><text class="me-s" x="71" y="81">사용자</text><text class="me-s" x="71" y="98">범위·완료 기준</text>
+          <rect class="box" x="168" y="28" width="134" height="88" rx="14"/>
+          <text class="t" x="235" y="60">기획</text><text class="s" x="235" y="81">Codex 작성</text><text class="s" x="235" y="98">Claude 검토</text>
+          <rect class="box" x="332" y="28" width="134" height="88" rx="14"/>
+          <text class="t" x="399" y="60">개발</text><text class="s" x="399" y="81">Claude 제작</text><text class="s" x="399" y="98">자체 시험</text>
+          <rect class="box" x="496" y="28" width="134" height="88" rx="14"/>
+          <text class="t" x="563" y="60">독립 QA</text><text class="s" x="563" y="81">별도 세션</text><text class="s" x="563" y="98">실제 사용 시험</text>
+          <rect class="box" x="660" y="28" width="134" height="88" rx="14"/>
+          <text class="t" x="727" y="60">문서화</text><text class="s" x="727" y="81">Hermes 초안</text><text class="s" x="727" y="98">마스터 근거 대조</text>
+          <rect class="box me" x="824" y="28" width="132" height="88" rx="14"/>
+          <text class="me-t" x="890" y="60">완료 판정</text><text class="me-s" x="890" y="81">마스터 보고</text><text class="me-s" x="890" y="98">사용자 확인</text>
+        </g>
+        <g fill="none" stroke="currentColor" stroke-width="1.6">
+          <path d="M138 72H166" marker-end="url(#arrow-p)"/><path d="M302 72H330" marker-end="url(#arrow-p)"/><path d="M466 72H494" marker-end="url(#arrow-p)"/><path d="M630 72H658" marker-end="url(#arrow-p)"/><path d="M794 72H822" marker-end="url(#arrow-p)"/>
+          <path d="M563 116V150H399V118" marker-end="url(#arrow-p)"/>
+          <path d="M481 150V190" stroke-dasharray="5 4" marker-end="url(#arrow-p)"/>
+        </g>
+        <text class="lb" x="481" y="142" text-anchor="middle">결함이면 수정 후 재검증</text>
+        <text class="lb" x="727" y="138" text-anchor="middle">내용 불일치면 반려·수정</text>
+        <rect class="box" x="331" y="192" width="300" height="60" rx="14"/>
+        <text class="t" x="481" y="216">마스터 재평가</text>
+        <text class="s" x="481" y="238">같은 결함이 2회 수정 후 반복되거나 검토 3회 초과</text>
+      </svg>
+      </div>
+      <figcaption>어두운 칸은 사용자가 결정하는 지점입니다. 단계별로 일부 시험은 했지만, 요구사항부터 문서화까지 한 번에 완주한 기록은 아직 없습니다.</figcaption>
+    </figure>
+    <h3>11.06 herdr 6담당 시험 <span class="ev">확인</span></h3>
+    <div class="tbl"><table>
+      <thead><tr><th scope="col">담당</th><th scope="col">맡은 일과 회수 결과</th></tr></thead>
+      <tbody>
+        <tr><th scope="row">마스터</th><td>배치, 담당 시작, 작업 전달, 원문 대조, 샘플 작성, 검사와 최종 통합</td></tr>
+        <tr><th scope="row">wiki-plan</th><td>목적, 포함·제외, 수락 기준 3개 제안</td></tr>
+        <tr><th scope="row">wiki-sources</th><td>주장별 근거 연결, 출처 경로, 상태 보존 기준</td></tr>
+        <tr><th scope="row">wiki-draft</th><td>원문 보관과 설명의 차이, 내용 합성에 관한 초안</td></tr>
+        <tr><th scope="row">wiki-ops</th><td>작성 → 형식 검사 → 내용 검토 흐름과 검사 한계</td></tr>
+        <tr><th scope="row">wiki-format</th><td>필수 검사 5개, 샘플 형식 검사 실행(오류 0)</td></tr>
+        <tr><th scope="row">wiki-review</th><td>독립 검토 기준 4개, 샘플과 원문 3개 대조(필수 결함 0)</td></tr>
+      </tbody>
+    </table></div>
+    <h3>11.02 역할 분담 시험 <span class="ev">확인</span></h3>
+    <p>Claude가 만든 작은 함수를 GPT가 별도로 실행해 같은 결과를 확인했습니다.</p>
+    <div class="tbl"><table>
+      <thead><tr><th scope="col">입력</th><th scope="col">예상값</th><th scope="col">Claude 자체 실행</th><th scope="col">GPT 별도 실행</th><th scope="col">판정</th></tr></thead>
+      <tbody>
+        <tr><th scope="row">[1, 2, 3, 4]</th><td>6</td><td>6</td><td>6</td><td>통과</td></tr>
+        <tr><th scope="row">[]</th><td>0</td><td>0</td><td>0</td><td>통과</td></tr>
+        <tr><th scope="row">[-4, -3, -2, 1, 2]</th><td>-4</td><td>-4</td><td>-4</td><td>통과</td></tr>
+      </tbody>
+    </table></div>
+  </div></section>
+
+  <section class="block" id="c2-screens"><div class="wrap">
+    <h2>실제 화면</h2>
+    <p>2026년 11월 6일에 캡처한 herdr와 Obsidian 화면입니다.<br>이미지를 누르면 화면 가운데에 크게 열립니다.</p>
+    <div class="shots">
+      <figure class="wide"><a href="img/case02-herdr-dispatch.png"><img src="img/case02-herdr-dispatch.png" alt="herdr 화면. 왼쪽 위 마스터가 담당 6개에게 각각 다른 작업을 전달한 모습" loading="lazy"></a><figcaption>마스터(왼쪽 위)가 담당 6개에게 기획, 출처, 본문, 운영, 형식, 검토를 나눠 전달했습니다.</figcaption></figure>
+      <figure class="wide"><a href="img/case02-herdr-parallel.png"><img src="img/case02-herdr-parallel.png" alt="herdr 화면. 담당들이 각자 결과를 반환하고 마스터가 진행 상황을 보고하는 모습" loading="lazy"></a><figcaption>각 담당의 결과를 회수해 하나의 샘플로 합친 뒤, 형식 담당과 독립 내용 검토 담당에게 다시 보냈습니다.</figcaption></figure>
+      <figure><a href="img/case02-obsidian-wiki.png"><img src="img/case02-obsidian-wiki.png" alt="Obsidian에서 위키 문서를 연 화면. 왼쪽에 6분류 폴더, 본문에 구조 도식" loading="lazy"></a><figcaption>6분류로 다시 정리한 위키를 Obsidian에서 읽는 화면입니다. 구조 도식이 본문과 함께 표시됩니다.</figcaption></figure>
+      <figure><a href="img/case02-obsidian-graph.png"><img src="img/case02-obsidian-graph.png" alt="Obsidian 그래프 뷰. 위키 문서들이 서로 연결된 모습" loading="lazy"></a><figcaption>그래프 뷰: README, AGENTS, 작업기록과 위키 문서가 서로 어떻게 연결되는지 봅니다.</figcaption></figure>
+    </div>
+  </div></section>
+
+  <section class="block" id="c2-issue"><div class="wrap">
+    <h2>발생한 문제</h2>
+    <div class="issues">
+      <article class="issue"><span class="no">1</span><h3>사람이 AI 사이를 손으로 이었습니다</h3><dl>
+        <div><dt>근거</dt><dd>외부 Codex와 herdr 안의 GPT가 모두 마스터처럼 움직였고 프롬프트와 결과를 제가 복사해 옮겼습니다. 창구를 하나로 정한 10.28 이후에도 외부에서 작업이 이어졌습니다. <span class="ev">확인</span></dd></div>
+        <div><dt>조치</dt><dd>담당 실행, 전달, 회수를 마스터가 맡도록 정했습니다. 11.06 시험에서는 사용자 창 조작 없이 마스터가 담당 6개에게 전달하고 결과를 회수했습니다.</dd></div>
+      </dl></article>
+      <article class="issue"><span class="no">2</span><h3>개선할 위치를 잘못 기록했습니다</h3><dl>
+        <div><dt>근거</dt><dd>AI가 프로세스 개선 위치를 시험 프로젝트로 옮긴다고 기록했고, 제가 바로잡았습니다(11.04). 잘못된 해석으로 문서와 기록을 다시 쓰는 비용도 생겼습니다. <span class="ev">확인</span></dd></div>
+        <div><dt>조치</dt><dd>개선 원본은 project-management로 유지하고, 시험 프로젝트에서 관리 이력과 PC 경로 참조를 지웠습니다. 정리 후 관리 프로젝트명과 개인 PC 경로 참조 0건을 확인했습니다.</dd></div>
+      </dl></article>
+      <article class="issue"><span class="no">3</span><h3>실행 방식에 따라 AI 지침이 빠졌습니다</h3><dl>
+        <div><dt>근거</dt><dd>전용 시작기 대신 claude를 직접 실행한 세션에는 역할 지침과 보류 자료 읽기 차단이 적용되지 않았습니다. <span class="ev">확인</span></dd></div>
+        <div><dt>위험</dt><dd>지침이 없는 상태로 반복 실행을 자동화하면 보류한 자료를 읽는 일을 막을 수 없습니다.</dd></div>
+      </dl></article>
+      <article class="issue"><span class="no">4</span><h3>AI 문서 초안이 담당자를 잘못 적었습니다</h3><dl>
+        <div><dt>근거</dt><dd>11.02 Hermes 초안이 실제 실행 담당을 Hermes로 적었습니다. GPT가 근거와 대조해 반려했고 수정본을 다시 대조했습니다. <span class="ev">확인</span></dd></div>
+        <div><dt>의미</dt><dd>만드는 쪽과 검증하는 쪽을 나눈 구조가 실제 오류를 잡은 사례입니다. 다만 Hermes도 GPT 계열이라 이 검토는 제공자 간 교차 검증이 아니라 별도 세션 검토입니다.</dd></div>
+      </dl></article>
+      <article class="issue"><span class="no">5</span><h3>좁은 pane에서 긴 응답을 회수하지 못했습니다</h3><dl>
+        <div><dt>근거</dt><dd>11.06 시험에서 처음에는 오른쪽 pane 폭이 29~30칸이라 긴 응답의 앞부분이 회수되지 않았습니다. <span class="ev">확인</span></dd></div>
+        <div><dt>조치</dt><dd>분할 비율을 조정하고, 검토 담당에게 자기 결과 파일 하나만 쓰도록 허용했습니다. 샘플 원본을 고칠 권한은 주지 않았습니다.</dd></div>
+      </dl></article>
+    </div>
+  </div></section>
+
+  <section class="block" id="c2-next"><div class="wrap">
+    <h2>개선할 내용</h2>
+    <p>구조와 규칙은 갖췄지만 실제 모델을 연결한 전체 완주는 아직입니다.<br>남은 작업은 시험 프로젝트에서 실행하고, 막히면 개선 원본으로 가져와 고칩니다.</p>
+    <div class="tbl"><table>
+      <thead><tr><th scope="col">상태</th><th scope="col">개선 내용</th><th scope="col">결과 또는 완료 기준</th></tr></thead>
+      <tbody>
+        <tr><td><span class="st done">완료</span></td><td>개선 원본과 독립 시험 프로젝트 분리(11.04)</td><td>시험 프로젝트에서 관리 프로젝트명·PC 경로 참조 0건. 모의 시험 46개 중 45개 통과(symlink 권한 부재 1개 제외)</td></tr>
+        <tr><td><span class="st done">완료</span></td><td>위키를 내용별로 다시 정리(11.05)</td><td>20개 문서, 원문 40개 항목 대응, 상대 링크 271개 누락 0. Obsidian 표시는 화면 캡처로 확인</td></tr>
+        <tr><td><span class="st done">완료</span></td><td>herdr 마스터 1 + 담당 6 소규모 시험(11.06)</td><td>실제 응답 회수, 형식 검사 오류 0, 독립 내용 검토 필수 결함 0. 같은 모델의 별도 세션 검토</td></tr>
+        <tr><td><span class="st done">완료</span></td><td>시험 프로젝트에 위키 기준·스킬·위임 규칙 적용(11.06)</td><td>위키 검사기 회귀 17건 통과, 기존 도구·시험 13개 파일 변경 없음(SHA-256 일치)</td></tr>
+        <tr><td><span class="st part">다음</span></td><td>담당 제어 실검증: 명시 모델 → 새 탭 시작 → 최소 Task 전달</td><td>시험 프로젝트 전달 도구의 실제 전달은 아직 실행하지 않음</td></tr>
+        <tr><td><span class="st part">다음</span></td><td>기획 작성↔검토, 개발↔독립 QA 반복 검증</td><td>별도 세션에서 실제 시험, 결함 반환, 수정, 재시험까지의 근거</td></tr>
+        <tr><td><span class="st">이후</span></td><td>Hermes 문서화 연결과 전체 프로세스 완주</td><td>작은 신규 명세 하나로 요구사항부터 문서화까지 단계별 근거 확보</td></tr>
+      </tbody>
+    </table></div>
+    <div class="detail-next">
+      <a class="btn" href="#case1-detail">← CASE 01 상세 보기</a>
+      <a class="btn primary" href="#case3-detail">CASE 03 상세 보기 →</a>
+    </div>
+  </div></section>
+</main>
+
+<!-- CASE 03 상세 -->
+<main class="page" id="case3-detail" data-detail hidden>
+  <header class="detail-head"><div class="wrap">
+    <a class="back" href="#p-case3">← AI Workflows로 돌아가기</a>
+    <p class="eyebrow">CASE 03 · 비용과 검증 범위의 조정 · project-management · project-prototype</p>
+    <h1>더 많이 실행하기 전에, 무엇이 반복되는지 셌습니다</h1>
+    <p class="section-lead">여러 AI에게 일을 나눌수록 다시 하는 지시와 읽어야 할 맥락이 함께 늘었습니다.<br>필요한 검증은 남기고 줄일 수 있는 반복만 골라내는 방식으로 조정했습니다.</p>
+    <nav class="toc" aria-label="상세 페이지 목차">
+      <a href="#case3-detail" data-jump="c3-overview">개요</a><a href="#case3-detail" data-jump="c3-plan">분석 및 계획</a><a href="#case3-detail" data-jump="c3-screens">실제 화면</a><a href="#case3-detail" data-jump="c3-flow">프로세스</a><a href="#case3-detail" data-jump="c3-issue">발생한 문제</a><a href="#case3-detail" data-jump="c3-next">개선할 내용</a>
+    </nav>
+    <p class="legend"><span><b class="ev">확인</b> 파일과 실행 기록에서 직접 봄</span><span><b class="ev">측정 조건</b> 수치마다 범위를 함께 표시</span><span>수치 출처: project-management 점검 보고서(2026.10.29), 위임·시험 보고(2026.11.06)</span></p>
+  </div></header>
+
+  <section class="block" id="c3-overview"><div class="wrap">
+    <h2>개요</h2>
+    <p>여러 AI에게 일을 나눠 맡기면서 같은 질문을 했습니다. 지금 반복되는 일이 결과를 지키는 검증인지, 줄여도 되는 반복인지입니다.<br>수치는 측정 조건이 서로 달라 직접 비교하거나 절감률로 표현하지 않습니다.</p>
+    <div class="tiles">
+      <div class="tile"><b>31건</b><span>10.25~28 제가 마스터 AI에게 짧게 다시 지시한 횟수</span></div>
+      <div class="tile"><b>94%</b><span>작업 중 마스터 AI 컨텍스트 창 최대 사용률(압축 7번)</span></div>
+      <div class="tile"><b>약 151회</b><span>권한 상승 자동 검토, 약 1,313만 토큰(누적·캐시 포함)</span></div>
+      <div class="tile"><b>6 / 6</b><span>11.06 병렬 시험에서 기본 설정인 마스터용 모델로 실행된 담당</span></div>
+    </div>
+    <div class="split">
+      <div class="me"><b>제가 맡은 일</b><span>반복 확인 요청, 사람이 계속 맡을 결정 지점 선택, 역할별 모델 강제와 훅 신뢰 등록 승인</span></div>
+      <div><b>AI가 맡은 일</b><span>세션 기록 집계와 점검 보고, 모델 검사 도구와 훅 구현, 회귀 시험과 독립 검토</span></div>
+    </div>
+  </div></section>
+
+  <section class="block" id="c3-plan"><div class="wrap">
+    <h2>분석 및 계획</h2>
+    <p>실행을 줄이는 것 자체가 목표는 아닙니다.<br>10.29 점검에서 세션 기록을 세어 보고, 대상마다 줄일 반복과 계속 유지할 검증을 먼저 나눴습니다.</p>
+    <h3>반복과 검증을 나눈 기준</h3>
+    <div class="tbl"><table>
+      <thead><tr><th scope="col">대상</th><th scope="col">줄인 반복</th><th scope="col">유지한 검증</th></tr></thead>
+      <tbody>
+        <tr><th scope="row">작업 지시</th><td>“작업기록 남겨줘”, “진행해줘” 같은 짧은 재지시(규칙 후보)</td><td>비용, 범위, 외부 공개 결정은 계속 사람이 확인</td></tr>
+        <tr><th scope="row">맥락 복원</th><td>매번 읽는 긴 작업기록, 문서마다 되풀이되는 경고 문구</td><td>최신 인계와 근거 위치는 매번 읽음</td></tr>
+        <tr><th scope="row">권한 상승 검토</th><td>반복 실행이 권한 상승 명령을 되풀이하지 않도록 상한(제안)</td><td>보안 검토 자체는 줄이지 않음</td></tr>
+        <tr><th scope="row">AI 문서화</th><td>같은 작업의 자동 재전송</td><td>해시·중복 방지·구독 확인. 다시 보낼 때는 새 작업 ID로만</td></tr>
+        <tr><th scope="row">담당 모델</th><td>마스터용 모델을 하위 담당에 그대로 쓰는 것</td><td>복잡한 작업과 독립 검토는 Terra 유지, 실제 모델 확인 후 Task 전달</td></tr>
+      </tbody>
+    </table></div>
+    <h3>역할별 모델 기준(11.06 공통 규칙)</h3>
+    <div class="tbl"><table>
+      <thead><tr><th scope="col">역할</th><th scope="col">모델</th><th scope="col">맡는 일</th></tr></thead>
+      <tbody>
+        <tr><th scope="row">마스터</th><td>GPT-6 Astra</td><td>판단, 지시, 검토, 통합 전용</td></tr>
+        <tr><th scope="row">단순 작업 담당</th><td>GPT-6 Luna</td><td>간단한 조사와 검사</td></tr>
+        <tr><th scope="row">복잡한 작업 담당</th><td>GPT-6.1 Terra</td><td>원문 분석, 구현, 독립 검토</td></tr>
+        <tr><th scope="row">Claude·Hermes</th><td>프로젝트별 계약 유지</td><td>기획 검토·개발, 문서화</td></tr>
+      </tbody>
+    </table></div>
+  </div></section>
+
+  <section class="block" id="c3-screens"><div class="wrap">
+    <h2>실제 화면</h2>
+    <p>2026년 11월 6일 병렬 시험 직후의 대화와 작업 화면입니다.<br>제 질문에서 모델 선택 문제가 드러났고, 같은 날 규칙과 도구로 바꿨습니다.</p>
+    <div class="shots">
+      <figure class="wide"><a href="img/case03-question.png"><img src="img/case03-question.png" alt="모든 모델을 Astra로 한 이유를 묻는 질문과, 모델을 지정하지 않아 기본 설정으로 실행됐다는 AI의 답변" loading="lazy"></a><figcaption>시험이 끝난 뒤 모델 선택 이유를 물었습니다. AI는 모델을 지정하지 않아 담당 6개가 기본 설정으로 실행됐다고 답하고 시험의 의미를 바로잡았습니다.</figcaption></figure>
+      <figure class="wide"><a href="img/case03-rule.png"><img src="img/case03-rule.png" alt="Astra를 마스터 전용으로 쓰고 담당은 Luna와 Terra를 쓰도록 강제하는 규칙 제안" loading="lazy"></a><figcaption>상위 규칙 문서를 확인한 뒤, Astra를 마스터 전용으로 강제할 수 있는지 물었습니다. 제안받은 규칙을 승인했습니다.</figcaption></figure>
+      <figure class="wide"><a href="img/case03-terra-panes.png"><img src="img/case03-terra-panes.png" alt="Terra 담당 두 개가 모델 검사 도구와 훅을 각각 구현하는 터미널 화면" loading="lazy"></a><figcaption>승인 후 Terra 담당 두 개가 시작 도구와 훅을 나눠 구현했습니다. 다른 Terra 담당이 읽기 전용으로 검토했습니다.</figcaption></figure>
+    </div>
+  </div></section>
+
+  <section class="block" id="c3-flow"><div class="wrap">
+    <h2>프로세스 순서도</h2>
+    <figure class="diagram">
+      <div class="scroll-x" tabindex="0" role="group" aria-label="프로세스 순서도, 좁은 화면에서는 가로로 스크롤합니다">
+      <svg viewBox="0 0 960 250" role="img" aria-label="작업 승인, 모델 명시, 시작 전 검사, 새 탭에서 시작, Task 전달의 다섯 단계. 훅이 금지된 모델의 담당 시작 명령을 실행 전에 막는다.">
+        <defs><marker id="arrow-c" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 10 5 0 10z" fill="currentColor"/></marker></defs>
+        <g>
+          <rect class="box me" x="4" y="28" width="170" height="88" rx="14"/>
+          <text class="me-t" x="89" y="60">작업 승인</text><text class="me-s" x="89" y="81">사용자</text><text class="me-s" x="89" y="98">범위·비용</text>
+          <rect class="box" x="196" y="28" width="170" height="88" rx="14"/>
+          <text class="t" x="281" y="60">모델 명시</text><text class="s" x="281" y="81">마스터가 지정</text><text class="s" x="281" y="98">Luna 또는 Terra</text>
+          <rect class="box on" x="388" y="28" width="170" height="88" rx="14"/>
+          <text class="t" x="473" y="60">시작 전 검사</text><text class="s" x="473" y="81">누락·금지 모델</text><text class="s" x="473" y="98">시작 거부</text>
+          <rect class="box" x="580" y="28" width="170" height="88" rx="14"/>
+          <text class="t" x="665" y="60">새 탭에서 시작</text><text class="s" x="665" y="81">담당 전용 탭</text><text class="s" x="665" y="98">실제 모델·권한 확인</text>
+          <rect class="box" x="772" y="28" width="184" height="88" rx="14"/>
+          <text class="t" x="864" y="60">Task 전달</text><text class="s" x="864" y="81">확인 뒤에만</text><text class="s" x="864" y="98">필요한 입력만</text>
+        </g>
+        <g fill="none" stroke="currentColor" stroke-width="1.6">
+          <path d="M174 72H194" marker-end="url(#arrow-c)"/><path d="M366 72H386" marker-end="url(#arrow-c)"/><path d="M558 72H578" marker-end="url(#arrow-c)"/><path d="M750 72H770" marker-end="url(#arrow-c)"/>
+          <path d="M665 170V120" stroke-dasharray="5 4" marker-end="url(#arrow-c)"/>
+        </g>
+        <rect class="box on" x="480" y="172" width="370" height="60" rx="14"/>
+        <text class="t" x="665" y="196">PreToolUse 훅</text>
+        <text class="s" x="665" y="218">금지된 모델의 담당 시작 명령을 실행 전에 차단</text>
+        <text class="lb" x="466" y="207" text-anchor="end">보조 장치: 모든 우회를 막지는 않음</text>
+      </svg>
+      </div>
+      <figcaption>어두운 칸은 제 결정, 파란 칸은 11.06에 실제로 동작을 확인한 장치입니다. 훅은 두 프로젝트에서 금지된 담당 시작 명령을 한 번씩 실행 전에 막았습니다.</figcaption>
+    </figure>
+  </div></section>
+
+  <section class="block" id="c3-issue"><div class="wrap">
+    <h2>발생한 문제</h2>
+    <div class="issues">
+      <article class="issue"><span class="no">1</span><h3>같은 지시를 계속 반복했습니다</h3><dl>
+        <div><dt>근거</dt><dd>10.25~28 마스터 세션의 짧은 재지시 31건 중 “작업기록 남겨줘” 9건, “진행해줘” 7건, 번호 선택 3건이었습니다. <span class="ev">확인</span></dd></div>
+        <div><dt>원인</dt><dd>“파일 반영은 명시 요청 때만” 규칙과 “승인된 실행의 기록은 허용” 규칙의 경계가 모호했습니다. 멈출 조건만 있고 다음으로 진행하는 규칙이 없었습니다.</dd></div>
+      </dl></article>
+      <article class="issue"><span class="no">2</span><h3>마스터 AI의 컨텍스트가 작업을 방해할 만큼 찼습니다</h3><dl>
+        <div><dt>근거</dt><dd>시작과 맥락 복원에 창의 약 30%, 작업 중 최대 94%를 썼습니다. 압축은 마스터 세션 4번, 자동 승인 검토까지 합쳐 7번 일어났습니다. <span class="ev">확인</span></dd></div>
+        <div><dt>배경</dt><dd>복원할 때 읽는 문서 묶음이 약 42k 토큰이었고, 문서마다 같은 경고 문구가 되풀이됐습니다. 한 세션에서 오랫동안 작업과 기록을 이어 갔습니다.</dd></div>
+      </dl></article>
+      <article class="issue"><span class="no">3</span><h3>권한 상승 자동 검토에 많은 사용량이 들었습니다</h3><dl>
+        <div><dt>근거</dt><dd>이틀 동안 자동 검토 세션 11개에서 검토 요청 약 151회, 약 1,313만 토큰(누적·캐시 포함)을 썼습니다. 토큰은 구독 한도에서 빠집니다. <span class="ev">확인</span></dd></div>
+        <div><dt>판단</dt><dd>보안 검토라 줄이지 않았습니다. 대신 반복 실행을 도입하면 이 수가 늘 수 있어 Phase별 Task 수와 검토 횟수에 상한을 두기로 제안했습니다.</dd></div>
+      </dl></article>
+      <article class="issue"><span class="no">4</span><h3>모델을 지정하지 않아 담당이 모두 마스터용 모델로 실행됐습니다</h3><dl>
+        <div><dt>근거</dt><dd>11.06 herdr 6담당 시험에서 담당 6개의 터미널 표시가 모두 GPT-6-Astra였습니다. 시작할 때 모델을 지정하지 않아 기본 설정을 이어받았습니다. <span class="ev">확인</span></dd></div>
+        <div><dt>조치</dt><dd>시험 결과를 “역할별 모델 배분 검증”이 아니라 “같은 모델의 별도 세션으로 한 pane 제어·협업 시험”으로 바로잡아 기록했습니다. 같은 날 모델 규칙과 시작 전 검사를 적용했습니다.</dd></div>
+      </dl></article>
+      <article class="issue"><span class="no">5</span><h3>해결하지 못한 도구 오류가 남았습니다</h3><dl>
+        <div><dt>근거</dt><dd>점검 도구는 세션 ID에 들어 있는 “/”를 거절하고, Hermes 대화 창은 알 수 없는 오류로 종료됩니다. <span class="ev">확인</span></dd></div>
+        <div><dt>대응</dt><dd>Hermes는 단일 응답 방식으로 우회해 시험을 끝냈고 이것을 대화 창 연동 성공으로 기록하지 않았습니다. 원인은 아직 확인하지 못했습니다.</dd></div>
+      </dl></article>
+    </div>
+  </div></section>
+
+  <section class="block" id="c3-next"><div class="wrap">
+    <h2>개선할 내용</h2>
+    <p>Task별 정확한 토큰과 구독 차감량은 측정하지 않았습니다.<br>그래서 비용 절감 효과를 비율로 표현하지 않고, 예상치는 예상치로 표시합니다.</p>
+    <div class="tbl"><table>
+      <thead><tr><th scope="col">상태</th><th scope="col">개선 내용</th><th scope="col">결과 또는 완료 기준</th></tr></thead>
+      <tbody>
+        <tr><td><span class="st done">완료</span></td><td>역할별 모델 규칙, 시작 전 모델 검사, 담당 전용 새 탭</td><td>prototype 회귀 58건, 공통 회귀 15건 통과. Luna 담당의 실제 시작과 대기 응답 확인</td></tr>
+        <tr><td><span class="st done">완료</span></td><td>금지 모델의 담당 시작 명령을 막는 훅 등록</td><td>두 프로젝트에서 각 1회, 금지된 시작 명령이 실행 전에 차단되는 것 확인. 다른 PC는 경로와 신뢰 등록 재확인 필요</td></tr>
+        <tr><td><span class="st part">시험 중</span></td><td>승인된 실행 안의 기록 자동 저장</td><td>시험 프로젝트 순서 문서에 반영: Task가 끝나면 실행 기록, Phase가 끝나면 작업기록 요약. 재지시 감소 효과는 아직 측정하지 않음</td></tr>
+        <tr><td><span class="st">제안</span></td><td>“멈출 사유가 없으면 다음 Task로” 진행 규칙</td><td>기록 자동 저장과 함께 10.25~28 기준 재지시 약 16건 감소(예상)</td></tr>
+        <tr><td><span class="st part">시험 중</span></td><td>작업기록을 현재 상태와 과거 이력으로 분리</td><td>복원에 읽는 기록 약 6.5k → 2~3k 토큰(예상). 시험 프로젝트에 긴 과거 이력을 분리해 링크하도록 반영. 마스터 교대는 “창 50%” 고정 기준 대신 Task·Phase 경계에서 판단</td></tr>
+      </tbody>
+    </table></div>
+    <div class="detail-next">
+      <a class="btn" href="#case2-detail">← CASE 02 상세 보기</a>
+      <a class="btn primary" href="#p-reflection">REFLECTION 보기 →</a>
+    </div>
+  </div></section>
+</main>
+
+<footer id="contact"><div class="wrap">
+  <div class="end">
+    <div><h2>이야기 나눠 보고 싶으시다면</h2><p>아래 메일로 연락해 주세요.</p><a class="mail" href="mailto:hanmir777@naver.com">hanmir777@naver.com</a></div>
+    <a class="btn primary" href="mailto:hanmir777@naver.com">메일 보내기</a>
+  </div>
+  <p class="note">목업입니다. 내용은 이력서, 포트폴리오(2026.10.25), 프로젝트 작업기록·점검 보고서·시험 보고(2026.11.06까지)와 직접 캡처한 화면에서 가져왔습니다.</p>
+</div></footer>
+
+<dialog class="lightbox" id="lightbox" aria-label="이미지 크게 보기"><button class="close" type="button" aria-label="닫기">×</button><img alt=""><p></p></dialog>
+
+<script>
+(function () {
+  var root = document.documentElement;
+  var icon = document.getElementById('modeIcon');
+  var moon = 'M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z';
+  var sun = 'M12 8a4 4 0 1 0 0 8 4 4 0 0 0 0-8zM12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41';
+  function isDark() { var t = root.getAttribute('data-theme'); return t ? t === 'dark' : matchMedia('(prefers-color-scheme: dark)').matches; }
+  function paint() { icon.innerHTML = '<path d="' + (isDark() ? sun : moon) + '"/>'; }
+  paint();
+  document.getElementById('mode').addEventListener('click', function () {
+    root.setAttribute('data-theme', isDark() ? 'light' : 'dark'); paint();
+  });
+  matchMedia('(prefers-color-scheme: dark)').addEventListener('change', paint);
+
+  var ids = ['home', 'how', 'projects'];
+  var links = document.querySelectorAll('[data-nav],[data-rail]');
+  var mainView = document.getElementById('view-main');
+  var details = document.querySelectorAll('[data-detail]');
+  function mark(id) { links.forEach(function (a) { a.setAttribute('aria-current', (a.dataset.nav || a.dataset.rail) === id ? 'true' : 'false'); }); }
+  function spy() {
+    if (mainView.hidden) return;
+    var y = window.scrollY + window.innerHeight * 0.35, cur = 'home';
+    ids.forEach(function (id) { if (document.getElementById(id).offsetTop <= y) cur = id; });
+    mark(cur);
+  }
+  addEventListener('scroll', spy, { passive: true });
+
+  // 상세 페이지는 해시로 전환한다. 숨겨진 대상으로는 브라우저가 스크롤하지 않으므로 보기를 바꾼 뒤 직접 이동한다.
+  function route() {
+    var hash = location.hash.slice(1);
+    var target = hash ? document.getElementById(hash) : null;
+    var detail = target && target.hasAttribute('data-detail') ? target : null;
+    details.forEach(function (d) { d.hidden = d !== detail; });
+    mainView.hidden = !!detail;
+    document.body.classList.toggle('in-detail', !!detail);
+    if (detail) { mark('projects'); window.scrollTo(0, 0); return; }
+    if (target) target.scrollIntoView();
+    spy();
+  }
+  addEventListener('hashchange', route);
+  route();
+
+  // 목차는 현재 상세 보기의 해시를 유지한 채 해당 절로 이동한다.
+  document.querySelectorAll('[data-jump]').forEach(function (a) {
+    a.addEventListener('click', function (e) {
+      e.preventDefault();
+      document.getElementById(a.dataset.jump).scrollIntoView();
+    });
+  });
+
+  // 화면 캡처는 새 창 대신 가운데 팝업으로 연다. 바깥이나 닫기 버튼을 누르거나 Esc로 닫는다.
+  var lb = document.getElementById('lightbox'), lbImg = lb.querySelector('img'), lbCap = lb.querySelector('p');
+  document.querySelectorAll('a[href^="img/"]').forEach(function (a) {
+    a.addEventListener('click', function (e) {
+      e.preventDefault();
+      var thumb = a.querySelector('img'), fig = a.closest('figure'), cap = fig && fig.querySelector('figcaption');
+      lbImg.src = a.getAttribute('href');
+      lbImg.alt = thumb ? thumb.alt : '';
+      lbCap.textContent = cap ? cap.textContent : '';
+      lbCap.hidden = !cap;
+      lb.showModal();
+    });
+  });
+  lb.addEventListener('click', function (e) { if (e.target === lb || e.target.classList.contains('close')) lb.close(); });
+  lb.addEventListener('close', function () { lbImg.removeAttribute('src'); });
+
+  document.querySelectorAll('.chip').forEach(function (c) {
+    c.addEventListener('click', function () {
+      document.querySelectorAll('.chip').forEach(function (o) { o.setAttribute('aria-pressed', o === c ? 'true' : 'false'); });
+    });
+  });
+})();
+</script>
+</body>
+</html>

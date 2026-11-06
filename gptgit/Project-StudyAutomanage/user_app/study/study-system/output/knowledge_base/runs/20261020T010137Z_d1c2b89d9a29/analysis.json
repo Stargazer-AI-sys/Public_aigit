@@ -1,0 +1,208 @@
+{
+  "material_type": {
+    "material_type": "실습",
+    "confidence": 0.78,
+    "reason": "R1·R2의 인터페이스와 RIP 설정, SSH 접속을 위한 설정 및 접속 명령이 중심이며 실제 성공 여부는 기록되지 않았습니다. IPv4 주소·클래스 설명도 함께 포함되어 있습니다."
+  },
+  "summary": "R1·R2의 인터페이스와 RIP 및 SSH 설정 예시를 제시하고, IPv4 주소와 클래스 관련 메모를 덧붙인 자료입니다.",
+  "topics": [
+    {
+      "name": "네트워크 장비 설정",
+      "children": [
+        {
+          "name": "인터페이스 IP 주소 설정"
+        },
+        {
+          "name": "RIP 설정"
+        },
+        {
+          "name": "SSH 원격 접속"
+        }
+      ]
+    },
+    {
+      "name": "IPv4",
+      "children": [
+        {
+          "name": "서브넷 마스크와 비트 표현"
+        },
+        {
+          "name": "IPv4 주소 클래스"
+        }
+      ]
+    }
+  ],
+  "keywords": [
+    {
+      "name": "RIP",
+      "type": "라우팅 프로토콜"
+    },
+    {
+      "name": "SSH",
+      "type": "원격 접속 프로토콜"
+    },
+    {
+      "name": "VTY",
+      "type": "가상 회선"
+    },
+    {
+      "name": "서브넷 마스크",
+      "type": "IPv4"
+    },
+    {
+      "name": "D 클래스",
+      "type": "IPv4 주소 클래스"
+    }
+  ],
+  "concepts": [
+    {
+      "name": "라우터 인터페이스 IP 주소 설정",
+      "description": "R1의 Fa0/0에 192.168.1.254/24, S1/0에 192.168.12.1/24를 설정하고, R2의 Fa0/0에 192.168.2.254/24, S1/0에 192.168.12.2/24를 설정하는 명령 예시가 있습니다. 각 인터페이스에 no shutdown 명령도 제시되어 있으나 실행 결과는 기록되지 않았습니다.",
+      "type": {
+        "category": "설정",
+        "subtype": "인터페이스"
+      }
+    },
+    {
+      "name": "RIP 설정",
+      "description": "R1은 192.168.1.0 및 192.168.12.0, R2는 192.168.2.0 및 192.168.12.0을 대상으로 router rip 아래에 network 명령을 입력하는 예시가 있습니다. 설정 또는 라우팅 결과는 기록되지 않았습니다.",
+      "type": {
+        "category": "설정",
+        "subtype": "라우팅"
+      }
+    },
+    {
+      "name": "SSH 원격 접속",
+      "description": "자료는 SSH를 암호문으로 통신하는 원격 접속용 프로토콜이라고 설명합니다. R2에서 SSH 관련 설정을 제시하고 R1에서 R2 주소로 접속하는 명령을 적었으나, 접속 성공 여부는 확인되지 않았습니다.",
+      "type": {
+        "category": "프로토콜",
+        "subtype": "원격 접속"
+      }
+    },
+    {
+      "name": "SSH 구성 요소",
+      "description": "구성 시 필요한 조건으로 로컬 계정, 특권 암호, 도메인 지정, 암호화 알고리즘과 키 길이 지정, 가상 회선 범위를 열거합니다. R2 설정 예시에는 로컬 로그인과 VTY 범위가 포함되어 있으며 키 생성 명령은 물음표 도움말 표기에서 끝납니다.",
+      "type": {
+        "category": "설정 요소",
+        "subtype": "인증 및 가상 회선"
+      }
+    },
+    {
+      "name": "IPv4 서브넷 마스크",
+      "description": "자료는 192.168.1.1/24의 주소와 마스크를 이진수로 적고, 마스크 연산을 AND 연산으로 설명합니다. 또한 서브넷 마스크를 통해 주소를 매핑한다고 기록합니다.",
+      "type": {
+        "category": "주소 체계",
+        "subtype": "서브넷 마스크"
+      }
+    },
+    {
+      "name": "IPv4 주소 클래스",
+      "description": "자료는 IPv4 주소를 MSB로 식별하는 5개 클래스로 구분한다고 설명하며, 224.30.54.70의 첫 옥텟 224를 1110 0000으로 나타내고 D 클래스라고 적습니다. D 클래스는 멀티캐스트 용도, E 클래스는 학술 연구용 예약 주소라고 기록합니다.",
+      "type": {
+        "category": "주소 체계",
+        "subtype": "클래스"
+      }
+    },
+    {
+      "name": "IPv4 8비트 옥텟",
+      "description": "자료는 IPv4의 옥텟을 8비트 구조로 제시하고 각 비트 값으로 128, 64, 32, 16, 8, 4, 2, 1을 나열합니다.",
+      "type": {
+        "category": "주소 체계",
+        "subtype": "비트 표현"
+      }
+    }
+  ],
+  "theory": {
+    "definitions": [
+      {
+        "subject": "SSH",
+        "content": "자료에서는 SSH를 암호문으로 통신하는 원격 접속용 프로토콜이라고 설명합니다.",
+        "evidence": "++++++++++++++++++++++++++\n-암호문으로 통신하는 원격 접속용 프로토콜"
+      },
+      {
+        "subject": "IPv4 주소 클래스",
+        "content": "자료는 IPv4 주소를 MSB를 이용해 식별하는 5개 클래스로 구분한다고 설명합니다. D 클래스는 멀티캐스트 용도, E 클래스는 학술 연구용 예약 주소라고 적고 있습니다.",
+        "evidence": "IPv4\n5개 클래스라는걸로 구분하는데 MSB(most significant bit 최상위 비트)를 이용해 식별 가능\n224.30.54.70\n128+64+32\n224\n1110 0000 D클래스\n\n클래스는 네트워크 규모의 차이\n장비에 할당 가능한 주소는 C클래스 까지\nD클래스는 멀티케스트 용으로 사용\nE는 학술 연구용으로 예약된 주소임"
+      }
+    ],
+    "principles": [
+      {
+        "subject": "SSH 구성 조건",
+        "content": "자료는 SSH 구성 조건으로 로컬 계정, 특권 암호, 도메인 지정, 암호화 알고리즘 선택 및 키 길이 지정, 가상 회선 범위를 열거합니다. R2 예시에는 로컬 계정, 도메인, 키 생성 도움말 명령, VTY 범위와 로컬 로그인 설정이 나타나며 키 생성 명령의 구체적인 값은 제시되지 않았습니다.",
+        "evidence": "구성시 필요 조건\n1. 로컬계정\n2. 특권 pw\n3. 도메인 지정\n4. 암호화 알고리즘 선택 및 key 길이 지정\n5. 가상회선 범위 지정\n\nR2\nenable pass 1111\nusername user pass 2222\nip domain-name ict.ac.kr\ncrypto key generate ? \nline vty 0 4\nlogin local",
+        "related_concepts": [
+          "SSH 구성 요소",
+          "SSH 원격 접속"
+        ]
+      },
+      {
+        "subject": "서브넷 마스크와 비트 표현",
+        "content": "자료는 192.168.1.1/24를 이진수로 나타내고 마스크 연산을 AND 연산으로 설명합니다. 이어 IPv4 옥텟의 비트 값과 서브넷 마스크를 통한 매핑을 기록합니다.",
+        "evidence": "IPv4 37번 슬라이드\n데이터 복구 암호화 원리\n베타 논리합\n Mask 연산 = AND 연산\n192.168.1.1/24 \nipv4 8bit octet 구조\n2^7 2^6 2^5 2^4 2^3 2^2 2^1 2^0\n128   64   32   16    8     4     2     1\n\n1100 0000 . 1010 1000. 0000 0001 . 0000 0001\n1111 1111 . 1111 1111. 1111 1111 . 0000 0000\n1100 0000 . 1010 1000. \n192.168.1.1/24 \n\n서브넷 마스크를 통해 맵핑 ",
+        "related_concepts": [
+          "IPv4 서브넷 마스크",
+          "IPv4 8비트 옥텟"
+        ]
+      }
+    ]
+  },
+  "practice": [
+    {
+      "title": "R1·R2 인터페이스 및 RIP 설정 예시",
+      "description": "R1과 R2에서 Fa0/0 및 S1/0에 각각 주소와 마스크를 설정하고 no shutdown을 입력한 뒤, router rip 아래에 네트워크를 지정하는 명령 예시입니다. 실행 여부나 라우팅 결과는 기록되지 않았습니다.",
+      "evidence": "R1\n\nconf t\nint fa0/0\nip addr 192.168.1.254 255.255.255.0\nno sh\nint s1/0\nip addr 192.168.12.1 255.255.255.0\nno sh\nrouter rip\nnet 192.168.1.0\nnet 192.168.12.0\n\nR2\n\nconf t\nint fa0/0\nip addr 192.168.2.254 255.255.255.0\nno sh\nint s1/0\nip addr 192.168.12.2 255.255.255.0\nno sh\nrouter rip\nnet 192.168.2.0\nnet 192.168.12.0",
+      "related_concepts": [
+        "라우터 인터페이스 IP 주소 설정",
+        "RIP 설정"
+      ]
+    },
+    {
+      "title": "R2 SSH 설정 및 R1 접속 명령 예시",
+      "description": "R2에서 특권 암호, 로컬 계정, 도메인, 키 생성 도움말 명령, VTY 범위와 로컬 로그인 설정을 제시하고 R1에서 R2 주소를 대상으로 SSH 접속 명령을 적었습니다. 접속 결과와 성공 여부는 기록되지 않았습니다.",
+      "evidence": "R2\nenable pass 1111\nusername user pass 2222\nip domain-name ict.ac.kr\ncrypto key generate ? \nline vty 0 4\nlogin local\n\nR1 \nssh -l user1 192.168.12.2",
+      "related_concepts": [
+        "SSH 원격 접속",
+        "SSH 구성 요소"
+      ]
+    }
+  ],
+  "schema_version": "0.2",
+  "sections": [
+    {
+      "id": "router-setup",
+      "title": "R1·R2 인터페이스 및 RIP 설정",
+      "content_refs": [
+        "/concepts/0",
+        "/concepts/1",
+        "/practice/0"
+      ]
+    },
+    {
+      "id": "ssh-access",
+      "title": "SSH 구성과 접속 예시",
+      "content_refs": [
+        "/concepts/2",
+        "/concepts/3",
+        "/theory/definitions/0",
+        "/theory/principles/0",
+        "/practice/1"
+      ]
+    },
+    {
+      "id": "ipv4",
+      "title": "IPv4 서브넷 마스크, 비트 표현 및 클래스",
+      "content_refs": [
+        "/concepts/4",
+        "/concepts/5",
+        "/concepts/6",
+        "/theory/definitions/1",
+        "/theory/principles/1"
+      ]
+    }
+  ],
+  "source": {
+    "material_id": "83759605cda2e73158d0e459567927b62efd2dd13c7c54e9af019fdce875a399",
+    "filename": "3일차 ssh 연결.txt",
+    "extension": ".txt"
+  }
+}

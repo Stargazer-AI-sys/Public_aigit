@@ -1,0 +1,28 @@
+{
+  "provider": "saved-response",
+  "actual_ai_call": false,
+  "completed_stages": [
+    "input_validation",
+    "prompt_generation",
+    "response_received",
+    "json_parse",
+    "optional_null_normalization",
+    "source_injection",
+    "schema_validation",
+    "quality_validation",
+    "optional_auxiliary_validation"
+  ],
+  "warnings": [],
+  "api_request_attempted": false,
+  "automatic_retries": 0,
+  "offline_revalidation": true,
+  "content_review_required": true,
+  "usage": {
+    "input_tokens": 0,
+    "output_tokens": 0,
+    "total_tokens": 0
+  },
+  "review_candidates_pending": 0,
+  "origin_run_directory": "C:\\Users\\ICT\\Desktop\\Aigit\\gptgit\\Project-StudyAutomanage\\study\\study-system\\output\\knowledge_base\\runs\\20261019T032342Z_9275ca30e632",
+  "manual_source_grounded_correction": true
+}

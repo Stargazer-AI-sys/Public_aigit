@@ -1,0 +1,102 @@
+<!doctype html><html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>CORE ↔ EDGE 연결 및 반환 경로 검증 가이드</title><style>
+:root{color-scheme:light}*{box-sizing:border-box}body{margin:0;background:#fff;color:#20252b;font:16px/1.75 system-ui,-apple-system,"Segoe UI","Malgun Gothic",sans-serif}main{max-width:960px;margin:auto;padding:42px 28px 70px}h1{font-size:29px;line-height:1.4;margin:0 0 12px}h2{font-size:23px;margin:42px 0 16px;padding-bottom:8px;border-bottom:1px solid #d9dee4}h3{font-size:18px;margin:26px 0 10px}p{margin:10px 0}a{color:#245c88;text-underline-offset:3px}.meta{color:#606973;font-size:14px}.note{padding:12px 16px;border-left:3px solid #7893a8;background:#f5f7f9;margin:18px 0}.success{border-left-color:#528368}nav{padding:16px 0;border-bottom:1px solid #d9dee4}nav a{display:inline-block;margin:4px 16px 4px 0}table{border-collapse:collapse;width:100%;font-size:14px;margin:14px 0}th,td{padding:10px 12px;text-align:left;border:1px solid #d9dee4;vertical-align:top}th{background:#f3f5f7;font-weight:600}.table-wrap{overflow-x:auto}pre{background:#f5f6f8;border:1px solid #e0e4e8;border-radius:4px;padding:14px 16px;overflow-x:auto;line-height:1.6;font-size:14px}code{font-family:ui-monospace,SFMono-Regular,Consolas,monospace}p code,li code,td code{background:#f1f3f5;padding:1px 4px;border-radius:3px}li{margin:7px 0}footer{margin-top:40px;border-top:1px solid #d9dee4;padding-top:16px;font-size:13px;color:#606973}@media(max-width:600px){main{padding:24px 16px}h1{font-size:25px}h2{font-size:21px}th,td{padding:8px}pre{font-size:13px}}@media print{main{max-width:none;padding:0}nav{display:none}h2{break-after:avoid}pre,table,.note{break-inside:avoid}a{color:inherit}body{font-size:11pt}}
+</style></head><body><main>
+<header><p class="meta">네트워크 엔지니어 취업 프로젝트 · Phase 1 · 2026-10-11</p><h1>CORE ↔ EDGE 연결 및<br>반환 경로 검증 가이드</h1><p>Core L3 스위치와 Edge 라우터의 전송망을 구성하고 내부 VLAN·Linux 간 통신을 검증합니다. 실제로 발견한 게이트웨이 IP 중복의 진단·조치도 포함합니다.</p></header><div class="note success"><strong>[확정] 재부팅 검증 완료</strong><br>ASW 중복 SVI IP 제거 유지, Linux 전송망 경로 유지, Linux → EDGE 손실 0%, EDGE → PC20 100%.</div>
+<nav aria-label="목차"><a href="#plan">1. 환경·설계</a><a href="#precheck">2. 사전 확인</a><a href="#link">3. 직접 연결</a><a href="#routes">4. 정적 경로</a><a href="#incident">5. 중복 IP 조치</a><a href="#persist">6. 저장·재부팅</a><a href="#rollback">7. 원복·다음 단계</a></nav>
+<section id="plan"><h2>$1 환경 및 설계</h2><p>선행 실습의 VLAN·Trunk·SVI와 외부 Linux 연결이 구성돼 있어야 합니다. <a href="Linux_PNETLab_통신검증_가이드.html">Linux ↔ PNETLab 통신 검증 가이드</a>를 먼저 참고하세요.</p><p><strong>장비 역할:</strong> ASW1은 Access, CORE-TEST는 내부 게이트웨이·라우팅, EDGE-TEST는 외부 연결 경계입니다. 이번 단계에서는 EDGE 외부 연결을 구성하지 않습니다.</p>
+<div class="table-wrap"><table><thead><tr><th>장비 / 포트</th><th>주소 / 역할</th></tr></thead><tbody><tr><td>CORE-TEST Gi0/3</td><td>10.255.0.1/30 · Routed Port</td></tr><tr><td>EDGE-TEST Gi0/0</td><td>10.255.0.2/30 · CORE 연결</td></tr><tr><td>CORE Vlan10</td><td>10.10.10.1/24 · VLAN10 게이트웨이</td></tr><tr><td>CORE Vlan20</td><td>10.10.20.1/24 · VLAN20 게이트웨이</td></tr><tr><td>Linux ens34</td><td>10.10.10.100/24 · 실습 NIC</td></tr><tr><td>PC20</td><td>10.10.20.10/24 · GW 10.10.20.1</td></tr></tbody></table></div>
+<p>전송망 10.255.0.0/30의 사용 가능한 호스트는 .1·.2입니다. .0은 네트워크, .3은 브로드캐스트 주소입니다. 주소는 현재 검증 환경의 값입니다.</p>
+<div class="table-wrap"><table><thead><tr><th>장비</th><th>목적지</th><th>다음 홉 / 처리</th></tr></thead><tbody><tr><td>CORE</td><td>10.255.0.0/30</td><td>Gi0/3 직접 연결</td></tr><tr><td>CORE</td><td>10.10.10.0/24, 10.10.20.0/24</td><td>각 SVI 직접 연결</td></tr><tr><td>EDGE</td><td>10.10.10.0/24, 10.10.20.0/24</td><td>10.255.0.1</td></tr><tr><td>Linux</td><td>10.255.0.0/30</td><td>10.10.10.1 dev ens34</td></tr><tr><td>Linux</td><td>10.10.20.0/24</td><td>기존 10.10.10.1 dev ens34 유지</td></tr><tr><td>Linux</td><td>기본 경로</td><td>기존 192.168.111.2 dev ens32 유지</td></tr></tbody></table></div>
+<p class="note"><strong>기본 경로가 필요한 단계가 아닙니다.</strong> CORE는 이번 목적지 네트워크를 직접 연결 경로로 알고 있습니다. Linux에는 관리망 기본 경로가 있으므로 실습 전송망 목적지 경로를 별도로 추가해야 합니다.</p></section>
+<section id="precheck"><h2>$2 사전 확인</h2><h3>%1 EDGE 노드·포트</h3><p>사용자는 기존 DSW를 삭제하고 새 Edge Router를 생성했습니다. 실제 확인 버전은 IOSv 15.9(3)M9, Gi0/0~Gi0/3 4개입니다. 전체 Image / Template 선택값은 별도 확인이 필요합니다.</p>
+<pre><code>show version | include IOS Software
+show ip interface brief</code></pre>
+<p>CORE-TEST의 사용하지 않는 포트를 확인합니다.</p>
+<pre><code>show interfaces GigabitEthernet0/3 status</code></pre>
+<p><strong>핵심 확인:</strong> Gi0/3에 다른 연결이 없고 notconnect 상태인지 확인합니다.</p><h3>%2 게이트웨이 소유 확인</h3><p>실제 실습에서는 ASW에 이전 게이트웨이 IP가 남아 장애가 발생했습니다. 재현 시에는 먼저 중복을 예방합니다.</p><p><strong>ASW1:</strong></p>
+<pre><code>show ip interface brief | include Vlan</code></pre>
+<p><strong>정상:</strong> ASW Vlan10·20은 unassigned 또는 해당 SVI 자체가 없음. 10.10.10.1 / 10.10.20.1은 CORE에만 배치합니다. 중복이 있으면 $5의 조치 후 진행합니다.</p></section>
+<section id="link"><h2>$3 CORE ↔ EDGE 직접 연결</h2><ol><li>PNETLab에서 CORE-TEST Gi0/3 ↔ EdgeRouter Gi0/0을 연결합니다.</li><li>아래 명령을 각 장비 콘솔에 입력합니다. Linux 콘솔과 구분하세요.</li></ol><h3>%1 CORE-TEST</h3>
+<pre><code>configure terminal
+interface GigabitEthernet0/3
+ description TO-EDGE-TEST-Gi0/0
+ no switchport
+ ip address 10.255.0.1 255.255.255.252
+ no shutdown
+end</code></pre>
+<p>no switchport는 해당 포트를 L3 포트로 전환합니다. 이 연결은 ASW uplink의 Trunk와 다릅니다. 기존 Gi0/2 Trunk 및 SVI는 유지합니다.</p><h3>%2 EDGE-TEST</h3>
+<pre><code>configure terminal
+hostname EDGE-TEST
+interface GigabitEthernet0/0
+ description TO-CORE-TEST-Gi0/3
+ ip address 10.255.0.2 255.255.255.252
+ no shutdown
+end</code></pre>
+<h3>%3 직접 연결 검증 — EDGE</h3>
+<pre><code>show ip interface brief
+ping 10.255.0.1</code></pre>
+<p><strong>정상:</strong> Gi0/0 up/up, Ping 재시험 100%. 첫 시험 4/5, 이후 5/5를 확인했습니다. 초기 손실은 ARP 학습 가능성이 있지만 항상 첫 Ping이 실패하는 것은 아니며 지속 손실은 별도 조사합니다.</p></section>
+<section id="routes"><h2>$4 내부망·반환 경로 설정</h2><h3>%1 EDGE 내부망 경로</h3>
+<pre><code>configure terminal
+ip route 10.10.10.0 255.255.255.0 10.255.0.1
+ip route 10.10.20.0 255.255.255.0 10.255.0.1
+end</code></pre>
+<h3>%2 Linux 임시 반환 경로</h3><p>기존 경로가 없는 경우에만 추가합니다.</p>
+<pre><code>ip route add 10.255.0.0/30 via 10.10.10.1 dev ens34</code></pre>
+<p>EDGE에서 Linux로 보낸 요청의 출발지 10.255.0.2에 응답하려면 이 경로가 필요합니다. Linux의 기존 인터넷 기본 경로는 ens32에 유지합니다.</p><h3>%3 통신 검증</h3><p><strong>EDGE-TEST:</strong></p>
+<pre><code>ping 10.255.0.1
+ping 10.10.10.100 source 10.255.0.2 repeat 10
+ping 10.10.20.10 source 10.255.0.2 repeat 10</code></pre>
+<p><strong>PC20:</strong></p>
+<pre><code>show ip
+ping 10.255.0.2</code></pre>
+<p><strong>정상:</strong> PC20은 10.10.20.10/24, GW 10.10.20.1. 반복 Ping이 모두 성공해야 합니다. 실패하면 다음 단계의 진단을 적용합니다.</p></section>
+<section id="incident"><h2>$5 실제 장애: 중복 게이트웨이 IP</h2><h3>%1 증상·확인</h3>
+<div class="table-wrap"><table><thead><tr><th>단계</th><th>실제 확인 결과</th></tr></thead><tbody><tr><td>초기 EDGE → PC20</td><td>0/5 실패</td></tr><tr><td>PC20 → VLAN20 GW</td><td>정상 응답</td></tr><tr><td>EDGE → VLAN20 GW</td><td>5/5 성공</td></tr><tr><td>PC20 → EDGE</td><td>10.10.20.1에서 ICMP type 3 code 1 Host unreachable</td></tr><tr><td>CORE 전송망 조회</td><td>직접 연결 경로·EDGE ARP·포트 up/up 정상</td></tr><tr><td>CORE 경고</td><td>%IP-4-DUPADDR: 10.10.20.1 on Vlan20</td></tr><tr><td>ASW SVI 조회</td><td>Vlan10 10.10.10.1, Vlan20 10.10.20.1 · 모두 up/up</td></tr></tbody></table></div>
+<p><strong>핵심:</strong> 게이트웨이 Ping 성공만으로 올바른 장비에 도착했다고 판단할 수 없습니다. 같은 게이트웨이 주소가 두 장비에 존재했습니다.</p><p><strong>CORE-TEST 진단:</strong></p>
+<pre><code>show ip route 10.255.0.2
+show ip arp 10.255.0.2
+show ip interface brief | include GigabitEthernet0/3</code></pre>
+<p>정상 전송망 경로와 ARP를 확인하는 과정에서 중복 IP 로그가 나타났습니다. 경고 source MAC은 500a.4200.8014였으며, MAC 테이블 조회만으로 그 MAC의 소유 장비를 별도 확정하지는 않았습니다.</p><p><strong>ASW1 진단:</strong></p>
+<pre><code>show ip interface brief | include Vlan
+show mac address-table address 500a.4200.8014</code></pre>
+<h3>%2 ASW 중복 IP 제거</h3><p>이번 설계에서는 게이트웨이가 CORE에만 있어야 합니다. ASW의 SVI IP만 제거하고 VLAN·Access·Trunk는 유지합니다.</p>
+<pre><code>configure terminal
+interface Vlan10
+ no ip address
+exit
+interface Vlan20
+ no ip address
+exit
+end
+show ip interface brief | include Vlan</code></pre>
+<p><strong>핵심 확인:</strong> Vlan10·20 unassigned. CORE의 게이트웨이 주소는 변경하지 않습니다.</p><h3>%3 재검증</h3><p>PC20 → EDGE, EDGE → Linux 및 PC20을 다시 시험합니다. 실제 결과는 EDGE → Linux 10/10, EDGE → PC20 4/10 후 재시험 10/10으로 정상화됐습니다.</p><p class="note">[추론:확인필요] 조치 직후 일부 손실은 기존 ARP 정보 갱신 영향일 수 있습니다. 캡처로 확정한 원인은 아니므로 반복 시험이 정상인지 확인하고 완료 처리합니다.</p></section>
+<section id="persist"><h2>$6 영구 설정·재부팅 검증</h2><h3>%1 Linux 경로 영구화</h3><p>이 실습의 ens34 프로필에는 기존 VLAN20 경로가 있습니다. +ipv4.routes로 전송망 경로를 추가해 기존 목록을 유지합니다. 이미 같은 경로가 저장돼 있다면 반복 추가하지 않습니다.</p>
+<pre><code>nmcli connection modify ens34 \
+  +ipv4.routes &quot;10.255.0.0/30 10.10.10.1&quot;
+nmcli connection up ens34
+ip route show 10.255.0.0/30
+ping -c 4 10.255.0.2</code></pre>
+<p><strong>실제 경로:</strong></p>
+<pre><code>10.255.0.0/30 via 10.10.10.1 dev ens34 proto static metric 101</code></pre>
+<p>metric 101은 이번 출력값입니다. 다른 환경에서 수치가 달라도 목적지·다음 홉·인터페이스를 기준으로 확인합니다.</p><h3>%2 스위치·라우터 저장</h3><p>ASW1·CORE-TEST·EDGE-TEST 각각에서 실행합니다.</p>
+<pre><code>copy running-config startup-config</code></pre>
+<p>PC20 설정도 save합니다. Linux와 PNETLab 두 VM을 정상 재부팅한 뒤 PNETLab에서 ASW1·CORE-TEST·EDGE-TEST·PC20을 실행합니다.</p><h3>%3 재부팅 후 핵심 확인</h3><p><strong>ASW1:</strong></p>
+<pre><code>show ip interface brief | include Vlan</code></pre>
+<p><strong>Linux:</strong></p>
+<pre><code>ip route show 10.255.0.0/30
+ping -c 4 10.255.0.2</code></pre>
+<p><strong>EDGE-TEST:</strong></p>
+<pre><code>ping 10.10.20.10 source 10.255.0.2 repeat 10</code></pre>
+<div class="table-wrap"><table><thead><tr><th>완료 기준</th><th>사용자 확인 결과</th></tr></thead><tbody><tr><td>ASW Vlan10·20 unassigned</td><td>유지</td></tr><tr><td>Linux 전송망 정적 경로</td><td>유지</td></tr><tr><td>Linux → EDGE</td><td>패킷 손실 0%</td></tr><tr><td>EDGE → PC20</td><td>100% (10/10), 4/4/6 ms</td></tr></tbody></table></div>
+<p class="meta">재부팅 후 결과는 사용자 제공 출력과 핵심 상태 보고를 근거로 합니다. 기존 Linux 관리 기본 경로·VLAN20 경로의 최초 재부팅 유지 결과는 선행 가이드에 기록돼 있습니다.</p></section>
+<section id="rollback"><h2>$7 원복 및 다음 단계</h2><h3>%1 이번 경로만 제거할 경우</h3><p>Linux 영구 전송망 경로만 제거:</p>
+<pre><code>nmcli connection modify ens34 \
+  -ipv4.routes &quot;10.255.0.0/30 10.10.10.1&quot;
+nmcli connection up ens34</code></pre>
+<p>EDGE 내부 정적 경로 제거:</p>
+<pre><code>configure terminal
+no ip route 10.10.10.0 255.255.255.0 10.255.0.1
+no ip route 10.10.20.0 255.255.255.0 10.255.0.1
+end</code></pre>
+<p>전송망 실습을 중단할 때는 해당 연결 포트를 shutdown하고 필요 시 IP를 제거합니다. CORE Gi0/2 Trunk·SVI와 기존 Linux VLAN20 경로는 유지합니다. <strong>ASW 중복 게이트웨이 IP를 복구하는 것은 원복 대상이 아닙니다.</strong></p><h3>%2 다음 작업</h3><ul><li>EDGE 외부 연결 포트·PNETLab Cloud·VMware VMnet 확인.</li><li>CORE 기본 경로, EDGE 외부 경로와 NAT 범위 설계.</li><li>Linux ens32 인터넷 경로와 구분해 실습 트래픽이 EDGE를 경유하는지 검증.</li></ul><p>현재 결과는 내부 연결성 검증입니다. EDGE 인터넷·DNS·NAT, AWS/VPN, 웹서비스 동작을 검증한 것은 아닙니다.</p></section><footer>작성일 2026-10-11 · 근거: <a href="../docs/04_records/%EC%9E%91%EC%97%85%20%EA%B8%B0%EB%A1%9D.md">작업 기록.md</a> / <a href="../docs/02_design/network%20project%20%EC%A7%84%ED%96%89%EC%83%81%ED%99%A9.md">network project 진행상황.md</a> 및 제공된 명령 출력 · 최소 디자인의 독립 HTML</footer></main></body></html>

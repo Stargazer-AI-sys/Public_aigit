@@ -1,0 +1,15 @@
+{
+  "status": "PASS",
+  "actual_ai_call": false,
+  "decisions": [
+    {
+      "candidate_id": "candidate-bfcd52ab692e6d95",
+      "section_id": "etherchannel",
+      "status": "applied",
+      "reason": "2026-10-15에 Cisco 공식 CLI 문서를 조회해 공백 뒤 물음표가 인수·키워드 도움말을 표시한다는 설명을 확인했다. URL 접속 여부만으로 판정한 것이 아니다."
+    }
+  ],
+  "technical_review_source": "trusted local decisions; not URL availability checks",
+  "input_analysis_sha256": "97adf1455391c92056b3f19d040348077eb16b1db282530292b72831a3d8e571",
+  "output_analysis_sha256": "4ac103987aee3d1f13a137cdfe435b9daf4db02896831bdbdb57f616f052c1b6"
+}

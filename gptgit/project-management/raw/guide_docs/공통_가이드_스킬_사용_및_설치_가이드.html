@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>공통 스킬 사용·다른 PC 설치 — 가이드·기획·인계</title>
+<style>
+:root{color-scheme:light}*{box-sizing:border-box}body{margin:0;background:#fff;color:#20252b;font:16px/1.75 system-ui,-apple-system,"Segoe UI","Malgun Gothic",sans-serif}main{max-width:960px;margin:auto;padding:42px 28px 70px}h1{font-size:29px;line-height:1.4;margin:0 0 12px}h2{font-size:23px;margin:42px 0 16px;padding-bottom:8px;border-bottom:1px solid #d9dee4}h3{font-size:18px;margin:26px 0 10px}p{margin:10px 0}a{color:#245c88;text-underline-offset:3px}.meta{color:#606973;font-size:14px}.note{padding:12px 16px;border-left:3px solid #7893a8;background:#f5f7f9;margin:18px 0}.caution{border-left-color:#a76c32}nav{padding:16px 0;border-bottom:1px solid #d9dee4}nav a{display:inline-block;margin:4px 16px 4px 0}table{border-collapse:collapse;width:100%;font-size:14px;margin:14px 0}th,td{padding:10px 12px;text-align:left;border:1px solid #d9dee4;vertical-align:top}th{background:#f3f5f7}.table-wrap{overflow-x:auto}pre{background:#f5f6f8;border:1px solid #e0e4e8;border-radius:4px;padding:14px 16px;overflow-x:auto;line-height:1.6;font-size:14px}code{font-family:ui-monospace,SFMono-Regular,Consolas,monospace}p code,li code,td code{background:#f1f3f5;padding:1px 4px;border-radius:3px}li{margin:7px 0}footer{margin-top:40px;border-top:1px solid #d9dee4;padding-top:16px;font-size:13px;color:#606973}@media(max-width:600px){main{padding:24px 16px}h1{font-size:25px}h2{font-size:21px}th,td{padding:8px}pre{font-size:13px}}@media print{main{max-width:none;padding:0}nav{display:none}h2{break-after:avoid}pre,table,.note{break-inside:avoid}a{color:inherit}body{font-size:11pt}}
+</style>
+</head>
+<body><main>
+<header><p class="meta">GPT 공통 사용자 가이드 · v0.3 · 2026-10-16</p><h1>공통 스킬 사용·다른 PC 설치</h1><p>가이드 작성·초기 기획·인계 점검 → 공유 원본 확인 → 다른 PC에 설치</p></header>
+<p class="note">스킬 호출은 <strong>Codex 채팅</strong>에, 복사·설치는 <strong>Windows PowerShell</strong>에 입력합니다. 아래 설치 명령은 기본 사용자 스킬 경로와 처음 설치하는 경우를 기준으로 합니다.</p>
+<nav aria-label="목차"><a href="#use">1. 스킬 사용</a><a href="#share">2. 공유 원본 확인</a><a href="#install">3. 다른 PC에 설치</a></nav>
+
+<section id="use"><h2>1. 스킬 사용 — Codex 채팅</h2>
+<p>공유 원본은 세 스킬 모두 <code>gptgit/skills/</code>에서 관리합니다. 현재 PC의 설치·목록 등록 여부는 각각 확인합니다. 프로젝트 규칙이 공유 원본 사용을 지정했다면 미설치 상태에서도 원본을 읽어 적용할 수 있습니다.</p>
+<div class="table-wrap"><table><thead><tr><th>스킬</th><th>사용하는 상황</th><th>결과</th></tr></thead><tbody>
+<tr><td><code>simple-user-guide</code></td><td>설치·실행·운영 방법을 짧게 안내할 때</td><td>필수 절차·명령·확인 방법 중심의 HTML 가이드</td></tr>
+<tr><td><code>project-planning</code></td><td>아이디어·요구사항을 구체적인 기획으로 바꿀 때</td><td>첫 버전 범위·사용 흐름·결과 예시·진행 순서·필수 질문</td></tr>
+<tr><td><code>project-handoff</code></td><td>프로젝트를 재개하거나 최신 인계를 점검할 때</td><td>근거를 구분한 현재 상태·충돌·미확인 사항·다음 행동</td></tr>
+</tbody></table></div>
+<p>Codex 채팅에 필요한 요청 하나를 입력합니다. 아래 프로젝트 경로와 작업명은 예시입니다.</p>
+<pre><code>$simple-user-guide로 [작업명] 가이드를 작성해줘. 필수 명령과 확인 방법만 간단하게 넣어줘.</code></pre>
+<pre><code>$project-planning으로 이 요구사항을 구체화해줘. 핵심 기능과 대표 결과를 먼저 보여주고 중요한 결정만 질문해줘. 지금은 채팅으로만 제안해줘.</code></pre>
+<pre><code>$project-handoff로 [대상 프로젝트 경로]의 최신 인계를 점검하고 현재 상태와 다음 작업을 알려줘. 파일 수정과 Git 작업은 하지 마.</code></pre>
+<p><strong>확인:</strong> 요청에 맞는 스킬을 사용해 결과를 제공합니다. 기획·인계 스킬은 기본적으로 채팅으로 보고하며, 파일 반영·유료 호출·Git 작업은 별도 실행 조건을 따릅니다.</p>
+</section>
+
+<section id="share"><h2>2. 공유 원본 확인</h2>
+<p>세 스킬의 Git 공유 원본 위치를 한곳으로 통합했습니다. 개인 설치본을 공유 원본 위에 다시 복사하지 않습니다.</p>
+<div class="table-wrap"><table><thead><tr><th>스킬</th><th>Aigit 기준 공유 폴더</th></tr></thead><tbody>
+<tr><td><code>simple-user-guide</code></td><td><code>gptgit/skills/simple-user-guide</code></td></tr>
+<tr><td><code>project-planning</code></td><td><code>gptgit/skills/project-planning</code></td></tr>
+<tr><td><code>project-handoff</code></td><td><code>gptgit/skills/project-handoff</code></td></tr>
+</tbody></table></div>
+<p>Aigit을 pull한 뒤 위 원본이 있는지 확인합니다. 원본이 없으면 경로·동기화 상태를 확인하고, 개인 설치본으로 임의 복구하지 않습니다. 공유 원본·개인 설치본은 서로 다른 역할입니다.</p>
+<p><strong>확인:</strong> 각 공유 폴더의 <code>SKILL.md</code>를 확인합니다. <code>simple-user-guide</code>에는 <code>assets/guide-template.html</code>도 필요합니다.</p>
+<p>공유 원본을 새로 작성·수정한 PC에서는 사용자가 변경분을 확인해 <strong>commit·push</strong>합니다. 순서는 <a href="Git_PC_작업_및_사용종료_가이드.html#save">Git 가이드의 저장·전송</a>을 따릅니다. 다른 PC에서 최신 원본을 pull로 받기만 했다면 이 단계는 필요하지 않습니다.</p>
+</section>
+
+<section id="install"><h2>3. 다른 PC에 설치 — 처음 한 번</h2>
+<ol><li>다른 PC에 Codex를 설치하고 로그인합니다.</li><li>Aigit 저장소를 <a href="Git_PC_작업_및_사용종료_가이드.html">clone 또는 pull</a>합니다. 위 공유 폴더가 내려왔는지 확인합니다.</li><li>PowerShell을 <strong>Aigit 최상위 폴더</strong>에서 열고 설치할 스킬 하나씩 아래 절차를 사용합니다.</li></ol>
+<p>아래는 <code>project-planning</code> 예시입니다. 다른 두 스킬은 첫 줄의 이름만 <code>project-handoff</code> 또는 <code>simple-user-guide</code>로 바꿉니다. 개인 설치 위치는 이 PC에서 사용하는 경로를 확인한 뒤 설정합니다. 아래 <code>.codex/skills</code>는 기존 PC 구성 예시이며 모든 환경의 유일한 설치 위치는 아닙니다.</p>
+<pre><code>$skillName = "project-planning"
+$skillSource = ".\gptgit\skills\$skillName"
+$skillTarget = "$env:USERPROFILE\.codex\skills\$skillName"
+if (-not (Test-Path -LiteralPath "$skillSource\SKILL.md")) { throw "공유 원본이 없습니다. 경로를 확인하세요." }
+if (Test-Path -LiteralPath $skillTarget) { throw "이미 설치되어 있습니다. 기존 내용과 비교하세요." }
+New-Item -ItemType Directory -Path "$env:USERPROFILE\.codex\skills" -Force
+Copy-Item -LiteralPath $skillSource -Destination $skillTarget -Recurse</code></pre>
+<p><code>$skillName</code>은 설치할 이름, <code>$skillSource</code>는 공유 원본, <code>$skillTarget</code>은 개인 설치 위치입니다. <code>$env:USERPROFILE</code>은 현재 Windows 사용자 폴더입니다. <code>-LiteralPath</code>는 정확한 원본 경로, <code>-Destination</code>은 설치 위치, <code>-Recurse</code>는 템플릿·참조 등 하위 파일도 복사한다는 뜻입니다.</p>
+<p>설치 파일 확인:</p>
+<pre><code>Test-Path -LiteralPath "$skillTarget\SKILL.md"</code></pre>
+<p><code>simple-user-guide</code>를 설치했다면 HTML 틀도 확인합니다.</p>
+<pre><code>Test-Path -LiteralPath "$skillTarget\assets\guide-template.html"</code></pre>
+<p><strong>확인:</strong> 필요한 파일의 결과가 <code>True</code>인지 확인하고, Codex의 스킬 목록에 이름이 나타나는지 봅니다. 1번처럼 요청해 실제 사용도 확인합니다. 파일 존재만으로 등록·동작까지 확인한 것은 아닙니다. 목록이 갱신되지 않으면 새 채팅이나 앱 재실행 후 확인합니다.</p>
+<p class="note">설치 후에는 이 PC의 다른 로컬 프로젝트에서도 사용할 수 있습니다. 원격 스킬이 나중에 바뀌어도 개인 설치본은 pull만으로 자동 갱신되지 않습니다.</p>
+</section>
+
+<footer>v0.3 · 2026-10-16 · 공통 원본 위치 통합·이전 PC 등록 상태 단정 제거 · simple-user-guide 적용<br>
+<a href="../README.md">프로젝트 안내</a> · <a href="Git_PC_작업_및_사용종료_가이드.html">Git 사용 가이드</a> · <a href="https://learn.chatgpt.com/docs/build-skills">OpenAI 공식 스킬 안내</a><br>
+이 문서는 설치 절차 안내입니다. 공유용 복사·다른 PC 설치·Git 작업을 대신 실행한 기록은 아닙니다.</footer>
+</main></body></html>

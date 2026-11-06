@@ -1,0 +1,63 @@
+{
+  "mode": "notion-mcp",
+  "package_digest": "59e2823bfaace213efc4fa060ef9bd2224875e021fea5247fbdc94c03c0d79db",
+  "errors": [],
+  "notion_sent": true,
+  "front_completion": "complete",
+  "writes": 2,
+  "skipped": 8,
+  "reconciled": 0,
+  "plan_digest": "bbffdc3b27d9ed3dc5f5c9c8864d9ed5082bd8e4473201e19bd07e950af9e239",
+  "publication_policy": "local-source",
+  "normal_write_confirmation": "tool-response",
+  "phase_seconds": {
+    "complete": 14.847
+  },
+  "elapsed_seconds": 59.176,
+  "transport_metrics": {
+    "tool_calls": {
+      "query_data_sources": 1,
+      "notion_create_pages": 1,
+      "fetch": 5,
+      "notion_update_page": 5
+    },
+    "tool_seconds": {
+      "query_data_sources": 44.319862800010014,
+      "notion_create_pages": 13.426193799998146,
+      "fetch": 63.76101570005994,
+      "notion_update_page": 47.25575289997505
+    },
+    "exchanges": 8,
+    "batch_creates": 1,
+    "request_json_bytes": 56989,
+    "response_json_bytes": 41328,
+    "local_changed_entities": 2,
+    "revision_reused_pages": 8,
+    "changed_revision_reused_pages": 0,
+    "body_read_pages": 5,
+    "revision_bootstrap_pages": 0,
+    "publication_policy": "local-source",
+    "acknowledged_pages": 2
+  },
+  "publication_sequence": "complete-only",
+  "entity_writes": 2,
+  "front_pages": {
+    "total": 8,
+    "unchanged": 3,
+    "reads": 5,
+    "writes": 5,
+    "recovered": 0,
+    "errors": [],
+    "verified_page_ids": [],
+    "acknowledged_page_ids": [
+      "3fe062cd7cd181bb9c61cdb9454abf18",
+      "3fb062cd7cd180c6ab73d56d5fadc0a5",
+      "3fe062cd7cd18139aeb6f6aecf72977b",
+      "3fe062cd7cd181388041eb53e303c9cc",
+      "3fe062cd7cd181f694d0dfd47ea91c7d"
+    ],
+    "publication_policy": "local-source"
+  },
+  "approval_db_unchanged": true,
+  "result_path": "C:\\Users\\ICT\\Desktop\\Aigit\\gptgit\\Project-StudyAutomanage\\study\\study-system\\output\\notion_live\\runs\\20261020T011651Z_aab1cc8a6d1b\\report.json"
+}

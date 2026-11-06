@@ -1,0 +1,14 @@
+test_changed_approved_source_waits_for_new_analysis_and_approval (test_notion_intake.IntakeTests.test_changed_approved_source_waits_for_new_analysis_and_approval) ... ok
+test_deleted_or_unsupported_file_and_duplicate_names_are_visible (test_notion_intake.IntakeTests.test_deleted_or_unsupported_file_and_duplicate_names_are_visible) ... ok
+test_matching_saved_analysis_is_reused_and_still_requires_approval (test_notion_intake.IntakeTests.test_matching_saved_analysis_is_reused_and_still_requires_approval) ... ok
+test_modify_and_delete_original_after_package_are_blocked (test_notion_intake.IntakeTests.test_modify_and_delete_original_after_package_are_blocked) ... ok
+test_new_file_extraction_analysis_review_approval_then_package (test_notion_intake.IntakeTests.test_new_file_extraction_analysis_review_approval_then_package) ... ok
+test_new_source_blocks_package_without_api_or_touching_approvals (test_notion_intake.IntakeTests.test_new_source_blocks_package_without_api_or_touching_approvals) ... ok
+test_original_changed_or_file_added_after_preparation_blocks_before_network (test_notion_intake.IntakeTests.test_original_changed_or_file_added_after_preparation_blocks_before_network) ... ok
+test_paid_scope_is_explicit_and_approved_files_not_selected (test_notion_intake.IntakeTests.test_paid_scope_is_explicit_and_approved_files_not_selected) ... ok
+test_review_launcher_prepares_package_after_user_approval (test_notion_intake.IntakeTests.test_review_launcher_prepares_package_after_user_approval) ... ok
+
+----------------------------------------------------------------------
+Ran 9 tests in 13.611s
+
+OK

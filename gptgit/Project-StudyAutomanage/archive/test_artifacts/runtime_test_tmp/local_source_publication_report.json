@@ -1,0 +1,114 @@
+{
+  "mode": "offline mock, not live LAN replay",
+  "policy": "local-source",
+  "new_material_passes": [
+    {
+      "mode": "notion-mcp",
+      "notion_sent": true,
+      "writes": 9,
+      "skipped": 5,
+      "reconciled": 0,
+      "errors": [],
+      "plan_digest": "947d76bd4506962e9fe781be5973ef8ff0c7ce2cc04e1dd3ed1c2649ec75cee2",
+      "phase_seconds": {
+        "content": 0.36,
+        "relations": 0.153
+      },
+      "elapsed_seconds": 0.515,
+      "transport_metrics": {
+        "tool_calls": {
+          "query_data_sources": 4,
+          "notion_create_pages": 2,
+          "notion_update_page": 10
+        },
+        "tool_seconds": {
+          "query_data_sources": 0.00018010009080171585,
+          "notion_create_pages": 0.00014560006093233824,
+          "notion_update_page": 0.00018229999113827944
+        },
+        "exchanges": 9,
+        "batch_creates": 2,
+        "request_json_bytes": 8003,
+        "response_json_bytes": 4291,
+        "local_changed_entities": 6,
+        "revision_reused_pages": 5,
+        "changed_revision_reused_pages": 4,
+        "body_read_pages": 0,
+        "revision_bootstrap_pages": 0,
+        "publication_policy": "local-source",
+        "acknowledged_pages": 9
+      }
+    },
+    {
+      "mode": "notion-mcp",
+      "notion_sent": true,
+      "writes": 5,
+      "skipped": 9,
+      "reconciled": 0,
+      "errors": [],
+      "plan_digest": "abe0b5a67fd08e416b503495ad149c286ce376b749ce9bfdfa1cf29b51456777",
+      "phase_seconds": {
+        "content": 0.218,
+        "relations": 0.051
+      },
+      "elapsed_seconds": 0.271,
+      "transport_metrics": {
+        "tool_calls": {
+          "notion_update_page": 10
+        },
+        "tool_seconds": {
+          "notion_update_page": 0.00014379998901858926
+        },
+        "exchanges": 2,
+        "batch_creates": 0,
+        "request_json_bytes": 6214,
+        "response_json_bytes": 190,
+        "local_changed_entities": 5,
+        "revision_reused_pages": 0,
+        "changed_revision_reused_pages": 0,
+        "body_read_pages": 0,
+        "revision_bootstrap_pages": 0,
+        "publication_policy": "local-source",
+        "acknowledged_pages": 5
+      }
+    }
+  ],
+  "unchanged": {
+    "mode": "notion-mcp",
+    "notion_sent": false,
+    "writes": 0,
+    "skipped": 14,
+    "reconciled": 0,
+    "errors": [],
+    "plan_digest": "abe0b5a67fd08e416b503495ad149c286ce376b749ce9bfdfa1cf29b51456777",
+    "phase_seconds": {
+      "content": 0.103,
+      "relations": 0.051
+    },
+    "elapsed_seconds": 0.155,
+    "transport_metrics": {
+      "tool_calls": {
+        "query_data_sources": 4
+      },
+      "tool_seconds": {
+        "query_data_sources": 0.0001949999714270234
+      },
+      "exchanges": 4,
+      "batch_creates": 0,
+      "request_json_bytes": 580,
+      "response_json_bytes": 4551,
+      "local_changed_entities": 0,
+      "revision_reused_pages": 7,
+      "changed_revision_reused_pages": 0,
+      "body_read_pages": 0,
+      "revision_bootstrap_pages": 0,
+      "publication_policy": "local-source",
+      "acknowledged_pages": 0
+    }
+  },
+  "approval_db_unchanged": true,
+  "existing_page_ids_preserved": true,
+  "pending_operations": 0,
+  "actual_notion_calls": 0,
+  "paid_ai_calls": 0
+}

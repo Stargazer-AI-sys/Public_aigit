@@ -1,0 +1,25 @@
+{
+  "provider": "saved-response",
+  "actual_ai_call": false,
+  "completed_stages": [
+    "input_validation",
+    "prompt_generation",
+    "response_received",
+    "json_parse",
+    "optional_null_normalization",
+    "source_injection",
+    "schema_validation",
+    "quality_validation"
+  ],
+  "warnings": [],
+  "api_request_attempted": false,
+  "automatic_retries": 0,
+  "offline_revalidation": true,
+  "content_review_required": true,
+  "usage": {
+    "input_tokens": 0,
+    "output_tokens": 0,
+    "total_tokens": 0
+  },
+  "origin_run_directory": "/workspace/scratch/a2a1a5989437/deliverables/study_analyzer_v0.5/study/study-system/fixtures/saved_runs/15_day"
+}

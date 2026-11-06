@@ -1,0 +1,32 @@
+{
+  "entities": 72,
+  "unique_sync_keys": 72,
+  "kinds": {
+    "category": 17,
+    "concept": 40,
+    "material": 4,
+    "practice": 11
+  },
+  "receipt_property_id_stamp_digest_mismatches": [],
+  "operations": {
+    "success": 219
+  },
+  "pending_operations": 0,
+  "lock_exists": false,
+  "front_pages": 10,
+  "front_database_blocks": 0,
+  "unknown_internal_link_targets": [],
+  "body_comparison": "72/72 match after native mention URL, code-language and indentation normalization",
+  "browser_checked": [
+    "home",
+    "domain2",
+    "STP topic",
+    "STP concept",
+    "STP practice",
+    "material18",
+    "material18 STP toggle"
+  ],
+  "tests": "39 passed; mock repeat zero writes",
+  "approval_db_unchanged": true,
+  "mobile_visual_check": false
+}

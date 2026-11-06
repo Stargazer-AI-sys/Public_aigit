@@ -1,0 +1,72 @@
+{
+  "mode": "notion-mcp",
+  "notion_sent": true,
+  "writes": 23,
+  "skipped": 149,
+  "reconciled": 0,
+  "errors": [],
+  "plan_digest": "571bced470bce8e465799d7b91a2e33da393a0214ee1682bc8bf90a93cdb7d34",
+  "phase_seconds": {
+    "content": 628.728,
+    "relations": 4.571
+  },
+  "elapsed_seconds": 633.306,
+  "transport_metrics": {
+    "tool_calls": {
+      "query_data_sources": 4,
+      "fetch": 92,
+      "notion_update_page": 46
+    },
+    "tool_seconds": {
+      "query_data_sources": 131.97345509997103,
+      "fetch": 262.72478880005656,
+      "notion_update_page": 228.5557558000437
+    },
+    "exchanges": 13,
+    "batch_creates": 0,
+    "request_json_bytes": 67198,
+    "response_json_bytes": 553273,
+    "local_changed_entities": 23,
+    "revision_reused_pages": 63,
+    "body_read_pages": 92,
+    "revision_bootstrap_pages": 0
+  },
+  "initial_pass": {
+    "mode": "notion-mcp",
+    "notion_sent": true,
+    "writes": 41,
+    "skipped": 131,
+    "reconciled": 0,
+    "errors": [],
+    "plan_digest": "11c2910839a76ea0c6951b83bb176d026be5be9f0763112aba16bf20eaee7f97",
+    "phase_seconds": {
+      "content": 436.707,
+      "relations": 159.539
+    },
+    "elapsed_seconds": 596.252,
+    "transport_metrics": {
+      "tool_calls": {
+        "query_data_sources": 4,
+        "fetch": 88,
+        "notion_create_pages": 4,
+        "notion_update_page": 36
+      },
+      "tool_seconds": {
+        "query_data_sources": 112.97425359999761,
+        "fetch": 221.07055860001128,
+        "notion_create_pages": 36.36994720000075,
+        "notion_update_page": 215.78477860003477
+      },
+      "exchanges": 23,
+      "batch_creates": 4,
+      "request_json_bytes": 72701,
+      "response_json_bytes": 541621,
+      "local_changed_entities": 25,
+      "revision_reused_pages": 61,
+      "body_read_pages": 88,
+      "revision_bootstrap_pages": 0
+    }
+  },
+  "approval_db_unchanged": true,
+  "result_path": "output\\notion_live\\runs\\20261019T035032Z_24f8daeec973\\report.json"
+}

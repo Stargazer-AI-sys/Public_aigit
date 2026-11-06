@@ -1,0 +1,48 @@
+{
+  "version": 1,
+  "responses": {
+    "guide-finish-20261028": {
+      "sessions": {
+        "master-guide": {
+          "session_id": "01a18295-b31a-7741-a3d8-4e432f7b7217",
+          "task": "GUIDE-MASTER",
+          "provider": "codex",
+          "snapshots": {
+            "start": {
+              "total": {
+                "input_tokens": 1648728,
+                "cached_input_tokens": 1582848,
+                "output_tokens": 5779,
+                "reasoning_output_tokens": 385,
+                "total_tokens": 1654507
+              },
+              "last": {
+                "input_tokens": 89994,
+                "cached_input_tokens": 81024,
+                "output_tokens": 661,
+                "reasoning_output_tokens": 26,
+                "total_tokens": 90655
+              },
+              "context_window": 258400,
+              "status": "collected",
+              "source": "codex_token_count",
+              "at": "2026-10-28T13:22:15.320022+00:00",
+              "enabled": true,
+              "mode_epoch": 1
+            }
+          }
+        }
+      },
+      "reads": [],
+      "events": [
+        {
+          "at": "2026-10-28T13:22:14.774321+00:00",
+          "mode": "on",
+          "mode_epoch": 1
+        }
+      ]
+    }
+  },
+  "mode_epoch": 1,
+  "enabled": true
+}

@@ -1,0 +1,47 @@
+{
+  "policy_version": "concept-refs-v1",
+  "status": "needs_review",
+  "automatic_api_retry": false,
+  "concepts_added": 0,
+  "normalizations": [],
+  "items": [
+    {
+      "path": "/relationships/1/to",
+      "name": "VLAN",
+      "reason": "missing_concept",
+      "candidates": [],
+      "section_ids": [
+        "router-on-a-stick"
+      ],
+      "source_evidence_status": "mention_found",
+      "source_mentions": [
+        {
+          "start_offset": 717,
+          "end_offset": 731,
+          "start_line": 23,
+          "end_line": 23,
+          "quote": "sw acc vlan 30",
+          "redacted": false
+        },
+        {
+          "start_offset": 782,
+          "end_offset": 796,
+          "start_line": 30,
+          "end_line": 30,
+          "quote": "sw acc vlan 20",
+          "redacted": false
+        },
+        {
+          "start_offset": 847,
+          "end_offset": 861,
+          "start_line": 37,
+          "end_line": 37,
+          "quote": "sw acc vlan 10",
+          "redacted": false
+        }
+      ],
+      "action": "원문과 기존 개념을 검토하여 수동 수정 후 저장 응답을 무료 재검증하세요."
+    }
+  ],
+  "evidence_scope": "원문 용어 언급이며 개념 추가나 관계의 사실성을 입증하지 않습니다."
+}

@@ -1,0 +1,106 @@
+{
+  "filename": "2일차_원격접속.txt",
+  "sha256": "d7bab40eb0785349ae73364c61ea15ad5ec0c178f979f467f1d7cd9904a3f203",
+  "analyzed_at": "2026-11-06T00:33:21+00:00",
+  "model": "gpt-6-luna",
+  "usage": {
+    "input_tokens": 4210,
+    "input_tokens_details": {
+      "cache_write_tokens": 282,
+      "cached_tokens": 3925
+    },
+    "output_tokens": 985,
+    "output_tokens_details": {
+      "reasoning_tokens": 247
+    },
+    "total_tokens": 5195
+  },
+  "analysis": {
+    "summary": "Telnet 원격 접속을 위한 장비별 설정 항목과 명령 예시를 제시하고, 방화벽 장비 및 계층별 데이터 단위를 언급한다.",
+    "categories": [
+      "2. 네트워크 접속 / 무선 접속과 장비 관리",
+      "5. 네트워크 보안 기초 / 보안 원칙과 장비·VPN 접근"
+    ],
+    "concepts": [
+      "Telnet",
+      "TCP 포트 23",
+      "VTY",
+      "특권 비밀번호",
+      "방화벽",
+      "Message",
+      "Segment",
+      "Packet",
+      "Frame"
+    ],
+    "sections": [
+      {
+        "title": "Telnet 원격 접속 구성",
+        "points": [
+          {
+            "subject": "Telnet",
+            "content": "Telnet은 TCP 23번 포트를 사용한다.",
+            "evidence": "1. Telnet(TCP/23번 사용)"
+          },
+          {
+            "subject": "설정 항목",
+            "content": "장비 이름, 가상회선 범위, 가상회선 접속 비밀번호, 특권 비밀번호를 설정 항목으로 제시한다.",
+            "evidence": " - 장비 이름\n - 가상회선 범위\n - 가상회선 접속 PW\n - 특권 PW"
+          },
+          {
+            "subject": "R2 설정 예시",
+            "content": "R2에서 특권 비밀번호를 설정하고 VTY 0~2번에 비밀번호를 지정한다.",
+            "evidence": " R2\nconf t\nenable secret 2222\nline vty 0 2\npass 3333"
+          },
+          {
+            "subject": "R3 설정 예시",
+            "content": "R3에서 특권 비밀번호를 설정하고 VTY 0~1번에 비밀번호를 지정한다.",
+            "evidence": "R3\nconf t\nenable pass 4444\nline vty 0 1\npass 5555"
+          }
+        ],
+        "practice": [
+          {
+            "title": "R2 Telnet 설정",
+            "description": "전역 설정 모드에 진입해 특권 비밀번호를 설정하고, VTY 0~2번에 비밀번호를 지정한다.",
+            "evidence": " R2\nconf t\nenable secret 2222\nline vty 0 2\npass 3333"
+          },
+          {
+            "title": "R3 Telnet 설정",
+            "description": "전역 설정 모드에 진입해 특권 비밀번호를 설정하고, VTY 0~1번에 비밀번호를 지정한다.",
+            "evidence": "R3\nconf t\nenable pass 4444\nline vty 0 1\npass 5555"
+          }
+        ],
+        "comment": {
+          "kind": "보충",
+          "text": "Telnet은 접속 정보를 암호화하지 않으므로 보안 관리 접속에는 SSH를 우선 사용합니다. VTY 비밀번호만 지정한 구성에서 비밀번호 인증을 활성화하려면 `login` 설정도 필요합니다."
+        }
+      },
+      {
+        "title": "방화벽과 계층별 데이터 단위",
+        "points": [
+          {
+            "subject": "방화벽",
+            "content": "방화벽 장비와 2계층 방화벽을 언급한다.",
+            "evidence": "\twww.unicode.org\n방화벽 장비\n-2계층 방화벽"
+          },
+          {
+            "subject": "데이터 단위",
+            "content": "Message, Segment, Packet, Frame을 나열한다.",
+            "evidence": "Message\nSegment\nPacket\nFrame"
+          }
+        ],
+        "practice": [],
+        "comment": null
+      }
+    ],
+    "ccna_gaps": [
+      {
+        "category": "2. 네트워크 접속 / 무선 접속과 장비 관리",
+        "text": "Telnet 설정 예시만 있어 SSH와 콘솔 접속을 포함한 관리 접속 방법, 접속 설정 확인 및 관련 보안 관리 내용이 다뤄지지 않았다."
+      },
+      {
+        "category": "5. 네트워크 보안 기초 / 보안 원칙과 장비·VPN 접근",
+        "text": "방화벽과 2계층 방화벽의 명칭만 제시되어 방화벽의 기능·정책 및 VPN 접근 관련 내용이 다뤄지지 않았다."
+      }
+    ]
+  }
+}

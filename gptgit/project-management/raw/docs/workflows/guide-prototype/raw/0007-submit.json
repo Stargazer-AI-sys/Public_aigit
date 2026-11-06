@@ -1,0 +1,14 @@
+{
+  "session": "01a17b98-24a4-70c0-82a5-f6a97d8334fc",
+  "spec_version": "1.0",
+  "summary": "화면 승인과 기존 초안 해시 연결, 실제 환경 제한 보완",
+  "self_test": "기존 초안 스냅샷 및 사용자 응답 대조",
+  "limitations": [
+    "환경 통합 미완료",
+    "정식 제작 및 독립 QA 전"
+  ],
+  "artifacts": [
+    "docs/workflows/guide-prototype/01-planning/plan.md",
+    "docs/workflows/guide-prototype/00-request/screen-approval.md"
+  ]
+}

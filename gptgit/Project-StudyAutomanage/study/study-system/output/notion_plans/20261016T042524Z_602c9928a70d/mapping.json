@@ -1,0 +1,99 @@
+{
+  "version": 1,
+  "binding_status": "partial",
+  "conflict_policy": "stop-and-review",
+  "source_revision_policy": "separate-version-page",
+  "collections": {
+    "category": {
+      "title": "분야",
+      "properties": {
+        "name": "title",
+        "path": "rich_text",
+        "sync_key": "rich_text"
+      },
+      "relations": {
+        "parent": "category"
+      }
+    },
+    "concept": {
+      "title": "개념",
+      "properties": {
+        "name": "title",
+        "sync_key": "rich_text"
+      },
+      "relations": {
+        "materials": "material",
+        "categories": "category"
+      }
+    },
+    "material": {
+      "title": "학습자료",
+      "properties": {
+        "name": "title",
+        "source_hash": "rich_text",
+        "approval_snapshot": "rich_text",
+        "source_locations": "rich_text",
+        "sync_key": "rich_text"
+      },
+      "relations": {
+        "categories": "category",
+        "concepts": "concept",
+        "related": "material",
+        "practice": "practice"
+      }
+    },
+    "practice": {
+      "title": "실습 / 프로젝트",
+      "properties": {
+        "name": "title",
+        "source_pointer": "rich_text",
+        "sync_key": "rich_text"
+      },
+      "relations": {
+        "material": "material",
+        "concepts": "concept"
+      }
+    }
+  },
+  "required_binding_inputs": [
+    "target_page_or_data_sources",
+    "property_and_relation_ids",
+    "connection_permissions",
+    "source_revision_policy_confirmation"
+  ],
+  "target": {
+    "format_version": 1,
+    "parent_page": {
+      "id": "3fb062cd-7cd1-80c6-ab73-d56d5fadc0a5",
+      "name": "Network 학습 자료",
+      "url": "https://www.notion.so/3fb062cd7cd180c6ab73d56d5fadc0a5"
+    },
+    "material_database": {
+      "id": "3fb062cd-7cd1-809d-8614-c99f88fed2b5",
+      "name": "Network_Study_DB",
+      "url": "https://www.notion.so/3fb062cd7cd1809d8614c99f88fed2b5",
+      "data_source_id": "3fb062cd-7cd1-8065-a893-000bf1eefb6b",
+      "observed_properties": {
+        "이름": "title"
+      },
+      "property_mapping": {
+        "name": "이름"
+      }
+    },
+    "verified_on": "2026-10-16",
+    "binding_status": "partial",
+    "live_write_enabled": false
+  },
+  "missing_material_properties": [
+    "approval_snapshot",
+    "source_hash",
+    "source_locations",
+    "sync_key"
+  ],
+  "unbound_collections": [
+    "category",
+    "concept",
+    "practice"
+  ],
+  "material_relations_ready": false
+}

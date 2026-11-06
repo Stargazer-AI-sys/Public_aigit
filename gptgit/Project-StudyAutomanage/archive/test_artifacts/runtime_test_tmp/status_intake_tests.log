@@ -1,0 +1,19 @@
+======================================================================
+FAIL: test_external_approval_change_and_wal_hint_trigger_refresh (test_status_intake_efficiency.StatusIntakeEfficiencyTests.test_external_approval_change_and_wal_hint_trigger_refresh)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\ICT\Desktop\Aigit\gptgit\Project-StudyAutomanage\study\study-system\tests\test_status_intake_efficiency.py", line 71, in test_external_approval_change_and_wal_hint_trigger_refresh
+    self.assertEqual(self.manager.status()['intake']['counts'], {'held': 1})
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: {'changed': 1} != {'held': 1}
+- {'changed': 1}
+?   - ---
+
++ {'held': 1}
+?     +
+
+
+----------------------------------------------------------------------
+Ran 31 tests in 22.340s
+
+FAILED (failures=1)

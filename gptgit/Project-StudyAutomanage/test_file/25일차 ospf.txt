@@ -1,0 +1,195 @@
+26일차 OSPF
+
+[학습 내용 정리]
+
+1. virtual-link와 영역 생성 규칙 
+ - 단일 영역 : 영역 번호는 아무거나 사용가능 (0~42억번대)
+ - 2개 영역 : 둘 중 하나는 반드시 백본 영역(Area 0) 이어야 함.
+ - 3개 이상 영역 : 백본 영역을 가운데에 두고 양쪽으로 다른 영역 생성
+ - Virual-link : 백본 영역으로 가기위한 경유 영역(trasit area) 이 존재하는 경우 사용가능. 경유영역이 2개 이상이면 안됨.
+2. OSPF 의 테이블 코드와 Area
+1) O : 동일영역의 원격지 네트워크 정보
+2) IA : 다른 영역의 원격지 네트워크 정보로 ABR에 의해 배포된 정보
+3) E2 : ASBR 에 의해 재분배된 네트워크 정보. 고정 경로 비용 20사용. 직렬 구조로 연결된 경우 => 원격지 접근 경로가 1개인 상황에서 사용
+4) E1 : ASBR 에 의해 재분배된 네트워크 정보. 누적 경로 비용 사용. 다중 구조로 연결된 경우 => 원격지 접근 경로가 2개 이상인 상황에서 사용
+5) N2 : NSSA인 경우 생성됨. OSPF만 봤을 때는 Stub이 맞으나 ASBR이 있어서 다른 외부로의 연결 통로가 2개 이상인 경우 지정. 고정 경로 비용 값인 20 사용
+6) N1 : NSSA인 경우 생성됨. OSPF만 봤을 때는 Stub이 맞으나 ASBR이 있어서 다른 외부로의 연결 통로가 2개 이상인 경우 지정. 누적 경로 비용 사용
+- OSPF 에서의 Area 종류
+1) nomal area : 추가적인 설정 없이 일반적인 영역 생성시 발생
+2) stub area : 다른 영역으로 향하는 경로가 1개뿐인 영역
+router ospf 1
+area 3 stub
+=> ASBR에 의해 재분배된 경로는 O* 0.0.0.0/0 으로 축약
+3) Totally stubby area : cisco에서 사용하는 영역의 개념으로 Transit area에서는 적용되지 않음.
+router ospf 1
+area 3 stub no-summary
+=> ABR, ASBR에서 배포되거나 재분배된 경로 모두를 O*0.0.0.0/0으로 축약, 라우팅 테이블에는 O,C 코드만 남게 됨.
+
+
+[R1]
+conf t
+int L0
+ip addr 172.16.1.1 255.255.255.255
+int f0/0
+ip addr 192.168.12.1 255.255.255.0  
+no sh
+router ospf 1
+net 172.16.1.1 0.0.0.0 area 1
+net 192.168.12.0 0.0.0.255 area 1
+
+ip ospf network broadcast
+do clear ip ospf pro
+
+[R2]
+conf t
+int L0
+ip addr 172.16.2.1 255.255.255.255
+int s1/0
+ip addr 192.168.12.2 255.255.255.0
+no sh
+int s1/1
+ip addr 192.168.23.1 255.255.255.0
+no sh
+int s1/3
+ip addr 192.168.24.1 255.255.255.0
+no sh
+router ospf 1
+net 172.16.2.1 0.0.0.0 area 1
+net 192.168.12.0 0.0.0.255 area 1
+net 192.168.24.0 0.0.0.255 area 0
+net 192.168.23.0 0.0.0.255 area 0
+
+[R3]
+conf t
+int L0
+ip addr 172.16.3.1 255.255.255.255
+int s1/1
+ip addr 192.168.23.2 255.255.255.0
+no sh
+int s1/2
+ip addr 192.168.34.1 255.255.255.0
+no sh
+router ospf 1
+net 172.16.3.1 0.0.0.0 area 0
+net 192.168.23.0 0.0.0.255 area 0
+net 192.168.34.0 0.0.0.255 area 0
+
+[R4]
+conf t
+int L0
+ip addr 172.16.4.1 255.255.255.255
+int s1/0
+ip addr 192.168.45.1 255.255.255.0
+no sh
+int s1/2
+ip addr 192.168.34.2 255.255.255.0
+no sh
+int s1/3
+ip addr 192.168.24.2 255.255.255.0
+no sh
+router ospf 1
+net 172.16.4.1 0.0.0.0 area 2
+net 192.168.45.0 0.0.0.255 area 2
+net 192.168.34.0 0.0.0.255 area 0
+net 192.168.24.0 0.0.0.255 area 0
+
+conf t
+router ospf 1
+area 2 virtual-link 172.16.5.1
+
+
+
+
+
+[R5]
+conf t
+int L0
+ip addr 172.16.5.1 255.255.255.255
+int s1/0
+ip addr 192.168.45.2 255.255.255.0
+no sh
+router ospf 1
+net 172.16.5.1 0.0.0.0 area 2
+net 192.168.45.0 0.0.0.255 area 2
+
+int s1/1
+ip addr 192.168.56.1 255.255.255.0
+no sh
+router ospf 1
+net 192.168.56.0 0.0.0.255 area 3
+
+conf t
+router ospf 1
+area 2 virtual-link 172.16.4.1
+
+
+
+R6
+conf t
+int L0
+ip addr 172.16.6.1 255.255.255.255
+int s1/1
+ip addr 192.168.56.2 255.255.255.0
+no sh
+router ospf 1
+net 172.16.6.1 0.0.0.0 area 3
+net 192.168.56.0 0.0.0.255 area 3
+
+-----------------------------------------------------------------------------
+
+R1
+conf t
+int s1/1
+ip addr 10.0.71.1 255.255.255.0
+no sh
+exit
+ip route 10.0.1.0 255.255.255.0 s1/1
+
+
+R7
+conf t
+int L0
+ip addr 10.0.1.0 255.255.255.0
+int s1/1
+ip addr 10.0.71.0 255.255.255.0
+no sh
+exit
+ip route 0.0.0.0 0.0.0.0 s1/1
+
+
+------------------------------------------------------------------------------
+
+R5, R6
+conf t
+router ospf 1
+area 3 stub
+
+conf t
+router ospf 1
+no area 3 stub
+
+-----------------------------------------------------------------------------------
+R8
+conf t
+int L0
+ip addr 10.0.8.1 255.255.255.255
+int s1/0
+ip addr 10.0.86.2 255.255.255.0
+no sh
+router rip
+ver 2
+no auto
+net 10.0.0.0
+
+R6
+conf t
+int s1/0
+ip addr 10.0.86.1 255.255.255.0
+no sh
+router rip
+ver 2
+no auto
+net 10.0.0.0
+
+
+

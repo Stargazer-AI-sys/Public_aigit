@@ -1,0 +1,21 @@
+{
+  "selected_file": "2일차_라우팅테이블구성.txt",
+  "extraction_status": "success",
+  "characters": 1620,
+  "lines": 157,
+  "source_hash": "edf4ed37f8551bdb99e36837b3c373cd8a8729a8c0de82dbe091233fc35377a6",
+  "matching_library_materials": [],
+  "matching_jobs": [],
+  "matching_saved_files": [
+    "output\\new_material_test\\20261019T031428Z_f3936edb77fe\\preflight.json"
+  ],
+  "checked_saved_json_files": 82,
+  "saved_analysis_found": false,
+  "approval_db_unchanged": true,
+  "paid_calls": 0,
+  "notion_calls": 0,
+  "next_stage": "needs_paid_analysis_authorization_if_no_saved_response",
+  "user_authorized_max_new_calls": 1,
+  "selected_model": "gpt-6-luna",
+  "execution_status": "waiting_for_local_hidden_api_key_input"
+}

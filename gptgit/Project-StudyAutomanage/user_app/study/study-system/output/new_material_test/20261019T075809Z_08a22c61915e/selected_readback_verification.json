@@ -1,0 +1,29 @@
+{
+  "mode": "offline-snapshot-audit",
+  "remote_freshness_checked": false,
+  "scope": "selected",
+  "expected_entities": 1,
+  "entities": 1,
+  "unique_sync_keys": 1,
+  "stored_receipts": 107,
+  "receipt_confirmations": {
+    "write-response": 1
+  },
+  "physical_stamp_checked_entities": 0,
+  "kinds": {
+    "material": 1
+  },
+  "errors": [],
+  "pending_operations": 0,
+  "lock_files": [],
+  "operations": {
+    "success": 361
+  },
+  "front_pages": 1,
+  "front_database_blocks": 0,
+  "unknown_internal_link_targets": [],
+  "front_layout_compared": false,
+  "ok": true,
+  "front_body_matches": true,
+  "osi_link_listed": true
+}

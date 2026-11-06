@@ -1,0 +1,9 @@
+{
+  "previous_worker_stopped": true,
+  "previous_session_exit_code": 1,
+  "previous_request_dispatched": false,
+  "credential_commands_redacted": 4,
+  "approval_snapshot_preserved": true,
+  "recovery_method": "existing delivery lock recovery after own worker termination",
+  "regression_tests_passed": 12
+}

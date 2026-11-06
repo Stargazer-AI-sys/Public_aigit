@@ -1,0 +1,98 @@
+[
+  {
+    "path": "/theory/definitions/0/evidence",
+    "method": "source_line_reference",
+    "reference": {
+      "start_line": 29,
+      "end_line": 38
+    }
+  },
+  {
+    "path": "/theory/definitions/1/evidence",
+    "method": "source_line_reference",
+    "reference": {
+      "start_line": 49,
+      "end_line": 55
+    }
+  },
+  {
+    "path": "/theory/definitions/2/evidence",
+    "method": "source_line_reference",
+    "reference": {
+      "start_line": 129,
+      "end_line": 134
+    }
+  },
+  {
+    "path": "/theory/principles/0/evidence",
+    "method": "source_line_reference",
+    "reference": {
+      "start_line": 2,
+      "end_line": 25
+    }
+  },
+  {
+    "path": "/theory/principles/1/evidence",
+    "method": "source_line_reference",
+    "reference": {
+      "start_line": 85,
+      "end_line": 89
+    }
+  },
+  {
+    "path": "/theory/principles/2/evidence",
+    "method": "source_line_reference",
+    "reference": {
+      "start_line": 91,
+      "end_line": 105
+    }
+  },
+  {
+    "path": "/theory/principles/3/evidence",
+    "method": "source_line_reference",
+    "reference": {
+      "start_line": 107,
+      "end_line": 123
+    }
+  },
+  {
+    "path": "/practice/0/evidence",
+    "method": "source_line_reference",
+    "reference": {
+      "start_line": 136,
+      "end_line": 210
+    }
+  },
+  {
+    "path": "/practice/1/evidence",
+    "method": "source_line_reference",
+    "reference": {
+      "start_line": 212,
+      "end_line": 243
+    }
+  },
+  {
+    "path": "/practice/2/evidence",
+    "method": "source_line_reference",
+    "reference": {
+      "start_line": 245,
+      "end_line": 283
+    }
+  },
+  {
+    "path": "/practice/3/evidence",
+    "method": "source_line_reference",
+    "reference": {
+      "start_line": 285,
+      "end_line": 303
+    }
+  },
+  {
+    "path": "/practice/4/evidence",
+    "method": "source_line_reference",
+    "reference": {
+      "start_line": 308,
+      "end_line": 331
+    }
+  }
+]

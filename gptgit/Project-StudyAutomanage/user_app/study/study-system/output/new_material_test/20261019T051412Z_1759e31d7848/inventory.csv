@@ -1,0 +1,159 @@
+﻿filename,path,extension,size_bytes,created_at,modified_at,sha256,text_length,status,error,text
+2일차_라우팅테이블구성.txt,C:\Users\ICT\Desktop\Aigit\gptgit\Project-StudyAutomanage\study\sourcefile\2일차_라우팅테이블구성.txt,.txt,2245,2026-10-19T12:12:47,2026-09-02T20:39:11,edf4ed37f8551bdb99e36837b3c373cd8a8729a8c0de82dbe091233fc35377a6,1620,success,,"PC: ARP Table
+S/W: Mac Table
+Router: Routing Table, ARP Table
+
+-LAN통신은 라우팅이 필요 없는 트래픽 처리 구역.
+-WAN통신은 라우팅이 필요한 트래픽 처리 구역.
+
+■라우터에 반드시 설정해야 하는 내용
+1. IP(Routed Protocol)
+2. Routing Protocol: 경로(네트워크) 학습용 프로토콜
+
+■라우터의 핵심 기능
+1. Packet Switching : 패킷을 보낼지 말지를 결정
+2. Path Selection : 보낸다면 어떤 인터페이스로 보낼지 결정
+
+■라우팅 프로토콜 종류
+1. Static : 원격지 네트워크를 관리자가 직접 지정
+2. Dynamic : 라우터간 정보 교환을 통해 학습
+
+■라우팅 테이블 
+- 최적의 경로 정보만을 저장
+ =>인간이 이용하는 네비게이션과 같은 개념
+-가능한 나머지 정보는 Topology Database에 저장
+
+
+conf t
+int fa0/0
+ip addr 192.168.1.254 255.255.255.0
+no shut
+int s1/0
+ip addr 192.168.12.1 255.255.255.0
+no sh
+
+R2
+conf t
+int s1/1
+ip addr 192.168.12.2 255.255.255.0
+no sh
+int s1/2
+ip addr 192.168.23.1 255.255.255.0
+no sh
+int fa0/0
+ip addr 192.168.2.254 255.255.255.0
+no sh
+
+R3
+conf t
+int s1/3
+ip addr 192.168.23.2 255.255.255.0
+no sh
+int fa0/0
+ip addr 192.168.3.254 255.255.255.0
+no sh
+
+확인 명령어
+-do sh ip int b : 전체 인터페이스 상태 확인
+-do sh ip route : 라우팅 테이블 확인
+
+Router#show ip route
+Router(config)#
+Router(config-if)#
+
+■Routing Protocol구성 #라우팅 프로토콜 지정
+R1
+conf t
+router rip		
+net 192.168.1.0
+net 192.168.12.0
+
+R2
+conf t
+router rip
+net 192.168.2.0
+net 192.168.12.0
+net 192.168.23.0
+
+R3
+conf t
+router rip
+net 192.168.23.0
+net 192.168.3.0
+
+■Static Routing구성
+R1
+conf t
+ip route 192.168.2.0 255.255.255.0 s1/0
+ip route 192.168.3.0 255.255.255.0 s1/0
+do sh ip route
+
+R2
+conf t
+ip route 192.168.1.0 255.255.255.0 s1/1
+ip route 192.168.3.0 255.255.255.0 s1/2
+
+R3
+conf t
+ip route 192.168.1.0 255.255.255.0 s1/3
+ip route 192.168.2.0 255.255.255.0 s1/3
+
+pc1 게이트웨이 및 ip 설정
+ip 192.168.1.1 255.255.255.0 192.168.1.254
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+"

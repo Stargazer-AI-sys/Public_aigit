@@ -1,0 +1,139 @@
+{
+  "status": "SUCCESS",
+  "material_id": "d7bab40eb0785349ae73364c61ea15ad5ec0c178f979f467f1d7cd9904a3f203",
+  "analysis": {
+    "material_type": {
+      "material_type": "실습",
+      "confidence": 0.83,
+      "reason": "원격 접속을 위한 R2·R3의 설정 명령 예시가 중심이며, Telnet과 방화벽 관련 용어 메모도 함께 포함되어 있습니다. 명령 실행이나 접속 확인 결과는 제시되지 않았습니다."
+    },
+    "summary": "Telnet 원격 접속에 관한 R2·R3 설정 명령과 방화벽·계층 관련 메모를 담고 있으며, 실행 결과는 확인되지 않습니다.",
+    "topics": [
+      {
+        "name": "네트워크 관리",
+        "children": [
+          {
+            "name": "원격 접속",
+            "children": [
+              {
+                "name": "Telnet 설정"
+              }
+            ]
+          },
+          {
+            "name": "방화벽",
+            "children": [
+              {
+                "name": "2계층 방화벽 메모"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "keywords": [
+      {
+        "name": "Telnet",
+        "type": "원격 접속"
+      },
+      {
+        "name": "TCP/23",
+        "type": "프로토콜 포트"
+      },
+      {
+        "name": "가상회선(VTY)",
+        "type": "장비 설정"
+      },
+      {
+        "name": "2계층 방화벽",
+        "type": "방화벽"
+      },
+      {
+        "name": "Message",
+        "type": "계층 관련 용어 메모"
+      },
+      {
+        "name": "Segment",
+        "type": "계층 관련 용어 메모"
+      },
+      {
+        "name": "Packet",
+        "type": "계층 관련 용어 메모"
+      },
+      {
+        "name": "Frame",
+        "type": "계층 관련 용어 메모"
+      }
+    ],
+    "concepts": [
+      {
+        "name": "Telnet",
+        "description": "자료는 Telnet이 TCP 23번을 사용한다고 적고, R2와 R3에서 VTY 회선 범위 및 암호 관련 명령을 입력하는 설정 예시를 제시합니다. 명령의 실행이나 원격 접속 성공 여부는 확인되지 않습니다.",
+        "type": {
+          "category": "네트워크 관리",
+          "subtype": "원격 접속"
+        }
+      },
+      {
+        "name": "가상회선(VTY)",
+        "description": "R2에는 `line vty 0 2`, R3에는 `line vty 0 1` 설정 예시가 있습니다. 자료는 가상회선 범위와 접속 암호를 구성 항목으로 나열하지만, 설정 결과나 접속 여부는 제시하지 않습니다.",
+        "type": {
+          "category": "네트워크 관리",
+          "subtype": "장비 설정"
+        }
+      },
+      {
+        "name": "2계층 방화벽 메모",
+        "description": "자료에는 '방화벽 장비'와 '2계층 방화벽'이라는 메모가 있으나, 기능이나 구성에 관한 설명은 없습니다.",
+        "type": {
+          "category": "네트워크 보안",
+          "subtype": "방화벽"
+        }
+      },
+      {
+        "name": "Message·Segment·Packet·Frame 메모",
+        "description": "자료에 네 용어가 나열되어 있지만, 서로의 관계나 계층별 대응을 설명하지 않습니다.",
+        "type": {
+          "category": "네트워크 기초",
+          "subtype": "계층 관련 용어 메모"
+        }
+      }
+    ],
+    "practice": [
+      {
+        "title": "R2·R3 Telnet 원격 접속 설정 예시",
+        "description": "R2에서는 설정 모드 진입 후 특권 암호 설정 명령과 VTY 0–2 범위 및 암호 입력 예시를, R3에서는 설정 모드 진입 후 특권 암호 명령과 VTY 0–1 범위 및 암호 입력 예시를 제시합니다. 실행 여부나 원격 접속 확인 결과는 기록되어 있지 않습니다.",
+        "evidence": " R2\nconf t\nenable secret 2222\nline vty 0 2\npass 3333\n\nR3\nconf t\nenable pass 4444\nline vty 0 1",
+        "related_concepts": [
+          "Telnet",
+          "가상회선(VTY)"
+        ]
+      }
+    ],
+    "schema_version": "0.2",
+    "sections": [
+      {
+        "id": "telnet-remote-access",
+        "title": "Telnet 원격 접속 설정 예시",
+        "content_refs": [
+          "/concepts/0",
+          "/concepts/1",
+          "/practice/0"
+        ]
+      },
+      {
+        "id": "firewall-and-layer-terms",
+        "title": "방화벽 및 계층 관련 용어 메모",
+        "content_refs": [
+          "/concepts/2",
+          "/concepts/3"
+        ]
+      }
+    ],
+    "source": {
+      "material_id": "d7bab40eb0785349ae73364c61ea15ad5ec0c178f979f467f1d7cd9904a3f203",
+      "filename": "2일차_원격접속.txt",
+      "extension": ".txt"
+    }
+  }
+}

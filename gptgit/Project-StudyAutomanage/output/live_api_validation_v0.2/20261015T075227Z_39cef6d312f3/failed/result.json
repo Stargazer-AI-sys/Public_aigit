@@ -1,0 +1,8 @@
+{
+  "status": "FAILED",
+  "material_id": "475bb0dedd096ba1ba136d8a480894d332729b2fddfaca504a4eb7edae2fd18a",
+  "error": {
+    "code": "QUALITY_VALIDATION_ERROR",
+    "message": "[{\"path\": \"/sections\", \"message\": \"단락에 연결되지 않은 분석 항목이 있습니다.\"}]"
+  }
+}

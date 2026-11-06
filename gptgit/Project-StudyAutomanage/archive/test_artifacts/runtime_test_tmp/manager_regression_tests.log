@@ -1,0 +1,25 @@
+======================================================================
+ERROR: test_front_knowledge_index_excludes_approved_but_unselected_material (test_notion_review.ReviewRegressionTests.test_front_knowledge_index_excludes_approved_but_unselected_material)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\ICT\Desktop\Aigit\gptgit\Project-StudyAutomanage\study\study-system\tests\test_notion_review.py", line 36, in test_front_knowledge_index_excludes_approved_but_unselected_material
+    report = refresh_front(plan, self.store, self.target, self.root, SimpleNamespace(local_source=True))
+  File "C:\Users\ICT\Desktop\Aigit\gptgit\Project-StudyAutomanage\study\study-system\analyzer\notion_front.py", line 166, in refresh_front
+    pages = render_front_pages(plan, store, target, home)
+  File "C:\Users\ICT\Desktop\Aigit\gptgit\Project-StudyAutomanage\study\study-system\analyzer\notion_front.py", line 155, in render_front_pages
+    return build_front_pages(plan, approved, policy, target, home,
+                             navigation_plan=navigation_plan)
+  File "C:\Users\ICT\AppData\Local\Programs\Python\Python314\Lib\unittest\mock.py", line 1176, in __call__
+    return self._mock_call(*args, **kwargs)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "C:\Users\ICT\AppData\Local\Programs\Python\Python314\Lib\unittest\mock.py", line 1180, in _mock_call
+    return self._execute_mock_call(*args, **kwargs)
+           ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "C:\Users\ICT\AppData\Local\Programs\Python\Python314\Lib\unittest\mock.py", line 1247, in _execute_mock_call
+    result = effect(*args, **kwargs)
+TypeError: ReviewRegressionTests.test_front_knowledge_index_excludes_approved_but_unselected_material.<locals>.inspect() got an unexpected keyword argument 'navigation_plan'
+
+----------------------------------------------------------------------
+Ran 47 tests in 60.779s
+
+FAILED (errors=1)

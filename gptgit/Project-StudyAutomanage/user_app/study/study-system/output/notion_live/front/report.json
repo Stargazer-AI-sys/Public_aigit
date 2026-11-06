@@ -1,0 +1,16 @@
+{
+  "total": 8,
+  "unchanged": 4,
+  "reads": 4,
+  "writes": 4,
+  "recovered": 0,
+  "errors": [],
+  "verified_page_ids": [],
+  "acknowledged_page_ids": [
+    "3fe062cd7cd181bb9c61cdb9454abf18",
+    "3fb062cd7cd180c6ab73d56d5fadc0a5",
+    "3fe062cd7cd18139aeb6f6aecf72977b",
+    "3fe062cd7cd181f694d0dfd47ea91c7d"
+  ],
+  "publication_policy": "local-source"
+}

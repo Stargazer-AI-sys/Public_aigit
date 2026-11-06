@@ -1,0 +1,48 @@
+{
+  "publication_report": "study\\study-system\\output\\notion_live\\runs\\20261019T080338Z_d50d303fcf6f\\report.json",
+  "repeat_report": "study\\study-system\\output\\notion_live\\runs\\20261019T080552Z_93d1b08e8263\\report.json",
+  "tests": [
+    {
+      "suite": "materials/reader/staged/front/review/publisher/delta/sync/bridge",
+      "tests": 86,
+      "result": "PASS",
+      "stage": "before final recovery additions"
+    },
+    {
+      "suite": "materials/reader",
+      "tests": 14,
+      "result": "PASS"
+    },
+    {
+      "suite": "materials/bridge",
+      "tests": 15,
+      "result": "PASS",
+      "prior_failure": "new scoped-audit fixture lacked its index snapshot; supplied index snapshot; no remote failure"
+    },
+    {
+      "suite": "selected scoped audit/bridge",
+      "tests": 5,
+      "result": "PASS",
+      "stage": "after scoped reporting correction"
+    }
+  ],
+  "overlapping_test_counts": true,
+  "selected_readback_pass": true,
+  "existing_receipt_documents_ids_preserved": 106,
+  "existing_approvals_preserved": 7,
+  "approval_db_unchanged_during_publication": true,
+  "publication_calls": {
+    "query_data_sources": 1,
+    "notion_create_pages": 1,
+    "notion_update_page": 1
+  },
+  "repeat_calls": {
+    "query_data_sources": 1
+  },
+  "verification_fetch_calls": 2,
+  "publication_seconds": 69.701,
+  "repeat_seconds": 34.018,
+  "visual_browser_mobile_tested": false,
+  "partial_block_updates_implemented": false,
+  "default_publication_mode": "materials"
+}

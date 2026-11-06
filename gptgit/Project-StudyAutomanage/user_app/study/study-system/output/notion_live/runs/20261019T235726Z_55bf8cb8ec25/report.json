@@ -1,0 +1,68 @@
+{
+  "mode": "notion-mcp",
+  "package_digest": "e9aa0db7d71eff175c3bb78e6e4bcf0cce103cbb10e6570de400dfe2d851978e",
+  "errors": [],
+  "notion_sent": true,
+  "front_completion": "complete",
+  "writes": 0,
+  "skipped": 8,
+  "reconciled": 0,
+  "plan_digest": "ad9d710185c4fab69b16155dba162b2047703387e2b063efd1d72a90a7b4d285",
+  "publication_policy": "local-source",
+  "normal_write_confirmation": "tool-response",
+  "phase_seconds": {
+    "complete": 0.462
+  },
+  "elapsed_seconds": 28.804,
+  "transport_metrics": {
+    "tool_calls": {
+      "query_data_sources": 1,
+      "fetch": 12,
+      "notion_update_page": 5
+    },
+    "tool_seconds": {
+      "query_data_sources": 28.333026200009044,
+      "fetch": 166.71741640003165,
+      "notion_update_page": 55.02871350001078
+    },
+    "exchanges": 14,
+    "batch_creates": 0,
+    "request_json_bytes": 17848,
+    "response_json_bytes": 62354,
+    "local_changed_entities": 0,
+    "revision_reused_pages": 8,
+    "changed_revision_reused_pages": 0,
+    "body_read_pages": 12,
+    "revision_bootstrap_pages": 0,
+    "publication_policy": "local-source",
+    "acknowledged_pages": 0
+  },
+  "publication_sequence": "complete-only",
+  "entity_writes": 0,
+  "front_pages": {
+    "total": 8,
+    "unchanged": 3,
+    "reads": 12,
+    "writes": 5,
+    "recovered": 6,
+    "errors": [],
+    "verified_page_ids": [
+      "3fb062cd7cd180c6ab73d56d5fadc0a5",
+      "3fe062cd7cd18159af76d840845dedee",
+      "3fe062cd7cd181388041eb53e303c9cc",
+      "3fe062cd7cd181f694d0dfd47ea91c7d",
+      "3fe062cd7cd181068d8de8a96028a03d",
+      "3fe062cd7cd18195a3b6f3fe48189ad7"
+    ],
+    "acknowledged_page_ids": [
+      "3fe062cd7cd18139aeb6f6aecf72977b",
+      "3fe062cd7cd18159af76d840845dedee",
+      "3fe062cd7cd181388041eb53e303c9cc",
+      "3fe062cd7cd181f694d0dfd47ea91c7d",
+      "3fe062cd7cd181068d8de8a96028a03d"
+    ],
+    "publication_policy": "local-source"
+  },
+  "approval_db_unchanged": true,
+  "result_path": "C:\\Users\\ICT\\Desktop\\Aigit\\gptgit\\Project-StudyAutomanage\\study\\study-system\\output\\notion_live\\runs\\20261019T235726Z_55bf8cb8ec25\\report.json"
+}

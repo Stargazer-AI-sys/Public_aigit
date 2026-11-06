@@ -1,0 +1,8 @@
+{
+  "status": "FAILED",
+  "material_id": "6a3b013e1a8df696d37209438367329973945018c2e31f4541caefc258254acc",
+  "error": {
+    "code": "AI_CALL_ERROR",
+    "message": "OpenAI HTTP 401: 인증 Key를 확인하세요. 자동 재시도하지 않았습니다."
+  }
+}

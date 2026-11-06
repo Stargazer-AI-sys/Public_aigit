@@ -1,0 +1,50 @@
+[
+  {
+    "path": "/theory/definitions/0/evidence",
+    "method": "source_line_reference",
+    "reference": {
+      "start_line": 27,
+      "end_line": 28
+    }
+  },
+  {
+    "path": "/theory/definitions/1/evidence",
+    "method": "source_line_reference",
+    "reference": {
+      "start_line": 65,
+      "end_line": 75
+    }
+  },
+  {
+    "path": "/theory/principles/0/evidence",
+    "method": "source_line_reference",
+    "reference": {
+      "start_line": 29,
+      "end_line": 42
+    }
+  },
+  {
+    "path": "/theory/principles/1/evidence",
+    "method": "source_line_reference",
+    "reference": {
+      "start_line": 49,
+      "end_line": 63
+    }
+  },
+  {
+    "path": "/practice/0/evidence",
+    "method": "source_line_reference",
+    "reference": {
+      "start_line": 1,
+      "end_line": 25
+    }
+  },
+  {
+    "path": "/practice/1/evidence",
+    "method": "source_line_reference",
+    "reference": {
+      "start_line": 36,
+      "end_line": 45
+    }
+  }
+]

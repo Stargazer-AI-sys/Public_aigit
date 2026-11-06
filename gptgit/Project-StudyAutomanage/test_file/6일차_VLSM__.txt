@@ -1,0 +1,371 @@
+VLSM
+
+모든 서브넷이 획일적인 크기로 구문되지 않음
+
+각 서브넷의 소요IP의 수량이 다른경우 최적의 브로드캐스트 영역을 제공하기 위해서 사용
+
+-전체 서브넷의 수량과 각 서브넷 당 필요 IP숫자를 감안해서 계획을 설계
+-규모가 큰 서브넷부터 순차적으로 주소대역을 할당하는 방식을 사용하면 됩니다.
+
+
+++++++++++++++++++++++++++++
+S 200.1.1.0/30 200.1.1.1 ~ 2
+
+PC100 200.1.1.128/25 129 ~ 254 GW 200.1.1.129
+PC50  200.1.1.64/26 65 ~ 128 Gw 200.1.1.65
+PC28 200.1.1.32/27 33 ~ 64 GW 200.1.1.33
+PC10 200.1.1.16/28 17 ~ 32 GW 200.1.1.17
+lab1 구성
+R1
+
+en
+conf t
+int fa0/0
+ip addr 200.1.1.65 255.255.255.192
+no sh
+int fa1/0
+ip addr 200.1.1.33 255.255.255.224
+no sh
+int s2/0
+ip addr 200.1.1.1 255.255.255.252
+
+R2
+en
+conf t
+int s3/0
+ip addr 200.1.1.2 255.255.255.252
+no sh
+int fa0/0
+ip addr 200.1.1.129 255.255.255.128
+no sh
+int fa1/0
+ip addr 200.1.1.17 255.255.255.240
+no sh
+
+R1 R2
+en
+conf t
+router rip
+net 200.1.1.0
+version 2
+no auto summary
+
++++++++++++++++++++++++++++++
+라우터의 필수 구성 2가지
+
+1. Routed protocol : 패킷 전달시 목적지까지 전송되는 프로토콜
+=>ip 설정을 의미함
+=> 라우터에 직접 연결된 인터페이스에 주소할당
+=> 라우팅 테이블에 코드 C로 표시
+
+2. routing protocol : 원격지 네트워크 경로 학습용 프로토콜
+- static : 관리자가 원격지 네트워크 정보를 수동으로 입력하여 학습
+- dynamic : 라우터끼리 자신의 로컬 네트워크 정보를 교환하여 원격지 네트워크 정보를 학습
+  bgp    Border Gateway Protocol (BGP)
+  eigrp  Enhanced Interior Gateway Routing Protocol (EIGRP)
+  ospf   Open Shortest Path First (OSPF)
+  rip    Routing Information Protocol (RIP)
+rip version 2 v4용
+version 3 v6 용
+
+classful 방식의 라우팅 프로토콜은 서브넷 마스크를 인식하지못함
+
+Q. 라우터 인터페이스에 할당한 서브넷 마스크값과 pc에 할당한 서브넷 마스크 값이 다른 경우 어떤 현상이 발생하겠는가?
+통신 은 됨
+PC(200.1.1.20/27) <=> router Fa0/0(200.1.1.1/26)
+0 ~ 31                                0~63
+
+PC(200.1.1.30/27) <=> router Fa0/0(200.1.1.1/28)
+0 ~ 31                                0~15
+
++++++++++++++++++++++++++++++++++++
+VLSM_lab2 inter-vlan
+-사내부서는 모두4개
+-개발부(80대), 인사부(29), 영업부(60대), 회계부(25대)
+-각 부서의 규모에 맞춰 서브넷팅을 해야됨
+-회사가 ISP에서 할당받은 주소는 199.12.10.0/24
+
+개발부(vlan10) : 199.12.10.0/25 199.12.10.1 ~ 127   GW 199.12.10.1
+영업부(vlan20) : 199.12.10.128/26 199.12.129 ~ 191 GW 199.12.10.129
+인사부(vlan30) : 199.12.10.192/27 199.12.193 ~ 223 Gw 199.12.10.193
+회계부(vlan40) : 199.12.10.224/27 199.12.225 ~ 254 Gw 199.12.10.225
+
+게이트웨이 주소는 1번째 유니케스트 아이피에 할당
+
+스위치 > 4094 개 VLAN  인터페이스 총 갯수 12bit 
+=>결국 브로드캐스트 단위를 쪼개기 위해
+
+en
+conf t
+int range fa0/1 - 2
+sw acc vlan 10
+int range fa0/3 - 4
+sw acc vlan 20
+int range fa0/5 - 6
+sw acc vlan 30
+int range fa0/7 - 8
+sw acc vlan 40
+
+int fa0/24
+sw mode trunk
+=>트렁크 포트는 프레임에 Vlan tagging(꼬리표)를 붙이는 기능을 갖는다.
+=>꼬리표가 없으면 네이티브 VLAN
+
+ex sw mode access
+
+
+R1
+
+int fa0/0
+no sh
+int fa0/0.10
+encap dot1q 10 <== 해당 VLAN 은 할당한 주소로 써야된다.
+ip addr 199.12.10.1 255.255.255.128
+
+int fa0/0
+no sh
+int fa0/0.10
+encap dot1q 10
+ip addr 199.12.10.1 255.255.255.128
+int fa0/0.20
+encap dot1q 20
+ip addr 199.12.10.129 255.255.255.192
+int fa0/0.30
+encap dot1q 30
+ip addr 199.12.10.193 255.255.255.224
+int fa0/0.40
+encap dot1q 40
+ip addr 199.12.10.225 255.255.255.224
+
+
+
+dhcp 구성
+
+R1
+en
+conf t
+ip dhcp pool vlan10
+net 199.12.10.0 255.255.255.128
+default-router 199.12.10.1
+ip dhcp pool vlan20
+net 199.12.10.128 255.255.255.192
+default-router 199.12.10.129
+ip dhcp pool vlan30
+net 199.12.10.192 255.255.255.224
+default-router 199.12.10.193
+ip dhcp pool vlan40
+net 199.12.10.224 255.255.255.224
+default-router 199.12.10.225
+
+VLSM_lab3
+
+200.100.100.0/26
+
+200.100.100.64/26
+
+200.100.100.128/26
+
+200.100.100.192/26
+
+라우터는 마지막 유니케스트 IP사용
+PC는 1번째부터 차례대로 사용
+
+SW1
+en
+conf t
+int range fa0/1 - 2
+sw acc vlan 10
+int range fa0/3 - 4
+sw acc vlan 20
+int fa0/24
+sw mode trunk
+
+en
+conf t
+int range fa0/1 - 2
+sw acc vlan 30
+int range fa0/3 - 4
+sw acc vlan 40
+int fa0/24
+sw mode trunk
+
+R1
+en
+conf t
+int fa0/0
+no sh
+int fa1/0
+no sh
+int fa0/0.10
+encap dot1q 10
+ip addr 200.100.100.62 255.255.255.192
+int fa0/0.20
+encap dot1q 20
+ip addr 200.100.100.126 255.255.255.192
+int fa1/0.30
+encap dot1q 30
+ip addr 200.100.100.190 255.255.255.192
+int fa1/0.40
+encap dot1q 40
+ip addr 200.100.100.254 255.255.255.192
+
+ip dhcp pool vlan10
+net 200.100.100.0 255.255.255.192
+default-router 200.100.100.62
+ip dhcp pool vlan20
+net 200.100.100.64 255.255.255.192
+default-router 200.100.100.126
+ip dhcp pool vlan30
+net 200.100.100.128 255.255.255.192
+default-router 200.100.100.190
+ip dhcp pool vlan40
+net 200.100.100.192 255.255.255.192
+default-router 200.100.100.254
+
+++++++++++++++++++++++++++++++++++++++++++++++++++
+VLSM_lab4
+
+90대 vlan 30 210.1.1.0/25 210.1.1.1 ~ 127 Gw 210.1.1.127
+50대 vlan 10 210.1.1.128/26 210.1.1.129 ~ 191 Gw 210.1.1.191
+25대 vlan 20 210.1.1.192/27 210.1.1.193 ~ 223  Gw 210.1.1.223
+13대 vlan 40 210.1.1.224/28 210.1.1.225 ~ 239  Gw 210.1.1.239
+
+SW1
+en
+conf t
+int range fa0/1
+sw acc vlan 10
+int range fa0/2
+sw acc vlan 20
+int range fa0/3
+sw acc vlan 30
+int range fa0/4
+sw acc vlan 40
+int fa0/23
+sw mode trunk
+int fa0/24
+sw mode trunk
+
+
+
+
+SW2
+en
+conf t
+int range fa0/1
+sw acc vlan 10
+int range fa0/2
+sw acc vlan 20
+int range fa0/3
+sw acc vlan 30
+int range fa0/4
+sw acc vlan 40
+int fa0/24
+sw mode trunk
+
+R1
+en
+conf t
+int fa0/0
+no sh
+int fa0/0.10
+encap dot1q 10
+ip addr 210.1.1.129 255.255.255.192
+int fa0/0.20
+encap dot1q 20
+ip addr 210.1.1.193 255.255.255.224
+int fa0/0.30
+encap dot1q 30
+ip addr 210.1.1.1 255.255.255.128
+int fa0/0.40
+encap dot1q 40
+ip addr 210.1.1.225 255.255.255.240
+
+ip dhcp pool vlan10
+net 210.1.1.128 255.255.255.192
+default-router 210.1.1.191
+ip dhcp pool vlan20
+net 210.1.1.192 255.255.255.224
+default-router 210.1.1.223
+ip dhcp pool vlan30
+net 210.1.1.0 255.255.255.128
+default-router 210.1.1.127
+ip dhcp pool vlan40
+net 210.1.1.224 255.255.255.240
+default-router 210.1.1.239
+
+
++++++++++++++++++++++++++++++++++
+명령어
+conf t
+#no ip domain-lookup
+
+
+PW 구성
+enable password 1111
+enable secret 2222
+
+시간 설정
+sh clock
+clock set ?
+clock set 15:39:50 8 sep 2026
+
+
+배너
+banner motd #내용#
+
+원격설정
+remote access
+
+-Telnet : TCP 23 포트를 사용 평문 전송
+telnet 설정
+- 장비 이름 : 접근 장비의 이름 확인을 위해 필요
+- 특권 패스워드
+- 가상회선(VTY) 범위 설정 : 가상회선은 동시 접속 가능 회선을 의미
+- 가상회선 PW
+
+sh user =>  vty 유저 리스트
+
+
+-SSH : TCP 22 포트 사용, 메세지 암호문 전송
+- 장비 이름 : 접근 장비의 이름 확인을 위해 필요
+- 특권 패스워드
+- 가상회선(VTY) 범위 설정 : 가상회선은 동시 접속 가능 회선을 의미
+- 가상회선 PW
+- 도메인 정의
+- 로컬 계정 생성
+- 암호화 알고리즘, 키 길이 정의
+
+설정
+conf t
+ip domain-name ict.ac.kr
+username user1 pass 3333
+crypto key generate rsa
+512
+line vty 0 2
+login local
+
+추가 설정
+conf t
+line vty 0 4
+transport input ssh #원격 접속 허용 범위 (ssh만 할꺼냐 텔넷만 할꺼냐 라는물음)
+exec-timeout 2 30 #미 입력시 세션 해제시간 설정
+
+
+접속 ssh -l user1 192.168.1.254 
+
+
+백업
+라우터와 스위치에 설정한 정보는 ram 에 저장됨. ram은 휘발성이 있기 때문에 Rebooting 되면 모든 설정이 삭제됨 이런 문제를 예방하기 위해 NVRAM(비휘발성RAM) 에 백업하여 설정정보를 유지할 필요가 있음
+##특권모드에서 사용
+
+sh runnin-config (sh run) #RAM정보 확인
+sh startup-config #NVRAM 정보확인
+
+장비 초기화 
+RAM 은 리부팅하면 사라짐 NVRAM 은 erase start flash (do dir) 
+wr RAM 정보를 NVRAM 에 백업
+erase start NVRAM 정보 삭제
+delete vlan.dat #vlan DB삭제 명령
+
+

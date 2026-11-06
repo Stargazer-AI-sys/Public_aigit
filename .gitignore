@@ -1,0 +1,8 @@
+# 프로그램을 실행할 때마다 PC별 포트로 다시 쓰는 파일이라 pull 때 충돌만 일으킨다.
+**/output/notion_live/manager/endpoint.json
+# 간소화 재설계 프로그램의 실행 기록(포트·중복 실행 잠금). 분석 결과(data/results)는 PC 사이에서 옮긴다.
+Claudecode/Project_Refactor/refactory_target/study/study-system/data/app/
+# 비밀값(API 키 등)이 든 환경변수 파일은 커밋하지 않는다. 키 이름만 적은 견본(.env.example)만 공유한다.
+.env
+.env.*
+!.env.example

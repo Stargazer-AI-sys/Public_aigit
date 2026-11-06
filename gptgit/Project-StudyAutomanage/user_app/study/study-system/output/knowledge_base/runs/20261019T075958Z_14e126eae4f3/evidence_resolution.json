@@ -1,0 +1,26 @@
+[
+  {
+    "path": "/theory/definitions/0/evidence",
+    "method": "source_line_reference",
+    "reference": {
+      "start_line": 1,
+      "end_line": 48
+    }
+  },
+  {
+    "path": "/theory/definitions/1/evidence",
+    "method": "source_line_reference",
+    "reference": {
+      "start_line": 55,
+      "end_line": 73
+    }
+  },
+  {
+    "path": "/theory/definitions/2/evidence",
+    "method": "source_line_reference",
+    "reference": {
+      "start_line": 75,
+      "end_line": 85
+    }
+  }
+]

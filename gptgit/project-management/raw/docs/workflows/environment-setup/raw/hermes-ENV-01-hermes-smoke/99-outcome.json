@@ -1,0 +1,15 @@
+{
+  "status": "returned_draft",
+  "session_id": "local-b543eb32945c1ab5d2271c8742548ab765a57eba07a23cdb5ed5fc4d468e0b65",
+  "tokens": {
+    "input": 1293,
+    "output": 10,
+    "total": 1303,
+    "cache_read": 0,
+    "cache_write": 0
+  },
+  "stdout_sha256": "09d4e4fa72d99bea68601447bf61a8b1fc215b21b63f2fa23041766c6d2b58b8",
+  "stderr_sha256": "4190f3903a564c13e2e174e410b67ce5c5984c938bacc5116a36f551475fd9fc",
+  "result_sha256": "29f044bd4fda705b2e3cfafec4d629b52a0cff503f3fe80f16dc48c582a1ea54",
+  "approval": "not_performed"
+}

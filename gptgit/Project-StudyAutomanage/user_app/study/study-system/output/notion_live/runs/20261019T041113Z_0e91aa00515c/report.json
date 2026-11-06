@@ -1,0 +1,54 @@
+{
+  "mode": "notion-mcp",
+  "notion_sent": false,
+  "writes": 0,
+  "skipped": 172,
+  "reconciled": 0,
+  "errors": [],
+  "plan_digest": "571bced470bce8e465799d7b91a2e33da393a0214ee1682bc8bf90a93cdb7d34",
+  "phase_seconds": {
+    "content": 105.821,
+    "relations": 6.27
+  },
+  "elapsed_seconds": 112.098,
+  "transport_metrics": {
+    "tool_calls": {
+      "query_data_sources": 4,
+      "fetch": 16,
+      "notion_update_page": 8
+    },
+    "tool_seconds": {
+      "query_data_sources": 101.40295250003692,
+      "fetch": 34.85534540005028,
+      "notion_update_page": 49.68089160003001
+    },
+    "exchanges": 7,
+    "batch_creates": 0,
+    "request_json_bytes": 29978,
+    "response_json_bytes": 149299,
+    "local_changed_entities": 0,
+    "revision_reused_pages": 86,
+    "body_read_pages": 16,
+    "revision_bootstrap_pages": 0
+  },
+  "front_pages": {
+    "total": 10,
+    "unchanged": 2,
+    "reads": 16,
+    "writes": 8,
+    "recovered": 0,
+    "errors": [],
+    "verified_page_ids": [
+      "3fe062cd7cd18139aeb6f6aecf72977b",
+      "3fe062cd7cd18159af76d840845dedee",
+      "3fe062cd7cd181388041eb53e303c9cc",
+      "3fe062cd7cd181068d8de8a96028a03d",
+      "3fe062cd7cd18115be2ccf26275aea30",
+      "3fe062cd7cd181bb9c61cdb9454abf18",
+      "3fe062cd7cd181478ea1f99fb7ae9ef8",
+      "3fb062cd7cd180c6ab73d56d5fadc0a5"
+    ]
+  },
+  "approval_db_unchanged": true,
+  "result_path": "output\\notion_live\\runs\\20261019T041113Z_0e91aa00515c\\report.json"
+}

@@ -1,0 +1,26 @@
+{
+  "at": "2026-10-28T12:46:06.396008+00:00",
+  "status": "dispatching",
+  "command": [
+    "C:\\Users\\Stargazer\\OneDrive\\Desktop\\aigit\\gptgit\\project-management\\.local\\hermes-setup\\data\\bin\\hermes.exe",
+    "chat",
+    "--safe-mode",
+    "--provider",
+    "nous",
+    "--model",
+    "openai/gpt-6-luna",
+    "--toolsets",
+    "",
+    "--reasoning",
+    "none",
+    "--max-turns",
+    "1",
+    "--oneshot",
+    "--quiet",
+    "--format",
+    "stream-json",
+    "--query-file",
+    "C:\\Users\\Stargazer\\OneDrive\\Desktop\\aigit\\gptgit\\project-management\\docs\\workflows\\environment-setup\\raw\\hermes-ENV-01-hermes-smoke\\request.txt"
+  ],
+  "automatic_retry": false
+}

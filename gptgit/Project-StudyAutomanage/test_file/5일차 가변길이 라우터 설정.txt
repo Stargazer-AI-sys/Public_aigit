@@ -1,0 +1,44 @@
+R1
+en
+conf t
+int fa0/0
+ip addr 192.168.1.62 255.255.255.192
+no sh
+int fa1/0 
+ip addr 192.168.1.158 255.255.255.224
+no sh
+int fa2/0
+ip addr 192.168.1.222 255.255.255.224
+no sh
+int s3/0
+ip addr 192.168.1.225 255.255.255.252
+no sh
+
+R2
+en
+conf t
+int fa0/0
+ip addr 192.168.1.126 255.255.255.192
+no sh
+int fa1/0
+ip addr 192.168.1.190 255.255.255.224
+no sh
+int s2/0
+ip addr 192.168.1.226 255.255.255.252
+no sh
+
+구성 후 R1 R2의 라우팅 테이블 확인
+
+sh ip route #라우팅 테이블 확인
+
+■routing protocol구성
+-원격지 네트워크 학습
+
+R1 R2가 공통 설정
+en
+conf t
+router rip
+net 192.168.1.0
+no auto-summary
+version 2
+

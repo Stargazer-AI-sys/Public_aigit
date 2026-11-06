@@ -1,0 +1,38 @@
+■원격 접속 구성
+1. Telnet(TCP/23번 사용)
+ - 장비 이름
+ - 가상회선 범위
+ - 가상회선 접속 PW
+ - 특권 PW
+ R2
+conf t
+enable secret 2222
+line vty 0 2
+pass 3333
+
+R3
+conf t
+enable pass 4444
+line vty 0 1
+pass 5555
+
+	www.unicode.org
+방화벽 장비
+-2계층 방화벽
+
+Message
+Segment
+Packet
+Frame
+
+
+
+
+
+
+
+
+
+
+
+

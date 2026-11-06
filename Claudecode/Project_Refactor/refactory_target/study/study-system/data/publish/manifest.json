@@ -1,0 +1,66 @@
+{
+  "created_at": "2026-11-06T00:34:17+00:00",
+  "home_title": "Network 학습 자료",
+  "home_url": "https://app.notion.com/p/3fb062cd7cd180c6ab73d56d5fadc0a5",
+  "home_file": "pages/home.md",
+  "index_pages": [
+    {
+      "title": "학습자료",
+      "file": "pages/학습자료.md"
+    },
+    {
+      "title": "개념 찾아보기",
+      "file": "pages/개념 찾아보기.md"
+    },
+    {
+      "title": "실습 찾아보기",
+      "file": "pages/실습 찾아보기.md"
+    },
+    {
+      "title": "1. 네트워크 기초",
+      "file": "pages/domain_1.md"
+    },
+    {
+      "title": "2. 네트워크 접속",
+      "file": "pages/domain_2.md"
+    },
+    {
+      "title": "3. IP 라우팅",
+      "file": "pages/domain_3.md"
+    },
+    {
+      "title": "4. IP 서비스",
+      "file": "pages/domain_4.md"
+    },
+    {
+      "title": "5. 네트워크 보안 기초",
+      "file": "pages/domain_5.md"
+    },
+    {
+      "title": "6. 자동화와 프로그래밍",
+      "file": "pages/domain_6.md"
+    }
+  ],
+  "materials": [
+    {
+      "filename": "12일차.docx",
+      "sha256": "bc86db8089b8e84a49a80114657d596b3458b9d124880bb7b2965844526661a5",
+      "file": "pages/material_01.md"
+    },
+    {
+      "filename": "15일차 Dynamic routing_IGP.txt",
+      "sha256": "5520ea4cfcab84de60fba38f45a7c0f5d68173bf9c58f525630414acfc5f0efc",
+      "file": "pages/material_02.md"
+    },
+    {
+      "filename": "18일차.txt",
+      "sha256": "475bb0dedd096ba1ba136d8a480894d332729b2fddfaca504a4eb7edae2fd18a",
+      "file": "pages/material_03.md"
+    },
+    {
+      "filename": "1일차_LAN구성.txt",
+      "sha256": "6a3b013e1a8df696d37209438367329973945018c2e31f4541caefc258254acc",
+      "file": "pages/material_04.md"
+    }
+  ]
+}

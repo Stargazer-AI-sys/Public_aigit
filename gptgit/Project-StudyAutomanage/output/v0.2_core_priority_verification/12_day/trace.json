@@ -1,0 +1,21 @@
+{
+  "provider": "mock-file",
+  "actual_ai_call": false,
+  "completed_stages": [
+    "input_validation",
+    "prompt_generation",
+    "response_received",
+    "json_parse",
+    "source_injection",
+    "schema_validation",
+    "quality_validation",
+    "optional_auxiliary_validation"
+  ],
+  "warnings": [
+    "AI 응답의 source를 무시하고 입력 기반 source로 교체했습니다."
+  ],
+  "review_candidates_pending": 0,
+  "result_reused": false,
+  "cache_key": "0bb9dbdae7cbeace8c2a807b33cc35b18609f07a6d2290eac24b5ba4bd3e6c09",
+  "force_reanalysis": false
+}

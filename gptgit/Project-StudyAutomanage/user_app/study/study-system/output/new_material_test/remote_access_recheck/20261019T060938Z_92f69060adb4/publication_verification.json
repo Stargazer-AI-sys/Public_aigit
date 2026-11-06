@@ -1,0 +1,30 @@
+{
+  "selected_material_id": "810c870e17cc301e1687c831edaea67d6db48fa82704c2da0d040547ccdc0bda",
+  "notion_page_url": "https://www.notion.so/3fe062cd7cd18160adfec58bee312eb0",
+  "approved_materials": 7,
+  "managed_entities": 106,
+  "total_elapsed_seconds": 242.265,
+  "elapsed_scope": "successful publication only; excludes pre-dispatch redaction fix",
+  "tool_calls": {
+    "query_data_sources": 4,
+    "notion_create_pages": 4,
+    "notion_update_page": 26
+  },
+  "total_tool_calls": 34,
+  "bridge_exchanges": 5,
+  "db_body_reads": 0,
+  "front_body_reads": 0,
+  "front_writes": 6,
+  "pending_operations": 0,
+  "previous_approvals_preserved": true,
+  "previous_page_ids_preserved": true,
+  "approval_db_unchanged_during_publication": true,
+  "credential_display_redacted": true,
+  "local_plan_receipt_mismatches": [],
+  "errors": [],
+  "confirmation": "tool-response and local receipt audit",
+  "remote_body_readback_performed": false,
+  "screen_verified": false,
+  "paid_ai_calls_during_publication": 0,
+  "publication_report": "output\\notion_live\\runs\\20261019T061512Z_32f7fc928c56\\report.json"
+}

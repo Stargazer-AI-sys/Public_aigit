@@ -1,0 +1,94 @@
+{
+  "mode": "notion-mcp",
+  "notion_sent": true,
+  "writes": 10,
+  "skipped": 96,
+  "reconciled": 0,
+  "errors": [],
+  "plan_digest": "45acb370b2bd422f95069ade99487fa3896193f61390c915788314589f2955e6",
+  "publication_policy": "local-source",
+  "normal_write_confirmation": "tool-response",
+  "phase_seconds": {
+    "complete": 120.681,
+    "front": 45.405
+  },
+  "elapsed_seconds": 166.096,
+  "transport_metrics": {
+    "tool_calls": {
+      "notion_update_page": 26
+    },
+    "tool_seconds": {
+      "notion_update_page": 157.54335720004747
+    },
+    "exchanges": 3,
+    "batch_creates": 0,
+    "request_json_bytes": 47222,
+    "response_json_bytes": 1378,
+    "local_changed_entities": 10,
+    "revision_reused_pages": 0,
+    "changed_revision_reused_pages": 0,
+    "body_read_pages": 0,
+    "revision_bootstrap_pages": 0,
+    "publication_policy": "local-source",
+    "acknowledged_pages": 10
+  },
+  "initial_pass": {
+    "mode": "notion-mcp",
+    "notion_sent": true,
+    "writes": 8,
+    "skipped": 98,
+    "reconciled": 0,
+    "errors": [],
+    "plan_digest": "5e36b885595089d3f3ff5c3276ec1fcb146a296ad8b6c6a22d1d3e55fa9477fb",
+    "publication_policy": "local-source",
+    "normal_write_confirmation": "tool-response",
+    "phase_seconds": {
+      "allocate": 17.1
+    },
+    "elapsed_seconds": 76.169,
+    "transport_metrics": {
+      "tool_calls": {
+        "query_data_sources": 4,
+        "notion_create_pages": 4
+      },
+      "tool_seconds": {
+        "query_data_sources": 59.0588160000043,
+        "notion_create_pages": 10.877304999972694
+      },
+      "exchanges": 2,
+      "batch_creates": 4,
+      "request_json_bytes": 4452,
+      "response_json_bytes": 108782,
+      "local_changed_entities": 10,
+      "revision_reused_pages": 98,
+      "changed_revision_reused_pages": 2,
+      "body_read_pages": 0,
+      "revision_bootstrap_pages": 0,
+      "publication_policy": "local-source",
+      "acknowledged_pages": 8
+    }
+  },
+  "publication_sequence": "allocate-then-complete",
+  "front_pages": {
+    "total": 10,
+    "unchanged": 4,
+    "reads": 0,
+    "writes": 6,
+    "recovered": 0,
+    "errors": [],
+    "verified_page_ids": [],
+    "acknowledged_page_ids": [
+      "3fe062cd7cd18159af76d840845dedee",
+      "3fe062cd7cd181068d8de8a96028a03d",
+      "3fe062cd7cd18115be2ccf26275aea30",
+      "3fe062cd7cd181bb9c61cdb9454abf18",
+      "3fe062cd7cd181478ea1f99fb7ae9ef8",
+      "3fb062cd7cd180c6ab73d56d5fadc0a5"
+    ],
+    "publication_policy": "local-source"
+  },
+  "entity_notion_sent": true,
+  "approval_db_unchanged": true,
+  "total_elapsed_seconds": 242.265,
+  "result_path": "output\\notion_live\\runs\\20261019T061512Z_32f7fc928c56\\report.json"
+}

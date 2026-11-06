@@ -1,0 +1,18 @@
+✔ prepared preflight is required and stale package stops before claim or tool call (72.5823ms)
+✔ out-of-order replies preserve request order and unicode, no replay on repeat (63.314ms)
+✔ saved results survive interruption and uncertain write is not replayed (65.2607ms)
+✔ write authorization and allowlist are enforced before dispatch (22.581ms)
+✔ one dispatcher owns a bridge directory; invalid IDs cannot escape it (9.3204ms)
+✔ request changes after preparation are detected before calling tools (22.7506ms)
+✔ legacy single-request protocol and tool errors retain their envelope (38.8697ms)
+✔ null structured response preserves the text JSON used by Notion queries (40.9568ms)
+✔ queued async task is saved for resolution, not returned as completed (32.5872ms)
+✔ saved Codex adapter splits large responses and serializes node I/O (53.2722ms)
+ℹ tests 10
+ℹ suites 0
+ℹ pass 10
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 496.1438

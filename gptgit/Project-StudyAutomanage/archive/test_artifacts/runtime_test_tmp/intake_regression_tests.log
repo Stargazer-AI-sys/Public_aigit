@@ -1,0 +1,14 @@
+..E..........................................................................................
+======================================================================
+ERROR: test_matching_saved_analysis_is_reused_and_still_requires_approval (test_notion_intake.IntakeTests.test_matching_saved_analysis_is_reused_and_still_requires_approval)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\ICT\Desktop\Aigit\gptgit\Project-StudyAutomanage\study\study-system\tests\test_notion_intake.py", line 110, in test_matching_saved_analysis_is_reused_and_still_requires_approval
+    context, _ = context_for(data, OpenAIProvider(load_schema(DEFAULT_SCHEMA)))
+                 ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: context_for() missing 1 required positional argument: 'schema'
+
+----------------------------------------------------------------------
+Ran 93 tests in 95.063s
+
+FAILED (errors=1)

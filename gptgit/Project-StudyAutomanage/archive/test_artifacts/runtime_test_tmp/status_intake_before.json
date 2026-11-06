@@ -1,0 +1,93 @@
+{
+  "source": "C:\\Users\\ICT\\Desktop\\Aigit\\gptgit\\Project-StudyAutomanage\\study\\sourcefile",
+  "library_unchanged": true,
+  "full_status": {
+    "median_seconds": 0.431643,
+    "samples": [
+      {
+        "seconds": 0.580694,
+        "source_hashes": 33,
+        "extractions": 11,
+        "directory_walks": 4,
+        "library_validations": 11,
+        "key_reads": 1
+      },
+      {
+        "seconds": 0.424913,
+        "source_hashes": 33,
+        "extractions": 11,
+        "directory_walks": 4,
+        "library_validations": 11,
+        "key_reads": 1
+      },
+      {
+        "seconds": 0.431643,
+        "source_hashes": 33,
+        "extractions": 11,
+        "directory_walks": 4,
+        "library_validations": 11,
+        "key_reads": 1
+      }
+    ]
+  },
+  "periodic_poll": {
+    "median_seconds": 0.428758,
+    "samples": [
+      {
+        "seconds": 0.428758,
+        "source_hashes": 33,
+        "extractions": 11,
+        "directory_walks": 4,
+        "library_validations": 11,
+        "key_reads": 1
+      },
+      {
+        "seconds": 0.431864,
+        "source_hashes": 33,
+        "extractions": 11,
+        "directory_walks": 4,
+        "library_validations": 11,
+        "key_reads": 1
+      },
+      {
+        "seconds": 0.42824,
+        "source_hashes": 33,
+        "extractions": 11,
+        "directory_walks": 4,
+        "library_validations": 11,
+        "key_reads": 1
+      }
+    ]
+  },
+  "source_inspection": {
+    "median_seconds": 0.42294,
+    "samples": [
+      {
+        "seconds": 0.440686,
+        "source_hashes": 33,
+        "extractions": 11,
+        "directory_walks": 4,
+        "library_validations": 11,
+        "key_reads": 0
+      },
+      {
+        "seconds": 0.42294,
+        "source_hashes": 33,
+        "extractions": 11,
+        "directory_walks": 4,
+        "library_validations": 11,
+        "key_reads": 0
+      },
+      {
+        "seconds": 0.417426,
+        "source_hashes": 33,
+        "extractions": 11,
+        "directory_walks": 4,
+        "library_validations": 11,
+        "key_reads": 0
+      }
+    ]
+  },
+  "paid_api_calls": 0,
+  "notion_calls": 0
+}

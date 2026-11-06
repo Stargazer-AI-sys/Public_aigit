@@ -1,0 +1,39 @@
+{
+  "status": "PASS",
+  "local_tests": {
+    "passed": 126,
+    "total": 126
+  },
+  "curriculum_id": "cisco-ccna-200-301-v1.1-project-map",
+  "curriculum_source": "https://learningcontent.cisco.com/documents/marketing/exam-topics/200-301-CCNA-v1.1.pdf",
+  "checked_on": "2026-10-16",
+  "scope": "Pinned Cisco scope with explicitly marked project supplemental learning; RFC references are not a syllabus.",
+  "domains": [
+    "1. 네트워크 기초",
+    "2. 네트워크 접속",
+    "3. IP 라우팅",
+    "4. IP 서비스",
+    "5. 네트워크 보안 기초",
+    "6. 자동화와 프로그래밍"
+  ],
+  "materials": 4,
+  "ui_checks": [
+    "Six ordered learning domains",
+    "Domain -> learning unit -> scoped concept/source navigation",
+    "Official source links",
+    "Approval-needed queue only; approved materials excluded",
+    "No classification or prose editing controls"
+  ],
+  "edit_interfaces_removed": [
+    "HTTP /api/revise",
+    "HTTP edit action and paths changes",
+    "library revise command",
+    "library decide --action edit / --paths"
+  ],
+  "historical_analysis_and_edits_preserved": true,
+  "existing_12_day_publication_hold_preserved": true,
+  "new_api_calls": 0,
+  "notion_sent": false,
+  "guides_updated": false,
+  "official_records_updated": false
+}

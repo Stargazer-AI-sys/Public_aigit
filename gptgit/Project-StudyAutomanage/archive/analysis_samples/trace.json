@@ -1,0 +1,38 @@
+{
+  "provider": "openai",
+  "actual_ai_call": true,
+  "completed_stages": [
+    "input_validation",
+    "prompt_generation",
+    "response_received",
+    "json_parse",
+    "optional_null_normalization",
+    "source_injection",
+    "schema_validation"
+  ],
+  "warnings": [],
+  "model": "gpt-6.1-sol",
+  "reasoning_effort": "low",
+  "timeout_seconds": 90,
+  "max_output_tokens": 6000,
+  "api_request_attempted": true,
+  "response_received": true,
+  "automatic_retries": 0,
+  "usage": {
+    "input_tokens": 4054,
+    "input_tokens_details": {
+      "cache_write_tokens": 4051,
+      "cached_tokens": 0
+    },
+    "output_tokens": 4553,
+    "output_tokens_details": {
+      "reasoning_tokens": 44
+    },
+    "total_tokens": 8607
+  },
+  "response_id": "resp_01572b8f5352ebc3016acc495bd0a087d0afac4d003fa083f0",
+  "response_status": "completed",
+  "request_id": "req_892c095a8fed4538b6d73596a5006ec9",
+  "response_model": "gpt-6.1-sol",
+  "elapsed_seconds": 56.592
+}

@@ -1,0 +1,13 @@
+test_analysis_processing_identity_unchanged (test_user_runtime_optimization.UserRuntimeOptimizationTests.test_analysis_processing_identity_unchanged) ... ok
+test_catalog_approvals_and_locations_match_baseline (test_user_runtime_optimization.UserRuntimeOptimizationTests.test_catalog_approvals_and_locations_match_baseline) ... ok
+test_front_pages_and_reader_equal_baseline (test_user_runtime_optimization.UserRuntimeOptimizationTests.test_front_pages_and_reader_equal_baseline) ... ok
+test_intake_uses_two_connections_and_no_relationship_index (test_user_runtime_optimization.UserRuntimeOptimizationTests.test_intake_uses_two_connections_and_no_relationship_index) ... ok
+test_next_request_observes_external_hold (test_user_runtime_optimization.UserRuntimeOptimizationTests.test_next_request_observes_external_hold) ... ok
+test_policy_recomputed_once_and_changed_policy_blocks (test_user_runtime_optimization.UserRuntimeOptimizationTests.test_policy_recomputed_once_and_changed_policy_blocks) ... ok
+test_relation_order_and_duplicates_match_baseline (test_user_runtime_optimization.UserRuntimeOptimizationTests.test_relation_order_and_duplicates_match_baseline) ... ok
+test_reusable_keeps_content_and_integrity_checks (test_user_runtime_optimization.UserRuntimeOptimizationTests.test_reusable_keeps_content_and_integrity_checks) ... ok
+
+----------------------------------------------------------------------
+Ran 8 tests in 4.888s
+
+OK

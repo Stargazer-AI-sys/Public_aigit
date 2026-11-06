@@ -1,0 +1,317 @@
+■VLSM
+모든 서브넷이 획일적인 크기로 구분되지 않음.
+각 서브넷의 소요 IP의 수량이 다른 경우 최적의 브로드캐스트 영역을 제공하기 위해서 사용.
+-전체 서브넷의 수량과 각 서브넷 당 필요 IP의 숫자를 감안해서 계획 설계
+-규모가 큰 서브넷부터 순차적으로 주소대역을 할당
+++++++++++++++++++++++++++++
+■lab1 구성
+R1
+en
+conf t
+int fa0/0
+ip addr 200.1.1.65 255.255.255.192
+no sh
+int fa1/0
+ip addr 200.1.1.33 255.255.255.224
+no sh
+int s2/0
+ip addr 200.1.1.1 255.255.255.252
+no sh
+
+R2
+en
+conf t
+int s3/0
+ip addr 200.1.1.2 255.255.255.252
+no sh
+int fa0/0
+ip addr 200.1.1.129 255.255.255.128
+no sh
+int fa1/0
+ip addr 200.1.1.17 255.255.255.240
+no sh
+
+do sh ip route명령으로 직접연결 네트워크 각 3개 확인
+
+R1, R2 공통 설정
+en
+conf t
+router rip
+network 200.1.1.0
+version 2
+no auto-summary
+
+Classful방식의 라우팅 프로토콜은 서브넷 마스크를 인식하지 못함.
+
+■ 라우터의 필수 구성 2가지
+1. Routed Protocol : 패킷 전달시 목적지까지 전송되는 프로토콜
+ =>IP 설정을 의미함.
+ =>라우터에 직접 연결된 인터페이스에 주소 할당
+ =>라우팅 테이블에 코드 'C'로 표시
+2. Routing Protocol : 원격지 네트워크 경로 학습용 프로토콜
+ - Static : 관리자가 원격지 네트워크 정보를 수동으로 입력하여 학습
+ - Dynamic : 라우터끼리 자신의 로컬 네트워크 정보를 교환하여 원격지 네트워크 정보를 학습
+
+Q. 라우터 인터페이스에 할당한 서브넷 마스크값과 PC에 할당한 서브넷 마스크값이 다른 경우 어떤 현상이 발생하겠는가?
+PC(200.1.1.30/27) <=> Router Fa0/0(200.1.1.1/28)
+A. 양쪽 장비의 서브넷 마스크 값을 기준으로 상대방 IP를 포함하는 범위를 가지고 있으면 통신가능. 포함되지 않으면 통신 불가.
++++++++++++++++++++++++++++++++++++++++++
+■VLSM_lab2 Inter-vlan
+-사내 부서는 모두 4개
+-개발부(80대), 인사부(29대), 영업부(60대), 회계부(25대)
+-각 부서의 규모에 맞춰 서브넷팅을 해야 함.
+-회사가 ISP에서 할당받은 주소는 199.12.10.0/24.
+
+각 부서별 주소 할당 범위
+-개발부(Vlan10) : 199.12.10.0/25, 0 ~ 127
+-영업부(Vlan20) : 199.12.10.128/26, 128 ~ 191
+-인사부(Vlan30) : 199.12.10.192/27, 192 ~ 223
+-회계부(Vlan40) : 199.12.10.224/27, 224 ~ 255
+
+게이트웨이 주소는 1번째 유니캐스트 IP할당
+
+스위치는 기본적으로 모든 포트가 vlan1에 소속되어 있음.
+sh vlan으로 vlan확인
+en
+conf t
+int fa0/1
+sw acc vlan 10
+int fa0/2
+sw acc vlan 10
+int range fa0/3 - 4
+sw acc vlan 20
+int range fa0/5 - 6
+sw acc vlan 30
+int range fa0/7 - 8
+sw acc vlan 40
+int fa0/24
+sw mode trunk
+
+R1
+en
+conf t
+int fa0/0
+no sh
+int fa0/0.10
+encap dot1q 10
+ip addr 199.12.10.1 255.255.255.128
+int fa0/0.20
+encap dot1q 20
+ip addr 199.12.10.129 255.255.255.192
+int fa0/0.30
+encap dot1q 30
+ip addr 199.12.10.193 255.255.255.224
+int fa0/0.40
+encap dot1q 40
+ip addr 199.12.10.225 255.255.255.224
+
+DHCP구성
+R1
+en
+conf t
+ip dhcp pool vlan10
+net 199.12.10.0 255.255.255.128
+default-router 199.12.10.1
+ip dhcp pool vlan20
+net 199.12.10.128 255.255.255.192
+default-router 199.12.10.129
+ip dhcp pool vlan30
+net 199.12.10.192 255.255.255.224
+default-router 199.12.10.193
+ip dhcp pool vlan40
+net 199.12.10.224 255.255.255.224
+default-router 199.12.10.225
++++++++++++++++++++++++++++
+■ VLSM_lab3
+SW1
+en
+conf t
+int range fa0/1 - 2
+sw acc vlan 10
+int range fa0/3 - 4
+sw acc vlan 20
+int fa0/5
+sw mode trunk
+
+SW2
+en
+conf t
+int range fa0/1 - 2
+sw acc vlan 30
+int range fa0/3 - 4
+sw acc vlan 40
+int fa0/5
+sw mode trunk
+
+R1
+en
+conf t
+int fa0/0
+no sh
+int fa0/0.10
+encap dot1q 10
+ip addr 200.100.100.62 255.255.255.192
+int fa0/0.20
+encap dot1q 20
+ip addr 200.100.100.126 255.255.255.192
+
+int fa1/0
+no sh
+int fa1/0.30
+encap dot1q 30
+ip addr 200.100.100.190 255.255.255.192
+int fa1/0.40
+encap dot1q 40
+ip addr 200.100.100.254 255.255.255.192
+exit
+ip dhcp pool vlan10
+net 200.100.100.0 255.255.255.192
+default-router 200.100.100.62
+ip dhcp pool vlan20
+net 200.100.100.64 255.255.255.192
+default-router 200.100.100.126
+ip dhcp pool vlan30
+net 200.100.100.128 255.255.255.192
+default-router 200.100.100.190
+ip dhcp pool vlan40
+net 200.100.100.192 255.255.255.192
+default-router 200.100.100.254
+++++++++++++++++++++++++++++++++++
+■VLSM_lab4
+R1
+en
+conf t
+ip dhcp pool vlan10
+net 210.1.1.128 255.255.255.192
+default-router 210.1.1.190
+ip dhcp pool vlan20
+net 210.1.1.192 255.255.255.224
+default-router 210.1.1.222
+ip dhcp pool vlan30
+net 210.1.1.0 255.255.255.128
+default-router 210.1.1.126
+ip dhcp pool vlan40
+net 210.1.1.224 255.255.255.240
+default-router 210.1.1.238
+int fa0/0
+no sh
+int fa0/0.10
+encap dot1q 10
+ip addr 210.1.1.190 255.255.255.192
+int fa0/0.20
+encap dot1q 20
+ip addr 210.1.1.222 255.255.255.224
+int fa0/0.30
+encap dot1q 30
+ip addr 210.1.1.126 255.255.255.128
+int fa0/0.40
+encap dot1q 40
+ip addr 210.1.1.238 255.255.255.240
+
+SW1
+en
+conf t
+int fa0/1
+sw acc vlan 10
+int fa0/2
+sw acc vlan 20
+int fa0/3
+sw acc vlan 30
+int fa0/4
+sw acc vlan 40
+int range fa0/23 - 24
+sw mode trunk
+
+SW2
+en
+conf t
+int fa0/1
+sw acc vlan 10
+int fa0/2
+sw acc vlan 20
+int fa0/3
+sw acc vlan 30
+int fa0/4
+sw acc vlan 40
+int fa0/24
+sw mode trunk
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

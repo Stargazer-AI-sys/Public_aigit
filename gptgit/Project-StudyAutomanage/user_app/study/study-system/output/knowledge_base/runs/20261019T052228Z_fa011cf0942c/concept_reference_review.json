@@ -1,0 +1,9 @@
+{
+  "policy_version": "concept-refs-v1",
+  "status": "passed",
+  "automatic_api_retry": false,
+  "concepts_added": 0,
+  "normalizations": [],
+  "items": [],
+  "evidence_scope": "원문 용어 언급이며 개념 추가나 관계의 사실성을 입증하지 않습니다."
+}

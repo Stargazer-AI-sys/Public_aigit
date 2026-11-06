@@ -1,0 +1,20 @@
+{
+  "provider": "mock-file",
+  "actual_ai_call": false,
+  "completed_stages": [
+    "input_validation",
+    "prompt_generation",
+    "response_received",
+    "json_parse",
+    "source_injection",
+    "reviewed_reference_binding",
+    "schema_validation",
+    "quality_validation"
+  ],
+  "warnings": [
+    "AI 응답의 source를 무시하고 입력 기반 source로 교체했습니다."
+  ],
+  "result_reused": false,
+  "cache_key": "8dfd847bfef36c9660a21f99639c393602cac65c82b3e543230702e13b47fa9f",
+  "force_reanalysis": false
+}

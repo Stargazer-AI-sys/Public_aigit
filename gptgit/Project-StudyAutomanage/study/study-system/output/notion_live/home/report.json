@@ -1,0 +1,181 @@
+{
+  "verified_on": "2026-10-19",
+  "parent_url": "https://app.notion.com/p/3fb062cd7cd180c6ab73d56d5fadc0a5",
+  "materials": 4,
+  "categories": 17,
+  "concepts": 40,
+  "practices": 11,
+  "unique_sync_keys": 72,
+  "metadata_and_relations_mismatches": 0,
+  "normalization": "Notion 인라인 Markdown 이스케이프 및 관계 URL/ID 정규화 후 대조",
+  "home_navigation_pages": 6,
+  "linked_views": 19,
+  "view_checks": [
+    {
+      "url": "view://3fe062cd-7cd1-815c-8be0-000c958bcaf4",
+      "kind": "category",
+      "page": "3fe062cd-7cd1-8139-aeb6-f6aecf72977b",
+      "count": 3,
+      "has_more": false
+    },
+    {
+      "url": "view://3fe062cd-7cd1-8152-9ed2-000cadcbe66f",
+      "kind": "concept",
+      "page": "3fe062cd-7cd1-8139-aeb6-f6aecf72977b",
+      "count": 33,
+      "has_more": false
+    },
+    {
+      "url": "view://3fe062cd-7cd1-81f1-a20c-000c0769c75d",
+      "kind": "material",
+      "page": "3fe062cd-7cd1-8139-aeb6-f6aecf72977b",
+      "count": 3,
+      "has_more": false
+    },
+    {
+      "url": "view://3fe062cd-7cd1-81f6-8783-000ca3bae121",
+      "kind": "practice",
+      "page": "3fe062cd-7cd1-8139-aeb6-f6aecf72977b",
+      "count": 7,
+      "has_more": false
+    },
+    {
+      "url": "view://3fe062cd-7cd1-8102-b2d4-000c0850402c",
+      "kind": "category",
+      "page": "3fe062cd-7cd1-8159-af76-d840845dedee",
+      "count": 5,
+      "has_more": false
+    },
+    {
+      "url": "view://3fe062cd-7cd1-819a-9234-000c654f7257",
+      "kind": "concept",
+      "page": "3fe062cd-7cd1-8159-af76-d840845dedee",
+      "count": 14,
+      "has_more": false
+    },
+    {
+      "url": "view://3fe062cd-7cd1-8135-aef5-000c5344adbc",
+      "kind": "material",
+      "page": "3fe062cd-7cd1-8159-af76-d840845dedee",
+      "count": 2,
+      "has_more": false
+    },
+    {
+      "url": "view://3fe062cd-7cd1-81c6-9a2a-000c4e152eb3",
+      "kind": "practice",
+      "page": "3fe062cd-7cd1-8159-af76-d840845dedee",
+      "count": 7,
+      "has_more": false
+    },
+    {
+      "url": "view://3fe062cd-7cd1-81cb-b6f2-000cac2d71b7",
+      "kind": "category",
+      "page": "3fe062cd-7cd1-8138-8041-eb53e303c9cc",
+      "count": 4,
+      "has_more": false
+    },
+    {
+      "url": "view://3fe062cd-7cd1-81b4-9e1a-000cda51dfd9",
+      "kind": "concept",
+      "page": "3fe062cd-7cd1-8138-8041-eb53e303c9cc",
+      "count": 33,
+      "has_more": false
+    },
+    {
+      "url": "view://3fe062cd-7cd1-81e1-abb8-000c10c54013",
+      "kind": "material",
+      "page": "3fe062cd-7cd1-8138-8041-eb53e303c9cc",
+      "count": 3,
+      "has_more": false
+    },
+    {
+      "url": "view://3fe062cd-7cd1-81e3-bef2-000cd95ff14f",
+      "kind": "practice",
+      "page": "3fe062cd-7cd1-8138-8041-eb53e303c9cc",
+      "count": 7,
+      "has_more": false
+    },
+    {
+      "url": "view://3fe062cd-7cd1-81a5-9ea4-000c45bd6bb0",
+      "kind": "category",
+      "page": "3fe062cd-7cd1-81f6-94d0-dfd47ea91c7d",
+      "count": 1,
+      "has_more": false
+    },
+    {
+      "url": "view://3fe062cd-7cd1-81fc-9ec9-000ca8c592bf",
+      "kind": "concept",
+      "page": "3fe062cd-7cd1-81f6-94d0-dfd47ea91c7d",
+      "count": 13,
+      "has_more": false
+    },
+    {
+      "url": "view://3fe062cd-7cd1-8130-85b2-000ce66b1d7b",
+      "kind": "material",
+      "page": "3fe062cd-7cd1-81f6-94d0-dfd47ea91c7d",
+      "count": 1,
+      "has_more": false
+    },
+    {
+      "url": "view://3fe062cd-7cd1-81d9-9dfb-000c0c4d3dc5",
+      "kind": "practice",
+      "page": "3fe062cd-7cd1-81f6-94d0-dfd47ea91c7d",
+      "count": 0,
+      "has_more": false
+    },
+    {
+      "url": "view://3fe062cd-7cd1-81da-a243-000c29dab03d",
+      "kind": "material",
+      "page": "3fb062cd-7cd1-80c6-ab73-d56d5fadc0a5",
+      "count": 4,
+      "has_more": false
+    },
+    {
+      "url": "view://3fe062cd-7cd1-8195-bd40-000c8fda7f10",
+      "kind": "concept",
+      "page": "3fb062cd-7cd1-80c6-ab73-d56d5fadc0a5",
+      "count": 40,
+      "has_more": false
+    },
+    {
+      "url": "view://3fe062cd-7cd1-8130-af3c-000c9f9d2d22",
+      "kind": "practice",
+      "page": "3fb062cd-7cd1-80c6-ab73-d56d5fadc0a5",
+      "count": 11,
+      "has_more": false
+    }
+  ],
+  "limitations": [
+    "학습 내용의 사실성·장비 실습은 재검증하지 않음",
+    "이번 원격 검증은 저장된 승인 계획의 ID·속성·해시·관계·건수 대조",
+    "게시 효율 수치는 브리지 범위 계측이며 전체 대화의 도구 호출 총수나 시간 절감률이 아님"
+  ],
+  "recovery": [
+    "생성 20건의 결과 전달 누락을 조회로 복구해 중복 생성 없음",
+    "자동 승인 검토가 개념 페이지를 홈으로 판단한 거부는 대상 조회 및 최소 속성 갱신으로 해결",
+    "홈 블록 순서가 첫 배치 후 어긋나 같은 보존 대상의 배치를 다시 적용해 순서 확인"
+  ],
+  "tests": [
+    {
+      "suite": "test_notion*.py",
+      "count": 33,
+      "result": "passed",
+      "scope": "묶음 전송·기존 동기화 회귀, 최종 속성 최소 갱신 전 실행"
+    },
+    {
+      "suite": "test_notion_mcp",
+      "count": 13,
+      "result": "passed",
+      "scope": "최종 브리지·복구·묶음 파일 교환 검증"
+    }
+  ],
+  "test_notes": "실행별 수치이며 중복 테스트를 합산하지 않음. 첫 시도는 시스템 임시 폴더 권한 문제로 준비 단계 실패, 프로젝트 내부 임시 폴더로 변경 후 통과.",
+  "changed_files": [
+    "analyzer/notion_mcp.py",
+    "analyzer/notion_sync.py",
+    "tests/test_notion_mcp.py",
+    "config/notion_home.json"
+  ],
+  "paid_ai_calls": 0,
+  "approval_db_unchanged": true
+}

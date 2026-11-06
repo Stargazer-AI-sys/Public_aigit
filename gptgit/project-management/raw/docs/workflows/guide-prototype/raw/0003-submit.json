@@ -1,0 +1,15 @@
+{
+  "session": "codex-master-20261027",
+  "spec_version": "1.0",
+  "summary": "가이드 실행계획 작성. Claude 사전 기획 검토 G1에 따라 선행 HTML의 초안 지위를 명시함",
+  "self_test": "요구사항 R1~R4와 계획 Task를 대조. 대표 HTML 구조 검사와 화면 검토는 사전 확인이며 정식 QA가 아님",
+  "limitations": [
+    "정정 후 Claude 기획 재검토 미수행",
+    "대표 화면 사용자 승인 미수행",
+    "herdr 전체 동선·Docker·Hermes 실행 검증은 다음 작업"
+  ],
+  "artifacts": [
+    "docs/workflows/guide-prototype/01-planning/plan.md",
+    "guide_docs/AI_작업_요청과_재개_가이드.html"
+  ]
+}

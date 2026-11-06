@@ -1,0 +1,78 @@
+R1
+conf t
+int f0/0
+no sh 
+ip addr 172.16.1.254 255.255.255.0
+int s1/0
+no sh
+ip addr 192.168.12.1 255.255.255.252
+router rip
+ver 2
+no auto
+net 172.16.1.0
+net 192.168.12.0
+
+
+R2
+conf t
+int f0/0
+no sh 
+ip addr 172.16.2.254 255.255.255.0
+int s1/0
+no sh
+ip addr 192.168.12.2 255.255.255.252
+int s1/1
+no sh
+ip addr 192.168.23.1 255.255.255.252
+router rip
+ver 2
+no auto
+net 172.16.2.0
+net 192.168.12.0
+net 192.168.23.0
+
+
+R3
+conf t
+int f0/0
+no sh 
+ip addr 172.16.3.254 255.255.255.0
+int s1/1
+no sh
+ip addr 192.168.23.2 255.255.255.252
+int s1/2
+no sh
+ip addr 192.168.34.1 255.255.255.252
+router rip
+ver 2
+no auto
+net 192.168.23.0
+net 172.16.0.0
+redistribute static metric 10
+exit
+ip route 172.16.4.0 255.255.255.0 s1/2
+
+R4
+conf t
+int f0/0
+no sh 
+ip addr 172.16.4.254 255.255.255.0
+int s1/2
+no sh
+ip addr 192.168.34.2 255.255.255.252
+exit
+ip route 0.0.0.0 0.0.0.0 s1/2
+
+-------------------------------------------------------------
+
+sh ip protocol -> RIP 의 라우팅 테이블 업데이트 주기 등 각 항목별 타이머를 알 수 있다.
+debug ip rip RIP 프로토콜에 대한 디버깅 모드 사용을 온 함으로써 RIP 로그가 나온다.
+un all 디버그 모드를 끈다.
+
+타이머 설정
+router rip
+ex. timer basic 90 270 270 640
+
+
+
+

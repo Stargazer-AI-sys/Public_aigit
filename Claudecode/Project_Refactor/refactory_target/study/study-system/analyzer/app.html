@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="ko">
+<meta charset="utf-8">
+<title>학습자료 관리</title>
+<style>
+body{font-family:sans-serif;max-width:1000px;margin:auto;padding:16px;line-height:1.5}
+section{border:1px solid #ccc;border-radius:8px;padding:12px 16px;margin:12px 0}
+table{border-collapse:collapse;width:100%}td,th{border-bottom:1px solid #eee;padding:6px;text-align:left;vertical-align:top}
+.new,.changed{color:#b35c00;font-weight:bold}.analyzed{color:#0b6bcb}.published{color:#2a7a2a}
+textarea{width:100%;height:90px}#message{min-height:1.5em;font-weight:bold}button{margin:4px 4px 4px 0}
+</style>
+<h1>학습자료 관리</h1>
+<div id="message"></div>
+
+<section>
+  <h2>1. 자료 분석</h2>
+  <p>분석할 자료를 고르세요. 분석은 OpenAI 유료 API를 자료마다 1번 호출합니다.</p>
+  <table><thead><tr><th><input type="checkbox" id="all"></th><th>파일명</th><th>상태</th><th>요약</th></tr></thead>
+  <tbody id="files"></tbody></table>
+  <p>모델 <select id="model"></select>
+  <button id="analyze">선택 자료 분석 (유료)</button> <span id="progress"></span></p>
+</section>
+
+<section>
+  <h2>2. Notion 게시</h2>
+  <p>분석이 끝난 자료로 게시할 내용을 만듭니다. 미리보기로 확인한 뒤, 게시 요청문을 복사해 채팅(Codex 또는 Claude Code)에 붙여 넣으세요.
+  게시가 끝나면 [목록 새로 고침]을 누르면 상태가 '게시 완료'로 바뀝니다.</p>
+  <button id="prepare">미리보기·게시 요청문 만들기</button>
+  <a id="preview" href="/preview" target="_blank" hidden>미리보기 열기</a>
+  <div id="relay" hidden><textarea id="prompt" readonly></textarea><button id="copy">게시 요청문 복사</button></div>
+</section>
+
+<section>
+  <h2>3. 설정</h2>
+  <p>OpenAI API 키: <span id="keystate"></span></p>
+  <input id="key" type="password" size="40" placeholder="새 API 키" autocomplete="off">
+  <button id="savekey">저장</button><button id="deletekey">삭제</button>
+  <p><button id="refresh">목록 새로 고침</button><button id="shutdown">프로그램 종료</button></p>
+</section>
+
+<script nonce="__TOKEN__">
+const $ = id => document.getElementById(id);
+const say = text => { $('message').textContent = text; };
+async function post(path, body) {
+  const response = await fetch(path, {method: 'POST', headers: {'Content-Type': 'application/json', 'X-Token': '__TOKEN__'},
+                                      body: JSON.stringify(body || {})});
+  const data = await response.json();
+  if (!response.ok) throw new Error(data.error || '요청에 실패했습니다.');
+  return data;
+}
+let timer = null;
+async function load() {
+  const response = await fetch('/api/status');
+  const data = await response.json();
+  if (!response.ok) { say(data.error); return; }
+  const checked = new Set([...document.querySelectorAll('.pick:checked')].map(b => b.value));
+  $('files').replaceChildren(...data.files.map(f => {
+    const row = document.createElement('tr');
+    const box = Object.assign(document.createElement('input'), {type: 'checkbox', className: 'pick', value: f.filename,
+                                                                checked: checked.has(f.filename)});
+    const cells = [box, f.filename, f.label, f.summary || ''].map(value => {
+      const cell = document.createElement('td');
+      typeof value === 'string' ? cell.textContent = value : cell.append(value);
+      return cell;
+    });
+    cells[2].className = f.status;
+    if (f.url) { const a = Object.assign(document.createElement('a'), {href: f.url, target: '_blank', textContent: ' Notion'}); cells[2].append(a); }
+    row.append(...cells);
+    return row;
+  }));
+  if (!$('model').options.length) $('model').append(...data.models.map(m => new Option(m, m)));
+  $('keystate').textContent = data.key_saved ? '등록됨' : '없음';
+  const job = data.job;
+  if (job.status === 'running' || job.status === 'finished') {
+    $('progress').textContent = `${job.done.length + job.failed.length}/${job.total} 완료` +
+      (job.failed.length ? ` · 실패: ${job.failed.map(f => f.filename + ' (' + f.error + ')').join(', ')}` : '');
+  }
+  clearTimeout(timer);
+  if (job.status === 'running') timer = setTimeout(load, 3000);
+}
+const run = action => async () => { try { await action(); } catch (error) { say(error.message); } };
+$('all').onchange = () => document.querySelectorAll('.pick').forEach(b => { b.checked = $('all').checked; });
+$('analyze').onclick = run(async () => {
+  const filenames = [...document.querySelectorAll('.pick:checked')].map(b => b.value);
+  if (!filenames.length) throw new Error('분석할 자료를 고르세요.');
+  if (!confirm(`${filenames.length}개 자료를 유료 API로 분석합니다. 진행할까요?`)) return;
+  await post('/api/analyze', {filenames, model: $('model').value});
+  say('분석을 시작했습니다.');
+  load();
+});
+$('prepare').onclick = run(async () => {
+  const data = await post('/api/prepare');
+  $('prompt').value = data.prompt;
+  $('relay').hidden = $('preview').hidden = false;
+  say(`게시할 새 자료 ${data.materials.length}개, 변경 없는 자료 ${data.unchanged}개로 게시 내용을 만들었습니다.`);
+});
+$('copy').onclick = run(async () => { await navigator.clipboard.writeText($('prompt').value); say('게시 요청문을 복사했습니다.'); });
+$('savekey').onclick = run(async () => { await post('/api/key', {key: $('key').value}); $('key').value = ''; say('API 키를 저장했습니다.'); load(); });
+$('deletekey').onclick = run(async () => { if (confirm('저장된 API 키를 삭제할까요?')) { await post('/api/delete-key'); say('API 키를 삭제했습니다.'); load(); } });
+$('refresh').onclick = run(load);
+$('shutdown').onclick = run(async () => { await post('/api/shutdown'); say('프로그램을 종료했습니다. 이 창을 닫으세요.'); });
+load();
+</script>
+</html>

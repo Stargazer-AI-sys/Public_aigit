@@ -1,0 +1,47 @@
+{
+  "review_version": 1,
+  "analysis_sha256": "2dd2cfc8573b06d870214fd6ca8f4aef02c4ad576fa1fb24962b31186e8ed5f1",
+  "source": {
+    "material_id": "bc86db8089b8e84a49a80114657d596b3458b9d124880bb7b2965844526661a5",
+    "filename": "12일차.docx",
+    "extension": ".docx"
+  },
+  "candidates": [
+    {
+      "section_id": "routing-families",
+      "kind": "correction",
+      "text": "EIGRP는 링크상태 프로토콜이 아니라 거리 벡터 기반의 DUAL을 사용하는 프로토콜이다.",
+      "reason": "Hybrid라는 필기 표현을 독립적인 기술 분류로 오해할 수 있다.",
+      "search_query": "RFC 7868 EIGRP Distance Vector DUAL",
+      "id": "candidate-1cfd7a4de3d33efd",
+      "status": "pending"
+    },
+    {
+      "section_id": "route-selection",
+      "kind": "correction",
+      "text": "동일 프리픽스의 경로 등록에는 AD·프로토콜별 메트릭을 고려하고, 패킷 전달 시에는 등록된 경로 중 최장 프리픽스를 선택한다.",
+      "reason": "경로 등록과 패킷 전달을 하나의 순서로 나열한 원문 설명을 구분해야 한다.",
+      "search_query": "Cisco route selection administrative distance longest prefix",
+      "id": "candidate-9ff3af8fa232fc91",
+      "status": "pending"
+    },
+    {
+      "section_id": "rip-floating",
+      "kind": "correction",
+      "text": "동일 프리픽스의 기본 RIP 경로를 주 경로로 삼으려면 백업 정적 경로 AD는 120보다 커야 하므로 AD 10은 그 조건에서 백업이 아니다.",
+      "reason": "원문의 AD 10 보조 표시를 기본 RIP 경로의 백업으로 그대로 학습하면 오류가 된다.",
+      "search_query": "Cisco RIP administrative distance 120 floating static",
+      "id": "candidate-8a26d90fff369427",
+      "status": "pending"
+    },
+    {
+      "section_id": "default-stub",
+      "kind": "correction",
+      "text": "Stub network라는 이유만으로 보안성이나 패킷 절반 손실 여부를 단정할 수 없다.",
+      "reason": "보안성 없음·절반 손실이라는 원문 단정은 지식으로 확정하기 어렵다.",
+      "search_query": "Cisco stub network default route security packet loss",
+      "id": "candidate-6fb7d4e2bd285afa",
+      "status": "pending"
+    }
+  ]
+}

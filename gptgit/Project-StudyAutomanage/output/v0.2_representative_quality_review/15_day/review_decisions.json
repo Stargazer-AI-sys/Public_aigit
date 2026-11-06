@@ -1,0 +1,26 @@
+[
+  {
+    "candidate_id": "candidate-c52275f29aaaa20b",
+    "outcome": "supported",
+    "reason": "이번 대화에서 공식 자료 본문을 조회하고 해당 정정 문장이 출처의 설명과 일치함을 검토했다.",
+    "reference": {
+      "id": "rfc7868",
+      "title": "RFC 7868 — EIGRP architecture",
+      "url": "https://www.rfc-editor.org/rfc/rfc7868.html",
+      "verification_status": "source_checked",
+      "checked_on": "2026-10-15"
+    }
+  },
+  {
+    "candidate_id": "candidate-cf20d7548b6d92a3",
+    "outcome": "supported",
+    "reason": "이번 대화에서 공식 자료 본문을 조회하고 해당 정정 문장이 출처의 설명과 일치함을 검토했다.",
+    "reference": {
+      "id": "cisco-ospf-dead",
+      "title": "Cisco IOS OSPF Command Reference — ip ospf dead-interval",
+      "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/iproute_ospf/command/iro-cr-book/m_ospf-a1.html",
+      "verification_status": "source_checked",
+      "checked_on": "2026-10-15"
+    }
+  }
+]

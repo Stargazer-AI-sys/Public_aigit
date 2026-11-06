@@ -1,0 +1,7 @@
+{
+  "codex": "codex.cmd",
+  "claude": "./.local/bin/claude/claude.exe",
+  "herdr": "./.local/bin/herdr/herdr.exe",
+  "python": "python.exe",
+  "powershell": "pwsh.exe"
+}

@@ -1,0 +1,319 @@
+
+R1
+
+conf t 
+int L10
+ip addr 100.0.0.1 255.255.255.0
+int L11
+ip addr 100.0.1.1 255.255.255.0
+int L12
+ip addr 100.0.2.1 255.255.255.0
+int L13
+ip addr 100.0.3.1 255.255.255.0
+router ospf 1
+net 100.0.0.0 0.0.0.255 area 1
+net 100.0.1.0 0.0.0.255 area 1
+net 100.0.2.0 0.0.0.255 area 1
+net 100.0.3.0 0.0.0.255 area 1
+area 1 range 100.0.0.0 255.255.252.0
+변화 없음
+
+왜 변화없음? : ASBR이 아닌 ASB에 설정해야됨
+라우터 기준으로 2번라우터에 설정해야됨
+R2
+
+수동 경로 요약
+
+라우터 인증
+구성모드에서 만듬
+conf t
+key chain cisco
+key 5
+int s1/0
+ip ospf authentication message-digest
+ip ospf authentication key 5 1234 
+
+key chain cisco
+key 5
+key-string 1234
+
+conf t
+key chain ccna
+key 3
+key-string 4321
+router ospf 1
+area 1 authentication message-digest
+
+
+
+R6
+conf t
+int f0/0
+no sh
+ip addr 10.40.0.254 255.255.255.0
+int s1/0
+no sh
+ip addr 10.40.0.1 255.255.255.0
+int s1/1
+ip addr 10.40.0.2 255.255.255.0
+
+PC1 
+ip 10.40.0.
+
+---------------------------------------------------------------------------------------------
+R1
+int L0
+ip addr 11.11.11.1 255.255.255.0
+int f0/0
+no sh
+ip addr 10.254.0.1 255.255.255.248
+band 2500
+int S1/1
+no sh
+ip addr 10.254.0.9 255.255.255.252
+band 12,500
+int S1/0
+no sh
+ip addr 10.254.1.1 255.255.255.252
+router ospf 1
+net 10.254.0.8 0.0.0.3 area 0
+net 10.254.0.0 0.0.0.7 area 0
+redistribute rip subnet
+redistribute connected subnet
+router rip
+net 10.0.0.0
+ver 2
+no auto
+redistribute ospf 1 metric 3
+
+
+R2-ABR1
+int L0
+ip addr 11.11.11.2 255.255.255.0
+int fa0/0
+no sh
+ip addr 10.254.0.2 255.255.255.248
+band 2500
+int s1/1
+no sh
+ip addr 10.254.0.10 255.255.255.252
+band 12,500
+int s1/0
+no sh
+ip addr 10.254.0.13 255.255.255.252
+band 4100
+int s1/2
+no sh
+ip addr 10.254.0.17 255.255.255.252 
+band 14,285
+router ospf 1
+net 10.254.0.8 0.0.0.3 area 0
+net 10.254.0.0 0.0.0.7 area 0
+net 10.254.0.12 0.0.0.3 area 0
+net 10.254.0.16 0.0.0.3 area 10
+
+
+R3-ASBR2
+int L0
+ip addr 11.11.11.3 255.255.255.0
+int fa0/0
+no sh
+ip addr 10.254.0.3 255.255.255.248
+band 2500
+int s1/0
+no sh
+ip addr 10.254.0.14 255.255.255.252
+band 4100
+int s1/1
+no sh
+ip addr 10.254.1.5 255.255.255.252
+int s1/2
+no sh
+ip addr 10.254.2.1 255.255.255.252
+
+router rip
+ver 2
+no auto
+net 10.0.0.0
+redistribute ospf 1 metric 4
+redistribute static metric 4
+redistribute connected metric 4
+
+router ospf 1
+net 10.254.0.0 0.0.0.7 area 0
+net 10.254.0.12 0.0.0.3 area 0
+redistribute rip subnet
+redistribute static subnet
+redistribute connected subnet
+exit
+ip route 192.168.50.0 255.255.255.0 s1/2
+
+
+R4-ABR2
+int L0
+ip addr 11.11.11.4 255.255.255.0
+int S1/2
+no sh 
+ip addr 10.254.0.18 255.255.255.252
+band 14,285
+int S1/3
+no sh
+ip addr 10.254.0.21 255.255.255.252
+band 11111
+router ospf 1
+net 10.254.0.16 0.0.0.3 area 10
+net 10.254.0.20 0.0.0.3 area 20
+
+R5
+int L0
+ip addr 11.11.11.5 255.255.255.0
+int S1/3
+no sh
+ip addr 10.254.0.22 255.255.255.252
+band 11111
+int f0/0
+no sh
+int fa0/0.10
+encap dot1q 10
+ip addr 172.16.32.1 255.255.255.0
+int fa0/0.20
+encap dot1q 20
+ip addr 172.16.33.1 255.255.255.128
+int fa0/0.30
+encap dot1q 30
+ip addr 172.16.33.129 255.255.255.192
+int fa0/0.40
+encap dot1q 40
+ip addr 172.16.33.193 255.255.255.192
+router ospf 1
+net 10.254.0.20 0.0.0.3 area 20
+net 172.16.32.0 0.0.1.255 area 20
+
+
+R6
+int S1/0
+no sh
+ip addr 10.254.1.2 255.255.255.252
+int s1/1
+no sh
+ip addr 10.254.1.6 255.255.255.252
+int fa0/0
+ip addr 10.40.0.1 255.255.255.0
+router rip
+net 10.0.0.0
+ver 2
+no auto
+2-2 문항 
+router rip
+ver 2
+no auto-summary
+passive-interface default
+no passive-interface s1/0
+no passive-interface s1/1
+net 10.0.0.0 
+
+R7
+int s1/2
+no sh
+ip addr 10.254.2.2 255.255.255.252
+int fa0/0
+no sh
+ip addr 192.168.50.1 255.255.255.0
+exit
+ip route 0.0.0.0 0.0.0.0 s1/2
+
+
+해설 
+172.16.32.0/22 1024의 아이피
+172.16.32.0 ~ 172.16.35.255 전체범위
+
+172.16.34.0 ~ 172.16.35.255 남는 범위
+문제 4-2
+area 20 range 172.16.32.0 255.255.252.0 prefix /22
+area 20 range 172.16.32.0 255.255.254.0 prefix /23
+
+
+254
+172.16.32.0/24
+172.16.32.0 ~ 172.16.35.255
+172.16.32.1 ~ 172.16.32.254
+
+128
+172.16.33.0/25
+172.16.33.0 ~ 172.16.33.127
+172.16.33.1 ~ 172.16.33.126
+
+64
+172.16.33.128/26
+172.16.33.128 ~ 191
+172.16.33.129 ~ 190
+64
+172.16.33.192/26
+172.16.33.192 ~ 255
+172.16.33.193 ~ 254
+
+문제 1
+
+R5의 신규 LAN에 172.16.32.0/22를 배정받았다. 전체 범위 안에서 A→B→C→D 순서로 낮은 주소부터 연속 배정하시오. 단말 수는 아래 값으로 고정하며 LAN마다 라우터 게이트웨이 1개를 추가해야 한다. 여유 단말 수나 스위치 관리 IP는 추가하지 않는다. 게이트웨이는 첫 사용 가능 주소를 사용하시오.
+A 200 201 
+
+
+ip default-gateway 192.168.1.254
+
+문제3-1 
+R1
+conf t
+key chain RIP-B
+key 2
+key-string RouteB2026
+int s1/0
+ip rip authentication mode md5
+ip rip authentication key-chain RIP-B
+
+R6
+conf t
+key chain RIP-B
+key 2
+key-string RouteB2026
+int s1/0
+ip rip authentication mode md5
+ip rip authentication key-chain RIP-B
+int s1/1
+ip rip authentication mode md5
+ip rip authentication key-chain RIP-B
+
+R3
+conf t
+key chain RIP-B
+key 2
+key-string RouteB2026
+int s1/1
+ip rip authentication mode md5
+ip rip authentication key-chain RIP-B
+
+
+4-2
+conf t
+router ospf 1
+area 20 range 172.16.32.0 255.255.254.0 prefix /23
+
+
+6-3
+
+int s1/0
+ip rip auth
+
+
+
+R1
+router ospf 10
+redistribute rip subnets metric 20 metric-type 2 
+router rip
+redistribute ospf 10 metric 6 route-map 
+
+R3
+router ospf 10
+redistribute rip subnets metric 20 metric-type 2 
+redistribute static subnets metric 35 metric-type 1
+router rip
+redistribute ospf 10 metric 2

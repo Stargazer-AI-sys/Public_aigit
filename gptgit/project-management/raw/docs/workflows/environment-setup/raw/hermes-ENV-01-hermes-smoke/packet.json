@@ -1,0 +1,7 @@
+{
+  "run_id": "environment-setup",
+  "task_id": "ENV-01-hermes-smoke",
+  "purpose": "record-summary",
+  "instruction": "Reply exactly HERMES_WORKER_OK. This is synthetic connection evidence; independent QA remains unverified.",
+  "sources": []
+}

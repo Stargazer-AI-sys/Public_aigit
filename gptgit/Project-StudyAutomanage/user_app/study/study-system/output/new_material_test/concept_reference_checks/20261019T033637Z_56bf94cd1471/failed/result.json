@@ -1,0 +1,8 @@
+{
+  "status": "FAILED",
+  "material_id": "6a3b013e1a8df696d37209438367329973945018c2e31f4541caefc258254acc",
+  "error": {
+    "code": "QUALITY_VALIDATION_ERROR",
+    "message": "[{\"path\": \"/relationships/1/to\", \"message\": \"관계 대상이 concepts.name에 없습니다.\"}]"
+  }
+}

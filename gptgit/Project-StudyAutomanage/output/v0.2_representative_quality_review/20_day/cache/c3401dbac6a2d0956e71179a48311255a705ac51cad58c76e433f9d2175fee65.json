@@ -1,0 +1,287 @@
+{
+  "context": {
+    "cache_format": 1,
+    "input_sha256": "49cb99bc505c746d4f48f50b9a46e86c15d3262f483b9e3762ee87465000fd2b",
+    "prompt_sha256": "c1d9d9001d7f21dc1b60907ec1f9da6d9a4eb0d100cfab671672cabc88d0e8ee",
+    "schema_sha256": "39f0ded13822985f643d062890c37dc53008f83d20476ab3fd856110efa909e1",
+    "config": {
+      "provider": "mock-file",
+      "response_sha256": "179af0adb7cf5f6f1c38c8f37e7e364f3e0f66445ac9dab5ea4e1356db32e08e",
+      "processing_sha256": "a58df00d79849fc999b6cbd3ce0fad64023ea8b20f94fb46e3a50a52347a2e43"
+    }
+  },
+  "analysis": {
+    "material_type": {
+      "material_type": "실습",
+      "confidence": 0.88,
+      "reason": "SVI와 라우팅·경로 재분배의 설정 및 확인 절차가 중심이며, 경로 재분배의 설명과 라우팅 테이블 관찰 기록도 포함합니다."
+    },
+    "summary": "SVI를 통한 VLAN 라우팅, 루프백을 이용한 핑 테스트, RIP 정적 경로 재분배의 설정과 확인을 다룹니다.",
+    "topics": [
+      {
+        "name": "L3 스위치 라우팅",
+        "children": [
+          {
+            "name": "SVI를 이용한 Inter-VLAN"
+          }
+        ]
+      },
+      {
+        "name": "루프백 주소를 소스로 지정한 핑"
+      },
+      {
+        "name": "경로 재분배",
+        "children": [
+          {
+            "name": "RIP 정적 경로 재분배"
+          }
+        ]
+      }
+    ],
+    "keywords": [
+      {
+        "name": "SVI",
+        "type": "네트워크 인터페이스"
+      },
+      {
+        "name": "Inter-VLAN",
+        "type": "라우팅"
+      },
+      {
+        "name": "IGP",
+        "type": "라우팅 프로토콜 분류"
+      },
+      {
+        "name": "EGP",
+        "type": "라우팅 프로토콜 분류"
+      },
+      {
+        "name": "경로 재분배",
+        "type": "라우팅"
+      },
+      {
+        "name": "RIP",
+        "type": "동적 라우팅 프로토콜"
+      },
+      {
+        "name": "루프백 인터페이스",
+        "type": "가상 인터페이스"
+      }
+    ],
+    "concepts": [
+      {
+        "name": "SVI",
+        "description": "VLAN에 IP 주소를 설정해 L3 스위치에서 VLAN 간 라우팅에 사용하는 인터페이스입니다.",
+        "type": {
+          "category": "네트워크",
+          "subtype": "가상 인터페이스"
+        }
+      },
+      {
+        "name": "Inter-VLAN 라우팅",
+        "description": "서로 다른 VLAN 사이에서 이루어지는 라우팅이며, 자료는 SVI를 이용하는 구성을 다룹니다.",
+        "type": {
+          "category": "네트워크",
+          "subtype": "라우팅"
+        }
+      },
+      {
+        "name": "루프백 인터페이스",
+        "description": "자료에서 가상의 장비를 추가하는 용도로 언급하며, 핑 테스트의 소스 IP로 사용합니다.",
+        "type": {
+          "category": "네트워크",
+          "subtype": "가상 인터페이스"
+        }
+      },
+      {
+        "name": "경로 재분배",
+        "description": "서로 다른 라우팅 프로토콜을 사용하는 네트워크 간에 경로 정보를 번역하고 공유하는 기능입니다.",
+        "type": {
+          "category": "네트워크",
+          "subtype": "라우팅 기능"
+        }
+      },
+      {
+        "name": "RIP",
+        "description": "자료에서 경로 재분배 대상 프로토콜로 사용되며, 정적 경로를 재분배하는 설정 예가 제시됩니다.",
+        "type": {
+          "category": "네트워크",
+          "subtype": "동적 라우팅 프로토콜"
+        }
+      },
+      {
+        "name": "정적 경로",
+        "description": "자료에서는 기본 경로와 특정 네트워크 경로를 설정한 뒤 RIP로 재분배하는 대상으로 다룹니다.",
+        "type": {
+          "category": "네트워크",
+          "subtype": "라우팅 경로"
+        }
+      },
+      {
+        "name": "트렁크 포트",
+        "description": "스위치 포트를 트렁크 모드로 설정하고 상태를 확인하도록 안내하는 예시다. 상태 확인 출력은 기록되어 있지 않다.",
+        "type": {
+          "category": "네트워크",
+          "subtype": "스위치 포트"
+        }
+      }
+    ],
+    "relationships": [
+      {
+        "from": "SVI",
+        "relation": "사용하여 구성",
+        "to": "Inter-VLAN 라우팅",
+        "description": "자료는 SVI를 이용한 Inter-VLAN 구성을 다룹니다."
+      },
+      {
+        "from": "정적 경로",
+        "relation": "RIP로 재분배",
+        "to": "RIP",
+        "description": "R1에서 정적 경로를 RIP로 재분배하는 설정이 제시됩니다."
+      }
+    ],
+    "theory": {
+      "definitions": [
+        {
+          "subject": "경로 재분배",
+          "content": "서로 다른 라우팅 프로토콜을 사용하는 네트워크 간에 경로 정보를 번역하고 공유하여 한쪽 프로토콜이 학습한 네트워크 정보를 다른 쪽 프로토콜로 전달하는 기능이라고 설명합니다.",
+          "evidence": "[경로 재분배]:서로 다른 라우팅 프로토콜(예: OSPF, EIGRP, RIP, BGP 등)을 사용하는 네트워크 간에 경로 정보를 번역하고 공유하여, 한쪽 프로토콜이 학습한 네트워크 정보를 다른 쪽 프로토콜로 전달하는 기능입니다."
+        }
+      ],
+      "principles": [
+        {
+          "subject": "RIP 정적 경로 재분배",
+          "content": "자료에서는 RIP에 정적 경로를 재분배할 때 메트릭을 10으로 지정하는 설정 예를 제시합니다.",
+          "evidence": "redistribute static metric 10 #RIP의 메트릭값을 10으로 재분배",
+          "related_concepts": [
+            "정적 경로",
+            "RIP"
+          ]
+        },
+        {
+          "subject": "경로 재분배의 적용 구간",
+          "content": "자료에서는 경로 재분배를 동적 라우팅 프로토콜로 연결된 구간에서 사용하며, 정적으로 연결된 라우터 간에는 사용하지 않는다고 설명합니다.",
+          "evidence": "***경로 재분배는 동적 라우팅 프로토콜로 연결된 구간에서 사용가능.\n-정적으로 연결된 라우터간에는 사용안함",
+          "related_concepts": [
+            "경로 재분배",
+            "RIP",
+            "정적 경로"
+          ]
+        },
+        {
+          "subject": "루프백 주소를 소스로 지정한 핑",
+          "content": "자료에서는 루프백 인터페이스를 가상 장비로 추가한 경우 확장 핑에 소스 IP를 기입해야 한다고 설명합니다. 예시 명령만 제시되어 있어 핑 성공 여부는 확인되지 않습니다.",
+          "evidence": "루프백 인터페이스로 가상의 장비를 추가했을때 핑테스트는\nR1#ping 192.168.10.1 source 192.168.30.1\n확장핑으로 소스 아이피를 기입해야된다.",
+          "related_concepts": [
+            "루프백 인터페이스"
+          ]
+        }
+      ]
+    },
+    "practice": [
+      {
+        "title": "L3 스위치의 SVI 및 트렁크 구성 확인",
+        "description": "스위치 포트를 VLAN에 할당하고 트렁크를 설정한 뒤, trunk 상태와 VLAN 인터페이스의 IP 및 활성화 여부를 확인하도록 안내합니다. 결과 출력은 기재되지 않았습니다.",
+        "evidence": "aSw1\nconf t\nint fa1/1\nsw mode acc\nsw acc vlan 10\nint fa1/2\nsw mo acc\nsw acc vlan 20\nint fa1/15\nsw mo tr\n\nsh vlan-switch\n\n ASW2\nconf t\nint fa1/1\nsw mode acc\nsw acc vlan 10\nint fa1/2\nsw mo acc\nsw acc vlan 20\nint range fa1/14 - 15\nsw mo tr\n\nconf t\nip routing\nvlan 10\nint vlan 10\nip addr 192.168.10.254 255.255.255.0\nvlan 20\nint vlan 20\nip addr 192.168.20.254 255.255.255.0\nin fa1/14\nsw mo tr\n\n설정 후 2가지 확인\n1. sh int trunk : fa0/14포트가 trunk로 지정되어 있는지, 캡슐화 프로토콜은 무엇인지 확인\n2. sh ip int b : vlan 10, vlan 20에 할당된 IP 및 SVI 활성화 여부 확인",
+        "related_concepts": [
+          "SVI",
+          "Inter-VLAN 라우팅",
+          "트렁크 포트"
+        ]
+      },
+      {
+        "title": "루프백 인터페이스를 소스로 지정한 핑 테스트",
+        "description": "루프백 주소를 소스 IP로 지정해 핑을 실행하는 명령 예가 있습니다. 핑 결과는 원문에 제시되지 않아 성공 여부를 확인할 수 없습니다.",
+        "evidence": "R1#ping 192.168.10.1 source 192.168.30.1",
+        "related_concepts": [
+          "루프백 인터페이스"
+        ]
+      },
+      {
+        "title": "RIP 정적 경로 재분배 설정 및 라우팅 테이블 확인",
+        "description": "R1에서 정적 경로를 RIP로 재분배하는 명령을 제시합니다. 이어서 학습되지 않은 ESW3의 라우팅 테이블에 192.168.40.0/24 경로가 표시된 관찰 기록이 있으며, 이 기록의 설정과 장비 간 연결 원인은 별도로 확정하지 않습니다.",
+        "evidence": "R1\nrouter rip\nredistribute static metric 10 #RIP의 메트릭값을 10으로 재분배\n#redistribute connected  #직접 연결된 네트워크 재분배\n\n 설정 하면  \n\n학습이 되지 않은 ESW3\n\nR    192.168.40.0/24 [120/10] via 172.16.12.2, 00:00:21, FastEthernet1/1\n     172.16.0.0/30 is subnetted, 1 subnets\n\n라우팅 테이블에 위와 같이 나온다.",
+        "related_concepts": [
+          "경로 재분배",
+          "RIP",
+          "정적 경로"
+        ]
+      }
+    ],
+    "schema_version": "0.2-draft",
+    "sections": [
+      {
+        "id": "svi-trunks",
+        "title": "SVI와 트렁크 구성",
+        "content_refs": [
+          "/concepts/0",
+          "/concepts/1",
+          "/concepts/6",
+          "/relationships/0",
+          "/practice/0"
+        ]
+      },
+      {
+        "id": "loopback-ping",
+        "title": "루프백 주소를 소스로 지정한 핑",
+        "content_refs": [
+          "/concepts/2",
+          "/theory/principles/2",
+          "/practice/1"
+        ]
+      },
+      {
+        "id": "static-redistribution",
+        "title": "정적 경로의 RIP 재분배",
+        "content_refs": [
+          "/concepts/3",
+          "/concepts/4",
+          "/concepts/5",
+          "/relationships/1",
+          "/theory/definitions/0",
+          "/theory/principles/0",
+          "/theory/principles/1",
+          "/practice/2"
+        ]
+      }
+    ],
+    "source": {
+      "material_id": "bc311d69fc2366ebe3ae69a6b0b4627fd79e437b96c97241398ba20313aacf4d",
+      "filename": "20일차 경로재분배,루프백가상장비설정.txt",
+      "extension": ".txt"
+    }
+  },
+  "analysis_sha256": "78a507af687a1f939e0e6fd96e1e81b2d2c8c45fd6b506bd7c87ae45cb5f39ce",
+  "origin": {
+    "kind": "generated_result"
+  },
+  "review_request": {
+    "review_version": 1,
+    "analysis_sha256": "29fa713523766a06c63da90e55df87e1ec5c4b784f651ea2742c286d79cbaee6",
+    "source": {
+      "material_id": "bc311d69fc2366ebe3ae69a6b0b4627fd79e437b96c97241398ba20313aacf4d",
+      "filename": "20일차 경로재분배,루프백가상장비설정.txt",
+      "extension": ".txt"
+    },
+    "candidates": [
+      {
+        "section_id": "loopback-ping",
+        "kind": "correction",
+        "text": "특정 루프백에서 출발하는 통신을 시험할 때 소스 주소를 지정하는 것이며, 루프백이 있다는 이유만으로 모든 핑에 소스 지정이 필수인 것은 아니다.",
+        "reason": "원문이 모든 루프백 환경의 핑에서 소스 지정을 필수로 읽힐 수 있다.",
+        "search_query": "Cisco extended ping source address outbound interface",
+        "id": "candidate-c1e2585f5137c003",
+        "status": "pending"
+      },
+      {
+        "section_id": "static-redistribution",
+        "kind": "correction",
+        "text": "정적 경로도 redistribute static으로 동적 라우팅 프로토콜에 주입할 수 있으므로 정적 경로는 재분배하지 않는다고 일반화하면 안 된다.",
+        "reason": "정적으로 연결된 라우터 간에는 사용하지 않는다는 원문 설명의 범위를 명확히 해야 한다.",
+        "search_query": "Cisco RIP redistribute static",
+        "id": "candidate-d9a10b33638d4de5",
+        "status": "pending"
+      }
+    ]
+  }
+}

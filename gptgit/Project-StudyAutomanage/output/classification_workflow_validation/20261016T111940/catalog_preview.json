@@ -1,0 +1,1093 @@
+{
+  "categories": [
+    {
+      "path": "NETWORK / 온프레미스 네트워크",
+      "material_ids": [
+        "144ab5db4c077baf5b72682f78b4286f857fd0485ec0bb878a846147afff42f2",
+        "acc194f4b63fceab8eb484dd97368a0f931a49fc93aaf18dab8a592e201b7526",
+        "b0b50be4b719e7a173222c5573ec85a40b1aaa9938e0de53a1eb6ef131f5832b",
+        "f3bb8b2cc0e14e125f71322253dd586df819d2fd4dfb2c6bec375778f980b187"
+      ]
+    },
+    {
+      "path": "NETWORK / 온프레미스 네트워크 / EtherChannel",
+      "material_ids": [
+        "f3bb8b2cc0e14e125f71322253dd586df819d2fd4dfb2c6bec375778f980b187"
+      ]
+    },
+    {
+      "path": "NETWORK / 온프레미스 네트워크 / L3 스위치 라우팅",
+      "material_ids": [
+        "144ab5db4c077baf5b72682f78b4286f857fd0485ec0bb878a846147afff42f2"
+      ]
+    },
+    {
+      "path": "NETWORK / 온프레미스 네트워크 / L3 스위치 라우팅 / SVI를 이용한 Inter-VLAN",
+      "material_ids": [
+        "144ab5db4c077baf5b72682f78b4286f857fd0485ec0bb878a846147afff42f2"
+      ]
+    },
+    {
+      "path": "NETWORK / 온프레미스 네트워크 / VLAN 및 스위치 포트 설정",
+      "material_ids": [
+        "f3bb8b2cc0e14e125f71322253dd586df819d2fd4dfb2c6bec375778f980b187"
+      ]
+    },
+    {
+      "path": "NETWORK / 온프레미스 네트워크 / VLAN 및 스위치 포트 설정 / Native VLAN",
+      "material_ids": [
+        "f3bb8b2cc0e14e125f71322253dd586df819d2fd4dfb2c6bec375778f980b187"
+      ]
+    },
+    {
+      "path": "NETWORK / 온프레미스 네트워크 / VLAN 및 스위치 포트 설정 / VTP",
+      "material_ids": [
+        "f3bb8b2cc0e14e125f71322253dd586df819d2fd4dfb2c6bec375778f980b187"
+      ]
+    },
+    {
+      "path": "NETWORK / 온프레미스 네트워크 / VLAN 및 스위치 포트 설정 / 라우터 서브인터페이스와 802.1Q",
+      "material_ids": [
+        "f3bb8b2cc0e14e125f71322253dd586df819d2fd4dfb2c6bec375778f980b187"
+      ]
+    },
+    {
+      "path": "NETWORK / 온프레미스 네트워크 / VLAN 및 스위치 포트 설정 / 액세스 포트와 트렁크 포트",
+      "material_ids": [
+        "f3bb8b2cc0e14e125f71322253dd586df819d2fd4dfb2c6bec375778f980b187"
+      ]
+    },
+    {
+      "path": "NETWORK / 온프레미스 네트워크 / 경로 재분배",
+      "material_ids": [
+        "144ab5db4c077baf5b72682f78b4286f857fd0485ec0bb878a846147afff42f2"
+      ]
+    },
+    {
+      "path": "NETWORK / 온프레미스 네트워크 / 경로 재분배 / RIP 정적 경로 재분배",
+      "material_ids": [
+        "144ab5db4c077baf5b72682f78b4286f857fd0485ec0bb878a846147afff42f2"
+      ]
+    },
+    {
+      "path": "NETWORK / 온프레미스 네트워크 / 동적 라우팅",
+      "material_ids": [
+        "acc194f4b63fceab8eb484dd97368a0f931a49fc93aaf18dab8a592e201b7526",
+        "b0b50be4b719e7a173222c5573ec85a40b1aaa9938e0de53a1eb6ef131f5832b"
+      ]
+    },
+    {
+      "path": "NETWORK / 온프레미스 네트워크 / 동적 라우팅 / EGP",
+      "material_ids": [
+        "acc194f4b63fceab8eb484dd97368a0f931a49fc93aaf18dab8a592e201b7526"
+      ]
+    },
+    {
+      "path": "NETWORK / 온프레미스 네트워크 / 동적 라우팅 / IGP",
+      "material_ids": [
+        "acc194f4b63fceab8eb484dd97368a0f931a49fc93aaf18dab8a592e201b7526"
+      ]
+    },
+    {
+      "path": "NETWORK / 온프레미스 네트워크 / 동적 라우팅 / IGP / Distance vector",
+      "material_ids": [
+        "acc194f4b63fceab8eb484dd97368a0f931a49fc93aaf18dab8a592e201b7526"
+      ]
+    },
+    {
+      "path": "NETWORK / 온프레미스 네트워크 / 동적 라우팅 / IGP / Hybrid",
+      "material_ids": [
+        "acc194f4b63fceab8eb484dd97368a0f931a49fc93aaf18dab8a592e201b7526"
+      ]
+    },
+    {
+      "path": "NETWORK / 온프레미스 네트워크 / 동적 라우팅 / IGP / Link state",
+      "material_ids": [
+        "acc194f4b63fceab8eb484dd97368a0f931a49fc93aaf18dab8a592e201b7526"
+      ]
+    },
+    {
+      "path": "NETWORK / 온프레미스 네트워크 / 동적 라우팅 / RIP",
+      "material_ids": [
+        "acc194f4b63fceab8eb484dd97368a0f931a49fc93aaf18dab8a592e201b7526"
+      ]
+    },
+    {
+      "path": "NETWORK / 온프레미스 네트워크 / 동적 라우팅 / RIP / RIPv1",
+      "material_ids": [
+        "acc194f4b63fceab8eb484dd97368a0f931a49fc93aaf18dab8a592e201b7526"
+      ]
+    },
+    {
+      "path": "NETWORK / 온프레미스 네트워크 / 동적 라우팅 / RIP / RIPv2",
+      "material_ids": [
+        "acc194f4b63fceab8eb484dd97368a0f931a49fc93aaf18dab8a592e201b7526"
+      ]
+    },
+    {
+      "path": "NETWORK / 온프레미스 네트워크 / 동적 라우팅 / RIP 설정",
+      "material_ids": [
+        "b0b50be4b719e7a173222c5573ec85a40b1aaa9938e0de53a1eb6ef131f5832b"
+      ]
+    },
+    {
+      "path": "NETWORK / 온프레미스 네트워크 / 라우팅 기본 개념",
+      "material_ids": [
+        "b0b50be4b719e7a173222c5573ec85a40b1aaa9938e0de53a1eb6ef131f5832b"
+      ]
+    },
+    {
+      "path": "NETWORK / 온프레미스 네트워크 / 라우팅 기본 개념 / 네트워크 분리",
+      "material_ids": [
+        "b0b50be4b719e7a173222c5573ec85a40b1aaa9938e0de53a1eb6ef131f5832b"
+      ]
+    },
+    {
+      "path": "NETWORK / 온프레미스 네트워크 / 라우팅 기본 개념 / 라우터 기능",
+      "material_ids": [
+        "b0b50be4b719e7a173222c5573ec85a40b1aaa9938e0de53a1eb6ef131f5832b"
+      ]
+    },
+    {
+      "path": "NETWORK / 온프레미스 네트워크 / 라우팅 프로토콜",
+      "material_ids": [
+        "b0b50be4b719e7a173222c5573ec85a40b1aaa9938e0de53a1eb6ef131f5832b"
+      ]
+    },
+    {
+      "path": "NETWORK / 온프레미스 네트워크 / 라우팅 프로토콜 / IGP와 EGP",
+      "material_ids": [
+        "b0b50be4b719e7a173222c5573ec85a40b1aaa9938e0de53a1eb6ef131f5832b"
+      ]
+    },
+    {
+      "path": "NETWORK / 온프레미스 네트워크 / 라우팅 프로토콜 / 경로 계산 방식",
+      "material_ids": [
+        "b0b50be4b719e7a173222c5573ec85a40b1aaa9938e0de53a1eb6ef131f5832b"
+      ]
+    },
+    {
+      "path": "NETWORK / 온프레미스 네트워크 / 루프백 주소를 소스로 지정한 핑",
+      "material_ids": [
+        "144ab5db4c077baf5b72682f78b4286f857fd0485ec0bb878a846147afff42f2"
+      ]
+    },
+    {
+      "path": "NETWORK / 온프레미스 네트워크 / 스패닝 트리",
+      "material_ids": [
+        "f3bb8b2cc0e14e125f71322253dd586df819d2fd4dfb2c6bec375778f980b187"
+      ]
+    },
+    {
+      "path": "NETWORK / 온프레미스 네트워크 / 정적 라우팅",
+      "material_ids": [
+        "b0b50be4b719e7a173222c5573ec85a40b1aaa9938e0de53a1eb6ef131f5832b"
+      ]
+    },
+    {
+      "path": "NETWORK / 온프레미스 네트워크 / 정적 라우팅 / 경로 선택 기준",
+      "material_ids": [
+        "b0b50be4b719e7a173222c5573ec85a40b1aaa9938e0de53a1eb6ef131f5832b"
+      ]
+    },
+    {
+      "path": "NETWORK / 온프레미스 네트워크 / 정적 라우팅 / 디폴트 라우트와 stub network",
+      "material_ids": [
+        "b0b50be4b719e7a173222c5573ec85a40b1aaa9938e0de53a1eb6ef131f5832b"
+      ]
+    },
+    {
+      "path": "NETWORK / 온프레미스 네트워크 / 정적 라우팅 / 플로팅 라우트",
+      "material_ids": [
+        "b0b50be4b719e7a173222c5573ec85a40b1aaa9938e0de53a1eb6ef131f5832b"
+      ]
+    }
+  ],
+  "concepts": [
+    {
+      "id": "f2f4c3471a636f68143bf665995bd133853f3aea4fb58535a91a97c1ae7ac617",
+      "name": "AD",
+      "aliases": [
+        "AD"
+      ],
+      "sources": [
+        {
+          "material_id": "b0b50be4b719e7a173222c5573ec85a40b1aaa9938e0de53a1eb6ef131f5832b",
+          "filename": "12일차.docx",
+          "pointer": "/concepts/16",
+          "description": "자료에서는 같은 네트워크 정보를 둘 이상의 경로로 학습했을 때 우선 경로를 판단하는 관리 거리로 설명합니다.",
+          "approval_status": "pending"
+        }
+      ],
+      "different_descriptions": false,
+      "interpretation": "원문별 설명 보존; 서로 다르다고 오류·모순으로 자동 판정하지 않음"
+    },
+    {
+      "id": "a03c02bec877784c4e171d53e7ae68796d3cbdb43a6a7c9178e7812296c50f02",
+      "name": "Cost",
+      "aliases": [
+        "Cost"
+      ],
+      "sources": [
+        {
+          "material_id": "b0b50be4b719e7a173222c5573ec85a40b1aaa9938e0de53a1eb6ef131f5832b",
+          "filename": "12일차.docx",
+          "pointer": "/concepts/17",
+          "description": "자료에서는 경로 선택 시 낮은 비용을 우선하는 기준으로 제시합니다.",
+          "approval_status": "pending"
+        }
+      ],
+      "different_descriptions": false,
+      "interpretation": "원문별 설명 보존; 서로 다르다고 오류·모순으로 자동 판정하지 않음"
+    },
+    {
+      "id": "72ac622ee2a30c1edeb7062af804b1323b1aacad82b403643e5e774d35928fdf",
+      "name": "Distance vector",
+      "aliases": [
+        "Distance vector"
+      ],
+      "sources": [
+        {
+          "material_id": "acc194f4b63fceab8eb484dd97368a0f931a49fc93aaf18dab8a592e201b7526",
+          "filename": "15일차 Dynamic routing_IGP.txt",
+          "pointer": "/concepts/3",
+          "description": "자료에서 RIP와 IGRP를 예로 들고, 주기적으로 라우팅 테이블 정보를 교환하는 방식으로 설명합니다.",
+          "approval_status": "pending"
+        },
+        {
+          "material_id": "b0b50be4b719e7a173222c5573ec85a40b1aaa9938e0de53a1eb6ef131f5832b",
+          "filename": "12일차.docx",
+          "pointer": "/concepts/9",
+          "description": "자료에서는 주기적으로 정보를 교환하는 경로 계산 방식으로 설명하며 RIP을 예로 듭니다.",
+          "approval_status": "pending"
+        }
+      ],
+      "different_descriptions": true,
+      "interpretation": "원문별 설명 보존; 서로 다르다고 오류·모순으로 자동 판정하지 않음"
+    },
+    {
+      "id": "9e48c430bba87fa0155e348f01fbf6dd23c88108b973d86025b94940e43dc41b",
+      "name": "EGP",
+      "aliases": [
+        "EGP"
+      ],
+      "sources": [
+        {
+          "material_id": "acc194f4b63fceab8eb484dd97368a0f931a49fc93aaf18dab8a592e201b7526",
+          "filename": "15일차 Dynamic routing_IGP.txt",
+          "pointer": "/concepts/2",
+          "description": "자료에서 외부 게이트웨이 프로토콜로 제시하며, 추가 설명은 없습니다.",
+          "approval_status": "pending"
+        },
+        {
+          "material_id": "b0b50be4b719e7a173222c5573ec85a40b1aaa9938e0de53a1eb6ef131f5832b",
+          "filename": "12일차.docx",
+          "pointer": "/concepts/8",
+          "description": "서로 다른 AS 사이에서 사용하는 라우팅 프로토콜 분류입니다.",
+          "approval_status": "pending"
+        }
+      ],
+      "different_descriptions": true,
+      "interpretation": "원문별 설명 보존; 서로 다르다고 오류·모순으로 자동 판정하지 않음"
+    },
+    {
+      "id": "4dd5b8546ee6f1137e012f6a1ed2fd3a9e65382636d1298ea2e0c1e1fad91a23",
+      "name": "EtherChannel",
+      "aliases": [
+        "EtherChannel"
+      ],
+      "sources": [
+        {
+          "material_id": "f3bb8b2cc0e14e125f71322253dd586df819d2fd4dfb2c6bec375778f980b187",
+          "filename": "18일차.txt",
+          "pointer": "/concepts/7",
+          "description": "인터페이스 범위에 `channel-group`을 적용하는 예시가 있습니다. mode 값으로 auto, desirable의 축약형, active, passive, on이 기록되어 있고, 별도 메모에 LACP의 active/passive와 PAgP가 언급됩니다.",
+          "approval_status": "pending"
+        }
+      ],
+      "different_descriptions": false,
+      "interpretation": "원문별 설명 보존; 서로 다르다고 오류·모순으로 자동 판정하지 않음"
+    },
+    {
+      "id": "121a09e9ad3ad69b6c693f5433f40728eed0af66a701d10550ef8117d4f9fa3b",
+      "name": "Floating route",
+      "aliases": [
+        "Floating route"
+      ],
+      "sources": [
+        {
+          "material_id": "b0b50be4b719e7a173222c5573ec85a40b1aaa9938e0de53a1eb6ef131f5832b",
+          "filename": "12일차.docx",
+          "pointer": "/concepts/20",
+          "description": "주 경로에 장애가 발생했을 때 보조 경로가 동작하도록 AD 등을 이용해 구성하는 경로입니다.",
+          "approval_status": "pending"
+        }
+      ],
+      "different_descriptions": false,
+      "interpretation": "원문별 설명 보존; 서로 다르다고 오류·모순으로 자동 판정하지 않음"
+    },
+    {
+      "id": "e27df696c86d8605455dc51ed9f068518a52e4545c0d0ea24711722fc517fca3",
+      "name": "Hello packet",
+      "aliases": [
+        "Hello packet"
+      ],
+      "sources": [
+        {
+          "material_id": "acc194f4b63fceab8eb484dd97368a0f931a49fc93aaf18dab8a592e201b7526",
+          "filename": "15일차 Dynamic routing_IGP.txt",
+          "pointer": "/concepts/11",
+          "description": "자료에서 Link state 방식이 평상시 이웃 라우터를 모니터링할 때 사용하는 것으로 설명합니다.",
+          "approval_status": "pending"
+        }
+      ],
+      "different_descriptions": false,
+      "interpretation": "원문별 설명 보존; 서로 다르다고 오류·모순으로 자동 판정하지 않음"
+    },
+    {
+      "id": "4a27f91df4201372d787764fc1c4aec6a51af145d2c21c00b2f39a2904547e16",
+      "name": "Hybrid",
+      "aliases": [
+        "Hybrid"
+      ],
+      "sources": [
+        {
+          "material_id": "acc194f4b63fceab8eb484dd97368a0f931a49fc93aaf18dab8a592e201b7526",
+          "filename": "15일차 Dynamic routing_IGP.txt",
+          "pointer": "/concepts/5",
+          "description": "자료에서 EIGRP를 예로 들며 IGRP 기반 비용 계산과 Link state 방식의 상태 모니터링·변화 업데이트를 결합한 것으로 설명합니다.",
+          "approval_status": "pending"
+        },
+        {
+          "material_id": "b0b50be4b719e7a173222c5573ec85a40b1aaa9938e0de53a1eb6ef131f5832b",
+          "filename": "12일차.docx",
+          "pointer": "/concepts/11",
+          "description": "자료에서는 distance vector와 link state의 혼합 방식으로 설명하며 EIGRP를 예로 듭니다.",
+          "approval_status": "pending"
+        }
+      ],
+      "different_descriptions": true,
+      "interpretation": "원문별 설명 보존; 서로 다르다고 오류·모순으로 자동 판정하지 않음"
+    },
+    {
+      "id": "cb0c56d31243d333dc327dafd6a5f0efee509a31c3610ef12241adcb1ad087df",
+      "name": "IGP",
+      "aliases": [
+        "IGP"
+      ],
+      "sources": [
+        {
+          "material_id": "acc194f4b63fceab8eb484dd97368a0f931a49fc93aaf18dab8a592e201b7526",
+          "filename": "15일차 Dynamic routing_IGP.txt",
+          "pointer": "/concepts/1",
+          "description": "자료에서 내부 게이트웨이 프로토콜로 제시하며, Distance vector·Link state·Hybrid 유형을 설명합니다.",
+          "approval_status": "pending"
+        },
+        {
+          "material_id": "b0b50be4b719e7a173222c5573ec85a40b1aaa9938e0de53a1eb6ef131f5832b",
+          "filename": "12일차.docx",
+          "pointer": "/concepts/7",
+          "description": "하나의 AS 안에서 사용하는 라우팅 프로토콜 분류입니다.",
+          "approval_status": "pending"
+        }
+      ],
+      "different_descriptions": true,
+      "interpretation": "원문별 설명 보존; 서로 다르다고 오류·모순으로 자동 판정하지 않음"
+    },
+    {
+      "id": "bfc05faf4077a6360baaadebba5e3e50171ceca1af2e91d9499f77dd9054c11c",
+      "name": "Inter-VLAN 라우팅",
+      "aliases": [
+        "Inter-VLAN 라우팅"
+      ],
+      "sources": [
+        {
+          "material_id": "144ab5db4c077baf5b72682f78b4286f857fd0485ec0bb878a846147afff42f2",
+          "filename": "20일차 경로재분배,루프백가상장비설정.txt",
+          "pointer": "/concepts/1",
+          "description": "서로 다른 VLAN 사이에서 이루어지는 라우팅이며, 자료는 SVI를 이용하는 구성을 다룹니다.",
+          "approval_status": "pending"
+        }
+      ],
+      "different_descriptions": false,
+      "interpretation": "원문별 설명 보존; 서로 다르다고 오류·모순으로 자동 판정하지 않음"
+    },
+    {
+      "id": "5b98cb9be997201c75f8bb3cecb38201849bb78b4a4dfed0452a6dd055186565",
+      "name": "Link state",
+      "aliases": [
+        "Link state"
+      ],
+      "sources": [
+        {
+          "material_id": "acc194f4b63fceab8eb484dd97368a0f931a49fc93aaf18dab8a592e201b7526",
+          "filename": "15일차 Dynamic routing_IGP.txt",
+          "pointer": "/concepts/4",
+          "description": "자료에서 OSPF와 IS-IS를 예로 들며, 상태 변화 시 정보를 교환하고 평상시 이웃 라우터를 모니터링하는 방식으로 설명합니다.",
+          "approval_status": "pending"
+        },
+        {
+          "material_id": "b0b50be4b719e7a173222c5573ec85a40b1aaa9938e0de53a1eb6ef131f5832b",
+          "filename": "12일차.docx",
+          "pointer": "/concepts/10",
+          "description": "자료에서는 네트워크 상태가 변했을 때 정보를 교환하는 방식으로 설명하며 OSPF를 예로 듭니다.",
+          "approval_status": "pending"
+        }
+      ],
+      "different_descriptions": true,
+      "interpretation": "원문별 설명 보존; 서로 다르다고 오류·모순으로 자동 판정하지 않음"
+    },
+    {
+      "id": "00be9732af25cf32dc5294fc360822960f88f11f2f62ee8c91bd608cb016565e",
+      "name": "Longest prefix",
+      "aliases": [
+        "Longest prefix"
+      ],
+      "sources": [
+        {
+          "material_id": "b0b50be4b719e7a173222c5573ec85a40b1aaa9938e0de53a1eb6ef131f5832b",
+          "filename": "12일차.docx",
+          "pointer": "/concepts/15",
+          "description": "여러 경로가 적용될 때 프리픽스 길이가 긴 경로를 우선하는 기준으로 제시합니다.",
+          "approval_status": "pending"
+        }
+      ],
+      "different_descriptions": false,
+      "interpretation": "원문별 설명 보존; 서로 다르다고 오류·모순으로 자동 판정하지 않음"
+    },
+    {
+      "id": "7b9447de5e86bb9d9858469c75bbff645e3347363d7ff44a9554d55137443c3b",
+      "name": "RIP",
+      "aliases": [
+        "RIP"
+      ],
+      "sources": [
+        {
+          "material_id": "144ab5db4c077baf5b72682f78b4286f857fd0485ec0bb878a846147afff42f2",
+          "filename": "20일차 경로재분배,루프백가상장비설정.txt",
+          "pointer": "/concepts/4",
+          "description": "자료에서 경로 재분배 대상 프로토콜로 사용되며, 정적 경로를 재분배하는 설정 예가 제시됩니다.",
+          "approval_status": "pending"
+        },
+        {
+          "material_id": "acc194f4b63fceab8eb484dd97368a0f931a49fc93aaf18dab8a592e201b7526",
+          "filename": "15일차 Dynamic routing_IGP.txt",
+          "pointer": "/concepts/6",
+          "description": "자료에서 UDP 520을 사용하고 30초 주기로 라우팅 테이블 정보를 교환하는 프로토콜로 설명합니다.",
+          "approval_status": "pending"
+        },
+        {
+          "material_id": "b0b50be4b719e7a173222c5573ec85a40b1aaa9938e0de53a1eb6ef131f5832b",
+          "filename": "12일차.docx",
+          "pointer": "/concepts/19",
+          "description": "자료에서 distance vector 방식의 라우팅 프로토콜 예로 제시되며 설정 명령도 포함됩니다.",
+          "approval_status": "pending"
+        }
+      ],
+      "different_descriptions": true,
+      "interpretation": "원문별 설명 보존; 서로 다르다고 오류·모순으로 자동 판정하지 않음"
+    },
+    {
+      "id": "3a733a81ec662100fe4bd0252bd3f63fd693881aabedf71880fc801916df42e6",
+      "name": "RIPv1",
+      "aliases": [
+        "RIPv1"
+      ],
+      "sources": [
+        {
+          "material_id": "acc194f4b63fceab8eb484dd97368a0f931a49fc93aaf18dab8a592e201b7526",
+          "filename": "15일차 Dynamic routing_IGP.txt",
+          "pointer": "/concepts/7",
+          "description": "자료에서 classful 방식으로 서브넷 범위를 보지 않고 VLSM을 지원하지 않는 RIP 버전으로 설명합니다.",
+          "approval_status": "pending"
+        }
+      ],
+      "different_descriptions": false,
+      "interpretation": "원문별 설명 보존; 서로 다르다고 오류·모순으로 자동 판정하지 않음"
+    },
+    {
+      "id": "5e7a5f209eff17d5f9da032f6dfcacde60f7d3ebd9bbb3abfe91f78a40de6c28",
+      "name": "RIPv2",
+      "aliases": [
+        "RIPv2"
+      ],
+      "sources": [
+        {
+          "material_id": "acc194f4b63fceab8eb484dd97368a0f931a49fc93aaf18dab8a592e201b7526",
+          "filename": "15일차 Dynamic routing_IGP.txt",
+          "pointer": "/concepts/8",
+          "description": "원문에 classless와 VLSM 지원이 표기되어 있으나, 서브넷 범위에 대한 문장은 미완성이다.",
+          "approval_status": "pending"
+        }
+      ],
+      "different_descriptions": false,
+      "interpretation": "원문별 설명 보존; 서로 다르다고 오류·모순으로 자동 판정하지 않음"
+    },
+    {
+      "id": "5faec9b33b0f1359db6a8a785c9b6bcf93b3e25400a8f5c795af3b119312ee64",
+      "name": "Routed protocol 구성",
+      "aliases": [
+        "Routed protocol 구성"
+      ],
+      "sources": [
+        {
+          "material_id": "b0b50be4b719e7a173222c5573ec85a40b1aaa9938e0de53a1eb6ef131f5832b",
+          "filename": "12일차.docx",
+          "pointer": "/concepts/5",
+          "description": "인터페이스에 IP를 설정하여 직접 연결된 네트워크를 구성하는 단계입니다.",
+          "approval_status": "pending"
+        }
+      ],
+      "different_descriptions": false,
+      "interpretation": "원문별 설명 보존; 서로 다르다고 오류·모순으로 자동 판정하지 않음"
+    },
+    {
+      "id": "105cc2a336574783f145d4c36d3eb9e3181636871d0b696ed51a6c98722b695d",
+      "name": "Routing protocol 구성",
+      "aliases": [
+        "Routing protocol 구성"
+      ],
+      "sources": [
+        {
+          "material_id": "b0b50be4b719e7a173222c5573ec85a40b1aaa9938e0de53a1eb6ef131f5832b",
+          "filename": "12일차.docx",
+          "pointer": "/concepts/6",
+          "description": "원격지 네트워크를 학습하기 위한 라우팅 프로토콜 구성입니다.",
+          "approval_status": "pending"
+        }
+      ],
+      "different_descriptions": false,
+      "interpretation": "원문별 설명 보존; 서로 다르다고 오류·모순으로 자동 판정하지 않음"
+    },
+    {
+      "id": "1c6bfe16056e096012f83d3f5f5ca970e19d292814944ee4af0c3f97f16520ed",
+      "name": "SVI",
+      "aliases": [
+        "SVI"
+      ],
+      "sources": [
+        {
+          "material_id": "144ab5db4c077baf5b72682f78b4286f857fd0485ec0bb878a846147afff42f2",
+          "filename": "20일차 경로재분배,루프백가상장비설정.txt",
+          "pointer": "/concepts/0",
+          "description": "VLAN에 IP 주소를 설정해 L3 스위치에서 VLAN 간 라우팅에 사용하는 인터페이스입니다.",
+          "approval_status": "pending"
+        }
+      ],
+      "different_descriptions": false,
+      "interpretation": "원문별 설명 보존; 서로 다르다고 오류·모순으로 자동 판정하지 않음"
+    },
+    {
+      "id": "2a1e299788630f16eb5b60c03c9a3a83d65bb2f12382dd1782e815b23b25d1b3",
+      "name": "Stub network",
+      "aliases": [
+        "Stub network"
+      ],
+      "sources": [
+        {
+          "material_id": "b0b50be4b719e7a173222c5573ec85a40b1aaa9938e0de53a1eb6ef131f5832b",
+          "filename": "12일차.docx",
+          "pointer": "/concepts/14",
+          "description": "자료에서는 외부와 통하는 인터페이스가 단 1개인 네트워크로 정의합니다.",
+          "approval_status": "pending"
+        }
+      ],
+      "different_descriptions": false,
+      "interpretation": "원문별 설명 보존; 서로 다르다고 오류·모순으로 자동 판정하지 않음"
+    },
+    {
+      "id": "f34f1410cc6e4b5f105010c224c6f6e0d58eabd6b6531217c00ba85f5ed7be41",
+      "name": "VLAN",
+      "aliases": [
+        "VLAN"
+      ],
+      "sources": [
+        {
+          "material_id": "f3bb8b2cc0e14e125f71322253dd586df819d2fd4dfb2c6bec375778f980b187",
+          "filename": "18일차.txt",
+          "pointer": "/concepts/0",
+          "description": "메모에서는 VLAN 10, 20, 30을 생성하고 스위치 액세스 포트를 VLAN 10 또는 20에 할당하는 명령을 제시합니다.",
+          "approval_status": "pending"
+        }
+      ],
+      "different_descriptions": false,
+      "interpretation": "원문별 설명 보존; 서로 다르다고 오류·모순으로 자동 판정하지 않음"
+    },
+    {
+      "id": "a46f7ce30d7144aec80dbce63187f7437ad5f81860e952b22afb74589ccd4c92",
+      "name": "VLSM",
+      "aliases": [
+        "VLSM"
+      ],
+      "sources": [
+        {
+          "material_id": "acc194f4b63fceab8eb484dd97368a0f931a49fc93aaf18dab8a592e201b7526",
+          "filename": "15일차 Dynamic routing_IGP.txt",
+          "pointer": "/concepts/9",
+          "description": "자료에서 가변길이 서브넷 마스크라고 풀이하며 RIPv1은 지원하지 않고 RIPv2는 지원한다고 설명합니다.",
+          "approval_status": "pending"
+        }
+      ],
+      "different_descriptions": false,
+      "interpretation": "원문별 설명 보존; 서로 다르다고 오류·모순으로 자동 판정하지 않음"
+    },
+    {
+      "id": "c79f24b68e87b2627917fdab34c647530ca3d27011d42d1af0a0fcdaf95ba6d6",
+      "name": "VTP",
+      "aliases": [
+        "VTP"
+      ],
+      "sources": [
+        {
+          "material_id": "f3bb8b2cc0e14e125f71322253dd586df819d2fd4dfb2c6bec375778f980b187",
+          "filename": "18일차.txt",
+          "pointer": "/concepts/5",
+          "description": "VTP domain과 password를 지정하는 명령이 제시되며, 메모는 VTP를 VLAN DB 동기화로 설명합니다. ‘최대’ 뒤의 내용은 미완성입니다.",
+          "approval_status": "pending"
+        }
+      ],
+      "different_descriptions": false,
+      "interpretation": "원문별 설명 보존; 서로 다르다고 오류·모순으로 자동 판정하지 않음"
+    },
+    {
+      "id": "d12f4dba9d71b05cd12c4226442cf043e82acb44b55c193507039f33e9793aa3",
+      "name": "no ip domain lookup",
+      "aliases": [
+        "no ip domain lookup"
+      ],
+      "sources": [
+        {
+          "material_id": "acc194f4b63fceab8eb484dd97368a0f931a49fc93aaf18dab8a592e201b7526",
+          "filename": "15일차 Dynamic routing_IGP.txt",
+          "pointer": "/concepts/12",
+          "description": "자료에 단독으로 적힌 명령어이며 용도나 수행 절차는 설명되지 않습니다.",
+          "approval_status": "pending"
+        }
+      ],
+      "different_descriptions": false,
+      "interpretation": "원문별 설명 보존; 서로 다르다고 오류·모순으로 자동 판정하지 않음"
+    },
+    {
+      "id": "7d8657d35175423c2800f9be6fbf00fa970a44a24493159ec5295daa241c3ff0",
+      "name": "경로 선택",
+      "aliases": [
+        "경로 선택"
+      ],
+      "sources": [
+        {
+          "material_id": "b0b50be4b719e7a173222c5573ec85a40b1aaa9938e0de53a1eb6ef131f5832b",
+          "filename": "12일차.docx",
+          "pointer": "/concepts/4",
+          "description": "목적지로 향하는 경로를 선택하는 기능입니다.",
+          "approval_status": "pending"
+        }
+      ],
+      "different_descriptions": false,
+      "interpretation": "원문별 설명 보존; 서로 다르다고 오류·모순으로 자동 판정하지 않음"
+    },
+    {
+      "id": "67ca7c9ae72f2e2fd3cc216d9e0721468d6519d5c72b09ac1aac1980da91c7ea",
+      "name": "경로 재분배",
+      "aliases": [
+        "경로 재분배"
+      ],
+      "sources": [
+        {
+          "material_id": "144ab5db4c077baf5b72682f78b4286f857fd0485ec0bb878a846147afff42f2",
+          "filename": "20일차 경로재분배,루프백가상장비설정.txt",
+          "pointer": "/concepts/3",
+          "description": "서로 다른 라우팅 프로토콜을 사용하는 네트워크 간에 경로 정보를 번역하고 공유하는 기능입니다.",
+          "approval_status": "pending"
+        }
+      ],
+      "different_descriptions": false,
+      "interpretation": "원문별 설명 보존; 서로 다르다고 오류·모순으로 자동 판정하지 않음"
+    },
+    {
+      "id": "d9f9cd0c4c7ccd8106a3c1bfa7d1ba56f261ed6875789e0f3c8646f25c31a0bf",
+      "name": "네이티브 VLAN",
+      "aliases": [
+        "Native VLAN"
+      ],
+      "sources": [
+        {
+          "material_id": "f3bb8b2cc0e14e125f71322253dd586df819d2fd4dfb2c6bec375778f980b187",
+          "filename": "18일차.txt",
+          "pointer": "/concepts/4",
+          "description": "스위치 트렁크 인터페이스에 native VLAN 10을 지정하는 예시와 라우터 서브인터페이스에서 `encapsulation dot1q 10 native`를 사용하는 예시가 있습니다.",
+          "approval_status": "pending"
+        }
+      ],
+      "different_descriptions": false,
+      "interpretation": "원문별 설명 보존; 서로 다르다고 오류·모순으로 자동 판정하지 않음"
+    },
+    {
+      "id": "05d63034c352f80b32e9cd5bc256b6562e61d4869ba870850cc53289129233ba",
+      "name": "동적 라우팅",
+      "aliases": [
+        "동적 라우팅"
+      ],
+      "sources": [
+        {
+          "material_id": "acc194f4b63fceab8eb484dd97368a0f931a49fc93aaf18dab8a592e201b7526",
+          "filename": "15일차 Dynamic routing_IGP.txt",
+          "pointer": "/concepts/0",
+          "description": "자료에서 IGP와 EGP를 구분하고, IGP의 라우팅 방식과 RIP를 설명하는 주제입니다.",
+          "approval_status": "pending"
+        },
+        {
+          "material_id": "b0b50be4b719e7a173222c5573ec85a40b1aaa9938e0de53a1eb6ef131f5832b",
+          "filename": "12일차.docx",
+          "pointer": "/concepts/18",
+          "description": "라우팅 프로토콜을 사용하여 원격지 네트워크를 학습하는 방식입니다.",
+          "approval_status": "pending"
+        }
+      ],
+      "different_descriptions": true,
+      "interpretation": "원문별 설명 보존; 서로 다르다고 오류·모순으로 자동 판정하지 않음"
+    },
+    {
+      "id": "521d3c1310fde861b6ee0a5052d0dc7bb7f9808035ef06e06180ce1a268a1108",
+      "name": "디폴트 라우트",
+      "aliases": [
+        "디폴트 라우트"
+      ],
+      "sources": [
+        {
+          "material_id": "b0b50be4b719e7a173222c5573ec85a40b1aaa9938e0de53a1eb6ef131f5832b",
+          "filename": "12일차.docx",
+          "pointer": "/concepts/13",
+          "description": "자료에서는 불특정 다수와 통신하는 경우 등에 사용하는 기본 경로 방식으로 제시합니다.",
+          "approval_status": "pending"
+        }
+      ],
+      "different_descriptions": false,
+      "interpretation": "원문별 설명 보존; 서로 다르다고 오류·모순으로 자동 판정하지 않음"
+    },
+    {
+      "id": "7b9a4fda9fe739e5a69c9416f95ccff491a6e2334b4c2b235a32ea46c6a32777",
+      "name": "라우터 기능",
+      "aliases": [
+        "라우터 기능"
+      ],
+      "sources": [
+        {
+          "material_id": "b0b50be4b719e7a173222c5573ec85a40b1aaa9938e0de53a1eb6ef131f5832b",
+          "filename": "12일차.docx",
+          "pointer": "/concepts/2",
+          "description": "패킷 스위칭과 경로 선택을 핵심 기능으로 제시합니다.",
+          "approval_status": "pending"
+        }
+      ],
+      "different_descriptions": false,
+      "interpretation": "원문별 설명 보존; 서로 다르다고 오류·모순으로 자동 판정하지 않음"
+    },
+    {
+      "id": "98a0f0acedbcd73fccc92b2f549db005c010a95ac9d806abd080cd543241e931",
+      "name": "라우터 서브인터페이스와 802.1Q",
+      "aliases": [
+        "라우터 서브인터페이스와 802.1Q"
+      ],
+      "sources": [
+        {
+          "material_id": "f3bb8b2cc0e14e125f71322253dd586df819d2fd4dfb2c6bec375778f980b187",
+          "filename": "18일차.txt",
+          "pointer": "/concepts/3",
+          "description": "라우터 Fa0/0의 서브인터페이스 Fa0/0.10, .20, .30에 VLAN 번호를 지정하는 `encapsulation dot1q` 설정과 각각의 IPv4 주소가 제시됩니다. 앞선 예시에는 불완전하거나 다른 형태로 적힌 `encap dot` 명령도 있습니다.",
+          "approval_status": "pending"
+        }
+      ],
+      "different_descriptions": false,
+      "interpretation": "원문별 설명 보존; 서로 다르다고 오류·모순으로 자동 판정하지 않음"
+    },
+    {
+      "id": "a59989a006949a6a146693c72fe7f915fa3e06aff57a7fc756a822358ca470e7",
+      "name": "라우팅",
+      "aliases": [
+        "라우팅"
+      ],
+      "sources": [
+        {
+          "material_id": "b0b50be4b719e7a173222c5573ec85a40b1aaa9938e0de53a1eb6ef131f5832b",
+          "filename": "12일차.docx",
+          "pointer": "/concepts/0",
+          "description": "라우팅 테이블을 기준으로 패킷을 특정 인터페이스로 출력하는 과정으로 설명됩니다.",
+          "approval_status": "pending"
+        }
+      ],
+      "different_descriptions": false,
+      "interpretation": "원문별 설명 보존; 서로 다르다고 오류·모순으로 자동 판정하지 않음"
+    },
+    {
+      "id": "9ddf5e9f7bf93e1cfd635f943df7648a7efa0f662fcc3401b3c8684405e823e1",
+      "name": "라우팅 테이블",
+      "aliases": [
+        "라우팅 테이블"
+      ],
+      "sources": [
+        {
+          "material_id": "b0b50be4b719e7a173222c5573ec85a40b1aaa9938e0de53a1eb6ef131f5832b",
+          "filename": "12일차.docx",
+          "pointer": "/concepts/1",
+          "description": "경로 매핑과 경로 선택에 사용되는 테이블입니다.",
+          "approval_status": "pending"
+        }
+      ],
+      "different_descriptions": false,
+      "interpretation": "원문별 설명 보존; 서로 다르다고 오류·모순으로 자동 판정하지 않음"
+    },
+    {
+      "id": "cad1e73dfee9e6da9ccfc1f534c7a7ce3179a74c10ba7060eec563495a1a3bf0",
+      "name": "라우팅 테이블 정보 교환",
+      "aliases": [
+        "라우팅 테이블 정보 교환"
+      ],
+      "sources": [
+        {
+          "material_id": "acc194f4b63fceab8eb484dd97368a0f931a49fc93aaf18dab8a592e201b7526",
+          "filename": "15일차 Dynamic routing_IGP.txt",
+          "pointer": "/concepts/10",
+          "description": "자료에서 Distance vector의 주기적 정보 교환과 RIP의 30초 주기 정보 교환을 설명합니다.",
+          "approval_status": "pending"
+        }
+      ],
+      "different_descriptions": false,
+      "interpretation": "원문별 설명 보존; 서로 다르다고 오류·모순으로 자동 판정하지 않음"
+    },
+    {
+      "id": "5becd21b0ba031c506fae41037380df7a4e58f689569ca314132aa6c325c9cb5",
+      "name": "루프백 인터페이스",
+      "aliases": [
+        "루프백 인터페이스"
+      ],
+      "sources": [
+        {
+          "material_id": "144ab5db4c077baf5b72682f78b4286f857fd0485ec0bb878a846147afff42f2",
+          "filename": "20일차 경로재분배,루프백가상장비설정.txt",
+          "pointer": "/concepts/2",
+          "description": "자료에서 가상의 장비를 추가하는 용도로 언급하며, 핑 테스트의 소스 IP로 사용합니다.",
+          "approval_status": "pending"
+        }
+      ],
+      "different_descriptions": false,
+      "interpretation": "원문별 설명 보존; 서로 다르다고 오류·모순으로 자동 판정하지 않음"
+    },
+    {
+      "id": "c9c4bfafa58580dba499fef14c83801babbf441de05681226ce71fb6dc6dc972",
+      "name": "스패닝 트리",
+      "aliases": [
+        "스패닝 트리 설정"
+      ],
+      "sources": [
+        {
+          "material_id": "f3bb8b2cc0e14e125f71322253dd586df819d2fd4dfb2c6bec375778f980b187",
+          "filename": "18일차.txt",
+          "pointer": "/concepts/6",
+          "description": "SW1~3 공통 설정 메모에 `spanning-tree portfast default`와 `spanning-tree mode rapid-pvst` 명령이 있습니다.",
+          "approval_status": "pending"
+        }
+      ],
+      "different_descriptions": false,
+      "interpretation": "원문별 설명 보존; 서로 다르다고 오류·모순으로 자동 판정하지 않음"
+    },
+    {
+      "id": "a57ee0d5b8f37ff2a2ebf9c598ed0a7ffc1e6858c1f1bbacc668ec7fcfc84988",
+      "name": "액세스 포트",
+      "aliases": [
+        "액세스 포트"
+      ],
+      "sources": [
+        {
+          "material_id": "f3bb8b2cc0e14e125f71322253dd586df819d2fd4dfb2c6bec375778f980b187",
+          "filename": "18일차.txt",
+          "pointer": "/concepts/1",
+          "description": "`switchport mode access`와 `switchport access vlan` 축약 명령으로 포트를 액세스 모드로 지정하고 VLAN 10 또는 20에 할당하는 설정 예시가 있습니다.",
+          "approval_status": "pending"
+        }
+      ],
+      "different_descriptions": false,
+      "interpretation": "원문별 설명 보존; 서로 다르다고 오류·모순으로 자동 판정하지 않음"
+    },
+    {
+      "id": "810fa09f3040a885d2466b8f0898a34a69224c45dea9f5b45cfab7c3485762c2",
+      "name": "정적 경로",
+      "aliases": [
+        "정적 경로"
+      ],
+      "sources": [
+        {
+          "material_id": "144ab5db4c077baf5b72682f78b4286f857fd0485ec0bb878a846147afff42f2",
+          "filename": "20일차 경로재분배,루프백가상장비설정.txt",
+          "pointer": "/concepts/5",
+          "description": "자료에서는 기본 경로와 특정 네트워크 경로를 설정한 뒤 RIP로 재분배하는 대상으로 다룹니다.",
+          "approval_status": "pending"
+        }
+      ],
+      "different_descriptions": false,
+      "interpretation": "원문별 설명 보존; 서로 다르다고 오류·모순으로 자동 판정하지 않음"
+    },
+    {
+      "id": "ba8f847e6bd014c714cfc5ed5ffbdf32e4ef3757a8968df983a226d2ede5fadf",
+      "name": "정적 라우팅",
+      "aliases": [
+        "정적 라우팅"
+      ],
+      "sources": [
+        {
+          "material_id": "b0b50be4b719e7a173222c5573ec85a40b1aaa9938e0de53a1eb6ef131f5832b",
+          "filename": "12일차.docx",
+          "pointer": "/concepts/12",
+          "description": "관리자가 원격지 네트워크 정보와 다음 홉 IP 또는 출력 인터페이스를 지정하는 방식입니다.",
+          "approval_status": "pending"
+        }
+      ],
+      "different_descriptions": false,
+      "interpretation": "원문별 설명 보존; 서로 다르다고 오류·모순으로 자동 판정하지 않음"
+    },
+    {
+      "id": "a16551bcd5719207b36ed84613a9056d09ebdf6a405e82237ecd71777d6756c1",
+      "name": "트렁크 포트",
+      "aliases": [
+        "트렁크 포트"
+      ],
+      "sources": [
+        {
+          "material_id": "144ab5db4c077baf5b72682f78b4286f857fd0485ec0bb878a846147afff42f2",
+          "filename": "20일차 경로재분배,루프백가상장비설정.txt",
+          "pointer": "/concepts/6",
+          "description": "스위치 포트를 트렁크 모드로 설정하고 상태를 확인하도록 안내하는 예시다. 상태 확인 출력은 기록되어 있지 않다.",
+          "approval_status": "pending"
+        },
+        {
+          "material_id": "f3bb8b2cc0e14e125f71322253dd586df819d2fd4dfb2c6bec375778f980b187",
+          "filename": "18일차.txt",
+          "pointer": "/concepts/2",
+          "description": "인터페이스에 `switchport mode trunk` 축약 명령을 적용하는 설정 예시가 있습니다. 일부 포트에는 native VLAN을 10으로 지정합니다.",
+          "approval_status": "pending"
+        }
+      ],
+      "different_descriptions": true,
+      "interpretation": "원문별 설명 보존; 서로 다르다고 오류·모순으로 자동 판정하지 않음"
+    },
+    {
+      "id": "466f545606f10cd35ddf56b3a234ca38d88a4647332b87a42cf47ad4066e0a97",
+      "name": "패킷 스위칭",
+      "aliases": [
+        "패킷 스위칭"
+      ],
+      "sources": [
+        {
+          "material_id": "b0b50be4b719e7a173222c5573ec85a40b1aaa9938e0de53a1eb6ef131f5832b",
+          "filename": "12일차.docx",
+          "pointer": "/concepts/3",
+          "description": "자료에서는 패킷을 보낼지 말지를 결정하는 기능으로 설명합니다.",
+          "approval_status": "pending"
+        }
+      ],
+      "different_descriptions": false,
+      "interpretation": "원문별 설명 보존; 서로 다르다고 오류·모순으로 자동 판정하지 않음"
+    }
+  ],
+  "related": {
+    "144ab5db4c077baf5b72682f78b4286f857fd0485ec0bb878a846147afff42f2": [
+      {
+        "shared_concepts": [
+          "RIP"
+        ],
+        "same_source_hash": false,
+        "kind": "shared_concepts",
+        "semantic_duplicate_confirmed": false,
+        "material_id": "acc194f4b63fceab8eb484dd97368a0f931a49fc93aaf18dab8a592e201b7526",
+        "filename": "15일차 Dynamic routing_IGP.txt"
+      },
+      {
+        "shared_concepts": [
+          "RIP"
+        ],
+        "same_source_hash": false,
+        "kind": "shared_concepts",
+        "semantic_duplicate_confirmed": false,
+        "material_id": "b0b50be4b719e7a173222c5573ec85a40b1aaa9938e0de53a1eb6ef131f5832b",
+        "filename": "12일차.docx"
+      },
+      {
+        "shared_concepts": [
+          "트렁크 포트"
+        ],
+        "same_source_hash": false,
+        "kind": "shared_concepts",
+        "semantic_duplicate_confirmed": false,
+        "material_id": "f3bb8b2cc0e14e125f71322253dd586df819d2fd4dfb2c6bec375778f980b187",
+        "filename": "18일차.txt"
+      }
+    ],
+    "acc194f4b63fceab8eb484dd97368a0f931a49fc93aaf18dab8a592e201b7526": [
+      {
+        "shared_concepts": [
+          "RIP"
+        ],
+        "same_source_hash": false,
+        "kind": "shared_concepts",
+        "semantic_duplicate_confirmed": false,
+        "material_id": "144ab5db4c077baf5b72682f78b4286f857fd0485ec0bb878a846147afff42f2",
+        "filename": "20일차 경로재분배,루프백가상장비설정.txt"
+      },
+      {
+        "shared_concepts": [
+          "Distance vector",
+          "EGP",
+          "Hybrid",
+          "IGP",
+          "Link state",
+          "RIP",
+          "동적 라우팅"
+        ],
+        "same_source_hash": false,
+        "kind": "shared_concepts",
+        "semantic_duplicate_confirmed": false,
+        "material_id": "b0b50be4b719e7a173222c5573ec85a40b1aaa9938e0de53a1eb6ef131f5832b",
+        "filename": "12일차.docx"
+      }
+    ],
+    "b0b50be4b719e7a173222c5573ec85a40b1aaa9938e0de53a1eb6ef131f5832b": [
+      {
+        "shared_concepts": [
+          "RIP"
+        ],
+        "same_source_hash": false,
+        "kind": "shared_concepts",
+        "semantic_duplicate_confirmed": false,
+        "material_id": "144ab5db4c077baf5b72682f78b4286f857fd0485ec0bb878a846147afff42f2",
+        "filename": "20일차 경로재분배,루프백가상장비설정.txt"
+      },
+      {
+        "shared_concepts": [
+          "Distance vector",
+          "EGP",
+          "Hybrid",
+          "IGP",
+          "Link state",
+          "RIP",
+          "동적 라우팅"
+        ],
+        "same_source_hash": false,
+        "kind": "shared_concepts",
+        "semantic_duplicate_confirmed": false,
+        "material_id": "acc194f4b63fceab8eb484dd97368a0f931a49fc93aaf18dab8a592e201b7526",
+        "filename": "15일차 Dynamic routing_IGP.txt"
+      }
+    ],
+    "f3bb8b2cc0e14e125f71322253dd586df819d2fd4dfb2c6bec375778f980b187": [
+      {
+        "shared_concepts": [
+          "트렁크 포트"
+        ],
+        "same_source_hash": false,
+        "kind": "shared_concepts",
+        "semantic_duplicate_confirmed": false,
+        "material_id": "144ab5db4c077baf5b72682f78b4286f857fd0485ec0bb878a846147afff42f2",
+        "filename": "20일차 경로재분배,루프백가상장비설정.txt"
+      }
+    ]
+  }
+}

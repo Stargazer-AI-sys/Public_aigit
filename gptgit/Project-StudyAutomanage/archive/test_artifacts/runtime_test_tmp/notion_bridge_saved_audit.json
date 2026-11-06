@@ -1,0 +1,23 @@
+{
+  "mode": "offline-snapshot-audit",
+  "remote_freshness_checked": false,
+  "entities": 72,
+  "unique_sync_keys": 72,
+  "kinds": {
+    "category": 17,
+    "concept": 40,
+    "material": 4,
+    "practice": 11
+  },
+  "errors": [],
+  "pending_operations": 0,
+  "lock_files": [],
+  "operations": {
+    "success": 219
+  },
+  "front_pages": 10,
+  "front_database_blocks": 0,
+  "unknown_internal_link_targets": [],
+  "front_layout_compared": false,
+  "ok": true
+}

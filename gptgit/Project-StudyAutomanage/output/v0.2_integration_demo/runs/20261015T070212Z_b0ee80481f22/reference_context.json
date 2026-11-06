@@ -1,0 +1,15 @@
+[
+  {
+    "id": "cisco-cli-help",
+    "title": "Cisco IOS XE 17.x — Using the Cisco IOS Command-Line Interface",
+    "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/syst-mgmt/b-system-management/m_cf-cli-basics.html",
+    "verification_status": "source_checked",
+    "checked_on": "2026-10-15",
+    "comments": [
+      {
+        "kind": "correction",
+        "text": "기존 분석의 미완성 메모라는 해석과 달리, channel-group ?는 입력 가능한 인수·옵션을 조회하는 도움말 구문이다."
+      }
+    ]
+  }
+]

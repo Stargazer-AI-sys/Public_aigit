@@ -1,0 +1,15 @@
+# Offline test workspace. No credentials, Docker socket or host home mount.
+services:
+  verify:
+    image: python:3.14-slim
+    working_dir: /workspace
+    command: ["python", "-B", "-m", "unittest", "discover", "-s", "tools", "-p", "test_workflow.py", "-v"]
+    network_mode: none
+    read_only: true
+    user: "65534:65534"
+    cap_drop: ["ALL"]
+    security_opt: ["no-new-privileges:true"]
+    tmpfs:
+      - /tmp:rw,noexec,nosuid,size=64m
+    volumes:
+      - ./tools:/workspace/tools:ro

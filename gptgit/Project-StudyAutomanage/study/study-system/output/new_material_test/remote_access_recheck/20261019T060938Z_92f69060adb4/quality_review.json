@@ -1,0 +1,14 @@
+{
+  "mechanical_checks": "PASS",
+  "policy_version": "quality-v0.4",
+  "content_review_required": true,
+  "review_items": [
+    "혼합 자료의 주 목적과 분류 근거",
+    "명령·관찰 기록·성공 여부 미확인의 구분",
+    "주요 구간 및 불완전한 메모 누락",
+    "근거가 설명을 충분히 뒷받침하는지",
+    "명령 예시와 실제 실습 성공의 구분",
+    "원문 단정 및 기술적 사실성",
+    "동일 개념의 의미상 명칭 일관성"
+  ]
+}

@@ -1,0 +1,66 @@
+{
+  "status": "PASS",
+  "unit_tests": {
+    "passed": 80,
+    "total": 80
+  },
+  "actual_api_calls": 0,
+  "results": [
+    {
+      "day": "12",
+      "core_status": "SUCCESS",
+      "comments": 0,
+      "candidates": 0,
+      "cache_reuse": "PASS",
+      "original_source_hash_matches": true,
+      "content_scope": "mechanical validation; previous content-review limitations retained"
+    },
+    {
+      "day": "15",
+      "core_status": "SUCCESS",
+      "comments": 0,
+      "candidates": 0,
+      "cache_reuse": "PASS",
+      "original_source_hash_matches": true,
+      "content_scope": "mechanical validation; previous content-review limitations retained"
+    },
+    {
+      "day": "18",
+      "core_status": "SUCCESS",
+      "comments": 0,
+      "candidates": 0,
+      "cache_reuse": "PASS",
+      "original_source_hash_matches": true,
+      "content_scope": "mechanical validation; previous content-review limitations retained"
+    },
+    {
+      "day": "20",
+      "core_status": "SUCCESS",
+      "comments": 0,
+      "candidates": 0,
+      "cache_reuse": "PASS",
+      "original_source_hash_matches": true,
+      "content_scope": "mechanical validation; previous content-review limitations retained"
+    }
+  ],
+  "optional_failure_fallback": "PASS; invalid optional candidate omitted, 18-day core preserved",
+  "network_policy": "Applied in prompts; no rigid taxonomy or automated domain-classification claim",
+  "schema_changed": false,
+  "default_result_schema": "v0.1 (unchanged)",
+  "live_api_readiness": {
+    "api_key_in_current_environment": false,
+    "budget_ledger_exists": true,
+    "calls_used": 4,
+    "call_limit": 5,
+    "calls_remaining": 1,
+    "estimated_or_reserved_usd": 0.008091045,
+    "budget_usd": 1.0
+  },
+  "limitations": [
+    "New live generation and semantic compliance with prompt policy remain untested.",
+    "Previous 12-day stub/security/loss content hold remains unresolved.",
+    "Cache fingerprints changed with processing policy; previous keys are not silently adopted."
+  ],
+  "official_records_updated": false,
+  "guides_updated": false
+}

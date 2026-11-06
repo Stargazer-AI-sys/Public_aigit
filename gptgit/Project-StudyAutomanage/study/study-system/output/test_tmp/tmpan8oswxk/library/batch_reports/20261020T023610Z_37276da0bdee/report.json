@@ -1,0 +1,21 @@
+{
+  "items": [
+    {
+      "row": 1,
+      "filename": "화면 확인용 신규.txt",
+      "status": "success",
+      "material_id": "b1b7eab1cff4d3c2cf725a7fb8ceee6db020c10d40b3259edcf4e2dc226468f6",
+      "run": "C:\\Users\\ICT\\Desktop\\Aigit\\gptgit\\Project-StudyAutomanage\\study\\study-system\\output\\test_tmp\\tmpan8oswxk\\library\\runs\\20261020T023610Z_ffbc6879cd96",
+      "warnings": [
+        "AI 응답의 source를 무시하고 입력 기반 source로 교체했습니다."
+      ]
+    }
+  ],
+  "new_api_attempts": 0,
+  "new_successes": 1,
+  "reused": 0,
+  "failed": 0,
+  "blocked": 0,
+  "recovered_cache_locks": 0,
+  "status": "PASS"
+}

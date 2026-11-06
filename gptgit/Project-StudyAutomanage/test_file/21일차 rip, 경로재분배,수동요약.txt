@@ -1,0 +1,109 @@
+R1
+conf t
+int f0/0
+no sh 
+ip addr 172.16.1.254 255.255.255.0
+int s1/0
+no sh
+ip addr 192.168.12.1 255.255.255.252
+router rip
+ver 2
+no auto
+net 172.16.1.0
+net 192.168.12.0
+
+
+R2
+conf t
+int f0/0
+no sh 
+ip addr 172.16.2.254 255.255.255.0
+int s1/0
+no sh
+ip addr 192.168.12.2 255.255.255.252
+int s1/1
+no sh
+ip addr 192.168.23.1 255.255.255.252
+router rip
+ver 2
+no auto
+net 172.16.2.0
+net 192.168.12.0
+net 192.168.23.0
+
+
+R3
+conf t
+int f0/0
+no sh 
+ip addr 172.16.3.254 255.255.255.0
+int s1/1
+no sh
+ip addr 192.168.23.2 255.255.255.252
+int s1/2
+no sh
+ip addr 192.168.34.1 255.255.255.252
+router rip
+ver 2
+no auto
+net 192.168.23.0
+net 172.16.0.0
+redistribute static metric 10
+exit
+ip route 172.16.4.0 255.255.255.0 s1/2
+
+R4
+conf t
+int f0/0
+no sh 
+ip addr 172.16.4.254 255.255.255.0
+int s1/2
+no sh
+ip addr 192.168.34.2 255.255.255.252
+exit
+ip route 0.0.0.0 0.0.0.0 s1/2
+
+-------------------------------------------------------------
+
+sh ip protocol -> RIP 의 라우팅 테이블 업데이트 주기 등 각 항목별 타이머를 알 수 있다.
+debug ip rip RIP 프로토콜에 대한 디버깅 모드 사용을 온 함으로써 RIP 로그가 나온다.
+un all 디버그 모드를 끈다.
+
+타이머 설정
+router rip
+ex. timer basic 90 270 270 640
+
+router rip
+version 2
+network 10.0.0.0
+network 192.168.12.0
+no auto-summary
+
+------------------------------------------------------------------
+L0 192.168.1.0/26
+L1 192.168.1.64/26
+L2 192.168.1.192/27
+L3 192.168.1.224/27 
+
+192.168.1.0/26
+192.168.1.64/26
+192.168.1.0/25
+
+192.168.1.193/27
+192.168.1.225/27
+192.168.1.192/26
+
+193  1100 0001
+225  1110 0001
+       11
+
+int s1/0
+ip summary-address rip 192.168.1.0 255.255.255.128
+ip summary-address rip 192.168.1.192 255.255.255.192
+
+수동요약을 하는경우 주어진 L0~L3 의 아이피를 슈퍼네팅하여 위와 같이 지정해서 할 수 있다.
+
+clear ip route * 라우팅 테이블 초기화 명령어
+default-information originate R* 0.0.0.0/0 이라는 이웃 라우터에서 학습했을때는 인접한 라우터에서 해당 명령어를 주어서 생김
+
+passive-interface default 

@@ -1,0 +1,675 @@
+{
+  "format_version": 1,
+  "mode": "offline-plan",
+  "notion_sent": false,
+  "mapping": {
+    "version": 1,
+    "binding_status": "bound",
+    "conflict_policy": "stop-and-review",
+    "source_revision_policy": "update-existing-page",
+    "collections": {
+      "category": {
+        "title": "분야",
+        "properties": {
+          "name": "title",
+          "path": "rich_text",
+          "sync_key": "rich_text"
+        },
+        "relations": {
+          "parent": "category"
+        }
+      },
+      "concept": {
+        "title": "개념",
+        "properties": {
+          "name": "title",
+          "sync_key": "rich_text"
+        },
+        "relations": {
+          "materials": "material",
+          "categories": "category"
+        }
+      },
+      "material": {
+        "title": "학습자료",
+        "properties": {
+          "name": "title",
+          "source_hash": "rich_text",
+          "approval_snapshot": "rich_text",
+          "source_locations": "rich_text",
+          "sync_key": "rich_text"
+        },
+        "relations": {
+          "categories": "category",
+          "concepts": "concept",
+          "related": "material",
+          "practice": "practice"
+        }
+      },
+      "practice": {
+        "title": "실습 / 프로젝트",
+        "properties": {
+          "name": "title",
+          "source_pointer": "rich_text",
+          "sync_key": "rich_text"
+        },
+        "relations": {
+          "material": "material",
+          "concepts": "concept"
+        }
+      }
+    },
+    "required_binding_inputs": [
+      "target_page_or_data_sources",
+      "property_and_relation_ids",
+      "connection_permissions",
+      "source_revision_policy_confirmation"
+    ],
+    "target": {
+      "format_version": 1,
+      "parent_page": {
+        "id": "3fb062cd-7cd1-80c6-ab73-d56d5fadc0a5",
+        "name": "Network 학습 자료",
+        "url": "https://www.notion.so/3fb062cd7cd180c6ab73d56d5fadc0a5"
+      },
+      "verified_on": "2026-10-16",
+      "binding_status": "bound",
+      "source_revision_policy": "update-existing-page",
+      "live_write_enabled": false,
+      "collections": {
+        "material": {
+          "id": "3fb062cd-7cd1-809d-8614-c99f88fed2b5",
+          "name": "Network_Study_DB",
+          "url": "https://app.notion.com/p/3fb062cd7cd1809d8614c99f88fed2b5?pvs=204",
+          "data_source_id": "3fb062cd-7cd1-8065-a893-000bf1eefb6b",
+          "view_url": "view://3fb062cd-7cd1-80ae-ba8d-000c036d55fe",
+          "observed_properties": {
+            "개념": "relation",
+            "게시 내용 해시": "rich_text",
+            "관련 자료": "relation",
+            "동기화 키": "rich_text",
+            "분야": "relation",
+            "승인 버전": "rich_text",
+            "실습": "relation",
+            "원본 SHA256": "rich_text",
+            "원본 위치": "rich_text",
+            "이름": "title",
+            "전송 작업": "rich_text"
+          },
+          "observed_relations": {
+            "개념": "6705c5ab-b746-4d01-9666-1c05126f2655",
+            "관련 자료": "3fb062cd-7cd1-8065-a893-000bf1eefb6b",
+            "분야": "5deb4fcd-a1a5-4d20-943e-063950b1e801",
+            "실습": "3ae95fe6-100b-4f56-bf6c-ab2a58a858a3"
+          },
+          "property_mapping": {
+            "name": "이름",
+            "sync_key": "동기화 키",
+            "source_hash": "원본 SHA256",
+            "approval_snapshot": "승인 버전",
+            "source_locations": "원본 위치"
+          },
+          "relation_mapping": {
+            "categories": "분야",
+            "concepts": "개념",
+            "related": "관련 자료",
+            "practice": "실습"
+          },
+          "system_properties": {
+            "digest": "게시 내용 해시",
+            "operation": "전송 작업"
+          }
+        },
+        "category": {
+          "id": "d16746dd-167f-4468-ba82-1803cdb0d968",
+          "name": "Network_Category_DB",
+          "url": "https://app.notion.com/p/d16746dd167f4468ba821803cdb0d968?pvs=204",
+          "data_source_id": "5deb4fcd-a1a5-4d20-943e-063950b1e801",
+          "view_url": "view://c0ea76f4-4fe5-4075-ad23-77a2320d579d",
+          "observed_properties": {
+            "게시 내용 해시": "rich_text",
+            "동기화 키": "rich_text",
+            "상위 분야": "relation",
+            "이름": "title",
+            "전송 작업": "rich_text",
+            "학습 경로": "rich_text"
+          },
+          "observed_relations": {
+            "상위 분야": "5deb4fcd-a1a5-4d20-943e-063950b1e801"
+          },
+          "property_mapping": {
+            "name": "이름",
+            "sync_key": "동기화 키",
+            "path": "학습 경로"
+          },
+          "relation_mapping": {
+            "parent": "상위 분야"
+          },
+          "system_properties": {
+            "digest": "게시 내용 해시",
+            "operation": "전송 작업"
+          }
+        },
+        "concept": {
+          "id": "69c6e5ec-fde0-4f2c-a1cb-a81e8ff06b6d",
+          "name": "Network_Concept_DB",
+          "url": "https://app.notion.com/p/69c6e5ecfde04f2ca1cba81e8ff06b6d?pvs=204",
+          "data_source_id": "6705c5ab-b746-4d01-9666-1c05126f2655",
+          "view_url": "view://e70cb47a-4883-4822-9b2c-0aac95db1f98",
+          "observed_properties": {
+            "게시 내용 해시": "rich_text",
+            "동기화 키": "rich_text",
+            "분야": "relation",
+            "이름": "title",
+            "전송 작업": "rich_text",
+            "학습자료": "relation"
+          },
+          "observed_relations": {
+            "분야": "5deb4fcd-a1a5-4d20-943e-063950b1e801",
+            "학습자료": "3fb062cd-7cd1-8065-a893-000bf1eefb6b"
+          },
+          "property_mapping": {
+            "name": "이름",
+            "sync_key": "동기화 키"
+          },
+          "relation_mapping": {
+            "materials": "학습자료",
+            "categories": "분야"
+          },
+          "system_properties": {
+            "digest": "게시 내용 해시",
+            "operation": "전송 작업"
+          }
+        },
+        "practice": {
+          "id": "46fa365b-bca5-4b3f-9dbc-e4c89c2ca90f",
+          "name": "Network_Practice_DB",
+          "url": "https://app.notion.com/p/46fa365bbca54b3f9dbce4c89c2ca90f?pvs=204",
+          "data_source_id": "3ae95fe6-100b-4f56-bf6c-ab2a58a858a3",
+          "view_url": "view://603c1a84-492e-462a-a903-96a18e8a5f62",
+          "observed_properties": {
+            "개념": "relation",
+            "게시 내용 해시": "rich_text",
+            "동기화 키": "rich_text",
+            "원문 항목": "rich_text",
+            "이름": "title",
+            "전송 작업": "rich_text",
+            "학습자료": "relation"
+          },
+          "observed_relations": {
+            "개념": "6705c5ab-b746-4d01-9666-1c05126f2655",
+            "학습자료": "3fb062cd-7cd1-8065-a893-000bf1eefb6b"
+          },
+          "property_mapping": {
+            "name": "이름",
+            "sync_key": "동기화 키",
+            "source_pointer": "원문 항목"
+          },
+          "relation_mapping": {
+            "material": "학습자료",
+            "concepts": "개념"
+          },
+          "system_properties": {
+            "digest": "게시 내용 해시",
+            "operation": "전송 작업"
+          }
+        }
+      },
+      "material_database": {
+        "id": "3fb062cd-7cd1-809d-8614-c99f88fed2b5",
+        "name": "Network_Study_DB",
+        "url": "https://app.notion.com/p/3fb062cd7cd1809d8614c99f88fed2b5?pvs=204",
+        "data_source_id": "3fb062cd-7cd1-8065-a893-000bf1eefb6b",
+        "view_url": "view://3fb062cd-7cd1-80ae-ba8d-000c036d55fe",
+        "observed_properties": {
+          "개념": "relation",
+          "게시 내용 해시": "rich_text",
+          "관련 자료": "relation",
+          "동기화 키": "rich_text",
+          "분야": "relation",
+          "승인 버전": "rich_text",
+          "실습": "relation",
+          "원본 SHA256": "rich_text",
+          "원본 위치": "rich_text",
+          "이름": "title",
+          "전송 작업": "rich_text"
+        },
+        "observed_relations": {
+          "개념": "6705c5ab-b746-4d01-9666-1c05126f2655",
+          "관련 자료": "3fb062cd-7cd1-8065-a893-000bf1eefb6b",
+          "분야": "5deb4fcd-a1a5-4d20-943e-063950b1e801",
+          "실습": "3ae95fe6-100b-4f56-bf6c-ab2a58a858a3"
+        },
+        "property_mapping": {
+          "name": "이름",
+          "sync_key": "동기화 키",
+          "source_hash": "원본 SHA256",
+          "approval_snapshot": "승인 버전",
+          "source_locations": "원본 위치"
+        },
+        "relation_mapping": {
+          "categories": "분야",
+          "concepts": "개념",
+          "related": "관련 자료",
+          "practice": "실습"
+        },
+        "system_properties": {
+          "digest": "게시 내용 해시",
+          "operation": "전송 작업"
+        }
+      }
+    },
+    "missing_material_properties": [],
+    "unbound_collections": [],
+    "material_relations_ready": true
+  },
+  "approvals": {
+    "f3bb8b2cc0e14e125f71322253dd586df819d2fd4dfb2c6bec375778f980b187": "e916cd6ce1f9ee2891e7ec1d49b04d30ebfc64db8e54f1a5fe7d78c3a5ebf763"
+  },
+  "entities": [
+    {
+      "key": "category:56060c1c6b6e24d1e16cd68e6fca1e0a1a4fd8ffd662ec22dc4ad331db568d1a",
+      "kind": "category",
+      "properties": {
+        "name": "2. 네트워크 접속",
+        "path": "NETWORK / 2. 네트워크 접속",
+        "sync_key": "category:56060c1c6b6e24d1e16cd68e6fca1e0a1a4fd8ffd662ec22dc4ad331db568d1a"
+      },
+      "body": "",
+      "relations": {
+        "parent": []
+      }
+    },
+    {
+      "key": "category:70c9ff4e2bd298310e77c4f47eaed599b2324fc4a5ab503126bc1a3a3ddeac5e",
+      "kind": "category",
+      "properties": {
+        "name": "트렁크·802.1Q·네이티브 VLAN",
+        "path": "NETWORK / 2. 네트워크 접속 / 트렁크·802.1Q·네이티브 VLAN",
+        "sync_key": "category:70c9ff4e2bd298310e77c4f47eaed599b2324fc4a5ab503126bc1a3a3ddeac5e"
+      },
+      "body": "",
+      "relations": {
+        "parent": [
+          "category:56060c1c6b6e24d1e16cd68e6fca1e0a1a4fd8ffd662ec22dc4ad331db568d1a"
+        ]
+      }
+    },
+    {
+      "key": "category:8b07f229bdbfbe07efeaea021de7f3aa6002c41bbf551465c1d0cede9f601f49",
+      "kind": "category",
+      "properties": {
+        "name": "스패닝 트리와 루프 방지",
+        "path": "NETWORK / 2. 네트워크 접속 / 스패닝 트리와 루프 방지",
+        "sync_key": "category:8b07f229bdbfbe07efeaea021de7f3aa6002c41bbf551465c1d0cede9f601f49"
+      },
+      "body": "",
+      "relations": {
+        "parent": [
+          "category:56060c1c6b6e24d1e16cd68e6fca1e0a1a4fd8ffd662ec22dc4ad331db568d1a"
+        ]
+      }
+    },
+    {
+      "key": "category:b0df47a74e35948b183b5d02a99772a38fccf6caf9fd42ab3924fe940125b4d8",
+      "kind": "category",
+      "properties": {
+        "name": "EtherChannel과 LACP",
+        "path": "NETWORK / 2. 네트워크 접속 / EtherChannel과 LACP",
+        "sync_key": "category:b0df47a74e35948b183b5d02a99772a38fccf6caf9fd42ab3924fe940125b4d8"
+      },
+      "body": "",
+      "relations": {
+        "parent": [
+          "category:56060c1c6b6e24d1e16cd68e6fca1e0a1a4fd8ffd662ec22dc4ad331db568d1a"
+        ]
+      }
+    },
+    {
+      "key": "category:ba9037c8e8322abf74eb5509e86a11acda07e2206650fc42c8fbde2660c02542",
+      "kind": "category",
+      "properties": {
+        "name": "VTP와 PAgP",
+        "path": "NETWORK / 2. 네트워크 접속 / VTP와 PAgP",
+        "sync_key": "category:ba9037c8e8322abf74eb5509e86a11acda07e2206650fc42c8fbde2660c02542"
+      },
+      "body": "",
+      "relations": {
+        "parent": [
+          "category:56060c1c6b6e24d1e16cd68e6fca1e0a1a4fd8ffd662ec22dc4ad331db568d1a"
+        ]
+      }
+    },
+    {
+      "key": "category:be5af9f909fec8360c7949588fa38acc24a9b7e384283eb5c4e7f8d9e86390b6",
+      "kind": "category",
+      "properties": {
+        "name": "VLAN과 VLAN 간 연결",
+        "path": "NETWORK / 2. 네트워크 접속 / VLAN과 VLAN 간 연결",
+        "sync_key": "category:be5af9f909fec8360c7949588fa38acc24a9b7e384283eb5c4e7f8d9e86390b6"
+      },
+      "body": "",
+      "relations": {
+        "parent": [
+          "category:56060c1c6b6e24d1e16cd68e6fca1e0a1a4fd8ffd662ec22dc4ad331db568d1a"
+        ]
+      }
+    },
+    {
+      "key": "concept:4dd5b8546ee6f1137e012f6a1ed2fd3a9e65382636d1298ea2e0c1e1fad91a23",
+      "kind": "concept",
+      "properties": {
+        "name": "EtherChannel",
+        "sync_key": "concept:4dd5b8546ee6f1137e012f6a1ed2fd3a9e65382636d1298ea2e0c1e1fad91a23"
+      },
+      "body": "18일차.txt\n인터페이스 범위에 `channel-group`을 적용하는 예시가 있습니다. mode 값으로 auto, desirable의 축약형, active, passive, on이 기록되어 있고, 별도 메모에 LACP의 active/passive와 PAgP가 언급됩니다.",
+      "relations": {
+        "materials": [
+          "material:237276f429fc40b9f0574406f178e477a1112c7b36a256089a29c8fec9e05709"
+        ],
+        "categories": [
+          "category:56060c1c6b6e24d1e16cd68e6fca1e0a1a4fd8ffd662ec22dc4ad331db568d1a",
+          "category:70c9ff4e2bd298310e77c4f47eaed599b2324fc4a5ab503126bc1a3a3ddeac5e",
+          "category:8b07f229bdbfbe07efeaea021de7f3aa6002c41bbf551465c1d0cede9f601f49",
+          "category:b0df47a74e35948b183b5d02a99772a38fccf6caf9fd42ab3924fe940125b4d8",
+          "category:ba9037c8e8322abf74eb5509e86a11acda07e2206650fc42c8fbde2660c02542",
+          "category:be5af9f909fec8360c7949588fa38acc24a9b7e384283eb5c4e7f8d9e86390b6"
+        ]
+      }
+    },
+    {
+      "key": "concept:98a0f0acedbcd73fccc92b2f549db005c010a95ac9d806abd080cd543241e931",
+      "kind": "concept",
+      "properties": {
+        "name": "라우터 서브인터페이스와 802.1Q",
+        "sync_key": "concept:98a0f0acedbcd73fccc92b2f549db005c010a95ac9d806abd080cd543241e931"
+      },
+      "body": "18일차.txt\n라우터 Fa0/0의 서브인터페이스 Fa0/0.10, .20, .30에 VLAN 번호를 지정하는 `encapsulation dot1q` 설정과 각각의 IPv4 주소가 제시됩니다. 앞선 예시에는 불완전하거나 다른 형태로 적힌 `encap dot` 명령도 있습니다.",
+      "relations": {
+        "materials": [
+          "material:237276f429fc40b9f0574406f178e477a1112c7b36a256089a29c8fec9e05709"
+        ],
+        "categories": [
+          "category:56060c1c6b6e24d1e16cd68e6fca1e0a1a4fd8ffd662ec22dc4ad331db568d1a",
+          "category:70c9ff4e2bd298310e77c4f47eaed599b2324fc4a5ab503126bc1a3a3ddeac5e",
+          "category:8b07f229bdbfbe07efeaea021de7f3aa6002c41bbf551465c1d0cede9f601f49",
+          "category:b0df47a74e35948b183b5d02a99772a38fccf6caf9fd42ab3924fe940125b4d8",
+          "category:ba9037c8e8322abf74eb5509e86a11acda07e2206650fc42c8fbde2660c02542",
+          "category:be5af9f909fec8360c7949588fa38acc24a9b7e384283eb5c4e7f8d9e86390b6"
+        ]
+      }
+    },
+    {
+      "key": "concept:a16551bcd5719207b36ed84613a9056d09ebdf6a405e82237ecd71777d6756c1",
+      "kind": "concept",
+      "properties": {
+        "name": "트렁크 포트",
+        "sync_key": "concept:a16551bcd5719207b36ed84613a9056d09ebdf6a405e82237ecd71777d6756c1"
+      },
+      "body": "18일차.txt\n인터페이스에 `switchport mode trunk` 축약 명령을 적용하는 설정 예시가 있습니다. 일부 포트에는 native VLAN을 10으로 지정합니다.",
+      "relations": {
+        "materials": [
+          "material:237276f429fc40b9f0574406f178e477a1112c7b36a256089a29c8fec9e05709"
+        ],
+        "categories": [
+          "category:56060c1c6b6e24d1e16cd68e6fca1e0a1a4fd8ffd662ec22dc4ad331db568d1a",
+          "category:70c9ff4e2bd298310e77c4f47eaed599b2324fc4a5ab503126bc1a3a3ddeac5e",
+          "category:8b07f229bdbfbe07efeaea021de7f3aa6002c41bbf551465c1d0cede9f601f49",
+          "category:b0df47a74e35948b183b5d02a99772a38fccf6caf9fd42ab3924fe940125b4d8",
+          "category:ba9037c8e8322abf74eb5509e86a11acda07e2206650fc42c8fbde2660c02542",
+          "category:be5af9f909fec8360c7949588fa38acc24a9b7e384283eb5c4e7f8d9e86390b6"
+        ]
+      }
+    },
+    {
+      "key": "concept:a57ee0d5b8f37ff2a2ebf9c598ed0a7ffc1e6858c1f1bbacc668ec7fcfc84988",
+      "kind": "concept",
+      "properties": {
+        "name": "액세스 포트",
+        "sync_key": "concept:a57ee0d5b8f37ff2a2ebf9c598ed0a7ffc1e6858c1f1bbacc668ec7fcfc84988"
+      },
+      "body": "18일차.txt\n`switchport mode access`와 `switchport access vlan` 축약 명령으로 포트를 액세스 모드로 지정하고 VLAN 10 또는 20에 할당하는 설정 예시가 있습니다.",
+      "relations": {
+        "materials": [
+          "material:237276f429fc40b9f0574406f178e477a1112c7b36a256089a29c8fec9e05709"
+        ],
+        "categories": [
+          "category:56060c1c6b6e24d1e16cd68e6fca1e0a1a4fd8ffd662ec22dc4ad331db568d1a",
+          "category:70c9ff4e2bd298310e77c4f47eaed599b2324fc4a5ab503126bc1a3a3ddeac5e",
+          "category:8b07f229bdbfbe07efeaea021de7f3aa6002c41bbf551465c1d0cede9f601f49",
+          "category:b0df47a74e35948b183b5d02a99772a38fccf6caf9fd42ab3924fe940125b4d8",
+          "category:ba9037c8e8322abf74eb5509e86a11acda07e2206650fc42c8fbde2660c02542",
+          "category:be5af9f909fec8360c7949588fa38acc24a9b7e384283eb5c4e7f8d9e86390b6"
+        ]
+      }
+    },
+    {
+      "key": "concept:c79f24b68e87b2627917fdab34c647530ca3d27011d42d1af0a0fcdaf95ba6d6",
+      "kind": "concept",
+      "properties": {
+        "name": "VTP",
+        "sync_key": "concept:c79f24b68e87b2627917fdab34c647530ca3d27011d42d1af0a0fcdaf95ba6d6"
+      },
+      "body": "18일차.txt\nVTP domain과 password를 지정하는 명령이 제시되며, 메모는 VTP를 VLAN DB 동기화로 설명합니다. ‘최대’ 뒤의 내용은 미완성입니다.",
+      "relations": {
+        "materials": [
+          "material:237276f429fc40b9f0574406f178e477a1112c7b36a256089a29c8fec9e05709"
+        ],
+        "categories": [
+          "category:56060c1c6b6e24d1e16cd68e6fca1e0a1a4fd8ffd662ec22dc4ad331db568d1a",
+          "category:70c9ff4e2bd298310e77c4f47eaed599b2324fc4a5ab503126bc1a3a3ddeac5e",
+          "category:8b07f229bdbfbe07efeaea021de7f3aa6002c41bbf551465c1d0cede9f601f49",
+          "category:b0df47a74e35948b183b5d02a99772a38fccf6caf9fd42ab3924fe940125b4d8",
+          "category:ba9037c8e8322abf74eb5509e86a11acda07e2206650fc42c8fbde2660c02542",
+          "category:be5af9f909fec8360c7949588fa38acc24a9b7e384283eb5c4e7f8d9e86390b6"
+        ]
+      }
+    },
+    {
+      "key": "concept:c9c4bfafa58580dba499fef14c83801babbf441de05681226ce71fb6dc6dc972",
+      "kind": "concept",
+      "properties": {
+        "name": "스패닝 트리",
+        "sync_key": "concept:c9c4bfafa58580dba499fef14c83801babbf441de05681226ce71fb6dc6dc972"
+      },
+      "body": "18일차.txt\nSW1~3 공통 설정 메모에 `spanning-tree portfast default`와 `spanning-tree mode rapid-pvst` 명령이 있습니다.",
+      "relations": {
+        "materials": [
+          "material:237276f429fc40b9f0574406f178e477a1112c7b36a256089a29c8fec9e05709"
+        ],
+        "categories": [
+          "category:56060c1c6b6e24d1e16cd68e6fca1e0a1a4fd8ffd662ec22dc4ad331db568d1a",
+          "category:70c9ff4e2bd298310e77c4f47eaed599b2324fc4a5ab503126bc1a3a3ddeac5e",
+          "category:8b07f229bdbfbe07efeaea021de7f3aa6002c41bbf551465c1d0cede9f601f49",
+          "category:b0df47a74e35948b183b5d02a99772a38fccf6caf9fd42ab3924fe940125b4d8",
+          "category:ba9037c8e8322abf74eb5509e86a11acda07e2206650fc42c8fbde2660c02542",
+          "category:be5af9f909fec8360c7949588fa38acc24a9b7e384283eb5c4e7f8d9e86390b6"
+        ]
+      }
+    },
+    {
+      "key": "concept:d9f9cd0c4c7ccd8106a3c1bfa7d1ba56f261ed6875789e0f3c8646f25c31a0bf",
+      "kind": "concept",
+      "properties": {
+        "name": "네이티브 VLAN",
+        "sync_key": "concept:d9f9cd0c4c7ccd8106a3c1bfa7d1ba56f261ed6875789e0f3c8646f25c31a0bf"
+      },
+      "body": "18일차.txt\n스위치 트렁크 인터페이스에 native VLAN 10을 지정하는 예시와 라우터 서브인터페이스에서 `encapsulation dot1q 10 native`를 사용하는 예시가 있습니다.",
+      "relations": {
+        "materials": [
+          "material:237276f429fc40b9f0574406f178e477a1112c7b36a256089a29c8fec9e05709"
+        ],
+        "categories": [
+          "category:56060c1c6b6e24d1e16cd68e6fca1e0a1a4fd8ffd662ec22dc4ad331db568d1a",
+          "category:70c9ff4e2bd298310e77c4f47eaed599b2324fc4a5ab503126bc1a3a3ddeac5e",
+          "category:8b07f229bdbfbe07efeaea021de7f3aa6002c41bbf551465c1d0cede9f601f49",
+          "category:b0df47a74e35948b183b5d02a99772a38fccf6caf9fd42ab3924fe940125b4d8",
+          "category:ba9037c8e8322abf74eb5509e86a11acda07e2206650fc42c8fbde2660c02542",
+          "category:be5af9f909fec8360c7949588fa38acc24a9b7e384283eb5c4e7f8d9e86390b6"
+        ]
+      }
+    },
+    {
+      "key": "concept:f34f1410cc6e4b5f105010c224c6f6e0d58eabd6b6531217c00ba85f5ed7be41",
+      "kind": "concept",
+      "properties": {
+        "name": "VLAN",
+        "sync_key": "concept:f34f1410cc6e4b5f105010c224c6f6e0d58eabd6b6531217c00ba85f5ed7be41"
+      },
+      "body": "18일차.txt\n메모에서는 VLAN 10, 20, 30을 생성하고 스위치 액세스 포트를 VLAN 10 또는 20에 할당하는 명령을 제시합니다.",
+      "relations": {
+        "materials": [
+          "material:237276f429fc40b9f0574406f178e477a1112c7b36a256089a29c8fec9e05709"
+        ],
+        "categories": [
+          "category:56060c1c6b6e24d1e16cd68e6fca1e0a1a4fd8ffd662ec22dc4ad331db568d1a",
+          "category:70c9ff4e2bd298310e77c4f47eaed599b2324fc4a5ab503126bc1a3a3ddeac5e",
+          "category:8b07f229bdbfbe07efeaea021de7f3aa6002c41bbf551465c1d0cede9f601f49",
+          "category:b0df47a74e35948b183b5d02a99772a38fccf6caf9fd42ab3924fe940125b4d8",
+          "category:ba9037c8e8322abf74eb5509e86a11acda07e2206650fc42c8fbde2660c02542",
+          "category:be5af9f909fec8360c7949588fa38acc24a9b7e384283eb5c4e7f8d9e86390b6"
+        ]
+      }
+    },
+    {
+      "key": "material:237276f429fc40b9f0574406f178e477a1112c7b36a256089a29c8fec9e05709",
+      "kind": "material",
+      "properties": {
+        "name": "18일차.txt",
+        "source_hash": "475bb0dedd096ba1ba136d8a480894d332729b2fddfaca504a4eb7edae2fd18a",
+        "approval_snapshot": "e916cd6ce1f9ee2891e7ec1d49b04d30ebfc64db8e54f1a5fe7d78c3a5ebf763",
+        "source_locations": "C:\\Users\\ICT\\Desktop\\Aigit\\gptgit\\Project-StudyAutomanage\\study\\sourcefile\\18일차.txt",
+        "sync_key": "material:237276f429fc40b9f0574406f178e477a1112c7b36a256089a29c8fec9e05709"
+      },
+      "body": "# 18일차\\.txt\n\nSchema 0.2 · 원문 기반 분석 · 내용 검토 필요\n\nVLAN과 스위치 포트, 라우터 서브인터페이스, native VLAN, VTP, 스패닝 트리 및 EtherChannel 설정 명령을 모은 실습 메모입니다\\.\n\n형식·연결 검사와 기술적 사실성·실습 성공 검증은 별개입니다.\n\n## VLAN 및 스위치 포트 설정\n\n### VLAN\n\n메모에서는 VLAN 10, 20, 30을 생성하고 스위치 액세스 포트를 VLAN 10 또는 20에 할당하는 명령을 제시합니다\\.\n\n### 액세스 포트\n\n\\`switchport mode access\\`와 \\`switchport access vlan\\` 축약 명령으로 포트를 액세스 모드로 지정하고 VLAN 10 또는 20에 할당하는 설정 예시가 있습니다\\.\n\n### 트렁크 포트\n\n인터페이스에 \\`switchport mode trunk\\` 축약 명령을 적용하는 설정 예시가 있습니다\\. 일부 포트에는 native VLAN을 10으로 지정합니다\\.\n\n### 액세스 포트 → VLAN\n\nVLAN에 할당하는 설정이 제시됨\n\n인터페이스에 액세스 모드를 지정한 뒤 VLAN 10 또는 20을 할당하는 명령이 이어집니다\\.\n\n### VLAN 및 스위치 포트 설정 예시\n\nVLAN 10, 20, 30을 생성하고 Fa0/24·Fa0/23 또는 Fa0/24를 트렁크 모드로 지정하는 명령이 있습니다\\. Fa0/1과 Fa0/2에는 액세스 모드 및 VLAN 10과 20을 지정합니다\\. 여러 장비 설정으로 보이는 명령이 포함되지만 수행 결과는 확인되지 않습니다\\.\n\n원문 인용 · 표시본의 인증값은 숨김\n\n```text\nconf t\nvlan 10\nexit\nvlan 20\nexit\nvlan 30\nexit\n\n\nint fa0/24\nsw mo tr\nint fa0/23\nsw mo tr\nint fa0/1\nsw mo acc\nsw acc vlan 10\nint fa0/2\nsw mo acc\nsw acc vlan 20\n\n\n\nconf t\nint fa0/24\nsw mo tr\nint fa0/1\nsw mo acc\nsw acc vlan 10\nint fa0/2\nsw mo acc\nsw acc vlan 20\n```\n\n## 라우터 서브인터페이스와 Native VLAN\n\n### 라우터 서브인터페이스와 802\\.1Q\n\n라우터 Fa0/0의 서브인터페이스 Fa0/0\\.10, \\.20, \\.30에 VLAN 번호를 지정하는 \\`encapsulation dot1q\\` 설정과 각각의 IPv4 주소가 제시됩니다\\. 앞선 예시에는 불완전하거나 다른 형태로 적힌 \\`encap dot\\` 명령도 있습니다\\.\n\n### Native VLAN\n\n스위치 트렁크 인터페이스에 native VLAN 10을 지정하는 예시와 라우터 서브인터페이스에서 \\`encapsulation dot1q 10 native\\`를 사용하는 예시가 있습니다\\.\n\n### VLAN별 라우터 서브인터페이스 설정 예시\n\nFa0/0을 활성화하고 Fa0/0\\.10, \\.20, \\.30 서브인터페이스에 각각 \\`encapsulation dot1q\\` VLAN 번호 10, 20, 30과 192\\.168\\.10\\.254/24, 192\\.168\\.20\\.254/24, 192\\.168\\.30\\.254/24 주소를 지정하는 명령이 있습니다\\. 이는 설정 예시이며 실행 결과는 기록되어 있지 않습니다\\.\n\n원문 인용 · 표시본의 인증값은 숨김\n\n```text\nen\nconf t\nint fa0/0\nno sh\nint fa0/0.10\nencap dot1q 10\nip addr 192.168.10.254 255.255.255.0\nint fa0/0.20\nencap dot1q 20\nip addr 192.168.20.254 255.255.255.0\nint fa0/0.30\nencap dot1q 30\nip addr 192.168.30.254 255.255.255.0\n```\n\n### Native VLAN 설정 예시\n\n스위치 Fa0/24와 Fa0/23, 또는 Fa0/24에 native VLAN 10을 지정하는 명령과 라우터 Fa0/0\\.10에 \\`encapsulation dot1q 10 native\\`를 지정하는 예시가 있습니다\\. 설정 수행 및 동작 결과는 기록되어 있지 않습니다\\.\n\n원문 인용 · 표시본의 인증값은 숨김\n\n```text\n-------------------------------------------\nint fa0/24\nswitchport trunk native vlan 10\nint fa0/23\nswitchport trunk native vlan 10\n\nint fa0/24\nswitchport trunk native vlan 10\n\n-------------------------------------\n\nconf t\nvtp domain cisco\nvtp password [인증값 숨김]\n\nvtp는 vlan DB 동기화\ndomain, password 를 지정하고 그 정보로 동기화\n최대 \n\nsw1\nint range fa0/23 - 24\nsw tr nati vlan 10\n\nsw\nint fa0/23\nsw tr nati vlan 10\n\nr1\nconf t\nint fa0/0.10\nencap dot1q 10 native\n```\n\n## VTP 메모\n\n### VTP\n\nVTP domain과 password를 지정하는 명령이 제시되며, 메모는 VTP를 VLAN DB 동기화로 설명합니다\\. ‘최대’ 뒤의 내용은 미완성입니다\\.\n\n### VTP에 관한 메모\n\n자료에서는 VTP를 VLAN DB 동기화라고 설명하고, domain과 password를 지정해 그 정보로 동기화한다고 적습니다\\. ‘최대’ 뒤의 메모는 완성되지 않았습니다\\.\n\n원문 인용 · 표시본의 인증값은 숨김\n\n```text\nconf t\nvtp domain cisco\nvtp password [인증값 숨김]\n\nvtp는 vlan DB 동기화\ndomain, password 를 지정하고 그 정보로 동기화\n최대 \n```\n\n## 스패닝 트리 설정\n\n### 스패닝 트리 설정\n\nSW1\\~3 공통 설정 메모에 \\`spanning\\-tree portfast default\\`와 \\`spanning\\-tree mode rapid\\-pvst\\` 명령이 있습니다\\.\n\n### 스패닝 트리 및 액세스 포트 설정 예시\n\nSW1\\~3 공통 설정으로 PortFast 기본 설정과 Rapid PVST 모드를 지정하고, Fa0/1과 Fa0/2를 각각 VLAN 10과 20의 액세스 포트로 설정하는 명령이 있습니다\\. 실행 결과는 기록되어 있지 않습니다\\.\n\n원문 인용 · 표시본의 인증값은 숨김\n\n```text\nSW1~3 공통설정\n\nen \nconf t\nspanning-tree portfast default\nspanning-tree mode rapid-pvst\n\nint fa0/1\nsw mo acc\nsw acc vlan 10\nint fa0/2\nsw mo acc\nsw acc vlan 20\n```\n\n## EtherChannel 설정\n\n### EtherChannel\n\n인터페이스 범위에 \\`channel\\-group\\`을 적용하는 예시가 있습니다\\. mode 값으로 auto, desirable의 축약형, active, passive, on이 기록되어 있고, 별도 메모에 LACP의 active/passive와 PAgP가 언급됩니다\\.\n\n### EtherChannel 설정 예시\n\nSW1\\~3의 인터페이스 범위에 channel\\-group을 적용하며, 그룹별로 auto, desirable 축약형, active, passive 또는 on 모드를 지정하는 명령이 있습니다\\. 일부 포트 범위에는 트렁크 모드 명령도 포함됩니다\\. 장비 간 연결 성립이나 설정 성공 여부는 기록되어 있지 않습니다\\.\n\n원문 인용 · 표시본의 인증값은 숨김\n\n```text\nsw1\nen\nconf t\nint fa0/1\nsw mo acc\nsw acc vlan 10\nint fa0/2\nsw mo acc\nsw acc vlan 20\nint range fa0/23-24\nsw mo tr\nchannel-group 1 mode auto\nint range fa0/21-22\nchannel-group 2 mode active\nsw mo tr\n\n\n\nsw2\nen\nconf t\nint fa0/1\nsw mo acc\nsw acc vlan 10\nint fa0/2\nsw mo acc\nsw acc vlan 20\nint range fa0/23-24\nsw mo tr\nchannel-group 1 mode desi\nint range fa0/19-20\nchannel-group 3 mode on\nsw mo tr\n\nsw3\nen\nconf t\nint fa0/1\nsw mo acc\nsw acc vlan 10\nint fa0/2\nsw mo acc\nsw acc vlan 20\nint range fa0/21-22\nsw mo tr\nchannel-group 2 mode passive\nint range fa0/19-20\nchannel-group 3 mode on\nsw mo tr\n```\n\n---\n\n코멘트 0개 · 검토 대기 후보 미확인 · 보조 항목 제외 사유 미확인\n\n원본 JSON은 별도로 보존합니다. 표시본의 인증값 숨김은 원문 인용 수정이 아닙니다.\n",
+      "relations": {
+        "categories": [
+          "category:56060c1c6b6e24d1e16cd68e6fca1e0a1a4fd8ffd662ec22dc4ad331db568d1a",
+          "category:70c9ff4e2bd298310e77c4f47eaed599b2324fc4a5ab503126bc1a3a3ddeac5e",
+          "category:8b07f229bdbfbe07efeaea021de7f3aa6002c41bbf551465c1d0cede9f601f49",
+          "category:b0df47a74e35948b183b5d02a99772a38fccf6caf9fd42ab3924fe940125b4d8",
+          "category:ba9037c8e8322abf74eb5509e86a11acda07e2206650fc42c8fbde2660c02542",
+          "category:be5af9f909fec8360c7949588fa38acc24a9b7e384283eb5c4e7f8d9e86390b6"
+        ],
+        "concepts": [
+          "concept:4dd5b8546ee6f1137e012f6a1ed2fd3a9e65382636d1298ea2e0c1e1fad91a23",
+          "concept:98a0f0acedbcd73fccc92b2f549db005c010a95ac9d806abd080cd543241e931",
+          "concept:a16551bcd5719207b36ed84613a9056d09ebdf6a405e82237ecd71777d6756c1",
+          "concept:a57ee0d5b8f37ff2a2ebf9c598ed0a7ffc1e6858c1f1bbacc668ec7fcfc84988",
+          "concept:c79f24b68e87b2627917fdab34c647530ca3d27011d42d1af0a0fcdaf95ba6d6",
+          "concept:c9c4bfafa58580dba499fef14c83801babbf441de05681226ce71fb6dc6dc972",
+          "concept:d9f9cd0c4c7ccd8106a3c1bfa7d1ba56f261ed6875789e0f3c8646f25c31a0bf",
+          "concept:f34f1410cc6e4b5f105010c224c6f6e0d58eabd6b6531217c00ba85f5ed7be41"
+        ],
+        "related": [],
+        "practice": [
+          "practice:c10b65892053b937864408601a7a2ccde354667ed8bf02f4821974fda9e282d0",
+          "practice:7ec3137ba6eb21958f98a5bb258ac199dbeeadaf87d1f1c9e53f2f59e1a9d9dd",
+          "practice:686709031b1f9cc3d7b91c4d836948aab24b53d25be1f8c4cb0aa64867b6681e",
+          "practice:84e242d96f9dcb377fc6e4fcea9236b56635b9dca9f26d94444d832faddff2e9"
+        ]
+      }
+    },
+    {
+      "key": "practice:686709031b1f9cc3d7b91c4d836948aab24b53d25be1f8c4cb0aa64867b6681e",
+      "kind": "practice",
+      "properties": {
+        "name": "스패닝 트리 및 액세스 포트 설정 예시",
+        "source_pointer": "/practice/2",
+        "sync_key": "practice:686709031b1f9cc3d7b91c4d836948aab24b53d25be1f8c4cb0aa64867b6681e"
+      },
+      "body": "SW1~3 공통 설정으로 PortFast 기본 설정과 Rapid PVST 모드를 지정하고, Fa0/1과 Fa0/2를 각각 VLAN 10과 20의 액세스 포트로 설정하는 명령이 있습니다. 실행 결과는 기록되어 있지 않습니다.\n\n원문 근거\nSW1~3 공통설정\n\nen \nconf t\nspanning-tree portfast default\nspanning-tree mode rapid-pvst\n\nint fa0/1\nsw mo acc\nsw acc vlan 10\nint fa0/2\nsw mo acc\nsw acc vlan 20",
+      "relations": {
+        "material": [
+          "material:237276f429fc40b9f0574406f178e477a1112c7b36a256089a29c8fec9e05709"
+        ],
+        "concepts": [
+          "concept:4dd5b8546ee6f1137e012f6a1ed2fd3a9e65382636d1298ea2e0c1e1fad91a23",
+          "concept:98a0f0acedbcd73fccc92b2f549db005c010a95ac9d806abd080cd543241e931",
+          "concept:a16551bcd5719207b36ed84613a9056d09ebdf6a405e82237ecd71777d6756c1",
+          "concept:a57ee0d5b8f37ff2a2ebf9c598ed0a7ffc1e6858c1f1bbacc668ec7fcfc84988",
+          "concept:c79f24b68e87b2627917fdab34c647530ca3d27011d42d1af0a0fcdaf95ba6d6",
+          "concept:c9c4bfafa58580dba499fef14c83801babbf441de05681226ce71fb6dc6dc972",
+          "concept:d9f9cd0c4c7ccd8106a3c1bfa7d1ba56f261ed6875789e0f3c8646f25c31a0bf",
+          "concept:f34f1410cc6e4b5f105010c224c6f6e0d58eabd6b6531217c00ba85f5ed7be41"
+        ]
+      }
+    },
+    {
+      "key": "practice:7ec3137ba6eb21958f98a5bb258ac199dbeeadaf87d1f1c9e53f2f59e1a9d9dd",
+      "kind": "practice",
+      "properties": {
+        "name": "Native VLAN 설정 예시",
+        "source_pointer": "/practice/1",
+        "sync_key": "practice:7ec3137ba6eb21958f98a5bb258ac199dbeeadaf87d1f1c9e53f2f59e1a9d9dd"
+      },
+      "body": "스위치 Fa0/24와 Fa0/23, 또는 Fa0/24에 native VLAN 10을 지정하는 명령과 라우터 Fa0/0.10에 `encapsulation dot1q 10 native`를 지정하는 예시가 있습니다. 설정 수행 및 동작 결과는 기록되어 있지 않습니다.\n\n원문 근거\n-------------------------------------------\nint fa0/24\nswitchport trunk native vlan 10\nint fa0/23\nswitchport trunk native vlan 10\n\nint fa0/24\nswitchport trunk native vlan 10\n\n-------------------------------------\n\nconf t\nvtp domain cisco\nvtp password [인증값 숨김]\n\nvtp는 vlan DB 동기화\ndomain, password 를 지정하고 그 정보로 동기화\n최대 \n\nsw1\nint range fa0/23 - 24\nsw tr nati vlan 10\n\nsw\nint fa0/23\nsw tr nati vlan 10\n\nr1\nconf t\nint fa0/0.10\nencap dot1q 10 native",
+      "relations": {
+        "material": [
+          "material:237276f429fc40b9f0574406f178e477a1112c7b36a256089a29c8fec9e05709"
+        ],
+        "concepts": [
+          "concept:4dd5b8546ee6f1137e012f6a1ed2fd3a9e65382636d1298ea2e0c1e1fad91a23",
+          "concept:98a0f0acedbcd73fccc92b2f549db005c010a95ac9d806abd080cd543241e931",
+          "concept:a16551bcd5719207b36ed84613a9056d09ebdf6a405e82237ecd71777d6756c1",
+          "concept:a57ee0d5b8f37ff2a2ebf9c598ed0a7ffc1e6858c1f1bbacc668ec7fcfc84988",
+          "concept:c79f24b68e87b2627917fdab34c647530ca3d27011d42d1af0a0fcdaf95ba6d6",
+          "concept:c9c4bfafa58580dba499fef14c83801babbf441de05681226ce71fb6dc6dc972",
+          "concept:d9f9cd0c4c7ccd8106a3c1bfa7d1ba56f261ed6875789e0f3c8646f25c31a0bf",
+          "concept:f34f1410cc6e4b5f105010c224c6f6e0d58eabd6b6531217c00ba85f5ed7be41"
+        ]
+      }
+    },
+    {
+      "key": "practice:84e242d96f9dcb377fc6e4fcea9236b56635b9dca9f26d94444d832faddff2e9",
+      "kind": "practice",
+      "properties": {
+        "name": "EtherChannel 설정 예시",
+        "source_pointer": "/practice/3",
+        "sync_key": "practice:84e242d96f9dcb377fc6e4fcea9236b56635b9dca9f26d94444d832faddff2e9"
+      },
+      "body": "SW1~3의 인터페이스 범위에 channel-group을 적용하며, 그룹별로 auto, desirable 축약형, active, passive 또는 on 모드를 지정하는 명령이 있습니다. 일부 포트 범위에는 트렁크 모드 명령도 포함됩니다. 장비 간 연결 성립이나 설정 성공 여부는 기록되어 있지 않습니다.\n\n원문 근거\nsw1\nen\nconf t\nint fa0/1\nsw mo acc\nsw acc vlan 10\nint fa0/2\nsw mo acc\nsw acc vlan 20\nint range fa0/23-24\nsw mo tr\nchannel-group 1 mode auto\nint range fa0/21-22\nchannel-group 2 mode active\nsw mo tr\n\n\n\nsw2\nen\nconf t\nint fa0/1\nsw mo acc\nsw acc vlan 10\nint fa0/2\nsw mo acc\nsw acc vlan 20\nint range fa0/23-24\nsw mo tr\nchannel-group 1 mode desi\nint range fa0/19-20\nchannel-group 3 mode on\nsw mo tr\n\nsw3\nen\nconf t\nint fa0/1\nsw mo acc\nsw acc vlan 10\nint fa0/2\nsw mo acc\nsw acc vlan 20\nint range fa0/21-22\nsw mo tr\nchannel-group 2 mode passive\nint range fa0/19-20\nchannel-group 3 mode on\nsw mo tr",
+      "relations": {
+        "material": [
+          "material:237276f429fc40b9f0574406f178e477a1112c7b36a256089a29c8fec9e05709"
+        ],
+        "concepts": [
+          "concept:4dd5b8546ee6f1137e012f6a1ed2fd3a9e65382636d1298ea2e0c1e1fad91a23",
+          "concept:98a0f0acedbcd73fccc92b2f549db005c010a95ac9d806abd080cd543241e931",
+          "concept:a16551bcd5719207b36ed84613a9056d09ebdf6a405e82237ecd71777d6756c1",
+          "concept:a57ee0d5b8f37ff2a2ebf9c598ed0a7ffc1e6858c1f1bbacc668ec7fcfc84988",
+          "concept:c79f24b68e87b2627917fdab34c647530ca3d27011d42d1af0a0fcdaf95ba6d6",
+          "concept:c9c4bfafa58580dba499fef14c83801babbf441de05681226ce71fb6dc6dc972",
+          "concept:d9f9cd0c4c7ccd8106a3c1bfa7d1ba56f261ed6875789e0f3c8646f25c31a0bf",
+          "concept:f34f1410cc6e4b5f105010c224c6f6e0d58eabd6b6531217c00ba85f5ed7be41"
+        ]
+      }
+    },
+    {
+      "key": "practice:c10b65892053b937864408601a7a2ccde354667ed8bf02f4821974fda9e282d0",
+      "kind": "practice",
+      "properties": {
+        "name": "VLAN 및 스위치 포트 설정 예시",
+        "source_pointer": "/practice/0",
+        "sync_key": "practice:c10b65892053b937864408601a7a2ccde354667ed8bf02f4821974fda9e282d0"
+      },
+      "body": "VLAN 10, 20, 30을 생성하고 Fa0/24·Fa0/23 또는 Fa0/24를 트렁크 모드로 지정하는 명령이 있습니다. Fa0/1과 Fa0/2에는 액세스 모드 및 VLAN 10과 20을 지정합니다. 여러 장비 설정으로 보이는 명령이 포함되지만 수행 결과는 확인되지 않습니다.\n\n원문 근거\nconf t\nvlan 10\nexit\nvlan 20\nexit\nvlan 30\nexit\n\n\nint fa0/24\nsw mo tr\nint fa0/23\nsw mo tr\nint fa0/1\nsw mo acc\nsw acc vlan 10\nint fa0/2\nsw mo acc\nsw acc vlan 20\n\n\n\nconf t\nint fa0/24\nsw mo tr\nint fa0/1\nsw mo acc\nsw acc vlan 10\nint fa0/2\nsw mo acc\nsw acc vlan 20",
+      "relations": {
+        "material": [
+          "material:237276f429fc40b9f0574406f178e477a1112c7b36a256089a29c8fec9e05709"
+        ],
+        "concepts": [
+          "concept:4dd5b8546ee6f1137e012f6a1ed2fd3a9e65382636d1298ea2e0c1e1fad91a23",
+          "concept:98a0f0acedbcd73fccc92b2f549db005c010a95ac9d806abd080cd543241e931",
+          "concept:a16551bcd5719207b36ed84613a9056d09ebdf6a405e82237ecd71777d6756c1",
+          "concept:a57ee0d5b8f37ff2a2ebf9c598ed0a7ffc1e6858c1f1bbacc668ec7fcfc84988",
+          "concept:c79f24b68e87b2627917fdab34c647530ca3d27011d42d1af0a0fcdaf95ba6d6",
+          "concept:c9c4bfafa58580dba499fef14c83801babbf441de05681226ce71fb6dc6dc972",
+          "concept:d9f9cd0c4c7ccd8106a3c1bfa7d1ba56f261ed6875789e0f3c8646f25c31a0bf",
+          "concept:f34f1410cc6e4b5f105010c224c6f6e0d58eabd6b6531217c00ba85f5ed7be41"
+        ]
+      }
+    }
+  ],
+  "plan_digest": "75517bcb89bd80075540e6ed7205051ef2f2a337b5e65e25f2ba0861f9e9ee64"
+}

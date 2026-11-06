@@ -1,0 +1,47 @@
+{
+  "material_count": 5,
+  "managed_entities": 86,
+  "existing_page_ids_preserved": true,
+  "existing_approval_snapshots_preserved": true,
+  "pending_operations": 0,
+  "publication_errors": [],
+  "front_changes": {
+    "total": 10,
+    "unchanged": 2,
+    "reads": 16,
+    "writes": 8,
+    "recovered": 0,
+    "errors": [],
+    "verified_page_ids": [
+      "3fe062cd7cd18139aeb6f6aecf72977b",
+      "3fe062cd7cd18159af76d840845dedee",
+      "3fe062cd7cd181388041eb53e303c9cc",
+      "3fe062cd7cd181068d8de8a96028a03d",
+      "3fe062cd7cd18115be2ccf26275aea30",
+      "3fe062cd7cd181bb9c61cdb9454abf18",
+      "3fe062cd7cd181478ea1f99fb7ae9ef8",
+      "3fb062cd7cd180c6ab73d56d5fadc0a5"
+    ]
+  },
+  "repeat": {
+    "tool_calls": {
+      "query_data_sources": 4
+    },
+    "body_reads": 0,
+    "entity_writes": 0,
+    "front_reads": 0,
+    "front_writes": 0,
+    "approval_db_unchanged": true,
+    "errors": []
+  },
+  "browser_checked": [
+    "LAN summary and 4 sections",
+    "LAN practice links",
+    "home LAN row",
+    "home to LAN navigation",
+    "security preparation badge cleared"
+  ],
+  "paid_ai_calls": 0,
+  "tests": "53 passed",
+  "screenshot": "front/lan_home.png"
+}

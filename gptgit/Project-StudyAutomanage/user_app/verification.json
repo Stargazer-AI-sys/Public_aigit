@@ -1,0 +1,17 @@
+{
+  "approved": 11,
+  "source_counts": {
+    "approved": 11
+  },
+  "approval_and_history_preserved": true,
+  "delivery_history_preserved": true,
+  "development_access_blocked": true,
+  "preview_validation": "passed",
+  "user_approval_db_unchanged": true,
+  "new_api_calls": 0,
+  "notion_calls": 0,
+  "original_database_hashes": {
+    "study\\study-system\\output\\knowledge_base\\library.sqlite3": "663212ff151dbd64dd8cafc7003e15bbf2816a16382585bbc9041d84a9512d8f",
+    "study\\study-system\\output\\notion_live\\outbox\\delivery.sqlite3": "3b85a1cc51cc0a3a2300365ab639c1c5621bd291c8657ea7ef7fbc1d007d1aad"
+  }
+}

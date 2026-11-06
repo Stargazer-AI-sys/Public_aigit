@@ -1,0 +1,4 @@
+{
+  "model": "openai/gpt-6-luna",
+  "billing_mode": "subscription"
+}

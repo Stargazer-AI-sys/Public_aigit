@@ -1,0 +1,21 @@
+{
+  "items": [
+    {
+      "row": 1,
+      "filename": "1일차_LAN구성.txt",
+      "status": "failed",
+      "error": {
+        "code": "AI_CALL_ERROR",
+        "message": "OpenAI HTTP 401: 인증 Key를 확인하세요. 자동 재시도하지 않았습니다."
+      },
+      "run": "C:\\Users\\ICT\\Desktop\\Aigit\\gptgit\\Project-StudyAutomanage\\study\\study-system\\output\\knowledge_base\\runs\\20261019T032139Z_7be71ed33c0c"
+    }
+  ],
+  "new_api_attempts": 1,
+  "new_successes": 0,
+  "reused": 0,
+  "failed": 1,
+  "blocked": 0,
+  "recovered_cache_locks": 0,
+  "status": "PARTIAL"
+}

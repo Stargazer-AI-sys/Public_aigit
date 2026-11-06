@@ -1,0 +1,1 @@
+{"requestId":"9bc84fa3e3de4adb9792239d1fb593c8","requests":[{"tool":"fetch","args":{"id":"mock-only-one"}},{"tool":"fetch","args":{"id":"mock-only-two"}}],"single":false,"fingerprint":"792c2591b17e0821bf99bfe9833113bb1876e1216449cb7a72bf24be70b328ce","states":["claimed","claimed"]}

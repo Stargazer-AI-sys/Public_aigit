@@ -1,0 +1,748 @@
+{
+  "schema_version": "0.1",
+  "validation_note": "material_id values are validation-only placeholders; production uses Collector content SHA-256.",
+  "materials": [
+    {
+      "source": {
+        "material_id": "71212520514101a0f99ffc1a6422faa1b048a22166ce3c038545a1995687e1c4",
+        "filename": "12일차.docx",
+        "extension": ".docx"
+      },
+      "material_type": {
+        "material_type": "개념",
+        "confidence": 0.9,
+        "reason": "라우팅 기본 개념과 경로 선택 원리가 중심이다."
+      },
+      "summary": "정적·동적 라우팅, Stub/Default Route, Longest Prefix, AD, Cost, Floating Route를 정리한 자료.",
+      "topics": [
+        {
+          "name": "네트워크",
+          "children": [
+            {
+              "name": "라우팅",
+              "children": [
+                {
+                  "name": "정적 라우팅"
+                },
+                {
+                  "name": "동적 라우팅"
+                },
+                {
+                  "name": "Default Route"
+                },
+                {
+                  "name": "Floating Route"
+                },
+                {
+                  "name": "라우팅 경로 선택"
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "keywords": [
+        {
+          "name": "Routing",
+          "type": "protocol_concept"
+        },
+        {
+          "name": "RIP",
+          "type": "routing_protocol"
+        },
+        {
+          "name": "Longest Prefix",
+          "type": "routing_selection"
+        },
+        {
+          "name": "AD",
+          "type": "routing_selection"
+        },
+        {
+          "name": "Floating Route",
+          "type": "routing_technique"
+        }
+      ],
+      "concepts": [
+        {
+          "name": "Static Routing",
+          "description": "관리자가 목적지 경로를 직접 설정하는 라우팅 방식.",
+          "type": {
+            "category": "routing",
+            "subtype": "static"
+          }
+        },
+        {
+          "name": "Dynamic Routing",
+          "description": "라우팅 프로토콜을 이용해 원격 네트워크 정보를 학습하는 방식.",
+          "type": {
+            "category": "routing",
+            "subtype": "dynamic"
+          }
+        },
+        {
+          "name": "Longest Prefix Match",
+          "description": "더 긴 프리픽스 길이를 가진 경로를 우선 선택하는 기준.",
+          "type": {
+            "category": "routing_selection",
+            "subtype": "prefix"
+          }
+        },
+        {
+          "name": "Administrative Distance",
+          "description": "서로 다른 경로의 우선순위를 판단하는 값.",
+          "type": {
+            "category": "routing_selection",
+            "subtype": "administrative_distance"
+          }
+        },
+        {
+          "name": "Floating Static Route",
+          "description": "주 경로 장애 시 사용할 수 있도록 높은 AD를 부여한 보조 정적 경로.",
+          "type": {
+            "category": "routing",
+            "subtype": "static_backup"
+          }
+        }
+      ],
+      "relationships": [
+        {
+          "from": "Dynamic Routing",
+          "relation": "uses",
+          "to": "RIP",
+          "description": "자료에서 RIP를 동적 라우팅의 예로 사용한다."
+        },
+        {
+          "from": "Floating Static Route",
+          "relation": "uses",
+          "to": "Administrative Distance",
+          "description": "보조 경로의 우선순위를 낮추기 위해 AD를 활용한다."
+        }
+      ],
+      "theory": {
+        "definitions": [
+          {
+            "subject": "Stub Network",
+            "content": "외부와 통하는 인터페이스가 하나인 네트워크로 설명된다.",
+            "evidence": "자료의 stub network 설명."
+          }
+        ],
+        "principles": [
+          {
+            "subject": "Route Selection",
+            "content": "Longest Prefix, AD, Cost를 경로 선택 기준으로 설명한다.",
+            "evidence": "자료의 라우팅 테이블 룩업 및 경로 우선순위 설명.",
+            "related_concepts": [
+              "Longest Prefix Match",
+              "Administrative Distance"
+            ]
+          }
+        ],
+        "comparisons": [
+          {
+            "subject_a": "Primary Route",
+            "subject_b": "Floating Static Route",
+            "criteria": [
+              "우선순위",
+              "장애 대응"
+            ],
+            "evidence": "Floating Route를 주 경로 장애 시 사용하는 보조 경로로 설명한다.",
+            "related_concepts": [
+              "Floating Static Route",
+              "Administrative Distance"
+            ]
+          }
+        ]
+      },
+      "practice": [
+        {
+          "title": "RIP와 Static Route 비교 실습",
+          "description": "RIP로 원격지를 학습한 뒤 정적 경로를 추가하고 라우팅 테이블 변화를 확인한다.",
+          "evidence": "R1/R2 RIP 및 static route 설정 예시.",
+          "related_concepts": [
+            "Dynamic Routing",
+            "Static Routing"
+          ]
+        }
+      ]
+    },
+    {
+      "source": {
+        "material_id": "5f9401874c8fa2d0f4eec00b069dadc232a3b6d7c6a8573ae64da5d51c788372",
+        "filename": "15일차 Dynamic routing_IGP.txt",
+        "extension": ".txt"
+      },
+      "material_type": {
+        "material_type": "개념",
+        "confidence": 0.94,
+        "reason": "Dynamic Routing, IGP/EGP, Distance Vector, Link State, EIGRP, RIP 계열의 개념 설명이 중심이다."
+      },
+      "summary": "Dynamic Routing의 분류와 IGP/EGP, RIP/RIPv1/RIPv2의 특성을 정리한 자료.",
+      "topics": [
+        {
+          "name": "네트워크",
+          "children": [
+            {
+              "name": "라우팅",
+              "children": [
+                {
+                  "name": "Dynamic Routing",
+                  "children": [
+                    {
+                      "name": "Distance Vector"
+                    },
+                    {
+                      "name": "Link State"
+                    },
+                    {
+                      "name": "Hybrid"
+                    }
+                  ]
+                },
+                {
+                  "name": "IGP"
+                },
+                {
+                  "name": "EGP"
+                },
+                {
+                  "name": "RIP",
+                  "children": [
+                    {
+                      "name": "RIPv1"
+                    },
+                    {
+                      "name": "RIPv2"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "keywords": [
+        {
+          "name": "IGP",
+          "type": "routing_scope"
+        },
+        {
+          "name": "EGP",
+          "type": "routing_scope"
+        },
+        {
+          "name": "Distance Vector",
+          "type": "routing_method"
+        },
+        {
+          "name": "Link State",
+          "type": "routing_method"
+        },
+        {
+          "name": "EIGRP",
+          "type": "routing_protocol"
+        },
+        {
+          "name": "RIP",
+          "type": "routing_protocol"
+        },
+        {
+          "name": "RIPv1",
+          "type": "routing_protocol_version"
+        },
+        {
+          "name": "RIPv2",
+          "type": "routing_protocol_version"
+        }
+      ],
+      "concepts": [
+        {
+          "name": "IGP",
+          "description": "하나의 AS 내부에서 사용하는 라우팅 프로토콜 범주.",
+          "type": {
+            "category": "routing_scope",
+            "subtype": "interior"
+          }
+        },
+        {
+          "name": "Distance Vector",
+          "description": "주기적으로 라우팅 정보를 교환하는 방식으로 설명된다.",
+          "type": {
+            "category": "routing_method",
+            "subtype": "distance_vector"
+          }
+        },
+        {
+          "name": "Link State",
+          "description": "상태 변화 정보를 교환하고 이웃 상태를 모니터링하는 방식으로 설명된다.",
+          "type": {
+            "category": "routing_method",
+            "subtype": "link_state"
+          }
+        },
+        {
+          "name": "EIGRP",
+          "description": "자료에서 hybrid 방식의 라우팅 프로토콜로 설명된다.",
+          "type": {
+            "category": "routing_protocol",
+            "subtype": "hybrid"
+          }
+        },
+        {
+          "name": "RIPv1",
+          "description": "Classful 방식이며 VLSM을 지원하지 않는 RIP 버전.",
+          "type": {
+            "category": "routing_protocol",
+            "subtype": "distance_vector"
+          }
+        },
+        {
+          "name": "RIPv2",
+          "description": "Classless 방식이며 VLSM을 지원하는 RIP 버전.",
+          "type": {
+            "category": "routing_protocol",
+            "subtype": "distance_vector"
+          }
+        }
+      ],
+      "relationships": [
+        {
+          "from": "RIP",
+          "relation": "belongs_to",
+          "to": "IGP",
+          "description": "자료에서 RIP를 IGP 내부의 동적 라우팅 프로토콜로 다룬다."
+        },
+        {
+          "from": "RIPv1",
+          "relation": "contrasts_with",
+          "to": "RIPv2",
+          "description": "Classful/Classless 및 VLSM 지원 여부를 비교한다."
+        },
+        {
+          "from": "EIGRP",
+          "relation": "classified_as",
+          "to": "Hybrid",
+          "description": "자료에서 hybrid 방식으로 설명한다."
+        }
+      ],
+      "theory": {
+        "definitions": [
+          {
+            "subject": "IGP",
+            "content": "내부 게이트웨이 프로토콜로 설명된다.",
+            "evidence": "자료의 IGP 설명."
+          }
+        ],
+        "principles": [
+          {
+            "subject": "RIPv1",
+            "content": "Classful이며 VLSM을 지원하지 않는 특성이 설명된다.",
+            "evidence": "자료의 RIPv1 설명.",
+            "related_concepts": [
+              "RIPv1",
+              "VLSM"
+            ]
+          }
+        ],
+        "comparisons": [
+          {
+            "subject_a": "RIPv1",
+            "subject_b": "RIPv2",
+            "criteria": [
+              "주소 체계",
+              "VLSM 지원"
+            ],
+            "evidence": "자료에서 RIPv1/RIPv2 특성을 비교한다.",
+            "related_concepts": [
+              "RIPv1",
+              "RIPv2"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "source": {
+        "material_id": "75320b6c1524f9ef7ae2d417182fffee19a0da830ba069eccf888ed198f81d32",
+        "filename": "18일차.txt",
+        "extension": ".txt"
+      },
+      "material_type": {
+        "material_type": "실습",
+        "confidence": 0.96,
+        "reason": "VLAN/Trunk/Access, Router-on-a-Stick, VTP, STP, EtherChannel 관련 실제 설정 명령이 중심이다."
+      },
+      "summary": "VLAN/Trunk, Router-on-a-Stick, VTP, STP, EtherChannel 관련 실습 설정을 기록한 자료.",
+      "topics": [
+        {
+          "name": "네트워크",
+          "children": [
+            {
+              "name": "스위칭",
+              "children": [
+                {
+                  "name": "VLAN"
+                },
+                {
+                  "name": "Trunk / Access"
+                },
+                {
+                  "name": "VTP"
+                },
+                {
+                  "name": "STP"
+                },
+                {
+                  "name": "EtherChannel"
+                }
+              ]
+            },
+            {
+              "name": "라우팅",
+              "children": [
+                {
+                  "name": "Inter-VLAN Routing",
+                  "children": [
+                    {
+                      "name": "Router-on-a-Stick"
+                    },
+                    {
+                      "name": "802.1Q"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "keywords": [
+        {
+          "name": "VLAN",
+          "type": "switching"
+        },
+        {
+          "name": "Trunk",
+          "type": "switching"
+        },
+        {
+          "name": "Access",
+          "type": "switching"
+        },
+        {
+          "name": "802.1Q",
+          "type": "encapsulation"
+        },
+        {
+          "name": "VTP",
+          "type": "vlan_management"
+        },
+        {
+          "name": "STP",
+          "type": "loop_prevention"
+        },
+        {
+          "name": "EtherChannel",
+          "type": "link_aggregation"
+        }
+      ],
+      "concepts": [
+        {
+          "name": "VLAN",
+          "description": "스위치에서 논리적으로 네트워크를 분리하기 위한 기능.",
+          "type": {
+            "category": "switching",
+            "subtype": "vlan"
+          }
+        },
+        {
+          "name": "Trunk",
+          "description": "여러 VLAN 트래픽을 하나의 링크로 전달하기 위한 포트 구성.",
+          "type": {
+            "category": "switching",
+            "subtype": "trunk"
+          }
+        },
+        {
+          "name": "Router-on-a-Stick",
+          "description": "라우터 서브인터페이스로 Inter-VLAN Routing을 수행하는 방식.",
+          "type": {
+            "category": "routing",
+            "subtype": "inter_vlan"
+          }
+        },
+        {
+          "name": "VTP",
+          "description": "자료에서 VLAN DB 동기화 기능으로 설명된다.",
+          "type": {
+            "category": "switching",
+            "subtype": "vlan_management"
+          }
+        },
+        {
+          "name": "STP",
+          "description": "스위치 네트워크의 루프 방지를 위한 프로토콜.",
+          "type": {
+            "category": "switching",
+            "subtype": "loop_prevention"
+          }
+        },
+        {
+          "name": "EtherChannel",
+          "description": "여러 물리 링크를 하나의 논리 링크로 묶는 구성.",
+          "type": {
+            "category": "switching",
+            "subtype": "link_aggregation"
+          }
+        }
+      ],
+      "relationships": [
+        {
+          "from": "Router-on-a-Stick",
+          "relation": "uses",
+          "to": "802.1Q",
+          "description": "서브인터페이스에서 dot1q 캡슐화를 설정한다."
+        },
+        {
+          "from": "VTP",
+          "relation": "manages",
+          "to": "VLAN",
+          "description": "자료에서 VTP를 VLAN DB 동기화 기능으로 설명한다."
+        },
+        {
+          "from": "EtherChannel",
+          "relation": "aggregates",
+          "to": "physical_links",
+          "description": "여러 포트를 channel-group으로 구성하는 예시가 포함된다."
+        }
+      ],
+      "practice": [
+        {
+          "title": "VLAN 및 Trunk 구성",
+          "description": "VLAN을 생성하고 Access/Trunk 포트를 구성한다.",
+          "evidence": "vlan 및 switchport mode 설정 예시.",
+          "related_concepts": [
+            "VLAN",
+            "Trunk"
+          ]
+        },
+        {
+          "title": "Router-on-a-Stick 구성",
+          "description": "라우터 서브인터페이스에 VLAN별 802.1Q와 IP를 설정한다.",
+          "evidence": "fa0/0.10/.20/.30 및 dot1q 설정 예시.",
+          "related_concepts": [
+            "Router-on-a-Stick",
+            "802.1Q"
+          ]
+        },
+        {
+          "title": "VTP / STP / EtherChannel 설정",
+          "description": "VTP 동기화, Rapid-PVST, PortFast 및 channel-group 설정을 수행한다.",
+          "evidence": "vtp, spanning-tree, channel-group 설정 예시.",
+          "related_concepts": [
+            "VTP",
+            "STP",
+            "EtherChannel"
+          ]
+        }
+      ]
+    },
+    {
+      "source": {
+        "material_id": "2a4119baeaf64b9018ba1044d75e622147eaba97a76858a5ab421d75fc3dcef2",
+        "filename": "20일차 경로재분배,루프백가상장비설정.txt",
+        "extension": ".txt"
+      },
+      "material_type": {
+        "material_type": "실습",
+        "confidence": 0.92,
+        "reason": "L3 Switch/SVI, Loopback, Extended Ping, RIP, Static Route, Redistribution 설정과 검증 결과가 포함된다."
+      },
+      "summary": "L3 Switch Inter-VLAN Routing, Loopback, RIP와 Static Route 재분배 및 검증을 다룬 실습 자료.",
+      "topics": [
+        {
+          "name": "네트워크",
+          "children": [
+            {
+              "name": "스위칭",
+              "children": [
+                {
+                  "name": "L3 Switch"
+                },
+                {
+                  "name": "SVI"
+                },
+                {
+                  "name": "Inter-VLAN Routing"
+                }
+              ]
+            },
+            {
+              "name": "라우팅",
+              "children": [
+                {
+                  "name": "RIP"
+                },
+                {
+                  "name": "Static Route"
+                },
+                {
+                  "name": "Route Redistribution"
+                },
+                {
+                  "name": "Loopback"
+                },
+                {
+                  "name": "검증",
+                  "children": [
+                    {
+                      "name": "Extended Ping"
+                    },
+                    {
+                      "name": "Routing Table"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "keywords": [
+        {
+          "name": "L3 Switch",
+          "type": "device"
+        },
+        {
+          "name": "SVI",
+          "type": "interface"
+        },
+        {
+          "name": "Inter-VLAN Routing",
+          "type": "routing"
+        },
+        {
+          "name": "RIP",
+          "type": "routing_protocol"
+        },
+        {
+          "name": "Loopback",
+          "type": "interface"
+        },
+        {
+          "name": "Route Redistribution",
+          "type": "routing_technique"
+        },
+        {
+          "name": "Static Route",
+          "type": "routing"
+        }
+      ],
+      "concepts": [
+        {
+          "name": "SVI",
+          "description": "VLAN 인터페이스에 IP를 부여해 L3 스위치에서 라우팅에 사용하는 논리 인터페이스.",
+          "type": {
+            "category": "switching",
+            "subtype": "layer3_interface"
+          }
+        },
+        {
+          "name": "Loopback",
+          "description": "가상 인터페이스를 이용해 가상의 장비/주소를 구성하는 데 사용한 개념.",
+          "type": {
+            "category": "routing",
+            "subtype": "logical_interface"
+          }
+        },
+        {
+          "name": "Route Redistribution",
+          "description": "경로 정보를 다른 라우팅 프로토콜로 전달하는 기능으로 자료에서 설명된다.",
+          "type": {
+            "category": "routing",
+            "subtype": "redistribution"
+          }
+        },
+        {
+          "name": "Extended Ping",
+          "description": "핑의 소스 IP를 지정해 경로를 검증하는 방법.",
+          "type": {
+            "category": "network_verification",
+            "subtype": "ping"
+          }
+        }
+      ],
+      "relationships": [
+        {
+          "from": "SVI",
+          "relation": "enables",
+          "to": "Inter-VLAN Routing",
+          "description": "VLAN 인터페이스와 L3 routing 설정이 함께 사용된다."
+        },
+        {
+          "from": "Loopback",
+          "relation": "used_for",
+          "to": "Extended Ping",
+          "description": "Loopback 주소를 source IP로 지정해 확장 핑을 수행한다."
+        },
+        {
+          "from": "Static Route",
+          "relation": "redistributed_into",
+          "to": "RIP",
+          "description": "redistribute static metric 10 설정을 통해 static route를 RIP로 재분배한다."
+        }
+      ],
+      "theory": {
+        "definitions": [
+          {
+            "subject": "Route Redistribution",
+            "content": "서로 다른 라우팅 프로토콜 또는 경로 정보를 공유하는 기능으로 설명된다.",
+            "evidence": "자료의 경로 재분배 설명."
+          }
+        ],
+        "principles": [
+          {
+            "subject": "RIP Static Redistribution",
+            "content": "Static Route를 RIP에 재분배할 때 metric을 지정하는 설정 예시가 있다.",
+            "evidence": "redistribute static metric 10 및 라우팅 테이블 결과.",
+            "related_concepts": [
+              "Route Redistribution",
+              "RIP",
+              "Static Route"
+            ]
+          }
+        ]
+      },
+      "practice": [
+        {
+          "title": "L3 Switch SVI 구성",
+          "description": "VLAN 10/20에 SVI IP를 설정하고 Inter-VLAN Routing을 구성한다.",
+          "evidence": "ip routing 및 interface vlan 설정 예시.",
+          "related_concepts": [
+            "SVI",
+            "Inter-VLAN Routing"
+          ]
+        },
+        {
+          "title": "Loopback 및 Extended Ping 검증",
+          "description": "Loopback 주소를 생성하고 source IP를 지정해 연결성을 검증한다.",
+          "evidence": "int L0 및 ping ... source ... 예시.",
+          "related_concepts": [
+            "Loopback",
+            "Extended Ping"
+          ]
+        },
+        {
+          "title": "Static Route의 RIP 재분배",
+          "description": "Static Route를 RIP에 재분배하고 라우팅 테이블에서 학습 경로를 확인한다.",
+          "evidence": "redistribute static metric 10 및 R 192.168.40.0/24 결과.",
+          "related_concepts": [
+            "Route Redistribution",
+            "Static Route",
+            "RIP"
+          ]
+        }
+      ]
+    }
+  ]
+}

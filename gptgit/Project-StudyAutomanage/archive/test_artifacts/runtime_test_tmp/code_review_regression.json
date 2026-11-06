@@ -1,0 +1,27 @@
+{
+  "scope": "Notion review fixes, staged publication, compatibility/recovery, normalization, evidence and redaction",
+  "verification_status": "passed_after_targeted_fixture_rerun",
+  "unique_tests_verified": 134,
+  "initial_run": {
+    "scope": "Notion review fixes, staged publication, compatibility/recovery, normalization, evidence and redaction",
+    "tests_run": 134,
+    "failures": 0,
+    "errors": 1,
+    "skipped": 0,
+    "success": false,
+    "live_notion_calls": 0,
+    "paid_ai_calls": 0
+  },
+  "targeted_rerun": {
+    "module": "test_notion_staged_replay",
+    "tests_run": 1,
+    "failures": 0,
+    "errors": 0,
+    "success": true
+  },
+  "rerun_reason": "Saved routing replay must freeze the original six approved materials after a seventh material was approved; fixture scope corrected. All other 133 tests passed in the original run.",
+  "success": true,
+  "full_suite_repeated": false,
+  "live_notion_calls": 0,
+  "paid_ai_calls": 0
+}

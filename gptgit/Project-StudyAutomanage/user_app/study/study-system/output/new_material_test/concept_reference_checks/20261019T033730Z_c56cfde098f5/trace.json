@@ -1,0 +1,28 @@
+{
+  "provider": "saved-response",
+  "actual_ai_call": false,
+  "completed_stages": [
+    "input_validation",
+    "prompt_generation",
+    "response_received",
+    "json_parse",
+    "optional_null_normalization",
+    "source_injection",
+    "schema_validation",
+    "concept_reference_check",
+    "quality_validation",
+    "optional_auxiliary_validation"
+  ],
+  "warnings": [],
+  "api_request_attempted": false,
+  "automatic_retries": 0,
+  "offline_revalidation": true,
+  "content_review_required": true,
+  "usage": {
+    "input_tokens": 0,
+    "output_tokens": 0,
+    "total_tokens": 0
+  },
+  "review_candidates_pending": 0,
+  "origin_run_directory": "C:\\Users\\ICT\\Desktop\\Aigit\\gptgit\\Project-StudyAutomanage\\study\\study-system\\output\\new_material_test\\offline_repairs\\20261019T032604Z_fbc21fccfe27"
+}

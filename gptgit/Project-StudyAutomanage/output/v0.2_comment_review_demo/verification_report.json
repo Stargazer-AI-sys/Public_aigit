@@ -1,0 +1,30 @@
+{
+  "status": "PASS",
+  "unit_tests": {
+    "passed": 70,
+    "total": 70
+  },
+  "actual_api_calls": 0,
+  "scenario": "assistant-prepared response from saved material; not fresh API generation",
+  "source_review": "assistant fetched and reviewed official Cisco CLI page in this conversation",
+  "proposal_result": "output\\v0.2_comment_review_demo\\proposal_runs\\20261015T070959Z_b832f5ed7d91\\success\\analysis.json",
+  "review_request": "output\\v0.2_comment_review_demo\\proposal_runs\\20261015T070959Z_b832f5ed7d91\\review_request.json",
+  "final_analysis": "output\\v0.2_comment_review_demo\\reviewed_runs\\20261015T070959Z_96cae7f3a630\\analysis.json",
+  "sections": 5,
+  "unverified_candidates_before_review": 1,
+  "comments_before_review": 0,
+  "comments_after_supported_review": 1,
+  "original_source_preserved": true,
+  "content_review": {
+    "five_major_sections": "appropriate grouping for saved 18-day material",
+    "comment_frequency": "one necessary correction; no repeated per-command notes",
+    "successful_execution_claim": "not added",
+    "evidence_quotes": "seven exact source quotations preserved"
+  },
+  "limitations": [
+    "Fresh API generation quality is untested.",
+    "The application does not automatically browse or judge source support.",
+    "Trusted source-review decisions are still required; this run used assistant review.",
+    "The v0.1 baseline and existing budget policy remain in effect."
+  ]
+}

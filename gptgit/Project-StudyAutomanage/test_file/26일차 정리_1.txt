@@ -1,0 +1,373 @@
+[R1-ASBR1]
+
+conf t
+key chain RIP-LAB
+key 1
+key-string ClassRIP2026
+int L0
+
+ip addr 1.1.1.1 255.255.255.0
+int s1/0
+no sh
+ip addr 10.255.1.1 255.255.255.252
+
+ip rip authentication mode md5
+ip rip authentication key-chain RIP-LAB
+
+int s1/1
+band 5,000
+ip addr 10.255.0.9 255.255.255.252
+no sh
+int fa0/0
+ip addr 10.255.0.1 255.255.255.248
+band 3333
+no sh
+
+
+router ospf 1
+net 10.255.0.8 0.0.0.3 area 0
+net 10.255.0.0 0.0.0.7 area 0
+redistribute rip subnet
+redistribute connected subnet
+
+router rip
+net 10.0.0.0
+ver 2
+no auto
+redistribute ospf 1 metric 3
+----
+router ospf 10
+redistribute rip subnets metric 20 
+router rip
+redistribute ospf 10 metric 6
+----
+
+
+
+[R2-ABR1]
+conf t
+int L0
+ip addr 2.2.2.2 255.255.255.0
+int s1/1
+ip addr 10.255.0.10 255.255.255.252
+band 5000
+no sh
+int fa0/0
+ip addr 10.255.0.2 255.255.255.248
+band 3333
+no sh
+int s1/0
+ip addr 10.255.0.13 255.255.255.252
+band 20000
+no sh
+int s1/2
+ip addr 10.255.0.17 255.255.255.252
+band 10000
+no sh
+router ospf 1
+net 10.255.0.8 0.0.0.3 area 0
+net 10.255.0.0 0.0.0.7 area 0
+net 10.255.0.12 0.0.0.3 area 0
+net 10.255.0.16 0.0.0.3 area 1
+area 1 virtual-link 4.4.4.4
+
+[R3-ASBR2]
+conf t
+
+key chain RIP-LAB
+key 1
+key-string ClassRIP2026
+
+int L0
+ip addr 3.3.3.3 255.255.255.0
+int s1/1
+ip addr 10.255.1.5 255.255.255.252
+no sh
+
+ip rip authentication mode md5
+ip rip authentication key-chain RIP-LAB
+
+int fa0/0
+ip addr 10.255.0.3 255.255.255.248
+band 3333
+no sh
+int s1/0
+ip addr 10.255.0.14 255.255.255.252
+band 20000
+no sh
+int s1/2
+ip addr 10.255.2.1 255.255.255.252
+no sh
+router rip
+ver 2
+no auto
+net 10.0.0.0
+redistribute ospf 1 metric 4
+redistribute static metric 4
+redistribute connected metric 4
+
+router ospf 1
+net 10.255.0.0 0.0.0.7 area 0
+net 10.255.0.12 0.0.0.3 area 0
+redistribute rip subnet
+redistribute static subnet
+redistribute connected subnet
+exit
+ip route 172.20.10.0 255.255.255.0 10.255.2.2
+
+------
+router ospf 10
+redistribute rip subnets metric 20 
+redistribute static subnets metric 35 metric-type 1
+router rip
+redistribute ospf 10 metric 2
+------
+
+[R4-ABR2]
+conf t
+int L0
+ip addr 4.4.4.4 255.255.255.0
+int s1/2
+ip addr 10.255.0.18 255.255.255.252
+band 10000
+no sh
+int s1/3
+ip addr 10.255.0.21 255.255.255.252
+band 10000
+no sh
+router ospf 1
+net 10.255.0.16 0.0.0.3 area 1
+net 10.255.0.20 0.0.0.3 area 2
+area 1 virtual-link 2.2.2.2
+area 2 range 10.20.0.0 255.255.254.0
+
+---------
+10.20.0.0 ~ 10.20.1.254
+---------
+
+[R5]
+conf t
+int L0
+ip addr 5.5.5.5 255.255.255.0
+int s1/3
+ip addr 10.255.0.22 255.255.255.252
+band 10000
+no sh
+int fa0/0
+no sh
+int fa0/0.10
+encap dot1q 10
+ip addr 172.16.32.1 255.255.255.0
+int fa0/0.20
+encap dot1q 20
+ip addr 172.16.33.1 255.255.255.128
+int fa0/0.30
+encap dot1q 30
+ip addr 172.16.33.129 255.255.255.192
+int fa0/0.40
+encap dot1q 40
+ip addr 172.16.33.193 255.255.255.192
+router ospf 1
+net 10.255.0.20 0.0.0.3 area 2
+net 172.16.32.0 0.0.1.255 area 2
+
+[R6]
+conf t
+
+key chain RIP-LAB
+key 1
+key-string ClassRIP2026
+
+int s1/0
+ip addr 10.255.1.2 255.255.255.252
+no sh
+ip rip authentication mode md5
+ip rip authentication key-chain RIP-LAB
+
+
+int s1/1
+ip addr 10.255.1.6 255.255.255.252
+ip rip authentication mode md5
+ip rip authentication key-chain RIP-LAB
+no sh
+int fa0/0
+ip addr 10.30.0.1 255.255.255.0
+no sh
+router rip
+net 10.0.0.0
+ver 2
+no auto
+passive-interface default
+no passive-interface s1/0
+no passive-interface s1/1
+
+
+
+[R7]
+conf t
+int s1/2
+no sh
+ip addr 10.255.2.2 255.255.255.252
+int fa0/0
+ip addr 172.20.10.1 255.255.255.0
+no sh
+exit
+ip route 0.0.0.0 0.0.0.0 10.255.2.1
+
+[R5의 Subnet정보 ]
+Subnet-A : 172.16.32.0/24
+Subnet-B : 172.16.33.0/25
+Subnet-C : 172.16.33.128/26
+Subnet-D : 172.16.33.192/26
+
+
+
+------------------------------------------
+
+
+해설 
+172.16.32.0/22 1024의 아이피 
+
+
+
+172.16.32.0 ~ 172.16.35.255 전체범위
+
+172.16.34.0 ~ 172.16.35.255 남는 범위
+문제 4-2
+area 20 range 172.16.32.0 255.255.252.0 prefix /22
+area 20 range 172.16.32.0 255.255.254.0 prefix /23
+
+
+254
+172.16.32.0/24
+172.16.32.0 ~ 172.16.35.255
+172.16.32.1 ~ 172.16.32.254
+
+128
+172.16.33.0/25
+172.16.33.0 ~ 172.16.33.127
+172.16.33.1 ~ 172.16.33.126
+
+64
+172.16.33.128/26
+172.16.33.128 ~ 191
+172.16.33.129 ~ 190
+64
+172.16.33.192/26
+172.16.33.192 ~ 255
+172.16.33.193 ~ 254
+
+문제 1
+
+R5의 신규 LAN에 172.16.32.0/22를 배정받았다. 전체 범위 안에서 A→B→C→D 순서로 낮은 주소부터 연속 배정하시오. 단말 수는 아래 값으로 고정하며 LAN마다 라우터 게이트웨이 1개를 추가해야 한다. 여유 단말 수나 스위치 관리 IP는 추가하지 않는다. 게이트웨이는 첫 사용 가능 주소를 사용하시오.
+A 200 201 
+
+
+
+
+10.20.0.0/22
+
+10.20.0.0 ~ 10.20.10.20.3.255
+ 
+
+서브넷 A 넷 아이피: 10.20.0.0   10.20.0.1 ~10.20.0.254 브로드 캐스트 아이피10.20.0.255 프리픽스 /24
+서브넷 B 넷 아이피 : 10.20.1.0   10.20.1.1~10.20.0.126 브로드 캐스트 아이피 10.20.1.127 프리픽스 /25
+서브넷 C 넷 아이피 : 10.20.1.128 10.20.1.129~10.20.1.190 브로드캐스트 아이피 10.20.1.191 프리픽스 /26
+서브넷 C 넷 아이피 : 10.20.1.192 10.20.1.193~10.20.1.254 브로드캐스트 아이피 10.20.1.255프리픽스 /26
+126
+
+128 64 32 16 8 4 2 1 
+11
+/26
+
+1-1
+254
+172.16.32.0/24
+172.16.32.0 ~ 172.16.35.255
+172.16.32.1 ~ 172.16.32.254
+/25로 더 늘렸을 때 128이 되므로 가용호스트의 수는 넷주소와 브로드케스트 주소수를 뺀 126이 된다. 이러면 200대를 가용 호스트에 수용 불가능  
+
+128
+172.16.33.0/25
+172.16.33.0 ~ 172.16.33.127
+172.16.33.1 ~ 172.16.33.126
+
+64
+172.16.33.128/26
+172.16.33.128 ~ 191
+172.16.33.129 ~ 190
+64
+172.16.33.192/26
+172.16.33.192 ~ 255
+172.16.33.193 ~ 254
+
+ip default-gateway 192.168.1.254
+
+문제3-1 
+R1
+conf t
+key chain RIP-B
+key 2
+key-string RouteB2026
+int s1/0
+ip rip authentication mode md5
+ip rip authentication key-chain RIP-B
+
+R6
+conf t
+key chain RIP-B
+key 2
+key-string RouteB2026
+int s1/0
+ip rip authentication mode md5
+ip rip authentication key-chain RIP-B
+int s1/1
+ip rip authentication mode md5
+ip rip authentication key-chain RIP-B
+
+R3
+conf t
+key chain RIP-B
+key 2
+key-string RouteB2026
+int s1/1
+ip rip authentication mode md5
+ip rip authentication key-chain RIP-B
+
+
+4-2
+conf t
+router ospf 1
+area 20 range 172.16.32.0 255.255.254.0 prefix /23
+
+
+6-3
+
+int s1/0
+ip rip auth
+
+
+sh ip routetracert
+라우팅 테이블에 수렴이 되었는가경로 추적이 정상적으로 완료되었는가
+sh ip protocol
+key값, key-string 값 동일mode 동일한지
+sh ip ospf virtual-linksh ip ospf database summarysh ip route
+다른 라우터의 라우팅 테이블에 인스톨 여부
+redistribute 
+라우팅 테이블 동기화
+ping 
+reply from타임아웃이 발생하면 안됨
+
+
+R1
+router ospf 10
+redistribute rip subnets metric 20 metric-type 2 
+router rip
+redistribute ospf 10 metric 6 route-map 
+
+R3
+router ospf 10
+redistribute rip subnets metric 20 metric-type 2 
+redistribute static subnets metric 35 metric-type 1
+router rip
+redistribute ospf 10 metric 2

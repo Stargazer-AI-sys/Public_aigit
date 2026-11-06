@@ -1,0 +1,2 @@
+아래 폴더의 Notion 게시 패키지를 현재 연결된 Notion 도구로 게시해줘. 순서와 규칙은 폴더의 GUIDE.md를 그대로 따라줘.
+게시 폴더: C:\Users\ICT\Desktop\Aigit\Claudecode\Project_Refactor\refactory_target\study\study-system\data\publish

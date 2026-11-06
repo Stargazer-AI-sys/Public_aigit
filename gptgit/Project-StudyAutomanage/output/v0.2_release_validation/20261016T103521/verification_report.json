@@ -1,0 +1,65 @@
+{
+  "status": "PASS",
+  "local_test_suite": {
+    "passed": 105,
+    "total": 105,
+    "final_exit_code": 0,
+    "earlier_attempt": "104 tests with 1 new-test CSV setup error; corrected before final PASS"
+  },
+  "representative_saved_results": [
+    {
+      "material": "12_day",
+      "saved_version": "0.2-draft",
+      "schema_and_links": "PASS",
+      "original_unchanged": true,
+      "source_quote_check": "not repeated; existing reviewed result"
+    },
+    {
+      "material": "15_day",
+      "saved_version": "0.2-draft",
+      "schema_and_links": "PASS",
+      "original_unchanged": true,
+      "source_quote_check": "not repeated; existing reviewed result"
+    },
+    {
+      "material": "20_day",
+      "saved_version": "0.2-draft",
+      "schema_and_links": "PASS",
+      "original_unchanged": true,
+      "source_quote_check": "not repeated; existing reviewed result"
+    },
+    {
+      "material": "18_day",
+      "saved_version": "0.2-draft",
+      "schema_and_links": "PASS",
+      "original_unchanged": true,
+      "source_quote_check": "PASS"
+    }
+  ],
+  "saved_response_recheck": "PASS",
+  "stable_schema_offline_fixture": "PASS (version field adapted only; not new AI output)",
+  "new_api_calls": 0,
+  "live_generation_quality": "pending user execution",
+  "network_device_execution": "not verified",
+  "guides_updated": false,
+  "official_records_updated": false,
+  "limitations": [
+    "Saved results retain earlier generation quality; rendering does not add missing explanations.",
+    "12-day Stub network security and packet-loss publication hold remains."
+  ],
+  "portable_launcher": "PASS: Windows CMD --help with selected existing interpreter",
+  "distribution": {
+    "file": "output\\releases\\study_analyzer_schema_v0.2_20261016T103521.zip",
+    "files": 26,
+    "manifest_integrity": "PASS",
+    "matches_current_runtime_source": true,
+    "isolated_extraction_smoke_check": "PASS in final test suite"
+  },
+  "budget_after_local_validation": {
+    "calls_used": 5,
+    "call_limit": 100,
+    "budget_usd": 2.0,
+    "estimated_or_reserved_usd": 0.010168845,
+    "new_api_calls": 0
+  }
+}

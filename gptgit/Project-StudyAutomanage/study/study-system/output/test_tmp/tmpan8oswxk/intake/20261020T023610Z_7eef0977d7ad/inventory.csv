@@ -1,0 +1,8 @@
+﻿filename,path,extension,size_bytes,created_at,modified_at,sha256,text_length,status,error,text
+sample.txt,C:\Users\ICT\Desktop\Aigit\gptgit\Project-StudyAutomanage\study\study-system\output\test_tmp\tmpan8oswxk\source\sample.txt,.txt,32,2026-10-20T11:36:10,2026-10-20T11:36:10,836408c94ae2b3dc8565dece8bf3386587c0cc04f189173eaef3f70fab18227a,32,success,,"vlan 10
+int fa0/1
+sw acc vlan 10"
+화면 확인용 신규.txt,C:\Users\ICT\Desktop\Aigit\gptgit\Project-StudyAutomanage\study\study-system\output\test_tmp\tmpan8oswxk\source\화면 확인용 신규.txt,.txt,52,2026-10-20T11:36:10,2026-10-20T11:36:10,f2bc6a4cffe6fb60a28d091def40433256467250d27d970d402e0d93e830053e,52,success,,"vlan 10
+int fa0/1
+sw acc vlan 10
+new material source"

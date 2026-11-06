@@ -1,0 +1,31 @@
+{
+  "version": "0.5",
+  "quality_policy": "quality-v0.3",
+  "automated_tests": {
+    "passed": 52,
+    "failed": 0
+  },
+  "paid_api_calls_during_validation": 0,
+  "new_api_evidence_contract": "start_line/end_line; final canonical evidence is verbatim source",
+  "legacy_offline_rechecks": [
+    {
+      "filename": "12일차.docx",
+      "mechanical_validation": "PASS",
+      "recovered_evidence_count": 3
+    },
+    {
+      "filename": "15일차 Dynamic routing_IGP.txt",
+      "mechanical_validation": "PASS",
+      "recovered_evidence_count": 1
+    }
+  ],
+  "ambiguous_reordered_or_paraphrased_quotes": "not automatically repaired",
+  "new_live_luna_line_selection_validation": "PENDING",
+  "content_review_required": true,
+  "budget_policy_unchanged": true,
+  "user_reported_prior_calls_used": 3,
+  "user_reported_prior_estimated_usd": 0.005968,
+  "recheck_consumes_calls": false,
+  "recheck_modifies_original_run": false,
+  "recheck_enters_live_api_cache": false
+}

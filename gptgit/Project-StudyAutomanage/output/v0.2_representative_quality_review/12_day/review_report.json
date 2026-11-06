@@ -1,0 +1,33 @@
+{
+  "status": "PASS",
+  "actual_ai_call": false,
+  "decisions": [
+    {
+      "candidate_id": "candidate-1cfd7a4de3d33efd",
+      "section_id": "routing-families",
+      "status": "applied",
+      "reason": "이번 대화에서 공식 자료 본문을 조회하고 해당 정정 문장이 출처의 설명과 일치함을 검토했다."
+    },
+    {
+      "candidate_id": "candidate-9ff3af8fa232fc91",
+      "section_id": "route-selection",
+      "status": "applied",
+      "reason": "이번 대화에서 공식 자료 본문을 조회하고 해당 정정 문장이 출처의 설명과 일치함을 검토했다."
+    },
+    {
+      "candidate_id": "candidate-8a26d90fff369427",
+      "section_id": "rip-floating",
+      "status": "applied",
+      "reason": "이번 대화에서 공식 자료 본문을 조회하고 해당 정정 문장이 출처의 설명과 일치함을 검토했다."
+    },
+    {
+      "candidate_id": "candidate-6fb7d4e2bd285afa",
+      "section_id": "default-stub",
+      "status": "unresolved",
+      "reason": "이번 확인 범위에서 보안 단정·손실 원인까지 뒷받침할 근거를 확보하지 못해 게시를 보류한다."
+    }
+  ],
+  "technical_review_source": "trusted local decisions; not URL availability checks",
+  "input_analysis_sha256": "2dd2cfc8573b06d870214fd6ca8f4aef02c4ad576fa1fb24962b31186e8ed5f1",
+  "output_analysis_sha256": "5444788d0b20d5b1900645f8276cd90684de7781203e36ac0f5461f50ba4c66b"
+}

@@ -1,0 +1,4 @@
+vlan 10
+int fa0/1
+sw acc vlan 10
+new material source

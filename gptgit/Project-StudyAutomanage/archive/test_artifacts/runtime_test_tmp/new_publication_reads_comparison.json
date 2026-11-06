@@ -1,0 +1,23 @@
+{
+  "mode": "offline mock, not live LAN replay",
+  "before_body_reads": [
+    23,
+    20
+  ],
+  "after_body_reads": [
+    19,
+    15
+  ],
+  "before_writes": [
+    9,
+    5
+  ],
+  "after_writes": [
+    9,
+    5
+  ],
+  "after_unchanged": {
+    "query_data_sources": 4
+  },
+  "approval_db_unchanged": true
+}
