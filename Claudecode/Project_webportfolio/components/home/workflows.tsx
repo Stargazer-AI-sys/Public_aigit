@@ -102,7 +102,9 @@ function WideCard({ card }: { card: CaseCard }) {
           ))}
         </div>
       </div>
-      {/* 카드 이미지는 같은 영역·같은 방식(왼쪽 위 기준 cover)으로 잘라 크기를 통일한다. */}
+      {/* 카드 이미지는 같은 영역·같은 방식(왼쪽 위 기준 cover)으로 잘라 크기를 통일한다.
+          cover는 카드 높이(약 640px)에 맞춰 늘리므로 가로로 넓은 이미지(CASE 02)는 표시 폭이 1100px을 넘는다.
+          sizes를 카드 폭(580px)으로 두면 640w 이미지를 받아 확대해 흐려지므로 표시 폭 기준으로 준다. */}
       <ZoomImage
         src={card.image.fullSrc}
         alt={card.image.alt}
@@ -112,7 +114,7 @@ function WideCard({ card }: { card: CaseCard }) {
           src={card.image.src}
           alt={card.image.alt}
           fill
-          sizes="(max-width: 960px) 100vw, 580px"
+          sizes="(max-width: 960px) 100vw, 1200px"
           className="object-cover object-left-top"
         />
       </ZoomImage>
