@@ -1,16 +1,19 @@
 # Project_webportfolio 작업 기록
 
-> 최종 갱신 2026-11-06 (HOME PC 세션) | 새 세션은 §0부터 읽는다. 경로는 저장소 루트(`aigit`) 기준 상대 경로다.
+> 최종 갱신 2026-11-08 (HOME PC 세션) | 새 세션은 §0부터 읽는다. 경로는 저장소 루트(`aigit`) 기준 상대 경로다.
 
 ## 0. 인계 요약
 
 ### 현재 상태
+- **2026-11-08 Vercel에 게시했다. 주소는 https://stargazer-folio.vercel.app** (Vercel Domains에서 추가). 처음 자동으로 붙은 `aigit-three.vercel.app`도 지우지 않아 계속 열린다(이미 공유한 링크 보호). private 저장소 `Aigit`를 연결했고 `main`에 push하면 자동으로 다시 배포된다. 링크를 아는 사람만 보게 `noindex`·`robots.txt`로 색인을 막았다(접근 자체는 막지 않는다). 공유 미리보기(OG)는 사용자가 메신저에서 나오는 것을 확인했다.
+  - 같은 날 연락 영역을 고쳤다(메일 주소 복사 + Gmail·Outlook·메일 앱 링크). 스크롤한 뒤 메뉴·연락하기를 다시 눌러도 반응하지 않던 버그를 고쳤고, 진행률 칸은 숨겼다. 커밋 `424010c`, `5e629ad`, `2ddaa66`, `6f7aaf1`(주소를 `stargazer-folio`로 변경)을 `main`에 push했다.
 - 블로그형 포트폴리오. 스택 세팅이 끝났다: Next.js 16.4.3(App Router) + TypeScript + Tailwind v4 + shadcn/ui + MDX(`@next/mdx`) + `next-themes` 다크 모드.
-  - 다크 모드 적용 뒤 `npm run lint`(에러 없음), `npm run build`, `tsc --noEmit` 통과. dev 서버 `/` 200 확인.
-  - `app/page.tsx`는 아직 템플릿 그대로이고, `app/layout.tsx`의 `title`·`lang="en"`도 그대로다. 구현 때 함께 바꾼다.
+  - **11-06 목업을 Next.js로 구현했다(개발기획서 Phase 1~4 완료).** Home(`/`, 섹션 `home`·`how`·`projects`)과 CASE 상세 3개(`/cases/case-01`~`03`, 정적 생성). 화면 문구는 `content/`(`site.ts`, `home.ts`, `cases/*.ts`) 데이터 파일에 있고 화면 코드와 분리돼 있다. 커밋 `50fa2e6`(`20261106_HOMEwork_webportfolio_nextjs_impl_subagent_skill`)과 작업기록 커밋 `44b7ce7`을 11-06 `main`에 push했다.
+  - 최종 `npm run lint`, `npx tsc --noEmit`, `npm run build` 통과. 브라우저(Playwright, 1400px·375px, 라이트·다크) 콘솔 오류·경고 0건.
   - `create-next-app@16.4.3` 템플릿에 shadcn/ui가 초기화되어 있다(`components.json`, `components/ui/button.tsx`, `lib/utils.ts`). MDX도 설치되어 있다(`@next/mdx`, `@mdx-js/loader`, `@mdx-js/react`, `@types/mdx`; `next.config.ts`의 `createMDX`, 루트 `mdx-components.tsx`).
-  - 실제 콘텐츠(`.mdx`)와 frontmatter 방식은 아직 정하지 않았다. `@next/mdx`는 기본적으로 frontmatter를 지원하지 않고 `export const metadata`를 쓴다.
-- **목업을 포트폴리오 핵심 주제(CASE 01~03 + REFLECTION) 기준으로 다시 썼고, 11-06 사용자 검토에서 "큰 문제 없음, 조금 수정할 부분만 남음" 판정을 받아 그 수정을 반영했다.** Next.js 페이지 구현은 시작하지 않았다.
+  - MDX 설정은 그대로 두었고 지금은 쓰지 않는다(CASE 상세는 TS 데이터로 결정, 이후 글 작성용). `@next/mdx`는 기본적으로 frontmatter를 지원하지 않고 `export const metadata`를 쓴다.
+- **개발 진행 방식:** 프로젝트 전용 `subagent-dev` 스킬(`Claudecode/Project_webportfolio/.claude/skills/subagent-dev/SKILL.md`)과 `CLAUDE.md` "개발 진행 규칙"을 따른다. 기획서는 `Claudecode/Project_webportfolio/docs/01_plan/development-plan.md`(승인됨, 전 Task 완료, 결정·변경 이력은 §6).
+- **목업을 포트폴리오 핵심 주제(CASE 01~03 + REFLECTION) 기준으로 다시 썼고, 11-06 사용자 검토에서 "큰 문제 없음, 조금 수정할 부분만 남음" 판정을 받아 그 수정을 반영했다.** 11-06 이 목업을 기준으로 Next.js 구현을 마쳤다(위 항목). 목업은 계속 비교 기준이다.
   - 기준 파일: `Claudecode/Project_webportfolio/prototype/portfolio-mockup.html`. 11-06 커밋 `59c7852`(`20261106_HOMEwork_webportfolio_mockup_case03_process_criteria`)로 `main`에 push했다. 실제 화면 캡처 편집본 15장은 `prototype/img/`, 원본은 `img/`(둘 다 커밋 `dc7a026`부터 git 추적 중이다. public 동기화에서는 `img/`만 제외한다).
   - 게시본 https://claude.ai/artifact/WCkt39nNT6HVbXK44m9ToA (비공개)에 11-06 최신 수정까지 반영했다(버전 `1793958040-c8e5`, `index.html`만 갱신, `img/`는 그대로, 슬러그 UUID `ec7d3e9d-6cec-4131-a566-9ab19d6fd2bd`).
 - Context7 MCP는 HOME PC와 ICT PC에서 정상 연결된다(11-03 ICT PC는 `resolve-library-id` 호출 확인).
@@ -50,22 +53,58 @@
 - **인용:** REFLECTION 11.06 질문은 원문을 띄어쓰기까지 그대로 인용한다(A안).
 - **무시 항목(다시 제안하지 않는다):** REFLECTION 타임라인을 프로젝트별로 나누는 안, CASE 02 카드 이미지(터미널 7개) 교체, CASE 01 "화면 기준 5건"과 게시 기록 1건의 차이(현재 Notion 기준 5건이 올라가 있는 것이 맞다), "AI가 처리한 일"과 "AI가 맡은 일" 용어 통일.
 
+### 개발 진행 방식 결정 (2026-11-06 사용자 결정)
+- **서브에이전트 기반 개발:** 개발기획서를 먼저 만들고 승인받은 뒤 Phase 안의 Task로 나눠 위임한다. Opus 5.5(마스터)는 판단·지시·검토·통합만 하고, 구현은 복잡성과 양에 따라 Sonnet 5.5 또는 Haiku 5.5에 맡긴다. 이 규칙은 이 프로젝트에만 적용한다(프로젝트 스킬로 둠).
+- **herdr:** 실제 탭·pane·cwd·세션을 확인한다. 마스터 대화 탭은 분할하지 않고 담당용 새 탭 안에서만 pane을 나눈다. 같은 작업 묶음은 확인 후 탭을 공유하고, 묶음이 바뀌면 새 탭을 만든다. 요청 없이 포커스 이동·창·서버 종료를 하지 않는다.
+- **병렬 처리(작업 중 지시):** 변경 범위가 겹치지 않으면 병렬로 처리한다. 스킬에만 규칙으로 두고 `CLAUDE.md` 요약에 넣는 것은 보류했다.
+- **연속 진행:** Phase 1 완료 후 이상이 없으면 다음 Phase로 계속 진행하고, 중요한 결정이 아니면 사용자를 부르지 않는다(이번 개발에 대한 지시).
+- **기획서:** 파일명·문서 제목만 영어(`development-plan.md`, "Project_webportfolio Development Plan"), 본문은 한국어.
+- **미정 3건을 마스터 추천안으로 확정:** 폰트는 목업과 같은 Manrope + Noto Sans KR, 상세 페이지는 TS 데이터 파일 + 공통 컴포넌트, 주소는 `/cases/case-01`~`03`.
+- **`.claude/settings.local.json`은 git에서 제외한다**(`.gitignore`에 추가). PC마다 MCP 승인 기록이 다르기 때문이다.
+
+### 게시·연락 결정 (2026-11-08 사용자 결정)
+- **연락 방식:** 메일 보내기가 동작하지 않았다(`mailto:`는 PC에 기본 메일 앱이 없으면 반응이 없다). 폼 없이 "주소 복사 + 웹메일 링크"(A안)로 간다. 폼 발송은 외부 서비스와 키 관리가 필요해 하지 않는다.
+- **버튼 디자인:** hero 버튼 색 등 버튼 상태는 일단 그대로 둔다. 디자인을 바꿀 때 사용자가 요청하면 바꾼다(이전 "hero 버튼 색 확인 필요" 항목은 이 결정으로 닫는다).
+- **진행률 칸:** 구현하지 않고 화면에서 숨기기만 한다(`components/progress-slot.tsx`의 `hidden`). 구현할 때 `hidden`을 지우고 `max-[960px]:hidden`을 되돌린다.
+- **게시처:** Vercel. 공개 범위는 "링크 아는 사람만"(검색 색인 차단). 템플릿 svg 5개와 기본 파비콘은 삭제하고, 파비콘은 Stargazer 의미에 맞춰 망원경 아이콘으로 한다. 공유 미리보기는 코드로 자동 생성하는 이미지(A안)로 한다.
+- **주소 이름:** 처음에는 그대로 두기로 했다가 같은 날 변경하기로 했다. 사용자가 `stargazer`를 원했지만 Vercel이 "이미 사용 중"으로 거절했고, 두 번째 후보 `stargazer-folio`가 추가됐다. 주소를 바꿀 때는 Vercel Settings → Domains에서 추가한 뒤 `content/site.ts`의 `url`을 같이 고친다.
+- **후속 항목(2026-11-08 사용자 결정):** 남은 문구 확인 2건과 스크린샷 반영은 사용자가 요청할 때 바꾼다. 목업 게시본(artifact)은 계속 둔다. 진행률 대시보드는 보류한다. LCP 이미지 경고(`case01-notion-home.png`)는 개발 콘솔에만 뜨는 권고이고 첫 화면 밖 이미지라 그대로 둔다.
+
 ### 다른 PC에서 이어갈 때
 - pull 후 이 폴더에서 `npm install`을 먼저 실행한다. `node_modules/`는 git에 없다. Node.js가 없으면 그것부터 설치한다.
 - Context7 MCP는 `.mcp.json`으로 함께 옮겨지지만, PC마다 Claude Code에서 승인해야 한다.
 - `humanize-korean` 플러그인은 2026-11-04에 DESKTOP-K58196E에서 설치했다. 다른 PC에서 쓰려면 설치 여부를 먼저 확인한다.
 
 ### 다음 단계
-0. **남은 문구 확인(선택):** 사용자가 아직 정하지 않은 항목이 둘 있다(실행 허가 아님).
-   - Working Style 03 "운영에서" 항목의 "확인 기준이 잘못되어 잘못 처리된" 표현.
-   - 카드의 교훈 문장(`.learn`) 4곳은 기록을 보고 정리한 표현이다. 경험담형 예시("AI가 끝났다고 보고해도, 어디서 확인했는지 되물으면 빠진 부분이 드러났습니다.")를 제시했으나 사용자는 REFLECTION 11.06 질문 인용(A안)만 정했다. REFLECTION 10.19·10.29 질문은 원문을 찾지 못해 지금도 정리된 표현이다.
-1. **화면 확인:** 이미지 팝업의 실제 클릭 동작, 다크 모드, 모바일 너비는 아직 보지 않았다. headless Edge는 창 최소 폭 때문에 모바일 캡처가 오른쪽이 잘려 실제 브라우저로 봐야 한다.
-2. 상세 페이지 미확인 항목을 본다: 다크 모드, 모바일, 게시본의 버튼 동작, 마지막에 고친 프로세스 순서도 문구.
-3. 승인되면 Next.js로 구현한다: 메뉴·좌측 레일·우측 슬롯(자리만), 카드 데이터 분리, 상세 페이지 2개의 라우트, `layout.tsx`의 제목과 `lang="ko"`, 토글 위치를 임시 고정 위치에서 상단 우측으로 이동. 목업의 해시 전환은 목업용이다.
-4. 브라우저 확인: 다크 모드 토글·새로고침 시 깜빡임·시스템 설정 추종, 폰트 적용. 아직 직접 확인하지 못했다.
-5. 스크린샷을 받으면 목업·구현에 반영한다.
+1. **실기기 확인(사용자):** 게시본을 사용자 폰·PC 브라우저에서 모바일 너비, 다크 모드, 이미지 팝업, Gmail·Outlook 링크까지 직접 확인한다. 지금까지는 Playwright headless로만 봤다. 이상이 있으면 알려 주면 고친다.
+2. **public 저장소 동기화(미결정):** `Public_aigit`에도 반영할지 사용자가 아직 답하지 않았다. 요청하면 `sync-public` 절차로 한다(`img/`만 제외).
+3. **새 주소 미리보기 확인(사용자):** 새 주소 `stargazer-folio.vercel.app`을 메신저에 붙여 미리보기가 나오는지 본다. 서버 쪽에서는 `og:image`가 새 주소를 가리키고 이미지가 200으로 열리는 것까지 확인했다.
+4. **요청 시 변경:** 남은 문구 2건(Working Style 03 "운영에서"의 "확인 기준이 잘못되어 잘못 처리된", 카드 교훈 문장 `.learn`, `content/home.ts`), 스크린샷 반영(`public/img/`와 데이터 파일), 디자인·버튼 색. REFLECTION 10.19·10.29 질문은 원문을 찾지 못해 정리된 표현 그대로다.
+5. **유지·보류:** 목업 게시본은 계속 둔다. 진행률 대시보드는 보류(`components/progress-slot.tsx`는 숨김 상태). `npm audit` 21건과 LCP 경고는 기존 결정대로 둔다.
 
 ## 1. 진행 내용
+
+### 2026-11-08 (HOME PC) — 연락 기능·스크롤 버그 수정과 Vercel 게시
+- **연락 영역:** `components/contact-actions.tsx`(클라이언트)를 새로 만들어 푸터(`components/site-footer.tsx`)에 연결했다. "메일 주소 복사"(복사 후 "복사됨"·안내 문구, 실패 시 직접 복사 안내) + "메일 앱으로 열기"(`mailto:`) + Gmail·Outlook 쓰기 링크. 네이버 메일은 받는사람 지정 URL 규격을 찾지 못해 뺐다.
+- **스크롤 버그:** 주소가 이미 `/#how`·`#contact`처럼 같은 해시일 때 `next/link`가 이동을 건너뛰어 스크롤로 벗어난 뒤 다시 눌러도 반응이 없었다(Playwright로 재현). `components/site-header.tsx`의 `scrollIfSameHash`가 같은 해시일 때만 `scrollIntoView()`로 직접 스크롤하게 했다. 해시가 바뀌는 이동은 라우터가 그대로 처리한다.
+- **진행률 칸 숨김:** `components/progress-slot.tsx`에 `hidden`.
+- **게시 전 정리:** `.gitignore`에 `.playwright-mcp/` 추가, `public/`의 템플릿 svg 5개와 기본 `app/favicon.ico` 삭제, 망원경 아이콘 `app/icon.svg`(lucide `telescope` 경로, `#4B89DC` 배경), `app/robots.ts`(`Disallow: /`)와 `robots: { index: false, follow: false }`(`app/layout.tsx`).
+- **OG 이미지:** `app/opengraph-image.tsx`(1200×630, 제목·소개 문장·망원경)와 한글 글꼴 부분집합 `assets/og/NotoSansKR-Bold-subset.ttf`(19KB, Google Fonts `text=` 파라미터로 받음). `content/site.ts`에 `url`을 두고 `app/layout.tsx`의 `metadataBase`가 읽는다. 제목·소개 문장의 글자를 바꾸면 글꼴을 다시 만들어야 한다(`opengraph-image.tsx` 주석에 방법을 적어 두었다).
+- **주소 변경:** `stargazer.vercel.app`은 Vercel 도메인 추가에서 "중복"으로 거절됐고(사전에 curl로 보면 보안 확인 화면(429)이 떠 사용 중일 가능성을 짐작했다), `stargazer-folio.vercel.app`이 추가됐다. `content/site.ts`의 `url`을 새 주소로 바꿨다(소스에 `aigit-three` 잔존 0건). 옛 주소는 계속 200이다.
+- **커밋·push:** `424010c`(연락·스크롤·진행률 숨김), `5e629ad`(게시 전 정리·아이콘·noindex), `2ddaa66`(OG 이미지·`metadataBase`), `6f7aaf1`(주소 `stargazer-folio`). 모두 `main`에 push했다.
+- **검증:** 각 변경 뒤 `npx tsc --noEmit`, `npm run lint`, `npm run build` 통과. 주소 변경 push 뒤 새 주소에서 `/`, `/cases/case-01`, `/robots.txt`, `/icon.svg`, `/opengraph-image`가 200이고 `og:image`가 `https://stargazer-folio.vercel.app/opengraph-image?...`임을 curl로 확인했다. 변경 전 게시본 `https://aigit-three.vercel.app`에서 `/`, `/cases/case-01`~`03`, `/robots.txt`, `/icon.svg`, 이미지가 200, 없는 주소 `/cases/nope`는 404. 게시본 브라우저(HTTPS)에서 메뉴 재클릭 스크롤, 메일 주소 복사 동작, 가로 스크롤 없음, 콘솔 경고·오류 0건 확인. OG 이미지가 열리고 메신저에서 미리보기가 나오는 것은 사용자가 확인했다.
+- **미확인:** 사용자 실기기(모바일 너비·다크 모드·이미지 팝업)와 Gmail·Outlook 링크가 받는사람을 채워 열리는지(로그인 필요). 클립보드에 실제 들어간 값(버튼 상태 변화만 봤다). SVG 파비콘이 오래된 브라우저·Safari에서 보이는지.
+
+### 2026-11-06 (HOME PC) — 서브에이전트 개발 규칙·스킬과 Next.js 구현
+- **규칙·스킬:** 프로젝트 전용 `subagent-dev` 스킬(`SKILL.md`, 기획서 양식 `references/plan-template.md`)을 만들고 `CLAUDE.md`에 "개발 진행 규칙" 요약을 넣었다. herdr 0.9.5 명령은 `herdr --skill`과 각 명령 그룹 도움말로 확인했다.
+- **테스트:** 담당 탭 생성·탭 안 분할(마스터 탭·포커스 유지), Haiku 담당자 실행·지시·응답 읽기를 확인한 뒤 테스트 탭을 닫았다.
+- **기획서:** `docs/01_plan/development-plan.md`. Phase 4개, Task 21건(Sonnet 13 · Haiku 5에게 위임, 나머지 3건은 마스터 통합·검증과 P4-T1). 겹치지 않는 Task는 Phase와 관계없이 최대 5개를 동시에 돌렸다.
+- **구현:** 색상 토큰(목업 → shadcn 변수 + 목업 전용 토큰), Manrope·Noto Sans KR, `lang="ko"`, 헤더·레일·진행률 슬롯·배경·푸터, Home 3섹션, 이미지 팝업(`components/lightbox.tsx`), CASE 상세 공통 컴포넌트와 CASE별 데이터·순서도 SVG, `public/img/` 15장(`prototype/img/` 복사).
+- **마스터가 직접 고친 것:** `layout.tsx`에 컴포넌트 연결, 사이트 설명을 hero 소개 문장으로, 푸터의 "목업입니다…" 안내 문단 제거(목업 전용 표기).
+- **브라우저 확인 중 찾아 고친 것:** 상세 페이지 상단 메뉴 `aria-current` hydration 불일치, `/cases/[slug]` params가 Suspense 밖에 있던 오류(`instant-shell-url-data`), 상세 페이지 레일 미숨김 → params 읽기를 Suspense 안으로 옮겨 해결(근거 `node_modules/next/dist/docs/` `adopting-partial-prefetching.md`). 목업 대비 hero 버튼·본문 링크 밑줄·hero 상단 여백·수치 카드 높이를 맞췄다.
+- **검증:** Task마다 `git diff` 범위와 문구 대조(CASE 01 332개, Home 131개 등) 확인. P3-T5 링크·이미지·중복 id·빠진 섹션 0건. 최종 lint·tsc·build 통과, 상세 3개 정적 생성. 실측 h1 상단 150px·수치 카드 102px(목업과 같음), Home 높이 5265px(목업 5322px).
+- **기타:** `.gitignore`에 `.claude/settings.local.json` 추가. 세션 전부터 있던 `.mcp.json`의 Playwright MCP 등록도 함께 커밋했다.
+- **미확인:** 사용자 실제 브라우저·실기기 화면. 375px 목업 비교는 수치(가로 스크롤 없음, 높이) 위주로 했다. LCP 경고 이미지는 첫 화면 밖이라 `loading="eager"`를 붙이지 않았고, 맨 위에서 새로 열었을 때 경고가 없음을 확인했다.
 
 ### 2026-11-06 (HOME PC) — 목업 검토 후속 수정·게시·커밋
 - **수정(`prototype/portfolio-mockup.html`):** 메인 "AI Workflows 보기" 버튼 스타일 통일. CASE 03 카드(제목·요약·문제·제 판단·결과·교훈)와 상세 페이지(제목·머리말·개요 첫 문단, 발생한 문제 1번에 "조치" 추가)를 처리 기준 중심으로 재작성. Working Style 03 제목과 "AI와 함께" 문장 수정. REFLECTION 11.06 질문을 원문 그대로 인용. 미사용 `.chips`·`.chip` CSS와 JS 삭제.
@@ -140,6 +179,10 @@
 - headless Edge 캡처는 명령이 끝난 뒤 파일이 늦게 생긴다(11-06 ICT PC에서 Git Bash로도 기다리면 생성됨). 같은 프로필로 동시에 실행하면 충돌한다. 해시로 섹션을 지정하면 빈 화면이 찍혀, 다른 섹션을 숨기고 `<base href>`를 넣은 임시 사본을 찍었다. 경로: `C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe`.
 - 목업 수정과 게시는 `Claudecode/Project_webportfolio/prototype/portfolio-mockup.html`을 기준으로 한다. 사용자가 이 파일을 직접 고치므로 게시본을 읽어 수정하지 않는다.
 - `LayoutProps` 같은 전역 타입은 `next build`/`next dev` 후에 생성된다. 빌드 전 `tsc --noEmit`은 실패할 수 있다.
+- **herdr 운영(2026-11-06 HOME PC 확인):** Git Bash에서 `/`로 시작하는 인자는 경로로 바뀐다(`/exit` → `C:/Program Files/Git/exit`). `MSYS_NO_PATHCONV=1`로 보낸다. 담당 `claude`는 사용자 설정을 이어받아 auto mode로 뜬다. 담당자 Claude Code 화면이 내부 스크롤되면 `agent read`에 최종 보고가 안 보이며 `send-keys`는 `ctrl+end`를 지원하지 않는다.
+- **Playwright MCP:** 브라우저 프로필(`ms-playwright-mcp\mcp-chrome-*`)을 공유해 한 번에 한 세션만 쓸 수 있다. 캡처 파일은 프로젝트 안 `.playwright-mcp/`에만 저장된다(scratchpad 경로 거부). 이 폴더는 2026-11-08에 gitignore에 추가했다(그 전에는 작업 후 지웠다).
+- **Vercel(2026-11-08 확인):** `main`에 push하면 자동으로 다시 배포된다(push 후 OG 이미지가 게시본에서 열림). 게시본은 로그인 없이 접속된다. 개발 서버의 `og:image`는 `localhost`로 보이지만 프로덕션 빌드 HTML에는 `content/site.ts`의 `url`(지금은 `https://stargazer-folio.vercel.app`)로 들어간다. 같은 프로젝트라 옛 주소(`aigit-three`)도 새 배포본을 서빙하고, 그 `og:image`도 새 주소를 가리킨다(2026-11-08 curl로 확인). `ImageResponse`는 한글 글꼴을 직접 넘겨야 하고 번들 한도는 500KB다(`node_modules/next/dist/docs/01-app/03-api-reference/04-functions/image-response.md`). `mailto:`는 기본 메일 앱이 없는 PC에서는 반응이 없다. Playwright 브라우저로 SVG 주소를 직접 열면 타임아웃이 났다(페이지에 `<img>`로 넣어 확인).
+- **Next 16 + `cacheComponents`:** `dynamicParams` 설정을 쓸 수 없다. `generateStaticParams`가 있는 경로는 프리렌더 중 `usePathname`이 풀린다(`use-pathname.md`). params를 Suspense 안에서 읽으면 목록 밖 slug의 `notFound()`가 HTTP 200으로 나간다(`not-found.md`). 단 2026-11-08 Vercel 게시본에서는 `/cases/nope`가 404로 응답했다(개발 서버와 다르다).
 - winget 설치 직후 열려 있던 셸·프로세스에는 Node.js 경로가 반영되지 않는다. 터미널과 Claude Code를 다시 열어야 한다.
 
 ## 3. 참고

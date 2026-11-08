@@ -10,6 +10,14 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 - 사용자가 "작업기록"이라고 하면 이 폴더의 `WORK_LOG.md`를 뜻한다(다른 프로젝트의 같은 이름 문서와 구분).
 - `WORK_LOG.md`는 작업 중 수시로 갱신하지 않는다. 사용자가 작업을 마칠 때 요청하면 한 번에 정리한다.
 
+## 개발 진행 규칙 (이 프로젝트 전용)
+
+개발 작업은 `subagent-dev` 스킬(`.claude/skills/subagent-dev/SKILL.md`)의 절차를 따른다. 핵심만 요약한다.
+
+- **기획서 먼저:** `docs/01_plan/development-plan.md`를 만들고 사용자 승인을 받은 뒤, Phase 안의 Task 단위로 쪼개 위임한다. 기획서 없이 Task를 넘기지 않는다.
+- **역할 분리:** Opus 5.5(현재 대화)는 마스터로서 판단·지시·검토·통합만 한다. 구현은 작업의 복잡성과 양에 따라 Sonnet 5.5 또는 Haiku 5.5 담당자에게 맡긴다.
+- **herdr 작업 공간:** 실제 탭·pane·cwd·세션을 확인한 뒤 작업한다. 마스터 대화 탭은 분할하지 않고, 담당용 새 탭을 만들어 그 안에서만 pane을 분할한다. 같은 작업 묶음은 확인 후 담당 탭을 공유하고, 묶음이 바뀌면 새 담당 탭을 만든다. 사용자 요청 없이 포커스를 옮기거나 기존 창·서버를 종료하지 않는다.
+
 ## 프로젝트
 
 Next.js App Router 기반 블로그형 포트폴리오. 목표 스택은 Next.js + TypeScript + Tailwind CSS v4 + shadcn/ui + MDX.
