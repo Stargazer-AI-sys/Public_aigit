@@ -40,7 +40,8 @@ def launch(role, model, name, check_only=False):
         raise ValueError('Herdr caller context required')
     if any(os.environ.get(k) for k in KEYS):
         raise ValueError('API/provider override present; no paid fallback allowed')
-    herdr = shutil.which('herdr')
+    local_herdr = PROJECT / '.local/bin/herdr/herdr.exe'
+    herdr = str(local_herdr) if local_herdr.is_file() else shutil.which('herdr')
     if not herdr:
         raise ValueError('herdr is not installed')
     codex = shutil.which('codex.cmd') if os.name == 'nt' else shutil.which('codex')

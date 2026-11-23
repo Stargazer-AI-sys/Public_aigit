@@ -171,6 +171,88 @@
 - 실행 중인 dev 서버가 있으면 그것을 쓰고, 없으면 새로 띄운 서버만 끝낸다. 기존 서버는 끄지 않는다.
 - 보고: 문제 목록(화면, 너비, 모드, 증상), 캡처 경로.
 
+### Phase 5 — Side Projects 메뉴와 llmwiki 상세 페이지 (2026-11-18 추가, 2026-11-18 완료)
+
+- **배경(2026-11-18 사용자 결정):** 헤더 메뉴에 4번째 항목을 추가한다. 형태는 Home 안의 새 섹션(`/#side`, AI Workflows 아래), 메뉴명은 `Side Projects`, 내용은 사용자가 준 llmwiki 프로젝트 1건이며 상세 페이지가 필요하다.
+- **문구·화면 원본:** `prototype/portfolio-mockup.html`의 `section#side`와 `main#side1-detail`(2026-11-18 추가). 문구 근거와 작성 기준은 `docs/01_plan/side-llmwiki-content.md`. 둘이 다르면 목업을 따른다. 담당자는 글자 그대로 옮긴다.
+- **목업에서 정한 화면 규칙:** 이미지가 오기 전까지 카드 오른쪽에 자리 표시(`.shot .frame` + "Slack 대화 화면 · 이미지 준비 중")를 두어 다른 카드와 크기를 맞춘다. 640px 이하에서는 메뉴가 4개라 가운데에 두면 우측 버튼과 닿으므로 메뉴를 왼쪽(10px)에 붙인다.
+- **구조**
+  - 라우트 `/side-projects/[slug]`(지금은 `llmwiki` 1개, `generateStaticParams`). 화면은 기존 `CaseDetail`(`components/case/case-sections.tsx`)을 그대로 쓴다. 섹션 블록 구성이 CASE와 같기 때문이다.
+  - 데이터 `content/side-projects/llmwiki.ts`, `content/side-projects/index.ts`. 타입은 `content/cases/types.ts`의 `CaseData`를 쓰되 `slug`를 CASE 전용 유니온에서 넓힌다.
+  - Home 카드는 기존 `WideCard`와 같은 모양에 저장소 링크 줄을 더한다. 흐름 라벨은 필요성/구축 단계/현재. 이미지가 없으면 자리 표시를 그린다(이미지는 사용자가 나중에 준다).
+  - 상세 페이지(`/side-projects/*`)에서는 레일을 숨기고 상단 메뉴는 Side Projects를 현재 위치로 표시한다(CASE와 같은 규칙).
+- **결정(2026-11-18 사용자)**
+  1. **저장소 링크:** 지금 주소(`llmwiki`, `agent-config`, 둘 다 비공개라 비로그인 시 404)를 임시로 쓴다. 공개용 저장소로 옮길 때 토큰·서버 정보를 점검하고 링크를 바꾼다.
+  2. **에이전트 이름:** 캐릭터 이름은 쓰지 않고 역할 이름(수집·리서치·정리 담당)만 쓴다.
+  3. **문구:** 카드 흐름은 운영 문제 대신 필요성·구축 단계·현재로 쓴다. 사이드 프로젝트는 문제가 생겨서가 아니라 필요해서 만든 것이 핵심이다. 분석 및 계획에 구축 단계 표를 넣고, 개선할 내용의 수집 경로는 자동화 파이프라인을 최종 목표로 적는다. 반영본은 `side-llmwiki-content.md`.
+
+| ID | 목표 | 담당 | 변경 허용 파일 | 선행 | 상태 |
+|---|---|---|---|---|---|
+| P5-T1 | 메뉴 4번째 항목·섹션 감지·레일·상세 경로 현재 위치 | sonnet | `content/site.ts`, `hooks/use-active-section.ts`, `components/site-header.tsx`, `components/section-rail.tsx` | 승인 | 완료 |
+| P5-T2 | 상세 라우트와 데이터 목록, slug 타입 확장 | sonnet | `app/side-projects/[slug]/page.tsx`, `content/side-projects/index.ts`, `content/cases/types.ts` | 승인 | 완료 |
+| P5-T3 | Home Side Projects 섹션 데이터와 컴포넌트 | sonnet | `content/home.ts`, `components/home/side-projects.tsx` | 승인 | 완료 |
+| P5-T4 | llmwiki 상세 데이터와 순서도 | sonnet | `content/side-projects/llmwiki.ts`, `components/case/flow-side-llmwiki.tsx` | P5-T2 | 완료 |
+| P5-I | Home에 섹션 연결, 통합 lint·tsc·build | 마스터 | `app/page.tsx` | P5-T1, T3, T4 | 완료 |
+| P5-T5 | 브라우저 확인(1400px·375px, 라이트·다크, 메뉴 4개 이동·현재 위치) | sonnet | 없음(보고만, 캡처는 scratchpad) | P5-I | 완료 |
+
+P5-T1은 변경 파일이 4개지만 각 1~5줄의 같은 목록 추가라 한 Task로 둔다. P5-T1·T2·T3은 파일이 겹치지 않아 동시에 돌린다.
+
+#### P5-T1 메뉴·섹션 감지·레일
+- `content/site.ts`의 `nav` 끝에 `{ label: "Side Projects", href: "/#side" }`. `SECTION_IDS` 끝에 `"side"`, 레일 항목 추가, 헤더 `navIcons`에 lucide 아이콘 1개(`Bot`) 추가.
+- 현재 위치: `/cases/*` → `projects`, `/side-projects/*` → `side`. 레일은 두 경로 모두 숨긴다.
+- 640px 이하에서 메뉴를 왼쪽 10px에 붙인다(목업 규칙). 320px·375px에서 메뉴와 우측 도구가 겹치지 않는지 보고한다(확인은 P5-T5).
+- 완료 조건: 자기 파일 eslint·`npx tsc --noEmit --incremental false` 통과.
+
+#### P5-T2 상세 라우트
+- `app/cases/[slug]/page.tsx`와 같은 구조(Suspense 안에서 params 읽기, `generateStaticParams`, 없으면 `notFound()`)로 만든다. `content/side-projects/index.ts`는 `content/cases/index.ts`와 같은 형태. `llmwiki.ts`가 아직 없으므로 P5-T4 전까지는 빈 자리 데이터로 둔다.
+- `CaseData.slug`를 `CaseSlug | SideSlug`(`SideSlug = "llmwiki"`)로 넓힌다. 기존 CASE 파일은 고치지 않는다.
+- 완료 조건: 자기 파일 eslint·tsc 통과.
+
+#### P5-T3 Home 섹션
+- `content/home.ts`에 `side`(eyebrow·title·lead·cards) 타입과 데이터를 추가한다. 카드 타입은 `CaseCard`를 바탕으로 하되 흐름은 `{ label, text, highlight? }[]`(라벨도 데이터, 필요성/구축 단계/현재), `image`는 선택, `repoLinks`(라벨·주소 배열, 새 탭으로 열기)를 더한다. 저장소 링크는 결정 1의 임시 주소를 넣는다.
+- `components/home/side-projects.tsx`: `section#side`, `workflows.tsx`의 카드 모양을 따른다(공통 조각은 복사해도 된다. `workflows.tsx`는 고치지 않는다). 이미지가 없으면 목업 `.shot .frame` 자리 표시.
+- 완료 조건: 자기 파일 eslint·tsc 통과.
+
+#### P5-T4 llmwiki 상세 데이터와 순서도
+- 목업 `main#side1-detail`을 `CaseData`로 옮긴다. 순서도 SVG도 목업 것을 옮기며 `flow-case-0N.tsx`의 클래스와 `currentColor`·토큰 색을 따르고, marker id는 `arrow-l`로 한다.
+- 완료 조건: 자기 파일 eslint·tsc 통과. 옮긴 섹션·표·문제 카드 수를 보고한다.
+
+### Phase 6 — llmwiki 실제 화면 이미지 반영 (2026-11-21 추가, 2026-11-21 완료)
+
+- **배경(2026-11-21 사용자 요청):** 사용자가 `img/`에 `URL.png`, `kaguya.png`, `wiki.png`(각 약 1910×1030)를 넣었다. Home SIDE 01 카드의 자리 표시를 실제 이미지로 바꾸고, 상세 페이지에 "실제 화면" 섹션을 추가한다(`side-llmwiki-content.md` §2 "이미지를 받으면 `s1-flow` 뒤에 추가").
+- **원본 내용**
+  - `URL.png`: Slack DM. URL을 보내면 수집 담당이 저장 위치(`raw/2026/11/...md`)·ID·커밋을 스레드로 답한다. 가운데 영역은 `/new` 확인 메시지가 반복돼 핵심이 아니다.
+  - `kaguya.png`: Slack `#wiki` 채널. 오른쪽 스레드에서 "wiki-ingest로 raw/_index의 rip·acl 주제를 반영해줘"라고 지시하면 정리 담당이 대조 결과·미반영 항목·Lint·커밋을 보고한다.
+  - `wiki.png`: Obsidian에서 연 llmwiki 저장소(`raw/`·`wiki/concepts`·`wiki/topics`)와 정리된 위키 문서(`eigrp-ospf-rip-redistribution`). 오른쪽 1/4은 빈 여백이다.
+- **자르기 기준(2026-11-06 이미지 결정을 따른다):** 관련 없는 부분(Slack 왼쪽 사이드바·"유료 플랜 할인" 배너·입력창, Obsidian 오른쪽 여백)을 잘라 낸다. 원본 `img/`는 그대로 둔다.
+  | 출력 파일 | 원본 | 영역(대략, px) | 용도 |
+  |---|---|---|---|
+  | `public/img/side01-url-ingest.png` | `URL.png` | 오른쪽 스레드 패널 x 1360~1900, y 185~500 | 상세 |
+  | `public/img/side01-wiki-ingest.png` | `kaguya.png` | 오른쪽 스레드 패널 x 1360~1905, y 175~850 | 상세, 카드 팝업 |
+  | `public/img/side01-obsidian-wiki.png` | `wiki.png` | x 0~1500, y 0~1022 | 상세(`wide`) |
+  | ~~`public/img/side01-card.png`~~ | `kaguya.png` | 스레드 패널 위쪽, `case03-card.png` 비율 | 카드 대표 → **쓰지 않음**(아래 변경 이력) |
+- **캡션·대체 텍스트:** 결정 2(2026-11-18)에 따라 캐릭터 이름 대신 역할 이름만 쓴다. 캡처 속 캐릭터 이름·워크스페이스 이름은 가리지 않는다(작은 글씨이고 서버 정보가 아님). 문구는 아래를 글자 그대로 쓴다.
+  1. URL 수집 — alt `Slack 스레드. URL을 보내자 수집 담당이 원문 저장 위치, 자료 ID, 커밋을 답한다` / caption `수집: Slack에 URL을 보내면 수집 담당이 원문을 저장하고 저장 위치, 자료 ID, 커밋을 답합니다.`
+  2. 위키 정리 — alt `Slack 스레드. 주제 반영을 지시하자 정리 담당이 원문 대조 결과, 미반영 항목, Lint 결과, 커밋을 보고한다` / caption `정리: 주제를 지정해 위키 반영을 맡기면 정리 담당이 원문과 대조한 결과와 반영하지 못한 항목, Lint 결과, 커밋을 함께 보고합니다.`
+  3. 위키 결과 — alt `Obsidian에서 연 llmwiki 저장소. raw·wiki 폴더 구조와 정리된 EIGRP·OSPF·RIP 재분배 문서` / caption `결과: 정리된 위키 문서를 Obsidian에서 연 화면입니다. 원문(raw)과 정리본(wiki)을 나눠 두고, 문서마다 속성과 원문 출처를 남깁니다.` (`wide: true`)
+  - 카드 이미지 alt는 2번과 같게 쓰고, 누르면 `side01-wiki-ingest.png`를 연다.
+- **목업:** `prototype/portfolio-mockup.html`은 이번에 고치지 않는다(미정, 사용자 확인).
+
+| ID | 목표 | 담당 | 변경 허용 파일 | 선행 | 상태 |
+|---|---|---|---|---|---|
+| P6-T1 | 이미지 4장 자르기 | haiku | `public/img/side01-*.png`(새 파일 4개) | 승인 | 완료 |
+| P6-T2 | 카드 이미지·상세 "실제 화면" 섹션 데이터 | haiku | `content/home.ts`, `content/side-projects/llmwiki.ts` | P6-T1 | 완료 |
+| P6-I | 통합 lint·tsc·build, 브라우저 확인(1400px·375px, 라이트·다크, 팝업) | 마스터 | `content/home.ts`(카드 src 1줄) | P6-T2 | 완료 |
+
+#### P6-T1 이미지 자르기
+- Pillow(사용자 Python에 `pip install --user pillow`, 프로젝트 의존성 아님)로 위 표대로 자른다. 스크립트는 scratchpad에 두고 프로젝트에 남기지 않는다. 영역은 자른 결과를 보고 글자가 잘리지 않게 몇 px 조정해도 된다.
+- 완료 조건: 4개 파일 생성, 각 크기 보고. 잘린 글자나 남은 사이드바·배너가 없는지 마스터가 이미지를 보고 확인한다.
+
+#### P6-T2 데이터 반영
+- `content/home.ts` `side.cards[0]`에 `image`(`src` `/img/side01-card.png`, `fullSrc` `/img/side01-wiki-ingest.png`, alt). 필드 이름은 `CaseCard["image"]` 타입을 따른다.
+- `content/side-projects/llmwiki.ts`: 목차에서 `s1-flow` 다음에 `{ id: "s1-screens", label: "실제 화면" }`, 섹션 배열에서 `s1-flow` 다음에 CASE 01 `c1-screens`와 같은 형태(안내 문단 `이미지를 누르면 화면 가운데에 크게 열립니다.` + `shots` 3개)를 넣는다.
+- 완료 조건: 두 파일 eslint·`npx tsc --noEmit --incremental false` 통과.
+
 ## 5. 검증 계획
 
 - **Task 단위:** 담당자가 완료 조건을 실행하고, 마스터가 `git diff`로 변경 범위를 확인한 뒤 lint·build를 다시 확인한다.
@@ -187,3 +269,7 @@
 - 2026-11-06: P4-T3에서 `/cases/[slug]`의 params 읽기를 Suspense 안으로 옮겼다(근거 `adopting-partial-prefetching.md`). 그 결과 목록 밖 slug는 not-found 화면이 나오지만 HTTP 상태는 200이다(`not-found.md`의 스트리밍 동작). 상세 3개뿐이라 그대로 둔다.
 - 2026-11-06: hero 버튼은 목업 `.btn`(흰 배경)을 따른다. `WORK_LOG.md`의 11-06 결정 문구("파란색·↗ 없음")와 엇갈려 사용자 확인 대상으로 남긴다.
 - 2026-11-06: Phase 4 완료. P4-T4로 hero 버튼(목업 `.btn`), 본문 링크 밑줄, hero 상단 여백(150px), 수치 카드 높이(102px)를 맞췄다. LCP 경고 이미지는 첫 화면 밖이라 `loading="eager"`를 붙이지 않았고, 맨 위에서 새로 열었을 때 경고가 나오지 않음을 확인했다. 최종 lint·tsc·build 통과, 콘솔 오류·경고 0건.
+- 2026-11-18: Phase 5(Side Projects 메뉴, llmwiki 상세 페이지) 초안 추가. 문구 원본 `side-llmwiki-content.md` 작성. 사용자 의견으로 카드 흐름을 필요성·구축 단계·현재로 바꾸고 구축 단계 표 추가. 구현 전 목업(`prototype/portfolio-mockup.html`)에 반영하고 목업 게시본을 갱신(버전 `1794998219-9bf7`). 사용자 승인 대기.
+- 2026-11-18: 사용자 승인으로 Phase 5 구현(이미지는 빈 틀 유지). T1~T3 병렬, T4, 통합(lint·tsc·build 통과), T5 브라우저 확인(1400/375/320px, 라이트·다크) 결함 없음. 저장소 링크는 비공개 주소 임시 사용.
+- 2026-11-21: Phase 6(llmwiki 실제 화면 이미지 3장 반영) 초안 추가. 사용자 승인으로 진행(목업은 고치지 않음).
+- 2026-11-21: Phase 6 완료. 카드 칸은 글 길이 때문에 세로로 길어(1400px에서 530×721) 가로형 `side01-card.png`(526×387)는 크게 확대·잘림 → P6-I에서 카드 `src`를 세로형 `side01-wiki-ingest.png`(553×679)로 바꾸고 `side01-card.png`는 삭제했다. lint·tsc·build 통과, 1400px 카드·상세 3장·팝업, 375px 다크 카드 확인, 가로 넘침·콘솔 오류·경고 0건. build는 Next.js 보안 권고(SecurityFatalError)로 첫 실행이 멈추고 다시 실행하면 통과한다.

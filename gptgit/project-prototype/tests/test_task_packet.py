@@ -48,11 +48,20 @@ class PacketTests(unittest.TestCase):
             self.assertTrue(self.errors(role=role, session=session))
             self.assertEqual([], self.errors(role=role, write_scope=[], session=session))
 
-    def test_documenter_only_drafts(self):
-        session = {"provider": "hermes", "actual_id": None}
-        self.assertTrue(self.errors(role="documenter", session=session, write_scope=["wiki/index.md"]))
-        self.assertTrue(self.errors(role="documenter", session=session, write_scope=["docs/runs/RUN-01/drafts/wiki.md"]))
-        self.assertEqual([], self.errors(role="documenter", session=session, write_scope=["docs/workflows/RUN-01/drafts/wiki.md"]))
+    def test_documenter_incremental_wiki_and_boundaries(self):
+        session = {"provider": "codex", "actual_id": None}
+        page = self.root / "wiki/features/example.md"
+        page.parent.mkdir(parents=True)
+        page.write_text("existing explanation", encoding="utf-8")
+        self.assertEqual([], self.errors(role="documenter", session=session,
+            inputs=[{"path": "wiki/features/example.md", "reason": "update existing page"}],
+            write_scope=["wiki/features/example.md", "wiki/index.md"]))
+        self.assertTrue(self.errors(role="documenter", session=session,
+            work_spec="wiki/features/example.md", write_scope=["wiki/features/example.md"]))
+        for target in ("src/app.py", "docs/workflows/RUN-01/drafts/wiki.md", "wiki/AGENTS.md", "wiki/features/agents.md", "wiki/run.ps1", "../wiki/out.md"):
+            with self.subTest(target=target):
+                self.assertTrue(self.errors(role="documenter", session=session, write_scope=[target]))
+        self.assertTrue(self.errors(role="documenter", session={"provider": "hermes", "actual_id": None}, write_scope=["wiki/index.md"]))
 
     def test_required_acceptance_and_missing_field(self):
         self.assertTrue(self.errors(acceptance=[]))

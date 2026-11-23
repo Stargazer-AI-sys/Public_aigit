@@ -1,6 +1,6 @@
 ﻿[CmdletBinding()]
 param(
- [ValidateSet('master','planner','planning-reviewer','developer','qa')][string]$Role='master',
+ [ValidateSet('master','planner','planning-reviewer','developer','qa','documenter')][string]$Role='master',
  [string]$Packet,
  [string]$Model,
  [switch]$CheckOnly
@@ -17,7 +17,7 @@ if(-not (Get-Command $exe -ErrorAction SilentlyContinue)){throw "$provider 실�
 foreach($key in @('OPENAI_API_KEY','CODEX_API_KEY','OPENAI_BASE_URL','OPENAI_API_BASE','ANTHROPIC_API_KEY','ANTHROPIC_AUTH_TOKEN','ANTHROPIC_BASE_URL','CLAUDE_CODE_USE_BEDROCK','CLAUDE_CODE_USE_VERTEX','CLAUDE_CODE_USE_FOUNDRY')){
  if([Environment]::GetEnvironmentVariable($key)){throw "구독 외 연결 가능 설정 발견: $key. 자동 변경하지 않습니다."}
 }
-$prompt=if($Role -eq 'master'){'README.md와 AGENTS.md에서 시작하고 승인된 작업만 수행하세요.'}else{'마스터가 실제 모델을 확인하고 작업을 전달할 때까지 대기하세요. 작업을 시작하지 마세요.'}
+$prompt=if($Role -eq 'master'){'자동 제공된 AGENTS는 재조회하지 마세요. README의 진입점과 최신 인계의 현재 작업 절만 확인하고 승인 범위에서 진행하세요. 추가 자료는 검색 후 필요한 절만 읽고 PowerShell Get-Content에는 -Encoding UTF8을 지정하세요. 위키는 필요한 주제가 있을 때만 검색하세요.'}else{$null}
 if($Role -ne 'master'){
  if(-not $Packet){throw '담당 역할에는 검증할 Task packet이 필요합니다.'}
  $packetCheck=& $runtime.python -B ./tools/task_packet.py $Packet --root $root
@@ -38,14 +38,14 @@ if($checkResult.valid -ne $true){throw '모델 검사 결과가 유효하지 않
 if($provider -eq 'codex'){
  $native=@('--cd',$root,'--model',$Model,'--no-daemon','--ask-for-approval','on-request','-c','approvals_reviewer="auto_review"','-c','forced_login_method="chatgpt"')
  if($Role -eq 'qa'){$native+=@('--sandbox','read-only')}else{$native+=@('--sandbox','workspace-write')}
- $native+=$prompt
+ if($Role -eq 'master'){$native+=$prompt}
 }else{
  $settings=@{autoMemoryEnabled=$false;disableAllHooks=$true;permissions=@{deny=@('Read(../**)')}} | ConvertTo-Json -Depth 5 -Compress
- $native=@('--model',$Model,'--setting-sources','project','--settings',$settings,'--strict-mcp-config','--mcp-config','{"mcpServers":{}}','--permission-mode','auto','--append-system-prompt',(Get-Content ./CLAUDE.md -Raw -Encoding UTF8))
+ $native=@('--model',$Model,'--no-chrome','--setting-sources','project','--settings',$settings,'--strict-mcp-config','--mcp-config','{"mcpServers":{}}','--permission-mode','auto','--append-system-prompt',(Get-Content ./CLAUDE.md -Raw -Encoding UTF8))
  if($Role -eq 'planning-reviewer'){$native+=@('--tools','Read,Grep,Glob')}
- $native+=$prompt
+ if($Role -eq 'master'){$native+=$prompt}
 }
-if($CheckOnly){@{role=$Role;provider=$provider;model=$Model;executable=$exe;arguments=$native;model_called=$false;authentication_checked=$false} | ConvertTo-Json -Depth 6;exit 0}
+if($CheckOnly){@{role=$Role;provider=$provider;model=$Model;executable=$exe;arguments=$native;model_called=$false;authentication_checked=$false;initial_prompt_planned=($Role -eq 'master')} | ConvertTo-Json -Depth 6;exit 0}
 if($env:HERDR_ENV -ne '1'){throw '실제 역할 시작은 herdr 내부에서 마스터가 수행해야 합니다.'}
 if($provider -eq 'codex'){
  # Native stderr may contain the successful login status in Windows PowerShell.

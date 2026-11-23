@@ -5,11 +5,9 @@ import sys
 from urllib.parse import unquote
 
 root = Path(__file__).resolve().parents[1]
-required = ['README.md', 'AGENTS.md', 'CLAUDE.md', 'docs/requirements.md',
-            'docs/development-plan.md', 'docs/workflow.md', 'docs/runtime.md',
-            'docs/context-and-agents.md', 'docs/tool-inventory.md',
-            'docs/records/work_log.md', 'wiki/index.md', 'tools/start_role.ps1',
-            'tools/dispatch_task.py', 'tools/task_packet.py', 'tools/workflow.py']
+required = ['README.md', 'AGENTS.md', 'CLAUDE.md', 'templates/development-plan.md',
+            'docs/workflow.md', 'docs/runtime.md', 'docs/records/work_log.md',
+            'wiki/index.md', 'tools/start_role.ps1', 'tools/dispatch_task.py', 'tools/task_packet.py']
 errors = [f'missing {p}' for p in required if not (root / p).is_file()]
 count = 0
 for file in root.rglob('*.md'):

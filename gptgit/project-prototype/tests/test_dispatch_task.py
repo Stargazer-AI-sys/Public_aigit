@@ -46,6 +46,17 @@ class DispatchTests(unittest.TestCase):
             code = dispatch_task.main()
             return code, run.call_count, out.getvalue()
 
+    def test_documenter_dispatch_and_model_gate(self):
+        self.packet.update(role='documenter', development_plan='plan.md', write_scope=['wiki/features/result.md'])
+        self.write_packet()
+        self.assertEqual(self.call_main()[:2], (0, 0))
+        env = {'HERDR_ENV': '1', 'HERDR_PANE_ID': 'w1:p1', 'HERDR_WORKSPACE_ID': 'w1', 'HERDR_TAB_ID': 't1'}
+        self.assertEqual(self.call_main(True, env, self.success)[:2], (0, 4))
+        self.packet['session']['model'] = 'gpt-6-astra'
+        self.write_packet()
+        with self.assertRaisesRegex(ValueError, 'model validation'):
+            self.call_main()
+
     def receipt(self):
         files = list((self.root / '.local/dispatch').glob('*.json'))
         self.assertEqual(len(files), 1)
@@ -99,10 +110,10 @@ class DispatchTests(unittest.TestCase):
             self.assertEqual(len(calls), 1)
         self.assertEqual(self.receipt()['status'], 'uncertain_inspect_required')
 
-    def test_documenter_is_blocked_before_receipt(self):
+    def test_hermes_documenter_is_blocked_before_receipt(self):
         self.packet.update(role='documenter', development_plan='plan.md', write_scope=[], session={'provider': 'hermes', 'actual_id': None})
         self.write_packet()
-        with self.assertRaisesRegex(ValueError, 'Hermes adapter not yet implemented'):
+        with self.assertRaisesRegex(ValueError, 'documenter must use provider codex'):
             self.call_main(True, {'HERDR_ENV': '1', 'HERDR_PANE_ID': 'w1:p1', 'HERDR_WORKSPACE_ID': 'w1', 'HERDR_TAB_ID': 't1'})
         self.assertFalse((self.root / '.local').exists())
 
@@ -212,6 +223,40 @@ class DispatchTests(unittest.TestCase):
                 else:
                     self.assertEqual(self.receipt()['status'], 'uncertain_inspect_required')
 
+    def test_process_info_retry_then_ready(self):
+        """Incomplete startup on first process-info, valid shell on retry; command submitted once."""
+        attempts = []
+        def delayed_ready(*args, **kwargs):
+            if args[0][1:3] == ['pane', 'process-info']:
+                attempts.append(1)
+                if len(attempts) == 1:
+                    result = {'process_info': {'pane_id': 'w2:p1', 'shell_pid': None, 'foreground_processes': []}}
+                    return subprocess.CompletedProcess(args[0], 0, json.dumps({'result': result}), '')
+            return self.success(*args, **kwargs)
+        env = {'HERDR_ENV': '1', 'HERDR_PANE_ID': 'w1:p1', 'HERDR_WORKSPACE_ID': 'w1', 'HERDR_TAB_ID': 't1'}
+        with patch('time.sleep'):
+            code, calls, _ = self.call_main(True, env, delayed_ready)
+        self.assertEqual(code, 0)
+        self.assertEqual(calls, 5)  # pane list, tab create, process-info×2, pane run
+        self.assertEqual(self.receipt()['status'], 'submitted_unverified')
+
+    def test_process_info_retry_exhausted_no_run(self):
+        """All process-info attempts return incomplete; no command sent; receipt uncertain."""
+        runs = []
+        def always_incomplete(*args, **kwargs):
+            runs.append(args[0][1:3])
+            if args[0][1:3] == ['pane', 'process-info']:
+                result = {'process_info': {'pane_id': 'w2:p1', 'foreground_processes': []}}
+                return subprocess.CompletedProcess(args[0], 0, json.dumps({'result': result}), '')
+            return self.success(*args, **kwargs)
+        env = {'HERDR_ENV': '1', 'HERDR_PANE_ID': 'w1:p1', 'HERDR_WORKSPACE_ID': 'w1', 'HERDR_TAB_ID': 't1'}
+        with patch('time.sleep'):
+            with self.assertRaisesRegex(RuntimeError, 'startup incomplete'):
+                self.call_main(True, env, always_incomplete)
+        self.assertNotIn(['pane', 'run'], runs)
+        self.assertEqual(runs.count(['pane', 'process-info']), dispatch_task._READY_MAX_ATTEMPTS)
+        self.assertEqual(self.receipt()['status'], 'uncertain_inspect_required')
+
     def test_tab_existing_identity_is_uncertain_without_command(self):
         calls = []
         def reused(*args, **kwargs):
@@ -223,6 +268,211 @@ class DispatchTests(unittest.TestCase):
             self.call_main(True, {'HERDR_ENV': '1', 'HERDR_PANE_ID': 'w1:p1', 'HERDR_WORKSPACE_ID': 'w1', 'HERDR_TAB_ID': 't1'}, reused)
         self.assertNotIn(['pane', 'run'], calls)
         self.assertEqual(self.receipt()['status'], 'uncertain_inspect_required')
+
+    def test_missing_pane_id_process_info_never_ready(self):
+        """process-info without pane_id never returns ready; eventually startup_incomplete."""
+        runs = []
+        def no_pane_id(*args, **kwargs):
+            runs.append(args[0][1:3])
+            if args[0][1:3] == ['pane', 'process-info']:
+                result = {'process_info': {'shell_pid': 123,
+                                           'foreground_processes': [{'pid': 123, 'name': 'pwsh.exe', 'cwd': str(self.root)}]}}
+                return subprocess.CompletedProcess(args[0], 0, json.dumps({'result': result}), '')
+            return self.success(*args, **kwargs)
+        env = {'HERDR_ENV': '1', 'HERDR_PANE_ID': 'w1:p1', 'HERDR_WORKSPACE_ID': 'w1', 'HERDR_TAB_ID': 't1'}
+        with patch('time.sleep'):
+            with self.assertRaisesRegex(RuntimeError, 'startup incomplete'):
+                self.call_main(True, env, no_pane_id)
+        self.assertNotIn(['pane', 'run'], runs)
+        self.assertEqual(runs.count(['pane', 'process-info']), dispatch_task._READY_MAX_ATTEMPTS)
+        r = self.receipt()
+        self.assertEqual(r['status'], 'uncertain_inspect_required')
+        self.assertIsNone(r['diag']['pane_id'])
+        self.assertEqual(r['diag']['reason'], 'startup_incomplete')
+
+    def test_empty_cwd_process_info_never_ready(self):
+        """process-info with explicit shell but empty cwd never returns ready."""
+        runs = []
+        def empty_cwd(*args, **kwargs):
+            runs.append(args[0][1:3])
+            if args[0][1:3] == ['pane', 'process-info']:
+                result = {'process_info': {'pane_id': 'w2:p1', 'shell_pid': 123,
+                                           'foreground_processes': [{'pid': 123, 'name': 'pwsh.exe', 'cwd': ''}]}}
+                return subprocess.CompletedProcess(args[0], 0, json.dumps({'result': result}), '')
+            return self.success(*args, **kwargs)
+        env = {'HERDR_ENV': '1', 'HERDR_PANE_ID': 'w1:p1', 'HERDR_WORKSPACE_ID': 'w1', 'HERDR_TAB_ID': 't1'}
+        with patch('time.sleep'):
+            with self.assertRaisesRegex(RuntimeError, 'startup incomplete'):
+                self.call_main(True, env, empty_cwd)
+        self.assertNotIn(['pane', 'run'], runs)
+        self.assertEqual(runs.count(['pane', 'process-info']), dispatch_task._READY_MAX_ATTEMPTS)
+        r = self.receipt()
+        self.assertIsNone(r['diag'].get('cwd_match'))
+        self.assertEqual(r['diag']['reason'], 'startup_incomplete')
+
+    def test_non_shell_without_shell_pid_hard_fail(self):
+        """Explicit non-shell process with absent shell_pid is an immediate hard fail, not incomplete."""
+        runs = []
+        def claude_no_pid(*args, **kwargs):
+            runs.append(args[0][1:3])
+            if args[0][1:3] == ['pane', 'process-info']:
+                result = {'process_info': {'pane_id': 'w2:p1',
+                                           'foreground_processes': [{'pid': 999, 'name': 'claude.exe'}]}}
+                return subprocess.CompletedProcess(args[0], 0, json.dumps({'result': result}), '')
+            return self.success(*args, **kwargs)
+        env = {'HERDR_ENV': '1', 'HERDR_PANE_ID': 'w1:p1', 'HERDR_WORKSPACE_ID': 'w1', 'HERDR_TAB_ID': 't1'}
+        with self.assertRaisesRegex(RuntimeError, 'not an idle PowerShell'):
+            self.call_main(True, env, claude_no_pid)
+        self.assertNotIn(['pane', 'run'], runs)
+        self.assertEqual(runs.count(['pane', 'process-info']), 1)
+        r = self.receipt()
+        self.assertEqual(r['status'], 'uncertain_inspect_required')
+        self.assertEqual(r['diag']['reason'], 'proc_name')
+
+    def test_ready_diag_persisted_to_receipt(self):
+        """Successful dispatch records process_info stage, attempt count, and observed fields."""
+        env = {'HERDR_ENV': '1', 'HERDR_PANE_ID': 'w1:p1', 'HERDR_WORKSPACE_ID': 'w1', 'HERDR_TAB_ID': 't1'}
+        self.call_main(True, env, self.success)
+        r = self.receipt()
+        self.assertEqual(r['status'], 'submitted_unverified')
+        diag = r.get('diag', {})
+        self.assertEqual(diag.get('stage'), 'process_info')
+        self.assertEqual(diag.get('attempts'), 1)
+        self.assertEqual(diag.get('reason'), 'ready')
+        self.assertEqual(diag.get('pane_id'), 'w2:p1')
+        self.assertTrue(diag.get('cwd_match'))
+
+    def test_hard_fail_diag_persisted_to_receipt(self):
+        """Hard fail in process-info records sanitized reason code and observed pane identity."""
+        def wrong_pane_info(*args, **kwargs):
+            if args[0][1:3] == ['pane', 'process-info']:
+                result = {'process_info': {'pane_id': 'other:p1', 'shell_pid': 123,
+                                           'foreground_processes': [{'pid': 123, 'name': 'pwsh.exe',
+                                                                      'cwd': str(self.root)}]}}
+                return subprocess.CompletedProcess(args[0], 0, json.dumps({'result': result}), '')
+            return self.success(*args, **kwargs)
+        env = {'HERDR_ENV': '1', 'HERDR_PANE_ID': 'w1:p1', 'HERDR_WORKSPACE_ID': 'w1', 'HERDR_TAB_ID': 't1'}
+        with self.assertRaisesRegex(RuntimeError, 'not an idle PowerShell'):
+            self.call_main(True, env, wrong_pane_info)
+        r = self.receipt()
+        self.assertEqual(r['status'], 'uncertain_inspect_required')
+        diag = r.get('diag', {})
+        self.assertEqual(diag.get('stage'), 'process_info')
+        self.assertEqual(diag.get('attempts'), 1)
+        self.assertEqual(diag.get('reason'), 'pane_id')
+
+    def test_malformed_foreground_none_is_incomplete(self):
+        """foreground_processes: null is treated as absent, not an error; becomes startup_incomplete."""
+        runs = []
+        def null_fg(*args, **kwargs):
+            runs.append(args[0][1:3])
+            if args[0][1:3] == ['pane', 'process-info']:
+                result = {'process_info': {'pane_id': 'w2:p1', 'shell_pid': 123,
+                                           'foreground_processes': None}}
+                return subprocess.CompletedProcess(args[0], 0, json.dumps({'result': result}), '')
+            return self.success(*args, **kwargs)
+        env = {'HERDR_ENV': '1', 'HERDR_PANE_ID': 'w1:p1', 'HERDR_WORKSPACE_ID': 'w1', 'HERDR_TAB_ID': 't1'}
+        with patch('time.sleep'):
+            with self.assertRaisesRegex(RuntimeError, 'startup incomplete'):
+                self.call_main(True, env, null_fg)
+        self.assertNotIn(['pane', 'run'], runs)
+        self.assertEqual(runs.count(['pane', 'process-info']), dispatch_task._READY_MAX_ATTEMPTS)
+        self.assertEqual(self.receipt()['status'], 'uncertain_inspect_required')
+
+
+    def test_query_failures_preserve_diagnosis_without_retry_or_run(self):
+        env = {'HERDR_ENV': '1', 'HERDR_PANE_ID': 'w1:p1', 'HERDR_WORKSPACE_ID': 'w1', 'HERDR_TAB_ID': 't1'}
+        for kind in ('timeout', 'api', 'json', 'missing'):
+            with self.subTest(kind=kind):
+                self.packet['task_id'] = 'QUERY-' + kind
+                self.write_packet()
+                calls = []
+                def failed_query(*args, **kwargs):
+                    command = args[0]
+                    calls.append(command[1:3])
+                    if command[1:3] != ['pane', 'process-info']:
+                        return self.success(*args, **kwargs)
+                    if kind == 'timeout':
+                        raise subprocess.TimeoutExpired(command, 45, output='SECRET-RAW')
+                    if kind == 'api':
+                        return subprocess.CompletedProcess(command, 1, '', 'SECRET-RAW')
+                    return subprocess.CompletedProcess(command, 0, 'SECRET-RAW' if kind == 'json' else '{"result":{}}', '')
+                with self.assertRaises(RuntimeError) as raised:
+                    self.call_main(True, env, failed_query)
+                self.assertNotIn('SECRET-RAW', str(raised.exception))
+                self.assertNotIn(['pane', 'run'], calls)
+                self.assertEqual(calls.count(['pane', 'process-info']), 1)
+                import hashlib
+                receipt = self.root / '.local/dispatch' / (hashlib.sha256(self.packet['task_id'].encode()).hexdigest() + '.json')
+                state = json.loads(receipt.read_text())
+                self.assertNotIn('SECRET-RAW', receipt.read_text())
+                self.assertEqual(state['status'], 'uncertain_inspect_required')
+                self.assertEqual(state['diag']['attempts'], 1)
+                self.assertEqual(state['diag']['reason'], {'timeout': 'query_timeout', 'api': 'query_failed'}.get(kind, 'malformed_response'))
+
+    def test_malformed_fields_and_untrusted_diagnostics_are_blocked(self):
+        env = {'HERDR_ENV': '1', 'HERDR_PANE_ID': 'w1:p1', 'HERDR_WORKSPACE_ID': 'w1', 'HERDR_TAB_ID': 't1'}
+        cases = [('name', None), ('cwd', ['SECRET-RAW']), ('name', 'SECRET-RAW' * 100),
+                 ('name', {'SECRET-RAW': True}), ('pid', True), ('cwd', 'relative')]
+        for index, (field, value) in enumerate(cases):
+            with self.subTest(field=field, value=value):
+                self.packet['task_id'] = 'MALFORMED-' + str(index)
+                self.write_packet()
+                calls = []
+                def malformed(*args, **kwargs):
+                    calls.append(args[0][1:3])
+                    if args[0][1:3] != ['pane', 'process-info']:
+                        return self.success(*args, **kwargs)
+                    proc = {'pid': 123, 'name': 'pwsh.exe', 'cwd': str(self.root)}
+                    proc[field] = value
+                    info = {'pane_id': 'w2:p1', 'shell_pid': 123, 'foreground_processes': [proc]}
+                    return subprocess.CompletedProcess(args[0], 0, json.dumps({'result': {'process_info': info}}), '')
+                with self.assertRaises(RuntimeError):
+                    self.call_main(True, env, malformed)
+                self.assertNotIn(['pane', 'run'], calls)
+                self.assertEqual(calls.count(['pane', 'process-info']), 1)
+                import hashlib
+                receipt = self.root / '.local/dispatch' / (hashlib.sha256(self.packet['task_id'].encode()).hexdigest() + '.json')
+                state = json.loads(receipt.read_text())
+                self.assertEqual(state['diag']['stage'], 'process_info')
+                self.assertNotIn('SECRET-RAW', receipt.read_text())
+                self.assertEqual(state['status'], 'uncertain_inspect_required')
+
+    def test_silent_successful_pane_run_is_admission_not_agent_success(self):
+        calls = []
+        def silent_run(*args, **kwargs):
+            calls.append(args[0][1:3])
+            if args[0][1:3] == ['pane', 'run']:
+                return subprocess.CompletedProcess(args[0], 0, '', '')
+            return self.success(*args, **kwargs)
+        env = {'HERDR_ENV': '1', 'HERDR_PANE_ID': 'w1:p1', 'HERDR_WORKSPACE_ID': 'w1', 'HERDR_TAB_ID': 't1'}
+        code, _, _ = self.call_main(True, env, silent_run)
+        self.assertEqual(code, 0)
+        self.assertEqual(calls.count(['pane', 'run']), 1)
+        self.assertEqual(self.receipt()['status'], 'submitted_unverified')
+
+    def test_silent_query_and_failed_or_malformed_run_are_not_success(self):
+        env = {'HERDR_ENV': '1', 'HERDR_PANE_ID': 'w1:p1', 'HERDR_WORKSPACE_ID': 'w1', 'HERDR_TAB_ID': 't1'}
+        for kind in ('query', 'run_failed', 'run_malformed', 'run_whitespace'):
+            with self.subTest(kind=kind):
+                self.packet['task_id'] = 'SILENT-' + kind
+                self.write_packet()
+                calls = []
+                def response(*args, **kwargs):
+                    cmd = args[0]
+                    calls.append(cmd[1:3])
+                    if kind == 'query' and cmd[1:3] == ['pane', 'process-info']:
+                        return subprocess.CompletedProcess(cmd, 0, '', '')
+                    if kind != 'query' and cmd[1:3] == ['pane', 'run']:
+                        return subprocess.CompletedProcess(cmd, 1 if kind == 'run_failed' else 0,
+                                                           '' if kind == 'run_failed' else ' ' if kind == 'run_whitespace' else 'invalid', '')
+                    return self.success(*args, **kwargs)
+                with self.assertRaises((RuntimeError, ValueError)):
+                    self.call_main(True, env, response)
+                self.assertEqual(calls.count(['pane', 'run']), 0 if kind == 'query' else 1)
+                import hashlib
+                path = self.root / '.local/dispatch' / (hashlib.sha256(self.packet['task_id'].encode()).hexdigest() + '.json')
+                self.assertEqual(json.loads(path.read_text())['status'], 'uncertain_inspect_required')
 
 if __name__ == '__main__':
     unittest.main()

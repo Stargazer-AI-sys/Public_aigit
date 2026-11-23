@@ -1,10 +1,12 @@
 # Project_webportfolio 작업 기록
 
-> 최종 갱신 2026-11-08 (HOME PC 세션) | 새 세션은 §0부터 읽는다. 경로는 저장소 루트(`aigit`) 기준 상대 경로다.
+> 최종 갱신 2026-11-21 (HOME PC 세션) | 새 세션은 §0부터 읽는다. 경로는 저장소 루트(`aigit`) 기준 상대 경로다.
 
 ## 0. 인계 요약
 
 ### 현재 상태
+- **2026-11-21 Side Projects(SIDE 01 llmwiki Slack 봇)에 실제 화면 이미지 3장을 넣고 배포했다.** Home 카드 대표 이미지와 상세 페이지(`/side-projects/llmwiki`)의 "실제 화면" 섹션(`s1-screens`, 프로세스 다음). 커밋 `9fccef1`을 `main`에 push했고 게시본에 반영된 것을 확인했다. 기획서 Phase 6(`docs/01_plan/development-plan.md`) 완료.
+- **2026-11-18~19 Side Projects 메뉴와 llmwiki 상세 페이지를 추가했다**(기획서 Phase 5, 커밋 `1e09101`). 헤더 메뉴 4번째 `Side Projects`(`/#side`), Home 섹션 카드 1개, 상세 `/side-projects/llmwiki`. 문구 원본은 `docs/01_plan/side-llmwiki-content.md`, 결정은 기획서 Phase 5 절에 있다(저장소 링크는 비공개 주소 임시 사용, 에이전트는 역할 이름만). 목업에도 반영돼 있다.
 - **2026-11-08 Vercel에 게시했다. 주소는 https://stargazer-folio.vercel.app** (Vercel Domains에서 추가). 처음 자동으로 붙은 `aigit-three.vercel.app`도 지우지 않아 계속 열린다(이미 공유한 링크 보호). private 저장소 `Aigit`를 연결했고 `main`에 push하면 자동으로 다시 배포된다. 링크를 아는 사람만 보게 `noindex`·`robots.txt`로 색인을 막았다(접근 자체는 막지 않는다). 공유 미리보기(OG)는 사용자가 메신저에서 나오는 것을 확인했다.
   - 같은 날 연락 영역을 고쳤다(메일 주소 복사 + Gmail·Outlook·메일 앱 링크). 스크롤한 뒤 메뉴·연락하기를 다시 눌러도 반응하지 않던 버그를 고쳤고, 진행률 칸은 숨겼다. 커밋 `424010c`, `5e629ad`, `2ddaa66`, `6f7aaf1`(주소를 `stargazer-folio`로 변경)을 `main`에 push했다.
 - 블로그형 포트폴리오. 스택 세팅이 끝났다: Next.js 16.4.3(App Router) + TypeScript + Tailwind v4 + shadcn/ui + MDX(`@next/mdx`) + `next-themes` 다크 모드.
@@ -44,6 +46,8 @@
 - **맥락 분리:** 학습 자동화와 프로세스 개선은 독립 프로젝트다. 한 CASE 페이지에 섞지 않는다. Notion 관련 내용은 학습 자동화(CASE 01)에만 두고, CASE 02·03은 `gptgit/project-management`·`project-prototype` 기록(10.29 점검 보고서 `Claudecode/Project_process_manage/reports/2026-10-29_project-management.md` 등)을 근거로 쓴다.
 - **이미지:** 누르면 가운데 팝업으로 연다. 크기가 다르면 작은 쪽에 맞춰 자른다. 카드 대표 이미지는 내용보다 디자인(카드 크기 통일)을 우선한다. 캡처의 관련 없는 부분, Windows 정품 인증 표시, 경로는 자르거나 가린다.
 - **Home 수치 칸:** "31건" 대신 "4가지 기준 / AI Workflows에서 중요한 4가지 기준"(Working Style로 연결).
+- **CASE 01 실제 화면 소개:** "2026년 11월 6일에 직접 캡처한 화면입니다. 개인 페이지 목록과 PC 경로는…" 문장은 없어도 되는 내용이라 삭제. CASE 02의 "2026년 11월 6일에 캡처한 herdr와 Obsidian 화면입니다."는 유지.
+- **다크 모드:** 모드 전환 버튼이 잘 보여야 하고, 흰 보조 버튼("Working Style 보기" 등)은 다크 모드에서도 버튼으로 보이도록 테두리를 준다.
 - **공개 범위 항목**(CASE 01의 PC 경로·실습 비밀번호 문제, CASE 03의 토큰 수치, 캡처 속 외부 URL)은 사용자가 신경 쓰지 않기로 했다. 다시 제안하지 않는다.
 
 ### 목업 검토 후속 결정 (2026-11-06 사용자 결정)
@@ -70,19 +74,39 @@
 - **주소 이름:** 처음에는 그대로 두기로 했다가 같은 날 변경하기로 했다. 사용자가 `stargazer`를 원했지만 Vercel이 "이미 사용 중"으로 거절했고, 두 번째 후보 `stargazer-folio`가 추가됐다. 주소를 바꿀 때는 Vercel Settings → Domains에서 추가한 뒤 `content/site.ts`의 `url`을 같이 고친다.
 - **후속 항목(2026-11-08 사용자 결정):** 남은 문구 확인 2건과 스크린샷 반영은 사용자가 요청할 때 바꾼다. 목업 게시본(artifact)은 계속 둔다. 진행률 대시보드는 보류한다. LCP 이미지 경고(`case01-notion-home.png`)는 개발 콘솔에만 뜨는 권고이고 첫 화면 밖 이미지라 그대로 둔다.
 
+### 이미지·배포 결정 (2026-11-21 사용자 결정)
+- **이전 다음 단계 정리:** 실기기 확인은 이미지 작업 뒤에 한다. public 동기화도 최종 작업 뒤에 한다. 새 주소 미리보기는 이미 확인했다. 남은 문구 2건은 아직 요청하지 않았다. 진행률 대시보드 등 보류 항목은 계속 보류한다.
+- **SIDE 01 이미지:** 사용자가 `img/URL.png`, `img/kaguya.png`, `img/wiki.png`를 주고 기획대로 진행을 승인했다. 캡션은 역할 이름(수집·정리 담당)만 쓰고, 캡처 속 캐릭터 이름·워크스페이스 이름은 가리지 않는다(마스터 기본값, 사용자가 가리라고 하면 바꾼다).
+- **목업:** 이번 이미지는 Next.js에만 넣고 목업(`prototype/portfolio-mockup.html`)은 고치지 않았다. 목업 반영 여부를 물었으나 답이 없어 기획 기본값으로 진행했다.
+- **배포:** 사용자 확인 후 "배포 해줘"로 commit·push했다.
+
 ### 다른 PC에서 이어갈 때
 - pull 후 이 폴더에서 `npm install`을 먼저 실행한다. `node_modules/`는 git에 없다. Node.js가 없으면 그것부터 설치한다.
 - Context7 MCP는 `.mcp.json`으로 함께 옮겨지지만, PC마다 Claude Code에서 승인해야 한다.
-- `humanize-korean` 플러그인은 2026-11-04에 DESKTOP-K58196E에서 설치했다. 다른 PC에서 쓰려면 설치 여부를 먼저 확인한다.
+- `humanize-korean` 플러그인은 2026-11-04에 HOME PC에서 설치했다. 다른 PC에서 쓰려면 설치 여부를 먼저 확인한다.
 
 ### 다음 단계
-1. **실기기 확인(사용자):** 게시본을 사용자 폰·PC 브라우저에서 모바일 너비, 다크 모드, 이미지 팝업, Gmail·Outlook 링크까지 직접 확인한다. 지금까지는 Playwright headless로만 봤다. 이상이 있으면 알려 주면 고친다.
-2. **public 저장소 동기화(미결정):** `Public_aigit`에도 반영할지 사용자가 아직 답하지 않았다. 요청하면 `sync-public` 절차로 한다(`img/`만 제외).
-3. **새 주소 미리보기 확인(사용자):** 새 주소 `stargazer-folio.vercel.app`을 메신저에 붙여 미리보기가 나오는지 본다. 서버 쪽에서는 `og:image`가 새 주소를 가리키고 이미지가 200으로 열리는 것까지 확인했다.
-4. **요청 시 변경:** 남은 문구 2건(Working Style 03 "운영에서"의 "확인 기준이 잘못되어 잘못 처리된", 카드 교훈 문장 `.learn`, `content/home.ts`), 스크린샷 반영(`public/img/`와 데이터 파일), 디자인·버튼 색. REFLECTION 10.19·10.29 질문은 원문을 찾지 못해 정리된 표현 그대로다.
-5. **유지·보류:** 목업 게시본은 계속 둔다. 진행률 대시보드는 보류(`components/progress-slot.tsx`는 숨김 상태). `npm audit` 21건과 LCP 경고는 기존 결정대로 둔다.
+1. **실기기 확인(사용자):** 이미지 작업이 끝났으니 게시본을 폰·PC 브라우저에서 모바일 너비, 다크 모드, 이미지 팝업(SIDE 01 포함), Gmail·Outlook 링크까지 확인한다. 이상이 있으면 알려 주면 고친다.
+2. **Next.js 보안 권고(미결정):** `npm run build`가 "Next.js 16.4.3에 알려진 보안 취약점"(`SecurityFatalError`)으로 첫 실행에서 멈추고 다시 실행하면 통과한다. 출력이 권하는 업그레이드 명령은 실행하지 않았다. 의존성·잠금 파일이 바뀌므로 사용자가 업그레이드 여부를 정한다. Vercel 빌드는 이번에 통과했다.
+3. **public 저장소 동기화:** 최종 작업 뒤에 한다(2026-11-21 결정). 요청하면 `sync-public` 절차로 한다(`img/`만 제외).
+4. **사용자 결정 대기:** 목업에 SIDE 01 이미지를 넣을지, 캡처 속 캐릭터 이름을 가릴지. herdr 담당 탭 `wp-dev-P6`(w7:t9)를 정리할지.
+5. **요청 시 변경:** 남은 문구 2건(Working Style 03 "운영에서"의 "확인 기준이 잘못되어 잘못 처리된", 카드 교훈 문장 `.learn`, `content/home.ts`), 디자인·버튼 색. SIDE 01 저장소 링크는 공개용 저장소를 만들면 바꾼다(지금은 비공개라 방문자에게 404). REFLECTION 10.19·10.29 질문은 원문을 찾지 못해 정리된 표현 그대로다.
+6. **유지·보류:** 목업 게시본은 계속 둔다. 진행률 대시보드는 보류(`components/progress-slot.tsx`는 숨김 상태). `npm audit` 21건과 LCP 경고는 기존 결정대로 둔다.
 
 ## 1. 진행 내용
+
+### 2026-11-21 (HOME PC) — SIDE 01 실제 화면 이미지 반영과 배포
+- **진행 방식:** `subagent-dev` 절차. 기획서에 Phase 6을 추가해 승인받은 뒤 herdr 담당 탭 `wp-dev-P6`에서 Haiku 담당자 2명(P6-T1 이미지 자르기, P6-T2 데이터 반영)에게 맡겼다. 사용자가 이 PC에 Pillow를 설치했다(`pip install --user pillow`, 13.0.0).
+- **이미지:** `public/img/side01-url-ingest.png`(URL.png 스레드, 553×320), `side01-wiki-ingest.png`(kaguya.png 스레드, 553×679), `side01-obsidian-wiki.png`(wiki.png 오른쪽 여백 제거, 1500×1022). Slack 사이드바·할인 배너·입력창은 잘라 냈다. 맨 위 메시지 머리글이 살짝 잘린 것은 원본 캡처가 그런 상태라 그대로 두었다.
+- **데이터:** `content/home.ts` SIDE 01 카드 `image`, `content/side-projects/llmwiki.ts` 목차·섹션 `s1-screens`(안내 문단 + shots 3개, 결과 화면은 `wide`). 캡션·alt는 기획서 Phase 6 문구 그대로.
+- **계획 변경(마스터 직접 수정 1줄):** 카드 칸이 글 길이 때문에 세로로 길어(1400px에서 530×721) 가로형 카드 이미지(`side01-card.png`, 526×387)가 크게 확대·잘렸다. 카드 `src`를 세로형 `side01-wiki-ingest.png`로 바꾸고 `side01-card.png`는 지웠다.
+- **커밋·push:** `9fccef1`(`20261121_HOMEwork_webportfolio_side_llmwiki_screenshots`, 데이터 2개·기획서·원본 `img/` 3장·잘라 낸 이미지 3장). 이미 스테이징돼 있던 무관한 `aigit.code-workspace`는 넣지 않았다.
+- **검증:** `npm run lint`, `npx tsc --noEmit`, `npm run build` 통과. `next start`(3100)로 Playwright 확인: 1400px 카드·상세 이미지 3장·팝업 열림, 375px 다크 카드, 가로 넘침·콘솔 오류·경고 0건. push 약 50초 뒤 게시본 상세 HTML에 새 이미지 경로가 있고 이미지가 200임을 curl로 확인했다.
+- **미확인:** 375px 라이트 모드와 상세 페이지 모바일 화면, 게시본을 브라우저로 연 화면.
+
+### 2026-11-18~19 (HOME PC) — Side Projects 메뉴와 llmwiki 상세 페이지
+- 이 세션의 작업기록에는 남기지 않았던 작업이다. 내용은 기획서 Phase 5 절과 변경 이력, `docs/01_plan/side-llmwiki-content.md`, 커밋 `1e09101`(`20261119_HOMEwork_webportfolio_side_project_llmwiki_page`)에 있다.
+- 요약: 목업에 먼저 반영하고 목업 게시본을 `1794998219-9bf7`로 갱신한 뒤, P5-T1~T3 병렬·T4·통합 lint·tsc·build·T5 브라우저 확인(1400/375/320px, 라이트·다크) 순서로 구현했다(기획서 기록 기준).
 
 ### 2026-11-08 (HOME PC) — 연락 기능·스크롤 버그 수정과 Vercel 게시
 - **연락 영역:** `components/contact-actions.tsx`(클라이언트)를 새로 만들어 푸터(`components/site-footer.tsx`)에 연결했다. "메일 주소 복사"(복사 후 "복사됨"·안내 문구, 실패 시 직접 복사 안내) + "메일 앱으로 열기"(`mailto:`) + Gmail·Outlook 쓰기 링크. 네이버 메일은 받는사람 지정 URL 규격을 찾지 못해 뺐다.
@@ -119,10 +143,13 @@
 - **사용자 수정 요청 반영:** 메뉴명 변경, 그림 설명 72자 너비 제한 제거(한 줄 표시), CASE 02·03 순서 교체(카드·상세·링크·이미지 파일명), CASE 03에서 Notion 수치(436회·288회·255자·재사용·0.124→0.040초)를 빼서 CASE 01 문제 5번과 개선표로 옮기고 project-management 수치(재지시 31건, 컨텍스트 94%·압축 7번, 자동 검토 약 151회·약 1,313만 토큰)로 대체, 이미지 가운데 팝업(`<dialog>`), 2열 이미지 16:10 통일.
 - **추가 반영(사용자 승인 제안):** Home "4가지 기준" 칸을 Working Style(`#how`) 링크로 바꿨다. CASE 03 상세 머리말을 "여러 AI에게 일을 나눌수록 다시 하는 지시와 읽어야 할 맥락이 함께 늘었습니다"로 바꿨다.
 - **상태 정정:** CASE 03 개선표의 "기록 자동 저장"은 `gptgit/project-prototype/docs/workflow.md:57`에 반영돼 있어 "시험 중"으로 적었다. "창 50% 마스터 교대"는 `project-prototype/docs/context-and-agents.md:51`에서 고정 기준으로 쓰지 않기로 되어 있어 그대로 적었다.
-- **검증:** Python 스크립트로 태그 짝, 중복 id, 내부 링크·목차·이미지 경로, 미사용 이미지를 검사해 모두 0건. Notion 언급이 CASE 01 범위에만 있는지 확인했다. headless Edge(1400px)로 Home, AI Workflows 카드, CASE 01·03 상세를 캡처해 확인했다.
-- **미확인:** 팝업 클릭 동작, 다크 모드, 모바일. 재설계 "9개 파일 965줄"은 실측으로 유지했다.
+- **다크 모드 수정:** 모드 아이콘에 스타일이 없어 검은색으로 채워져 그려지던 것이 원인이었다. 글자색을 따르는 20px 선 아이콘으로 바꿨다(라이트 모드의 달도 선 모양으로 바뀜). 보조 버튼과 모드 버튼에 `--btn-line` 테두리 색(라이트 `#C9D6E8`, 다크 `#4A6289`)을 따로 두었다.
+- **문구 삭제:** CASE 01 실제 화면 소개에서 캡처 날짜·가림 안내 문장을 지웠다. CASE 02 문장은 사용자 결정으로 유지.
+- **게시:** 사용자 요청으로 `publish_files`로 `index.html`과 `img/` 15장을 올렸다(버전 `1793944948-1213`). `list_files`·`get_artifact`의 slug는 공유 링크 ID로도 되지만 `publish_files`는 UUID 슬러그만 받았다.
+- **검증:** Python 스크립트로 태그 짝, 중복 id, 내부 링크·목차·이미지 경로, 미사용 이미지를 검사해 모두 0건. Notion 언급이 CASE 01 범위에만 있는지 확인했다. headless Edge(1400px)로 Home, AI Workflows 카드, CASE 01·03 상세를 캡처했고, 다크·라이트 모드 Home 첫 화면을 캡처해 모드 아이콘과 버튼 테두리를 확인했다.
+- **미확인:** 팝업 클릭 동작, 모드 버튼 클릭 전환, 다크 모드 상세 페이지, 모바일, 게시본 화면. 재설계 "9개 파일 965줄"은 실측으로 유지했다.
 
-### 2026-11-04 (DESKTOP-K58196E) — 목업 문구 윤문과 버튼 통일
+### 2026-11-04 (HOME PC) — 목업 문구 윤문과 버튼 통일
 - **스킬 선정:** 한글 AI 문체 스킬 3종을 GitHub 정보와 `SKILL.md` 앞부분으로 비교해 `epoko77-ai/im-not-ai`(`humanize-korean`)를 추천했고, 사용자가 설치했다. 스크립트 코드는 검토하지 않았다.
 - **`/humanize-scan`:** 6신호 중 C-8(대구 4회), E-1(100자 넘는 문장 0개), C-11(연결어미 뒤 쉼표 34회) 3개가 발동했다.
 - **`추정` 표현 제거(5곳):** `:321` "확인과 미검증", `:339` "봤고", `:389` 범례 항목 삭제, `:517` "것으로 보입니다.", `:544` "예상치". `:517`과 `:544`는 단정이 되지 않도록 다른 말로 유보를 남겼고, 사용자가 단정을 원하는지는 확인하지 않았다.
@@ -183,6 +210,8 @@
 - **Playwright MCP:** 브라우저 프로필(`ms-playwright-mcp\mcp-chrome-*`)을 공유해 한 번에 한 세션만 쓸 수 있다. 캡처 파일은 프로젝트 안 `.playwright-mcp/`에만 저장된다(scratchpad 경로 거부). 이 폴더는 2026-11-08에 gitignore에 추가했다(그 전에는 작업 후 지웠다).
 - **Vercel(2026-11-08 확인):** `main`에 push하면 자동으로 다시 배포된다(push 후 OG 이미지가 게시본에서 열림). 게시본은 로그인 없이 접속된다. 개발 서버의 `og:image`는 `localhost`로 보이지만 프로덕션 빌드 HTML에는 `content/site.ts`의 `url`(지금은 `https://stargazer-folio.vercel.app`)로 들어간다. 같은 프로젝트라 옛 주소(`aigit-three`)도 새 배포본을 서빙하고, 그 `og:image`도 새 주소를 가리킨다(2026-11-08 curl로 확인). `ImageResponse`는 한글 글꼴을 직접 넘겨야 하고 번들 한도는 500KB다(`node_modules/next/dist/docs/01-app/03-api-reference/04-functions/image-response.md`). `mailto:`는 기본 메일 앱이 없는 PC에서는 반응이 없다. Playwright 브라우저로 SVG 주소를 직접 열면 타임아웃이 났다(페이지에 `<img>`로 넣어 확인).
 - **Next 16 + `cacheComponents`:** `dynamicParams` 설정을 쓸 수 없다. `generateStaticParams`가 있는 경로는 프리렌더 중 `usePathname`이 풀린다(`use-pathname.md`). params를 Suspense 안에서 읽으면 목록 밖 slug의 `notFound()`가 HTTP 200으로 나간다(`not-found.md`). 단 2026-11-08 Vercel 게시본에서는 `/cases/nope`가 404로 응답했다(개발 서버와 다르다).
+- **build 보안 권고(2026-11-21 HOME PC 확인):** `npm run build`가 Next.js 16.4.3 보안 취약점 안내(`SecurityFatalError`)를 내며 첫 실행에서 멈추고, 같은 명령을 다시 실행하면 통과한다. 이날 세 번 중 두 번 첫 실행이 멈췄다.
+- **Playwright 확인 요령:** 같은 주소에 해시만 바꿔 `navigate`하면 페이지를 다시 불러오지 않아 이전 빌드 화면이 남는다. 다시 빌드한 뒤에는 쿼리(`?v=2`)를 붙여 연다. `next/image`는 지연 로딩이라 섹션 캡처 전에 이미지마다 `scrollIntoView`로 불러와야 빈 칸이 찍히지 않는다.
 - winget 설치 직후 열려 있던 셸·프로세스에는 Node.js 경로가 반영되지 않는다. 터미널과 Claude Code를 다시 열어야 한다.
 
 ## 3. 참고

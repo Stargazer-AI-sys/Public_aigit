@@ -1,0 +1,18 @@
+# Hermes gateway 인스턴스 템플릿. 인스턴스 1개 = 컨테이너 1개 + 데이터 폴더 1개 + 봇 토큰 1개.
+# 직접 실행하지 않고 deploy/hermes-agent.sh가 서버에서 호출한다.
+# 값은 agents/<name>.env(비밀 아님)와 스크립트가 넘기는 DATA_DIR에서 온다.
+# 같은 봇 토큰·같은 데이터 폴더로 gateway를 두 곳에서 동시에 돌리지 않는다.
+# 이 템플릿은 2026-11-13 PC에서 `docker compose config`로 치환만 확인했다. 서버에서는 아직 실행하지 않았다.
+services:
+  hermes:
+    # 버전 고정: agents/<name>.env의 IMAGE에 태그나 다이제스트를 쓴다(`docker images --digests`).
+    image: ${IMAGE:?agents/<name>.env에 IMAGE가 필요하다}
+    container_name: hermes-${AGENT_NAME:?AGENT_NAME이 필요하다}
+    command: gateway run
+    restart: unless-stopped
+    # 인스턴스가 늘어도 한 개가 서버 메모리를 다 쓰지 못하게 한다(OOM 방지).
+    mem_limit: ${MEM_LIMIT:-600m}
+    volumes:
+      # 상태 전체가 이 폴더에 있다(컨테이너 /opt/data). hermes-agent.sh가 미리 만든다.
+      - ${DATA_DIR:?DATA_DIR이 필요하다}:/opt/data
+    # 채팅 플랫폼(Telegram)만 쓰므로 포트를 열지 않는다. 문서의 8642는 API 서버용이다.

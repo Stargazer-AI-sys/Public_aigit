@@ -12,6 +12,7 @@ export const siteConfig = {
     { label: "Home", href: "/#home" },
     { label: "Working Style", href: "/#how" },
     { label: "AI Workflows", href: "/#projects" },
+    { label: "Side Projects", href: "/#side" },
   ],
   contactEmail: "hanmir777@naver.com",
 } as const;

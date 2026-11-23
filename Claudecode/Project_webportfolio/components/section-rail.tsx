@@ -9,12 +9,14 @@ const railItems = [
   { id: "home", label: "Home", href: "/#home" },
   { id: "how", label: "Working Style", href: "/#how" },
   { id: "projects", label: "AI Workflows", href: "/#projects" },
+  { id: "side", label: "Side Projects", href: "/#side" },
 ] as const
 
 export function SectionRail() {
   const active = useActiveSection()
-  // 목업처럼 상세 페이지(/cases/*)에서는 좌측 레일을 숨긴다.
-  if (usePathname().startsWith("/cases/")) return null
+  // 목업처럼 상세 페이지(/cases/*, /side-projects/*)에서는 좌측 레일을 숨긴다.
+  const pathname = usePathname()
+  if (pathname.startsWith("/cases/") || pathname.startsWith("/side-projects/")) return null
 
   return (
     <nav

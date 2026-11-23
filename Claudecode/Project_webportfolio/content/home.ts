@@ -63,6 +63,14 @@ export type ReflectionCard = {
   learn: string;
 };
 
+export type SideFlowStep = { label: string; text: string; highlight?: boolean };
+
+export type SideCard = Omit<CaseCard, "flow" | "image"> & {
+  flow: SideFlowStep[];
+  image?: CaseCard["image"]; // 없으면 자리 표시를 그린다
+  repoLinks: Cta[]; // 새 탭으로 연다
+};
+
 export type HomeContent = {
   hero: HomeHero;
   proof: ProofItem[];
@@ -79,6 +87,12 @@ export type HomeContent = {
     lead: string; // "\n" = <br>
     cases: CaseCard[];
     reflection: ReflectionCard;
+  };
+  side: {
+    eyebrow: string;
+    title: string;
+    lead: string; // "\n" = <br>
+    cards: SideCard[];
   };
 };
 
@@ -286,5 +300,64 @@ export const home: HomeContent = {
       learn:
         "더 나은 결과는 더 긴 프롬프트보다 완료 기준, 역할, 검증 근거를 먼저 물을 때 나왔습니다.",
     },
+  },
+  side: {
+    eyebrow: "사이드 프로젝트",
+    title: "직접 만들어 운영하는 AI 도구",
+    lead: "AI Workflows에서 다듬은 방식을 실제로 돌아가는 도구에 적용한 프로젝트입니다.\n서버와 메신저, 저장소를 직접 연결하고 운영하면서 생긴 문제를 기록했습니다.",
+    cards: [
+      {
+        id: "p-side1",
+        tag: "SIDE 01 · llmwiki 작업용 Slack 봇",
+        state: "운영 중 · 2026.11.18 기준",
+        title: "Slack에서 자료를 모으고, 정리하고, 찾아 줍니다",
+        summary:
+          "클라우드 서버의 Hermes 에이전트를 Slack과 연동해 llmwiki 작업용 봇을 만들었습니다. llmwiki 스킬과 qmd 스킬로 위키 정리와 검색 기능을 강화했습니다.",
+        flow: [
+          {
+            label: "필요성",
+            text: "자료를 모으고 다시 찾아 쓰려면 정리와 검색을 매번 제가 해야 했습니다. 지시만 하면 수집·정리·검색이 이어지는 개인 지식 창고가 필요했습니다.",
+          },
+          {
+            label: "구축 단계",
+            text: "에이전트 하나로 Slack 연동을 시험한 뒤 수집·리서치·정리 역할로 나눴습니다. 이어서 llmwiki로 위키 정리를, qmd로 한국어 검색을 붙였습니다.",
+            highlight: true,
+          },
+          {
+            label: "현재",
+            text: "Slack에 URL을 보내면 원문 저장부터 위키 정리, GitHub 반영까지 이어집니다. 질문하면 위키를 검색해 근거 문서와 함께 답합니다.",
+          },
+        ],
+        learn:
+          "필요한 기능을 한 번에 만들기보다 연동, 역할 분리, 정리, 검색 순서로 하나씩 붙이며 확인했습니다.",
+        detailLabel: "근거와 상세 내용 보기 →",
+        detailHref: "/side-projects/llmwiki",
+        repoLinks: [
+          {
+            label: "llmwiki 자료 저장소 ↗",
+            href: "https://github.com/Stargazer-AI-sys/llmwiki",
+          },
+          {
+            label: "봇 설정 저장소 ↗",
+            href: "https://github.com/Stargazer-AI-sys/agent-config",
+          },
+        ],
+        techTags: [
+          "Hermes",
+          "Slack",
+          "Docker",
+          "AWS Lightsail",
+          "llmwiki",
+          "qmd",
+          "KURE-v1",
+          "GitHub",
+        ],
+        image: {
+          src: "/img/side01-wiki-ingest.png",
+          fullSrc: "/img/side01-wiki-ingest.png",
+          alt: "Slack 스레드. 주제 반영을 지시하자 정리 담당이 원문 대조 결과, 미반영 항목, Lint 결과, 커밋을 보고한다",
+        },
+      },
+    ],
   },
 };

@@ -3,13 +3,32 @@
   "task_id": "EXAMPLE-01",
   "role": "developer",
   "goal": "REPLACE: one approved Task goal",
-  "work_spec": "docs/specs/REPLACE-work-spec.md",
-  "development_plan": "docs/plans/REPLACE-development-plan.md",
-  "acceptance": ["REPLACE: observable expected result"],
-  "inputs": [{"path": "docs/plans/REPLACE-development-plan.md", "lines": [1, 10], "reason": "REPLACE: assigned Task definition"}],
-  "write_scope": ["src/REPLACE.py"],
+  "work_spec": "docs/REPLACE-development-plan.md",
+  "development_plan": "docs/REPLACE-development-plan.md",
+  "acceptance": [
+    "REPLACE: observable expected result"
+  ],
+  "inputs": [
+    {
+      "path": "docs/REPLACE-development-plan.md",
+      "lines": [
+        1,
+        10
+      ],
+      "reason": "REPLACE: assigned Task definition"
+    }
+  ],
+  "write_scope": [
+    "src/REPLACE.py"
+  ],
   "test_write_scope": [],
-  "constraints": ["No paid API fallback; no changes outside assigned files; return missing input to master"],
-  "expected_output": "Changed files, actual test evidence, unresolved issues, referenced input ranges",
-  "session": {"provider": "claude", "model": "REPLACE: explicit model", "actual_id": null}
+  "constraints": [
+    "No paid API fallback; no changes outside assigned files; return missing input to master"
+  ],
+  "expected_output": "Brief result: changed files, requested checks passed/failed, unresolved issues",
+  "session": {
+    "provider": "claude",
+    "model": "REPLACE: explicit model",
+    "actual_id": null
+  }
 }

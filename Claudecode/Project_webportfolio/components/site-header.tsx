@@ -1,6 +1,6 @@
 "use client"
 
-import { ArrowRight, FlaskConical, House, Sparkles } from "lucide-react"
+import { ArrowRight, Bot, FlaskConical, House, Sparkles } from "lucide-react"
 import Link from "next/link"
 import type { MouseEvent } from "react"
 import { usePathname } from "next/navigation"
@@ -9,8 +9,8 @@ import { ThemeToggle } from "@/components/theme-toggle"
 import { siteConfig } from "@/content/site"
 import { SECTION_IDS, useActiveSection } from "@/hooks/use-active-section"
 
-// 메뉴 항목 순서(Home, Working Style, AI Workflows)에 맞춘 목업 아이콘.
-const navIcons = [House, FlaskConical, Sparkles]
+// 메뉴 항목 순서(Home, Working Style, AI Workflows, Side Projects)에 맞춘 목업 아이콘.
+const navIcons = [House, FlaskConical, Sparkles, Bot]
 
 // 주소가 이미 같은 해시(예: /#how)이면 next/link가 이동을 건너뛰어, 스크롤로 벗어난 뒤 다시 눌러도 반응이 없다.
 // 이 경우에만 직접 스크롤한다. 해시가 바뀌는 이동은 Next 라우터가 그대로 처리한다.
@@ -29,13 +29,17 @@ function scrollIfSameHash(e: MouseEvent<HTMLAnchorElement>, href: string, pathna
 export function SiteHeader() {
   const sectionActive = useActiveSection()
   const pathname = usePathname()
-  const active = pathname.startsWith("/cases/") ? "projects" : sectionActive
+  const active = pathname.startsWith("/cases/")
+    ? "projects"
+    : pathname.startsWith("/side-projects/")
+      ? "side"
+      : sectionActive
 
   return (
     <header>
       <nav
         aria-label="주 메뉴"
-        className="fixed top-4 left-1/2 z-20 -translate-x-1/2"
+        className="fixed top-4 left-1/2 z-20 -translate-x-1/2 max-sm:left-2.5 max-sm:translate-x-0"
       >
         <div className="flex gap-0.5 rounded-full border border-border bg-card/80 p-[5px] shadow-[0_6px_24px_rgba(30,60,110,0.08)] backdrop-blur-[14px]">
           {siteConfig.nav.map((item, i) => {

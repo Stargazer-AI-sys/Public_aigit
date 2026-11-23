@@ -46,6 +46,8 @@ class StartRoleTests(unittest.TestCase):
         self.assertFalse(result['model_called'])
         self.assertFalse(result['authentication_checked'])
         self.assertIn('read-only', result['arguments'])
+        self.assertFalse(result['initial_prompt_planned'])
+        self.assertEqual(result['arguments'][-1], 'read-only')
         self.assertIn('auto_review', ' '.join(result['arguments']))
         self.assertNotIn('SECRET TASK CONTENT', r.stdout)
 
@@ -70,10 +72,29 @@ class StartRoleTests(unittest.TestCase):
         self.assertEqual(r.returncode, 0, r.stderr)
         result=json.loads(r.stdout)
         self.assertIn('Read,Grep,Glob', result['arguments'])
+        self.assertFalse(result['initial_prompt_planned'])
+        self.assertEqual(result['arguments'][-1], 'Read,Grep,Glob')
         self.assertIn('claude-sonnet-4-6', result['arguments'])
         self.assertNotIn('SECRET TASK CONTENT', r.stdout)
         self.packet['session']['model'] = 'gpt-6-astra'
         self.assertNotEqual(self.run_check('-Role','planning-reviewer','-Packet',str(self.packet_path)).returncode, 0)
+
+    def test_documenter_codex_waits_for_model_confirmation(self):
+        self.packet['role'] = 'documenter'
+        self.packet['write_scope'] = ['wiki/features/result.md']
+        for model in ('gpt-6-luna', 'gpt-6.1-terra'):
+            self.packet['session']['model'] = model
+            r = self.run_check('-Role','documenter','-Packet',str(self.packet_path))
+            self.assertEqual(r.returncode, 0, r.stderr)
+            result = json.loads(r.stdout)
+            self.assertEqual(result['provider'], 'codex')
+            self.assertIn('workspace-write', result['arguments'])
+            self.assertFalse(result['initial_prompt_planned'])
+            self.assertEqual(result['arguments'][-1], 'workspace-write')
+            self.assertFalse(result['model_called'])
+            self.assertNotIn('SECRET TASK CONTENT', r.stdout)
+        self.packet['session']['model'] = 'gpt-6-astra'
+        self.assertNotEqual(self.run_check('-Role','documenter','-Packet',str(self.packet_path)).returncode, 0)
 
     def test_subscription_environment_blocked(self):
         env=self.env.copy();env['OPENAI_API_KEY']='fixture-not-a-real-key'

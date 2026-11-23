@@ -7,7 +7,7 @@ import re
 from pathlib import Path, PureWindowsPath
 
 ROLES = {"master", "planner", "planning-reviewer", "developer", "qa", "documenter"}
-PROVIDERS = {"master": "codex", "planner": "codex", "qa": "codex", "planning-reviewer": "claude", "developer": "claude", "documenter": "hermes"}
+PROVIDERS = {"master": "codex", "planner": "codex", "qa": "codex", "planning-reviewer": "claude", "developer": "claude", "documenter": "codex"}
 REQUIRED = {"task_id", "role", "goal", "work_spec", "development_plan", "acceptance", "inputs", "write_scope", "constraints", "expected_output", "session"}
 
 
@@ -71,6 +71,7 @@ def validate(packet: object, root: Path) -> list[str]:
             source_paths.add(source)
         except ValueError as exc:
             errors.append(f"{key}: {exc}")
+    specification_paths = source_paths.copy()
     inputs = packet["inputs"]
     if not isinstance(inputs, list) or not inputs:
         errors.append("inputs must be a nonempty list of explicit files")
@@ -108,10 +109,13 @@ def validate(packet: object, root: Path) -> list[str]:
                     raise ValueError("write scope must name files, not directories")
                 if role == "documenter":
                     parts = path.relative_to(root).parts
-                    if len(parts) < 5 or parts[0:2] != ("docs", "workflows") or parts[3] != "drafts":
-                        raise ValueError("documenter may write only docs/workflows/<run>/drafts/<file>")
-                    if path in source_paths:
-                        raise ValueError("documenter must not overwrite an input")
+                    if path in specification_paths:
+                        raise ValueError("documenter must not overwrite a specification or plan")
+                    relative = path.relative_to(root)
+                    if len(parts) < 2 or parts[0].lower() != "wiki" or relative.suffix.lower() != ".md" or relative.name.lower() == "agents.md":
+                        raise ValueError("documenter may write only named wiki Markdown pages, not rules")
+                    # Existing wiki pages may be both input and output for incremental updates.
+                    # Resolved paths above still prevent links escaping the project/wiki boundary.
             except ValueError as exc:
                 errors.append(f"write_scope: {exc}")
     test_writes = packet.get("test_write_scope", [])

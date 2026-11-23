@@ -3,7 +3,7 @@
 import { useSyncExternalStore } from "react"
 
 // 섹션 id 순서. Home 페이지의 섹션 id와 같다(content/site.ts 메뉴 순서).
-export const SECTION_IDS = ["home", "how", "projects"] as const
+export const SECTION_IDS = ["home", "how", "projects", "side"] as const
 export type SectionId = (typeof SECTION_IDS)[number]
 
 // 목업 spy(): 뷰포트 높이의 35% 지점을 지난 마지막 섹션이 현재 위치다.

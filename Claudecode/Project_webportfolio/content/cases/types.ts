@@ -9,12 +9,13 @@
 import type { ComponentType } from "react";
 
 export type CaseSlug = "case-01" | "case-02" | "case-03";
+export type SideSlug = "llmwiki";
 
 export type Link = { label: string; href: string };
 
 /** 머리(.detail-head) */
 export type CaseHead = {
-  back: Link; // ← AI Workflows로 돌아가기. href는 /#p-caseN
+  back: Link; // ← AI Workflows(또는 Side Projects)로 돌아가기. href는 /#p-caseN, /#p-sideN
   eyebrow: string;
   title: string; // h1
   lead: string; // .section-lead, "\n" = <br>
@@ -121,7 +122,7 @@ export type CaseSection = {
 
 /** 상세 페이지 1개분. */
 export type CaseData = {
-  slug: CaseSlug;
+  slug: CaseSlug | SideSlug;
   head: CaseHead;
   sections: CaseSection[];
   footerLinks: CaseFooterLink[];
